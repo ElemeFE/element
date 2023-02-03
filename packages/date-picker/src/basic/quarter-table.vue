@@ -1,26 +1,29 @@
 <template>
-  <table @click="handleMonthTableClick" @mousemove="handleMouseMove" class="el-month-table">
+  <table @click="handleQuarterTableClick" @mousemove="handleMouseMove" class="el-quarter-table">
     <tbody>
-    <tr v-for="(row, key) in rows" :key="key">
-      <td :class="getCellStyle(cell)" v-for="(cell, key) in row" :key="key">
-        <div>
-          <a class="cell">{{ t('el.datepicker.months.' + months[cell.text]) }}</a>
-        </div>
-      </td>
-    </tr>
+      <tr v-for="(row, key) in rows" :key="key">
+        <td :class="getCellStyle(cell)" v-for="(cell, key) in row" :key="key" :cellNum="quarter[cell.text]">
+          <div>
+            <a class="cell">{{ t('el.datepicker.quarter' + quarter[cell.text]) }}</a>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </template>
 
 <script type="text/babel">
   import Locale from 'element-ui/src/mixins/locale';
-  import { isDate, range, getDayCountOfMonth, nextDate } from 'element-ui/src/utils/date-util';
+  import { isDate, range, getDayCountOfMonth, nextDate, getMonthNumberInQuarter } from 'element-ui/src/utils/date-util';
   import { hasClass } from 'element-ui/src/utils/dom';
   import { arrayFindIndex, coerceTruthyValueToArray, arrayFind } from 'element-ui/src/utils/util';
 
-  const datesInMonth = (year, month) => {
-    const numOfDays = getDayCountOfMonth(year, month);
-    const firstDay = new Date(year, month, 1);
+  const datesInQuarter = (year, quarter) => {
+    const monthList = getMonthNumberInQuarter(quarter);
+    const numOfDays = monthList
+      .map(m => getDayCountOfMonth(year, m))
+      .reduce((prev, cur) => prev + cur, 0);
+    const firstDay = new Date(year, monthList[0], 1);
     return range(numOfDays).map(n => nextDate(firstDay, n));
   };
 
@@ -37,30 +40,22 @@
       return NaN;
     }
   };
-  // remove the first element that satisfies `pred` from arr
-  // return a new array if modification occurs
-  // return the original array otherwise
-  const removeFromArray = function(arr, pred) {
-    const idx = typeof pred === 'function' ? arrayFindIndex(arr, pred) : arr.indexOf(pred);
-    return idx >= 0 ? [...arr.slice(0, idx), ...arr.slice(idx + 1)] : arr;
-  };
   export default {
     props: {
       disabledDate: {},
+      date: {},
       value: {},
-      selectionMode: {
-        default: 'month'
-      },
       minDate: {},
-
       maxDate: {},
+      selectionMode: {
+        default: 'quarter'
+      },
       defaultValue: {
         validator(val) {
           // null or valid Date Object
           return val === null || isDate(val) || (Array.isArray(val) && val.every(isDate));
         }
       },
-      date: {},
       rangeState: {
         default() {
           return {
@@ -93,8 +88,8 @@
 
     data() {
       return {
-        months: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-        tableRows: [ [], [], [] ],
+        quarter: [1, 2, 3, 4],
+        tableRows: [ [], [] ],
         lastRow: null,
         lastColumn: null
       };
@@ -103,19 +98,22 @@
     methods: {
       cellMatchesDate(cell, date) {
         const value = new Date(date);
-        return this.date.getFullYear() === value.getFullYear() && Number(cell.text) === value.getMonth();
+        return this.date.getFullYear() === value.getFullYear() && Number(cell.text * 3) === value.getMonth();
       },
       getCellStyle(cell) {
         const style = {};
         const year = this.date.getFullYear();
-        const today = new Date();
-        const month = cell.text;
+        const monthList = getMonthNumberInQuarter(cell.text + 1);
+        // const month = cell.text * 3;
         const defaultValue = this.defaultValue ? Array.isArray(this.defaultValue) ? this.defaultValue : [this.defaultValue] : [];
+        const monthMatch = month => monthList.some(item => item === month);
+        const quarter = new Date(this.date.getFullYear(), monthList[0]);
+        const today = new Date();
         style.disabled = typeof this.disabledDate === 'function'
-          ? datesInMonth(year, month).every(this.disabledDate)
+          ? datesInQuarter(quarter.getFullYear(), cell.text + 1).every(this.disabledDate)
           : false;
-        style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year && date.getMonth() === month) >= 0;
-        style.today = today.getFullYear() === year && today.getMonth() === month;
+        style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year && monthMatch(date.getMonth())) >= 0;
+        style.today = today.getFullYear() === year && monthMatch(today.getMonth());
         style.default = defaultValue.some(date => this.cellMatchesDate(cell, date));
 
         if (cell.inRange) {
@@ -131,8 +129,9 @@
         }
         return style;
       },
-      getMonthOfCell(month) {
+      getDateOfQuarter(quarter) {
         const year = this.date.getFullYear();
+        const month = quarter * 3 - 3;
         return new Date(year, month, 1);
       },
       markRange(minDate, maxDate) {
@@ -145,8 +144,8 @@
           for (let j = 0, l = row.length; j < l; j++) {
 
             const cell = row[j];
-            const index = i * 4 + j;
-            const time = new Date(this.date.getFullYear(), index).getTime();
+            const index = i * 2 + j;
+            const time = new Date(this.date.getFullYear(), index * 3).getTime();
 
             cell.inRange = minDate && time >= minDate && time <= maxDate;
             cell.start = minDate && time === minDate;
@@ -181,12 +180,12 @@
             maxDate: this.maxDate,
             rangeState: {
               selecting: true,
-              endDate: this.getMonthOfCell(row * 4 + column)
+              endDate: this.getDateOfQuarter(row * 2 + column + 1)
             }
           });
         }
       },
-      handleMonthTableClick(event) {
+      handleQuarterTableClick(event) {
         let target = event.target;
         if (target.tagName === 'A') {
           target = target.parentNode.parentNode;
@@ -196,10 +195,8 @@
         }
         if (target.tagName !== 'TD') return;
         if (hasClass(target, 'disabled')) return;
-        const column = target.cellIndex;
-        const row = target.parentNode.rowIndex;
-        const month = row * 4 + column;
-        const newDate = this.getMonthOfCell(month);
+        const quarter = target.getAttribute('cellNum');
+        const newDate = this.getDateOfQuarter(quarter);
         if (this.selectionMode === 'range') {
           if (!this.rangeState.selecting) {
             this.$emit('pick', {minDate: newDate, maxDate: null});
@@ -212,19 +209,11 @@
             }
             this.rangeState.selecting = false;
           }
-        } else if (this.selectionMode === 'months') {
-          const value = this.value || [];
-          const year = this.date.getFullYear();
-          const newValue = arrayFindIndex(value, date => date.getFullYear() === year && date.getMonth() === month) >= 0
-            ? removeFromArray(value, date => date.getTime() === newDate.getTime())
-            : [...value, newDate];
-          this.$emit('pick', newValue);
         } else {
-          this.$emit('pick', month);
+          this.$emit('pick', quarter);
         }
       }
     },
-
     computed: {
       rows() {
         // TODO: refactory rows / getCellClasses
@@ -233,9 +222,9 @@
         const selectedDate = [];
         const now = getMonthTimestamp(new Date());
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 2; i++) {
           const row = rows[i];
-          for (let j = 0; j < 4; j++) {
+          for (let j = 0; j < 2; j++) {
             let cell = row[j];
             if (!cell) {
               cell = { row: i, column: j, type: 'normal', inRange: false, start: false, end: false };
@@ -243,12 +232,13 @@
 
             cell.type = 'normal';
 
-            const index = i * 4 + j;
-            const time = new Date(this.date.getFullYear(), index).getTime();
+            const index = i * 2 + j;
+            const time = new Date(this.date.getFullYear(), index * 3).getTime();
+            const nextTime = new Date(this.date.getFullYear(), index * 3 + 3).getTime();
             cell.inRange = time >= getMonthTimestamp(this.minDate) && time <= getMonthTimestamp(this.maxDate);
             cell.start = this.minDate && time === getMonthTimestamp(this.minDate);
             cell.end = this.maxDate && time === getMonthTimestamp(this.maxDate);
-            const isToday = time === now;
+            const isToday = now >= time && now < nextTime;
 
             if (isToday) {
               cell.type = 'today';
