@@ -8,7 +8,7 @@
       </slot>
     </div>
     <div class="con">
-      <span class="prefix" v-if="!prefix">
+      <span class="prefix" v-if="prefix">
         <slot name="prefix" >
           {{ prefix }}
         </slot>
@@ -16,7 +16,7 @@
       <span class="number" :style="valueStyle">
         <slot name="formatter"> {{ disposeValue }}</slot>
       </span>
-      <span class="suffix" v-if="!suffix">
+      <span class="suffix" v-if="suffix">
         <slot name="suffix">
           {{ suffix }}
         </slot>
