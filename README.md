@@ -45,7 +45,7 @@ For Vue 3.0, we recommend using [Element Plus](https://github.com/element-plus/e
 ## Links
 - Homepage and documentation
   - [International users](http://element.eleme.io/#/en-US)
-  - [Chinese users](http://element-cn.eleme.io/#/zh-CN)
+  - [Chinese users](http://element.eleme.io/#/zh-CN)
   - [Spanish users](http://element.eleme.io/#/es)
   - [French users](http://element.eleme.io/#/fr-FR)
 - [awesome-element](https://github.com/ElementUI/awesome-element)
