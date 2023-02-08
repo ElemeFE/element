@@ -1,6 +1,6 @@
 <template>
   <div class="el-statistic">
-    <div class="head" v-if="title">
+    <div class="head" v-if="title||$slots.title">
       <slot name="title">
         <span class="title">
           {{ title }}
@@ -8,7 +8,7 @@
       </slot>
     </div>
     <div class="con">
-      <span class="prefix" v-if="prefix">
+      <span class="prefix" v-if="prefix||$slots.prefix">
         <slot name="prefix" >
           {{ prefix }}
         </slot>
@@ -16,7 +16,7 @@
       <span class="number" :style="valueStyle">
         <slot name="formatter"> {{ disposeValue }}</slot>
       </span>
-      <span class="suffix" v-if="suffix">
+      <span class="suffix" v-if="suffix||$slots.suffix">
         <slot name="suffix">
           {{ suffix }}
         </slot>
