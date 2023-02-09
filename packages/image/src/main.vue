@@ -16,7 +16,7 @@
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
     <template v-if="preview">
-      <image-viewer :z-index="zIndex" :initial-index="initialIndex | imageIndex" v-if="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-if="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
     </template>
   </div>
 </template>
@@ -96,9 +96,15 @@
       },
       imageIndex() {
         let previewIndex = 0;
+        const initialIndex = this.initialIndex;
+        if (initialIndex >= 0) {
+          previewIndex = initialIndex;
+          return previewIndex;
+        }
         const srcIndex = this.previewSrcList.indexOf(this.src);
         if (srcIndex >= 0) {
           previewIndex = srcIndex;
+          return previewIndex;
         }
         return previewIndex;
       }
