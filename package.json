@@ -1,13 +1,14 @@
 {
   "name": "element-ui",
-  "version": "2.15.10",
+  "version": "2.15.12",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
     "lib",
     "src",
     "packages",
-    "types"
+    "types",
+    "web-types.json"
   ],
   "typings": "types/index.d.ts",
   "scripts": {
@@ -59,6 +60,7 @@
   },
   "unpkg": "lib/index.js",
   "style": "lib/theme-chalk/index.css",
+  "web-types": "./web-types.json",
   "dependencies": {
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
