@@ -371,7 +371,7 @@
             {
               "name": "type",
               "description": "Button type",
-              "type": "'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text"
+              "type": "'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text'"
             },
             {
               "name": "plain",
