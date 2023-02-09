@@ -52,15 +52,33 @@ When there are plenty of options, use a drop-down menu to display and select des
 
 ```html
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
-      :disabled="item.disabled">
-    </el-option>
-  </el-select>
+  <el-row class="demo-select">
+    <el-col :span="12">
+      <div class="sub-title">Single</div>
+      <el-select v-model="value" placeholder="Select">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+          :disabled="item.disabled">
+        </el-option>
+      </el-select>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <div class="sub-title">Multiple（clearable）</div>
+      <el-select multiple clearable filterable v-model="value1" placeholder="请选择">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+          :disabled="item.disabled">
+        </el-option>
+      </el-select>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -84,7 +102,8 @@ When there are plenty of options, use a drop-down menu to display and select des
           value: 'Option5',
           label: 'Option5'
         }],
-        value: ''
+        value: '',
+        value1: ['Option1', 'Option2', 'Option3'],
       }
     }
   }

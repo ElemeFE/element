@@ -11,13 +11,13 @@
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
       <span v-if="collapseTags && selected.length">
         <el-tag
-          :closable="!selectDisabled"
+          :closable="!selectDisabled && !selected[0].disabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
           type="info"
           @close="deleteTag($event, selected[0])"
           disable-transitions>
-          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
+          <span class="el-select__tags-text" :class="{'is-disabled': selected[0].disabled}">{{ selected[0].currentLabel }}</span>
         </el-tag>
         <el-tag
           v-if="selected.length > 1"
@@ -32,13 +32,13 @@
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
-          :closable="!selectDisabled"
+          :closable="!selectDisabled && !item.disabled"
           :size="collapseTagSize"
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
           disable-transitions>
-          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
+          <span class="el-select__tags-text" :class="{'is-disabled': item.disabled}">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
 
@@ -616,7 +616,9 @@
         if (!Array.isArray(this.selected)) return;
         const option = this.selected[this.selected.length - 1];
         if (!option) return;
-
+        if (option.disabled) {
+          return option.disabled;
+        }
         if (hit === true || hit === false) {
           option.hitState = hit;
           return hit;
@@ -764,6 +766,11 @@
       deleteSelected(event) {
         event.stopPropagation();
         const value = this.multiple ? [] : '';
+        if (value instanceof Array) {
+          for (const item of this.selected) {
+            if (item.disabled) value.push(item.value);
+          }
+        }
         this.$emit('input', value);
         this.emitChange(value);
         this.visible = false;

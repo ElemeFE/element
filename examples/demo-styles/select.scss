@@ -1,3 +1,11 @@
-.demo-select .el-select {
-  width: 240px;
+.demo-select {
+  .el-select {
+    width: 240px;
+  }
+  .sub-title {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #8492a6;
+  }
 }
+

@@ -19,7 +19,9 @@
     & .el-select-dropdown__item.selected {
       color: $--select-option-selected-font-color;
       background-color: $--select-dropdown-background;
-
+      &.is-disabled {
+        color: $--select-option-disabled-color;
+      }
       &.hover {
         background-color: $--select-option-hover-background;
       }

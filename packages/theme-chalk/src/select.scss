@@ -123,7 +123,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
+  .el-select__tags-text {
+    &.is-disabled {
+      color: $--select-option-disabled-color;
+    }
+  }
   .el-tag {
     box-sizing: border-box;
     border-color: transparent;

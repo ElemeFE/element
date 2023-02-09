@@ -51,15 +51,32 @@
 :::demo 在`el-option`中，设定`disabled`值为 true，即可禁用该选项
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
-      :disabled="item.disabled">
-    </el-option>
-  </el-select>
+  <el-row class="demo-select">
+    <el-col :span="12">
+      <div class="sub-title">单选</div>
+      <el-select v-model="value" placeholder="请选择">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+          :disabled="item.disabled">
+        </el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <div class="sub-title">多选（可清空）</div>
+      <el-select multiple clearable filterable v-model="value1" placeholder="请选择">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+          :disabled="item.disabled">
+        </el-option>
+      </el-select>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -83,7 +100,8 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
-        value: ''
+        value: '',
+        value1: ['选项1', '选项2', '选项3'],
       }
     }
   }
