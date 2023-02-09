@@ -5,7 +5,7 @@ export default {
   bind(el, binding, vnode) {
     let interval = null;
     let startTime;
-    const maxIntervals = isMac() ? 100 : 300;
+    const maxIntervals = isMac() ? 100 : 200;
     const handler = () => vnode.context[binding.expression].apply();
     const clear = () => {
       if (Date.now() - startTime < maxIntervals) {
