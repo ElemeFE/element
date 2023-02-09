@@ -147,6 +147,7 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 | scroll-container | The container to add scroll listener when using lazy load | string / HTMLElement | — | The nearest parent container whose overflow property is auto or scroll |
 | preview-src-list | allow big image preview | Array | — | - |
 | z-index | set image preview z-index | Number | — | 2000 |
+| initial-index | set image preview array index | Number | — | - |
 
 ### Events
 | Event Name | Description | Parameters |
