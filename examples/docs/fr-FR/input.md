@@ -603,7 +603,6 @@ export default {
 |----| ----| ----|
 | blur | Se déclenche quand Input perds le focus. | (event: Event) |
 | focus | Se déclenche quand Input a le focus. | (event: Event) |
-| change | Se déclenche quand la valeur change. | (value: string \ number) |
 | change | Déclenché uniquement lorsque la zone de saisie perd le focus ou que l'utilisateur appuie sur Entrée. | (value: string \| number) |
 | input | Déclenché lorsque la valeur d'entrée change. | (value: string \| number) |
 | clear | Se déclenche quand le champ est effacé par le bouton de reset. | — |
