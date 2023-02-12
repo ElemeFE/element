@@ -1860,6 +1860,7 @@
 | fit | 列的宽度是否自撑开 | boolean | — | true |
 | show-header | 是否显示表头 | boolean | — | true |
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |
+| highlight-selection-row | 是否要高亮复选框选中行（仅针对开启 `selection` 有效） | boolean | — | false |
 | current-row-key | 当前行的 key，只写属性 | String,Number | — | — |
 | row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function({row, rowIndex})/String | — | — |
 | row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function({row, rowIndex})/Object | — | — |
