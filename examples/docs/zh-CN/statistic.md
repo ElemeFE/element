@@ -133,7 +133,7 @@
         <el-card shadow="hover" style="width: 100%;margin-top: 20px; ">
           <div style="width: 100%; display: inline-block;">
             <el-statistic
-              format="DD:HH:mm"
+              format="DD天HH小时mm分钟"
               :value="deadline5"
               time-indices
               title="🚩距离立夏还有："
