@@ -506,10 +506,6 @@
             {
               "path": "/result",
               "title": "Result"
-            },
-            {
-              "path": "/statistic",
-              "title": "Statistic"
             }
           ]
         },
@@ -629,6 +625,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic"
             }
           ]
         }
@@ -824,10 +824,6 @@
             {
               "path": "/result",
               "title": "Result"
-            },
-            {
-              "path": "/statistic",
-              "title": "Statistic"
             }
           ]
         },
@@ -947,6 +943,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic"
             }
           ]
         }
@@ -1142,10 +1142,6 @@
             {
               "path": "/result",
               "title": "Result"
-            },
-            {
-              "path": "/statistic",
-              "title": "Statistic"
             }
           ]
         },
@@ -1265,6 +1261,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic"
             }
           ]
         }
