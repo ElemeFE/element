@@ -207,7 +207,12 @@ export default {
       let doRemove = () => {
         this.abort(file);
         let fileList = this.uploadFiles;
-        fileList.splice(fileList.indexOf(file), 1);
+        let index = fileList.indexOf(file)
+
+        if (index >= 0) {
+          fileList.splice(index, 1);
+        }
+      
         this.onRemove(file, fileList);
       };
 
