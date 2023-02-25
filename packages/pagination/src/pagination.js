@@ -54,7 +54,12 @@ export default {
 
     disabled: Boolean,
 
-    hideOnSinglePage: Boolean
+    hideOnSinglePage: Boolean,
+
+    popperAppendToBody: {
+      type: Boolean,
+      default: true
+    }
   },
 
   data() {
@@ -176,7 +181,9 @@ export default {
               popperClass={ this.$parent.popperClass || '' }
               size="mini"
               on-input={ this.handleChange }
-              disabled={ this.$parent.disabled }>
+              disabled={ this.$parent.disabled }
+              popper-append-to-body={ this.$parent.popperAppendToBody }
+            >
               {
                 this.pageSizes.map(item =>
                   <el-option
