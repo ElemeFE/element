@@ -40,12 +40,12 @@
 
 Element will stay with Vue 2.x 
 
-For Vue 3.0, we recommend using [Element Plus](https://github.com/element-plus/element-plus) from the same team (Element Plus is a community develop project)
+For Vue 3.0, we recommend using [Element Plus](https://github.com/element-plus/element-plus)(Element Plus is a community develop project)
 
 ## Links
 - Homepage and documentation
   - [International users](http://element.eleme.io/#/en-US)
-  - [Chinese users](http://element-cn.eleme.io/#/zh-CN)
+  - [Chinese users](http://element.eleme.io/#/zh-CN)
   - [Spanish users](http://element.eleme.io/#/es)
   - [French users](http://element.eleme.io/#/fr-FR)
 - [awesome-element](https://github.com/ElementUI/awesome-element)

@@ -173,3 +173,5 @@ Vous pouvez également spécifier l'attribut `type` de `dashboard` pour utiliser
 | show-text | Si le pourcentage doit être affiché. | boolean | — | true |
 | stroke-linecap  | circle/dashboard type shape at the end path | string | butt/round/square | round |
 | format  | Vous pouvez personnaliser le format du texte en définissant le format  | function(percentage) | — | — |
+| define-back-color  | background color of progress bar (hex format) | string | — | — |
+| text-color  | text color of progress bar (hex format) | string | — | — |

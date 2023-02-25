@@ -111,6 +111,24 @@
     </el-date-picker>
   </div>
 </div>
+<div class="container">
+  <div class="block">
+    <span class="demonstration">多个月</span>
+    <el-date-picker
+      type="months"
+      v-model="value5"
+      placeholder="选择一个或多个月">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">多个年</span>
+    <el-date-picker
+      type="years"
+      v-model="value6"
+      placeholder="选择一个或多个年">
+    </el-date-picker>
+  </div>
+</div>
 
 <script>
   export default {
@@ -119,7 +137,9 @@
         value1: '',
         value2: '',
         value3: '',
-        value4: ''
+        value4: '',
+        value5: '',
+        value6: ''
       };
     }
   };
@@ -395,7 +415,7 @@
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
-| type | 显示类型 | string | year/month/date/dates/ week/datetime/datetimerange/ daterange/monthrange | date |
+| type | 显示类型 | string | year/month/date/dates/months/years week/datetime/datetimerange/ daterange/monthrange | date |
 | format | 显示在输入框中的格式 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DatePicker 下拉框的类名 | string | — | — |
@@ -409,6 +429,7 @@
 | prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |
 | clear-icon | 自定义清空图标的类名 | string | — | el-icon-circle-close |
 | validate-event | 输入时是否触发表单的校验 | boolean | - | true |
+| append-to-body | DetePicker 自身是否插入至 body 元素上。   | boolean   | — | true |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

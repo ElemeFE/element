@@ -148,6 +148,7 @@ En plus des propriétés natives de img, ce composant supporte le lazy loading, 
 | scroll-container | Le conteneur auquel ajouter le listener du scroll en mode lazy loading. | string / HTMLElement | — | Le conteneur parent le plus proche avec la propriété overflow à auto ou scroll. |
 | preview-src-list | allow big image preview | Array | — | - |
 | z-index | set image preview z-index | Number | — | 2000 |
+| initial-index | set image preview array index | Number | — | - |
 
 ### Évènements
 | Nom | Description | Paramètres |

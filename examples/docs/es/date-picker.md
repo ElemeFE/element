@@ -114,6 +114,24 @@ Puede elegir la semana, el mes, el año o varias fechas ampliando el componente 
     </el-date-picker>
   </div>
 </div>
+<div class="container">
+  <div class="block">
+    <span class="demonstration">months</span>
+    <el-date-picker
+      type="months"
+      v-model="value5"
+      placeholder="Pick one or more months">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">years</span>
+    <el-date-picker
+      type="years"
+      v-model="value6"
+      placeholder="Pick one or more years">
+    </el-date-picker>
+  </div>
+</div>
 
 <script>
   export default {
@@ -122,7 +140,9 @@ Puede elegir la semana, el mes, el año o varias fechas ampliando el componente 
         value1: '',
         value2: '',
         value3: '',
-        value4: ''
+        value4: '',
+        value5: '',
+        value6: ''
       };
     }
   };
@@ -443,7 +463,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | placeholder       | placeholder cuando el modo NO es rango   | string            | —                                        | —                    |
 | start-placeholder | placeholder para la fecha de inicio en modo rango | string            | —                                        | —                    |
 | end-placeholder   | placeholder para la fecha final en modo rango | string            | —                                        | —                    |
-| type              | tipo de picker                           | string            | year/month/date/dates/datetime/ week/datetimerange/daterange/ monthrange | date                 |
+| type              | tipo de picker                           | string            | year/month/date/dates/months/years/datetime/ week/datetimerange/daterange/ monthrange | date                 |
 | format            | formato en que se muestra el valor en el input | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd           |
 | align             | alineación                               | left/center/right | left                                     |                      |
 | popper-class      | nombre de clase personalizada para el dropdown de DatePicker | string            | —                                        | —                    |
@@ -456,6 +476,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | unlink-panels     | desvincular los dos paneles de fecha en el range-picker | boolean           | —                                        | false                |
 | prefix-icon       | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
 | clear-icon        | Clase personalizada para el icono `clear` | string            | —                                        | el-icon-circle-close |
+| append-to-body    | Si adjuntar el cuadro de DatePicker al cuerpo | boolean       | —                 | true       |
 
 ### Opciones del Picker
 | Atributo       | Descripción                                                  | Tipo                           | Valores aceptados | Por defecto |
