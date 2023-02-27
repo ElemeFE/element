@@ -113,7 +113,31 @@ export default {
     },
 
     getColumnElIndex(children, child) {
-      return [].indexOf.call(children, child);
+      for (let i = 0, len = children.length; i < len; i++) {
+        const item = children[i];
+        if (item === child) {
+          return i;
+        } else if (item.children && item.children.length) {
+          if (this.generateColumn(item.children, child)) {
+            return i;
+          }
+        }
+      }
+      return -1;
+    },
+
+    generateColumn(children, child) {
+      for (let i = 0, len = children.length; i < len; i++) {
+        const item = children[i];
+        if (item === child) {
+          return true;
+        } else if (item.children && item.children.length) {
+          if (this.generateColumn(item.children, child)) {
+            return true;
+          }
+        }
+      }
+      return false;
     },
 
     setColumnWidth(column) {
