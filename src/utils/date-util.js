@@ -169,6 +169,41 @@ export const getRangeMinutes = function(ranges, hour) {
   return minutes;
 };
 
+// powered by github copilot
+export const getRangeSeconds = function(ranges, hour, minute) {
+  const seconds = new Array(60);
+
+  if (ranges.length > 0) {
+    ranges.forEach(range => {
+      const start = range[0];
+      const end = range[1];
+      const startHour = start.getHours();
+      const startMinute = start.getMinutes();
+      const startSecond = start.getSeconds();
+      const endHour = end.getHours();
+      const endMinute = end.getMinutes();
+      const endSecond = end.getSeconds();
+      if (startHour === hour && startMinute === minute && endHour !== hour) {
+        setRangeData(seconds, startSecond, 60, true);
+      } else if (startHour === hour && startMinute === minute && endHour === hour && endMinute !== minute) {
+        setRangeData(seconds, startSecond, 60, true);
+      } else if (startHour === hour && startMinute === minute && endHour === hour && endMinute === minute) {
+        setRangeData(seconds, startSecond, endSecond + 1, true);
+      } else if (startHour === hour && startMinute !== minute && endHour === hour && endMinute === minute) {
+        setRangeData(seconds, 0, endSecond + 1, true);
+      } else if (startHour === hour && startMinute !== minute && endHour === hour && endMinute !== minute) {
+        setRangeData(seconds, 0, 60, true);
+      } else if (startHour < hour && endHour > hour) {
+        setRangeData(seconds, 0, 60, true);
+      }
+    });
+  } else {
+    setRangeData(seconds, 0, 60, true);
+  }
+
+  return seconds;
+};
+
 export const range = function(n) {
   // see https://stackoverflow.com/questions/3746725/create-a-javascript-array-containing-1-n
   return Array.apply(null, {length: n}).map((_, n) => n);
