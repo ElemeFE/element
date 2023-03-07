@@ -98,7 +98,7 @@
         <slot name="prefix"></slot>
       </template>
       <template slot="suffix">
-        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"></i>
+        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"  @click="handleClickArrow"></i>
         <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
       </template>
     </el-input>
@@ -602,6 +602,16 @@
 
       handleClearClick(event) {
         this.deleteSelected(event);
+      },
+
+      // #22424
+      handleClickArrow(event) {
+        if (this.elFormItem && this.elFormItem.$slots.label) {
+          // 避免elFormItem存在slot为label时执行两次
+          event.stopPropagation();
+          // 强制更新，促使watch的visible执行一边
+          this.$forceUpdate();
+        }
       },
 
       doDestroy() {
