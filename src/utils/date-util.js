@@ -183,19 +183,26 @@ export const getRangeSeconds = function(ranges, hour, minute) {
       const endHour = end.getHours();
       const endMinute = end.getMinutes();
       const endSecond = end.getSeconds();
-      if (startHour === hour && startMinute === minute && endHour !== hour) {
-        setRangeData(seconds, startSecond, 60, true);
-      } else if (startHour === hour && startMinute === minute && endHour === hour && endMinute !== minute) {
-        setRangeData(seconds, startSecond, 60, true);
-      } else if (startHour === hour && startMinute === minute && endHour === hour && endMinute === minute) {
-        setRangeData(seconds, startSecond, endSecond + 1, true);
-      } else if (startHour === hour && startMinute !== minute && endHour === hour && endMinute === minute) {
-        setRangeData(seconds, 0, endSecond + 1, true);
-      } else if (startHour === hour && startMinute !== minute && endHour === hour && endMinute !== minute) {
+
+      const isInRangeDifferentHour = startHour < hour && endHour > hour;
+      const isInRangeHour = startHour <= hour && endHour >= hour;
+      const isSameStartHour = startHour === hour;
+      const isSameEndHour = endHour === hour;
+
+      if (isInRangeDifferentHour) {
         setRangeData(seconds, 0, 60, true);
-      } else if (startHour < hour && endHour > hour) {
-        setRangeData(seconds, 0, 60, true);
+      } else if (isInRangeHour && isSameStartHour) {
+        minute > startMinute && setRangeData(seconds, 0, 60, true);
+        minute < startMinute && setRangeData(seconds, 0, 60, false);
+        minute === startMinute && setRangeData(seconds, startSecond, 60, true);
+      } else if (isInRangeHour && isSameEndHour) {
+        minute > endMinute && setRangeData(seconds, 0, 60, false);
+        minute < endMinute && setRangeData(seconds, 0, 60, true);
+        minute === endMinute && setRangeData(seconds, 0, endSecond + 1, true);
+      } else {
+        setRangeData(seconds, 0, 60, false);
       }
+
     });
   } else {
     setRangeData(seconds, 0, 60, true);
