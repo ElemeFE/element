@@ -249,8 +249,8 @@
         if (typeof this.value === 'number') {
           return String(this.value).length;
         }
-
-        return (this.value || '').length;
+        const spRegexp = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+        return (this.value ? this.value.replace(spRegexp, '_') : '').length;
       },
       inputExceed() {
         // show exceed style if length of initial value greater then maxlength
