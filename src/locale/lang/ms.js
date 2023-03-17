@@ -14,7 +14,7 @@ export default {
       selectTime: 'Pilih Masa',
       startDate: 'Tarikh Mula',
       startTime: 'Masa Mula',
-      endDate: 'Tarik Tamat',
+      endDate: 'Tarikh Tamat',
       endTime: 'Masa Tamat',
       prevYear: 'Tahun Lepas',
       nextYear: 'Tahun Depan',
@@ -33,7 +33,6 @@ export default {
       month10: 'Oktober',
       month11: 'November',
       month12: 'Disember',
-      // week: '周次',
       weeks: {
         sun: 'Ahad',
         mon: 'Isnin',
@@ -68,7 +67,7 @@ export default {
       noMatch: 'Tiada maklumat yang sepadan',
       loading: 'Sedang dimuat turun',
       placeholder: 'Sila pilih',
-      noData: 'Tiada maklumat buat sementara'
+      noData: 'Tiada maklumat'
     },
     pagination: {
       goto: 'Seterusnya',
@@ -80,23 +79,23 @@ export default {
       title: 'Tip',
       confirm: 'Sah',
       cancel: 'Batal',
-      error: 'Data yang diisikan tidak sah!'
+      error: 'Data yang diisi tidak sah!'
     },
     upload: {
       deleteTip: 'Tekan "Padam" untuk memadam',
       delete: 'Padam',
-      preview: 'Semak gambar',
+      preview: 'Pratonton gambar',
       continue: 'Meneruskan muat naik'
     },
     table: {
-      emptyText: 'Tiada maklumat buat sementara',
+      emptyText: 'Tiada maklumat',
       confirmFilter: 'Tapis',
       resetFilter: 'Set Semula',
       clearFilter: 'Semua',
       sumText: 'Jumlah'
     },
     tree: {
-      emptyText: 'Tiada maklumat buat sementara'
+      emptyText: 'Tiada maklumat'
     },
     transfer: {
       noMatch: 'Tiada maklumat yang sepadan',
@@ -117,7 +116,7 @@ export default {
       cancelButtonText: 'Batal'
     },
     empty: {
-      description: 'Tiada maklumat buat sementara'
+      description: 'Tiada maklumat'
     }
   }
 };

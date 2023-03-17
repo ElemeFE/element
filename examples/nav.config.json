@@ -192,6 +192,10 @@
             {
               "path": "/result",
               "title": "Result 结果"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic 统计数值"
             }
           ]
         },
@@ -621,6 +625,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic"
             }
           ]
         }
@@ -935,6 +943,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic"
             }
           ]
         }
@@ -1249,6 +1261,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic"
             }
           ]
         }

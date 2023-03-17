@@ -617,7 +617,6 @@ export default {
 | ------ | ------------------------------------------------------------ | ------------------------- |
 | blur   | Se dispara cuando se pierde el foco                          | (event: Event)            |
 | focus  | Se dispara cuando se obtiene el foco                         | (event: Event)            |
-| change | se activa cuando cambia el valor de entrada                  | (value: string \| number) |
 | change | se activa solo cuando el cuadro de entrada pierde el foco o el usuario presiona Enter | (value: string \| number) |
 | input  | se activa cuando cambia el valor de entrada                  | (value: string \| number) |
 | clear  | se dispara cuando la entrada es borrada por el botón generado por el atributo `clearable`. | —                         |

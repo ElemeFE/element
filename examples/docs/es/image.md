@@ -149,6 +149,7 @@ Además de las características nativas de img, soporte de carga perezosa, marca
 | scroll-container | El contenedor para añadir el scroll listener cuando se utiliza lazy load | string / HTMLElement | — | El contenedor padre más cercano cuya propiedad de desbordamiento es auto o scroll |
 | preview-src-list | permitir una vista previa grande de la imagen | Array | — | - |
 | z-index | establecer el z-index de la vista previa de la imagen | Number | — | 2000 |
+| initial-index | set image preview array index | Number | — | - |
 
 ### Eventos
 | Nombre del evento | Descripción | Parámetros |
