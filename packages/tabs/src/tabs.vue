@@ -47,7 +47,7 @@
         if (this.$refs.nav) {
           this.$nextTick(() => {
             this.$refs.nav.$nextTick(_ => {
-              this.$refs.nav.scrollToActiveTab();
+              this.$refs.nav && this.$refs.nav.scrollToActiveTab();
             });
           });
         }
@@ -171,7 +171,7 @@
         </div>
       );
     },
-  
+
     created() {
       if (!this.currentName) {
         this.setCurrentName('0');
