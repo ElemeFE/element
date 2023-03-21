@@ -513,8 +513,8 @@
       },
 
       bodyWidth() {
-        const { bodyWidth, scrollY, gutterWidth } = this.layout;
-        return bodyWidth ? bodyWidth - (scrollY ? gutterWidth : 0) + 'px' : '';
+        const { bodyWidth, scrollY, gutterWidth, bodyWidthOffset } = this.layout;
+        return bodyWidth ? bodyWidth - (scrollY ? gutterWidth : 0) - bodyWidthOffset + 'px' : '';
       },
 
       bodyHeight() {
