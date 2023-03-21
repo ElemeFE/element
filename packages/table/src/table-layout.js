@@ -161,28 +161,27 @@ class TableLayout {
           const flexWidthPerPixel = totalFlexWidth / allColumnsWidth;
           let noneFirstWidth = 0;
 
-          // 标记是否有任一列缩窄了
-          let isAnyColNarrower = false;
           flexColumns.forEach((column, index) => {
             if (index === 0) return;
             const flexWidth = Math.floor((column.minWidth || 80) * flexWidthPerPixel);
             noneFirstWidth += flexWidth;
-            const realWidth = (column.minWidth || 80) + flexWidth;
-            if (!isAnyColNarrower) isAnyColNarrower = column.realWidth > realWidth;
-            column.realWidth = realWidth;
+            column.realWidth = (column.minWidth || 80) + flexWidth;
           });
 
+          const isBoxSmaller = !!this._lastTotalFlexWidth && this._lastTotalFlexWidth > totalFlexWidth;
           const firstRealWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth;
-          // 由于上面使用了 Math.floor 对 flexWidth 进行取整，那么可能导致 firstRealWidth 计算结果产生偏差：
-          //   -> 窗口（父容器）缩小，但 firstRealWidth 却变大了，这将影响内容是否换行
-          // 在边界情况下，列内容换行会影响垂直滚动条的出现，触发重新计算宽度，进而产生表格闪烁的问题
-          // 所以这里判断下，如果某一列缩窄了，那么仅在 firstRealWidth 也减小的情况下才更新 realWidth 来避免上述问题
-          // see: https://github.com/ElemeFE/element/issues/16167
-          if (!isAnyColNarrower || firstRealWidth < flexColumns[0].realWidth) {
+          // If the container box gets smaller and the result of `firstRealWidth` is greater than before,
+          // we don't update the first flexible column's `realWidth`.
+          // In some cases, the result of `firstRealWidth` will be greater than before, even if the container gets smaller.
+          // Probably because of the decimal of the rest of columns' `realWidth` are rounded down?
+          // See: https://github.com/ElemeFE/element/issues/16167
+          if (!isBoxSmaller || firstRealWidth < flexColumns[0].realWidth) {
             flexColumns[0].realWidth = firstRealWidth;
           }
+          this._lastTotalFlexWidth = totalFlexWidth;
         }
       } else { // HAVE HORIZONTAL SCROLL BAR
+        this._lastTotalFlexWidth = null;
         this.scrollX = true;
         flexColumns.forEach(function(column) {
           column.realWidth = column.minWidth;
@@ -192,6 +191,7 @@ class TableLayout {
       this.bodyWidth = Math.max(bodyMinWidth, bodyWidth);
       this.table.resizeState.width = this.bodyWidth;
     } else {
+      this._lastTotalFlexWidth = null;
       flattenColumns.forEach((column) => {
         if (!column.width && !column.minWidth) {
           column.realWidth = 80;
