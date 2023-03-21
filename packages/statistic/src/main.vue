@@ -1,6 +1,6 @@
 <template>
   <div class="el-statistic">
-    <div class="head">
+    <div class="head" v-if="title||$slots.title">
       <slot name="title">
         <span class="title">
           {{ title }}
@@ -8,15 +8,15 @@
       </slot>
     </div>
     <div class="con">
-      <span class="prefix">
-        <slot name="prefix">
+      <span class="prefix" v-if="prefix||$slots.prefix">
+        <slot name="prefix" >
           {{ prefix }}
         </slot>
       </span>
       <span class="number" :style="valueStyle">
         <slot name="formatter"> {{ disposeValue }}</slot>
       </span>
-      <span class="suffix">
+      <span class="suffix" v-if="suffix||$slots.suffix">
         <slot name="suffix">
           {{ suffix }}
         </slot>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { isNumber, ceil, fill, chain, multiply, padStart, reduce} from 'element-ui/src/utils/lodash';
+import { isNumber, chain, multiply, padStart, reduce} from 'element-ui/src/utils/lodash';
 export default {
   name: 'ElStatistic',
   data() {
@@ -47,7 +47,7 @@ export default {
     },
     precision: {
       type: Number,
-      default: 0
+      default: null
     },
     value: {
       type: [String, Number],
@@ -97,36 +97,35 @@ export default {
       let { timeIndices, countDown, dispose} = this;
       timeIndices ? countDown() : dispose();
     },
-    magnification(num, _mulriple = 1000, _groupSeparator = ',') {
+    magnification(num, mulriple = 1000, groupSeparator = ',') {
       // magnification factor
-      const level = String(_mulriple).length - 1;
+      const level = String(mulriple).length - 1;
       const reg = new RegExp(`\\d{1,${level}}(?=(\\d{${level}})+$)`, 'g');
       const result = String(num)
         .replace(reg, '$&,')
         .split(',')
-        .join(_groupSeparator);
+        .join(groupSeparator);
       return result;
     },
     dispose() {
       let { value, precision, groupSeparator, rate } = this;
-
       if (!isNumber(value)) return false;
+      let [integer, decimal] = String(value).split('.');
       if (precision) {
-        value = ceil(value, precision);
+        decimal = `${decimal || ''}${(1)
+          .toFixed(precision)
+          .replace('.', '')
+          .slice(1)}`;
+        decimal = decimal.slice(0, precision);
       }
-
-      let integer = String(value).split('.')[0];
-      let decimals =
-        String(value).split('.')[1] ||
-        (precision ? fill(Array(precision), 0).join('') : '');
       let result = 0;
       // 1000 multiplying power
       if (groupSeparator) {
         integer = this.magnification(integer, rate, groupSeparator);
       }
 
-      result = [integer, decimals].join(
-        decimals ? this.decimalSeparator : ''
+      result = [integer, decimal].join(
+        decimal ? this.decimalSeparator : ''
       );
       this.disposeValue = result;
       return result;
@@ -140,7 +139,6 @@ export default {
           clearInterval(this.timeTask);
           this.timeTask = null;
         }
-
       } else {
         this.branch();
       }
@@ -195,8 +193,7 @@ export default {
       if (timeTask) return;
       let than = this;
       this.timeTask = setInterval(()=> {
-        let {value} = than;
-        let diffTiem = diffDate(value, Date.now());
+        let diffTiem = diffDate(than.value, Date.now());
         than.disposeValue = formatTimeStr(diffTiem);
         stopTime(diffTiem);
       }, REFRESH_INTERVAL);

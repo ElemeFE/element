@@ -1,13 +1,14 @@
 {
   "name": "element-ui",
-  "version": "2.15.12",
+  "version": "2.15.13",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
     "lib",
     "src",
     "packages",
-    "types"
+    "types",
+    "web-types.json"
   ],
   "typings": "types/index.d.ts",
   "scripts": {
