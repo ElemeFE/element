@@ -173,9 +173,10 @@ class TableLayout {
           });
 
           const firstRealWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth;
-          // 由于上面使用了 Math.floor 对 flexWidth 进行取整，那么可能导致 firstRealWidth 计算结果产生偏差（窗口缩小，但 firstRealWidth 却变大了）
-          // 在临界窗口大小的情况下（页面即将出现滚动条 且 有某一列数据即将换行）会反复出现滚动条，进而触发重新计算宽度，产生表格闪烁的问题
-          // 所以这里判断下，如果其他列缩窄了，那么当 firstRealWidth 也缩窄了才去更新 realWidth
+          // 由于上面使用了 Math.floor 对 flexWidth 进行取整，那么可能导致 firstRealWidth 计算结果产生偏差：
+          //   -> 窗口（父容器）缩小，但 firstRealWidth 却变大了，这将影响内容是否换行
+          // 在边界情况下，列内容换行会影响垂直滚动条的出现，触发重新计算宽度，进而产生表格闪烁的问题
+          // 所以这里判断下，如果某一列缩窄了，那么仅在 firstRealWidth 也减小的情况下才更新 realWidth 来避免上述问题
           // see: https://github.com/ElemeFE/element/issues/16167
           if (!isAnyColNarrower || firstRealWidth < flexColumns[0].realWidth) {
             flexColumns[0].realWidth = firstRealWidth;
