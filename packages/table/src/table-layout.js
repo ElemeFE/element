@@ -170,10 +170,11 @@ class TableLayout {
 
           const isBoxSmaller = !!this._lastTotalFlexWidth && this._lastTotalFlexWidth > totalFlexWidth;
           const firstRealWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth;
-          // If the container box gets smaller and the result of `firstRealWidth` is greater than before,
-          // we don't update the first flexible column's `realWidth`.
-          // In some cases, the result of `firstRealWidth` will be greater than before, even if the container gets smaller.
-          // Probably because of the decimal of the rest of columns' `realWidth` are rounded down?
+          // If the container box becomes smaller and the value of `firstRealWidth` increases,
+          // we shouldn't update the `realWidth` of the first flexible column.
+          // In certain situations, the `firstRealWidth` value may increase despite the container getting smaller
+          // due to the rounding down of decimal values in the remaining columns' `realWidth`.
+          // This can cause the columns' width to be repeatedly updated, leading to behavior like that seen in issue #16167.
           // See: https://github.com/ElemeFE/element/issues/16167
           if (!isBoxSmaller || firstRealWidth < flexColumns[0].realWidth) {
             flexColumns[0].realWidth = firstRealWidth;
