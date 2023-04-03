@@ -168,6 +168,7 @@
       </div>
       <div class="el-picker-panel__footer" v-if="showTime">
         <el-button
+          v-if="clearable"
           size="mini"
           type="text"
           class="el-picker-panel__link-btn"
