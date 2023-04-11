@@ -81,6 +81,13 @@
 
       colorDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
+      },
+      
+      color() {
+        return new Color({
+          enableAlpha: this.showAlpha,
+          format: this.colorFormat
+        })
       }
     },
 
@@ -169,13 +176,7 @@
     },
 
     data() {
-      const color = new Color({
-        enableAlpha: this.showAlpha,
-        format: this.colorFormat
-      });
-
       return {
-        color,
         showPicker: false,
         showPanelColor: false
       };
