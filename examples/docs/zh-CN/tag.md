@@ -24,6 +24,7 @@
   v-for="tag in tags"
   :key="tag.name"
   closable
+  @close="handleClose(tag)"
   :type="tag.type">
   {{tag.name}}
 </el-tag>
@@ -40,6 +41,11 @@
           { name: '标签五', type: 'danger' }
         ]
       };
+    },
+    methods: {
+      handleClose(tag) {
+        this.tags.splice(this.tags.indexOf(tag), 1);
+      }
     }
   }
 </script>
