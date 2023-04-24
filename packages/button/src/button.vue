@@ -47,7 +47,10 @@
       },
       nativeType: {
         type: String,
-        default: 'button'
+        default: 'button',
+        validator(val) {
+          return ['button', 'submit', 'reset'].includes(val);
+        },
       },
       loading: Boolean,
       disabled: Boolean,
