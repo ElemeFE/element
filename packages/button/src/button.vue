@@ -38,16 +38,27 @@
     props: {
       type: {
         type: String,
-        default: 'default'
+        default: 'default',
+        validator(val) {
+          return ['default', 'primary', 'success', 'warning', 'danger', 'info', 'text'].includes(val);
+        },
       },
-      size: String,
+      size: {
+        type: String,
+        validator(val) {
+          return ['medium', 'small', 'mini'].includes(val);
+        },
+      },
       icon: {
         type: String,
         default: ''
       },
       nativeType: {
         type: String,
-        default: 'button'
+        default: 'button',
+        validator(val) {
+          return ['button', 'submit', 'reset'].includes(val);
+        },
       },
       loading: Boolean,
       disabled: Boolean,
