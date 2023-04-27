@@ -177,7 +177,7 @@ export default {
       if (this.table.highlightSelectionRow) {
         for (let i = 0; i < selection.length; i++) {
           if (objectEquals(row, selection[i])) {
-            classes.push('current-row');
+            classes.push('selection-row');
           }
         };
       }

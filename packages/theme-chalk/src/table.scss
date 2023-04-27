@@ -486,7 +486,7 @@
           background: #FAFAFA;
         }
 
-        &.current-row td.el-table__cell {
+        &.current-row td.el-table__cell, &.selection-row td.el-table__cell {
           background-color: $--table-current-row-background-color;
         }
       }
@@ -496,7 +496,7 @@
   @include e(body) {
     tr.hover-row {
       &, &.el-table__row--striped {
-        &, &.current-row {
+        &, &.current-row, &.selection-row {
           > td.el-table__cell {
             background-color: $--table-row-hover-background-color;
           }
@@ -504,7 +504,7 @@
       }
     }
 
-    tr.current-row > td.el-table__cell {
+    tr.current-row > td.el-table__cell, tr.selection-row > td.el-table__cell {
       background-color: $--table-current-row-background-color;
     }
   }
