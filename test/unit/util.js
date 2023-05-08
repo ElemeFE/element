@@ -27,7 +27,7 @@ export const destroyVM = function(vm) {
 
 /**
  * 创建一个 Vue 的实例对象
- * @param  {Object|String}  Compo   组件配置，可直接传 template
+ * @param  {Object|String} Compo 组件配置，可直接传 template
  * @param  {Boolean=false} mounted 是否添加到 DOM 上
  * @return {Object} vm
  */
