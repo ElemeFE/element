@@ -88,6 +88,7 @@ import { ElSpinner } from './spinner'
 import { ElDescriptions } from './descriptions'
 import { ElDescriptionsItem } from './descriptions-item'
 import { ElResult } from './result'
+import { ElStatistic } from './statistic'
 
 export interface InstallationOptions {
   locale: any,
@@ -376,3 +377,6 @@ export class DescriptionsItem extends ElDescriptionsItem {}
 
 /** Result Component */
 export class Result extends ElResult {}
+
+/** Statistic Component */
+export class Statistic extends ElStatistic {}

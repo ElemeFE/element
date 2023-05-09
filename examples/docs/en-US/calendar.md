@@ -57,7 +57,7 @@ Display date.
 |-----------------|------------------- |---------- |---------------------- |--------- |
 | value / v-model | binding value      | Date/string/number | —            | —        |
 | range           | time range, including start time and end time. Start time must be start day of week, end time must be end day of week, the time span cannot exceed two months. | Array  | —  | —  |
-| first-day-of-week | fisrt day of week| Number    | 1 to 7                |  1       |
+| first-day-of-week | first day of week| Number    | 1 to 7                |  1       |
 
 ### dateCell Scoped Slot Parameters
 | Attribute       | Description   | Type      | Accepted Values       | Default  |

@@ -1,5 +1,60 @@
 ## 更新日志
 
+### 2.15.13
+
+*2023-02-12*
+
+#### Bug 修复
+- Docs
+  - 修复 Statistic 文案 (#22383 by @JUST-Limbo) 
+  - 修复 Input 文案 (#22093 by @lm312)  
+  - 修复 en-US 文案 (#22268 #22269 #22270 by @Hazel-Lin)  
+  - 修复 Pagination 文案 (#22288 by @xujintai123)  
+  - 修复 Links 文案 (#22370 by @itmier)  
+- Statistics
+  - 修复 slot 显示问题 (#22375 by @webvs2)
+- Chore
+  - 修复 web-type 文件丢失问题 (#22271 by @loosheng)
+#### 优化
+- InputNumber
+  - windows触摸屏响应优化 (#22185 by @mrsai)
+- Image
+  - 新增 initialIndex 属性 (#22346 by @inkroom) 
+- Statistics
+  - countdown 特性更新 (#22260 by @webvs2)
+  - 代码优化及doc更新 (#22276 by @webvs2)
+- 其他
+  - web-type代码优化 (#22281 by @whzxc)
+
+### 2.15.12
+
+*2022-11-16*
+
+#### Bug 修复
+- Statistics
+  - 修改 千分位 问题 (#22252 by @webvs2)
+- 其他
+  - 修复 2.15.11版本element-theme-chalk未成功发布 问题
+
+### 2.15.11
+
+*2022-11-15*
+
+#### Bug 修复
+- Docs
+  - 修复 Radio 文案 (#22178 by @bchen1029)
+  - 修复 Progress 文案 
+#### 优化
+- I18n
+  - 更新 马来西亚语 翻译 (#22185 by @z4q)
+  - 更新 挪威语 翻译 (#22145 by @Barsnes)
+- Progress
+  - 新增 defineBackColor 和 textColor 属性 (#22089 by @lm312) 
+- Statistics
+  - 新增组件 Statistics (#22159 by @webvs2)
+- Other
+  - 改进WebStorm IDE和其他JetBrains IDE中的代码帮助 (#22135 by @piotrtomiak)
+
 ### 2.15.10
 
 *2022-09-13*
