@@ -1,0 +1,165 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(tree-select) {
+  display: inline-block;
+	position: relative;
+  width: 240px;
+
+	.el-tree-select__tags > span {
+		display: contents;
+	}
+
+	.el-input__inner {
+		cursor: pointer;
+		padding-right: 35px;
+		transition: none;
+	}
+
+	.el-input {
+    display: block;
+		& .el-tree-select__caret {
+			transition: transform 0.3s;
+			transform: rotateZ(180deg);
+			cursor: pointer;
+
+			@include when(reverse) {
+				transform: rotateZ(0deg);
+			}
+		}
+
+		& .el-icon-reload {
+			animation: spin 1s linear infinite;
+		}
+
+		&.is-disabled {
+			& .el-input__inner {
+				cursor: not-allowed;
+			}
+		}
+	}
+
+ 	@include e(input) {
+    border: none;
+		outline: none;
+		padding: 0;
+		margin-left: 15px;
+		color: $--tree-select-multiple-input-color;
+		font-size: $--tree-select-font-size;
+		appearance: none;
+		height: 28px;
+		background-color: transparent;
+		flex-grow: 1;
+  }
+
+  @include e(tags) {
+		position: absolute;
+    line-height: normal;
+    white-space: normal;
+    z-index: $--index-normal;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+	}
+
+  .el-tag {
+    box-sizing: border-box;
+    border-color: transparent;
+    margin: 2px 0 2px 6px;
+    background-color: #f0f2f5;
+    display: flex;
+    max-width: 100%;
+    align-items: center;
+
+    &__close.el-icon-close {
+      background-color: $--color-text-placeholder;
+      top: 0;
+      color: $--color-white;
+      flex-shrink: 0;
+
+      &:hover {
+        background-color: $--color-text-secondary;
+      }
+
+      &::before {
+        display: block;
+        transform: translate(0, .5px);
+      }
+    }
+  }
+}
+
+@include b(tree-select-dropdown) {
+	position: absolute;
+	z-index: #{$--index-top + 1};
+	border-radius: $--border-radius-base;
+	border: $--tree-select-dropdown-border;
+	box-sizing: border-box;
+  background-color: $--tree-select-dropdown-background;
+	margin: 0 0 5px;
+
+	@include b(tree-select-dropdown__wrap) {
+		max-height: $--tree-select-dropdown-max-height;
+	}
+
+	@include b(tree-select-dropdown__list) {
+		list-style: none;
+		padding: $--tree-select-dropdown-padding;
+		margin: 0;
+		box-sizing: border-box;
+		.el-tree-node {
+			&:focus {
+				> .el-tree-node__content:not(.is-disabled) {
+					background: $--tree-select-option-selected-hover;
+				}
+			}
+			.el-tree-node__content {
+				transition: background-color 0.3s;
+				color: $--color-text-primary;
+				.el-tree-node__content-text {
+					font-size: $--tree-select-font-size;
+				}
+				&:hover:not(.is-disabled),
+				&:focus:not(.is-disabled) {
+					background: $--tree-select-option-selected-hover;
+					color: $--color-text-primary;
+				}
+				> .is-disabled {
+					cursor: not-allowed;
+          color: $--color-text-secondary;
+				}
+				> .is-selected {
+					color: $--color-primary;
+				}
+			}
+		}
+	}
+
+  @include b(tree-select-dropdown__empty) {
+    padding: $--tree-select-dropdown-empty-padding;
+    margin: 0;
+    text-align: center;
+    color: $--tree-select-dropdown-empty-color;
+    font-size: $--tree-select-font-size;
+  }
+
+	@include m(mini) {
+		@include b(tree-select-dropdown__wrap) {
+			max-height: $--tree-select-mini-dropdown-max-height;
+		}
+	}
+
+	@include m(small) {
+		@include b(tree-select-dropdown__wrap) {
+			max-height: $--tree-select-small-dropdown-max-height;
+		}
+	}
+
+	@include m(large) {
+		@include b(tree-select-dropdown__wrap) {
+			max-height: $--tree-select-large-dropdown-max-height;
+		}
+	}
+}
