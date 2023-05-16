@@ -8,5 +8,5 @@ export declare class ElDivider extends ElementUIComponent {
   vertical: boolean
 
   /** customize the content on the divider line */
-  posiiton: ContentPosition
+  contentPosition: ContentPosition
 }
