@@ -188,7 +188,7 @@ Les éléments de formulaire désactivés ne sont pas supportés par Tooltip, pl
 | offset | Décalage du Tooltip. | number | — |  0 |
 | transition | Animation de transition. | string | — | el-fade-in-linear |
 | visible-arrow | Si une flèche doit être affichée. Pour plus d'information, voir [Vue-popper](https://github.com/element-component/vue-popper). | boolean | — | true |
-| popper-options | Paramètres [popper.js](https://popper.js.org/documentation.html). | Object | Se référer à  [popper.js](https://popper.js.org/documentation.html). | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+| popper-options | Paramètres [popper.js](https://popper.js.org/docs/v2/). | Object | Se référer à  [popper.js](https://popper.js.org/docs/v2/). | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | open-delay | Délai avant l'apparition en millisecondes. | number | — | 0 |
 | manual | Si le contrôle du Tooltip doit être manuel. `mouseenter` et `mouseleave` n'auront pas d'effet si `true`. | boolean | — | false |
 | popper-class | Classe du popper de Tooltip. | string | — | — |
