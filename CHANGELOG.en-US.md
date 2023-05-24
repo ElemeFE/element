@@ -1,5 +1,89 @@
 ## Changelog
 
+### 2.15.13
+
+*2023-02-12*
+
+#### Bug fixes
+- Docs
+  - Fix Statistic docs (#22383 by @JUST-Limbo) 
+  - Fix Input docs (#22093 by @lm312)  
+  - Fix en-US docs (#22268 #22269 #22270 by @Hazel-Lin)  
+  - Fix Pagination docs (#22288 by @xujintai123)
+  - Fix: Links docs (#22370 by @itmier)    
+- Statistics
+  - fix slot display bug  (#22375 by @webvs2)
+- Chore
+  - missing web-type after publishing (#22271 by @loosheng)
+#### Optimization
+- InputNumber
+  - Fix touch one click trigger twice on the window touch pad (#22185 by @mrsai)
+- Image
+  - Add initialIndex prop (#22346 by @inkroom) 
+- Statistics
+  - Updated countdown feature to localize lodash Closes (#22260 by @webvs2)
+  - Update code and doc (#22276 by @webvs2)
+- Other
+  - fix web-types type props (#22281 by @whzxc)
+
+### 2.15.12
+
+*2022-11-16*
+
+#### Bug fixes
+- Statistic：
+  - Fixed the thousandth bit bug (#22252 by @webvs2)
+- Other
+  - Fix 2.15.11 element-theme-chalk publish fail bug
+
+### 2.15.11
+
+*2022-11-15*
+
+#### Bug fixes
+- Docs
+  - Fix Radio docs (#22178 by @bchen1029) 
+  - Fix Progress docs
+#### Optimization
+- I18n
+  - Update translation of Malaysian (#22185 by @z4q)
+  - Update translation of Norwegian (#22145 by @Barsnes)
+- Progress
+  - Add defineBackColor and textColor prop (#22089 by @lm312)
+- Statistics
+  - Add new component Statistics (#22159 by @webvs2)
+- Other
+  - Add Web Types to improve code assistance in WebStorm IDE and other JetBrains IDEs (#22135 by @piotrtomiak)
+
+### 2.15.10
+
+*2022-09-13*
+
+#### Bug fixes
+
+- DatePicker
+  - Fix props placement error (#21908 by @lqzhgood)
+- Loading
+  - Fix sticky DOM error (#22087 by @zzjjhh001)
+- Docs
+  - Fix Popover docs (#22083 by @lm312)
+  - Fix Skeleton docs (#22092 by @lm312)
+  - Fix DatePicker docs (#21970 by @guojiongwei)
+- Tree: 
+  - fix lazy-load default check problem (#21934 by @kiss-yu)
+
+#### Optimization
+
+- I18n
+  - Add translation of Sinhalese (#21936 by @sayuri-gi)
+  - Update translation of Spanish (#21924 by @jcardus)
+  - Add translation of Malaysian (#22028 by @iorange0411)
+  - Update translation of Swahili (#21904 by @Cholowao)
+- Utils
+  - update date-util.js (#22099 by @Due07)  
+- DatePicker
+  - add months And years type (#21918 by @akiko123456)
+
 ### 2.15.9
 
 *2022-06-02*
@@ -18,7 +102,7 @@
   - Fix Calendar docs (#21814 by @GoJam11)
   - Fix TimePicker docs (#21803 by @Alanscut)
   - Fix DatePicker docs (#21877 by @Nirvanaiu)
-- 其他
+- Other
   - Fix codepen display bug (#21863 by @bofeng)
 
 #### Optimization

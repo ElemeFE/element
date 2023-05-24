@@ -520,7 +520,7 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 
 All components in a Form inherit their `size` attribute from that Form. Similarly, FormItem also has a `size` attribute.
 
-:::demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
+:::demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormItem.
 ```html
 <el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
   <el-form-item label="Activity name">

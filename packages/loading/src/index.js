@@ -87,7 +87,7 @@ const Loading = (options = {}) => {
   });
 
   addStyle(options, parent, instance);
-  if (instance.originalPosition !== 'absolute' && instance.originalPosition !== 'fixed') {
+  if (instance.originalPosition !== 'absolute' && instance.originalPosition !== 'fixed' && instance.originalPosition !== 'sticky') {
     addClass(parent, 'el-loading-parent--relative');
   }
   if (options.fullscreen && options.lock) {

@@ -62,7 +62,7 @@ export default {
       loading: 'Yuklanmoqda',
       noMatch: 'Mos maʼlumot yoʻq',
       noData: 'Maʼlumot yoʻq',
-      placeholder: 'Tanladizngiz'
+      placeholder: 'Tanlang'
     },
     cascader: {
       noMatch: 'Mos maʼlumot topilmadi',
@@ -85,8 +85,8 @@ export default {
     upload: {
       deleteTip: 'Oʻchirish tugmasini bosib oʻchiring',
       delete: 'Oʻchirish',
-      preview: 'Oldin koʻrish',
-      continue: 'Davom qilish'
+      preview: 'Oldindan koʻrish',
+      continue: 'Davom etish'
     },
     table: {
       emptyText: 'Boʻsh',
@@ -113,8 +113,8 @@ export default {
       title: 'Orqaga'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'Tasdiqlash',
+      cancelButtonText: 'Bekor qilish'
     },
     empty: {
       description: 'Boʻsh'
