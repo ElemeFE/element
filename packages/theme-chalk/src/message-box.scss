@@ -107,6 +107,7 @@
     + .el-message-box__message {
       padding-left: 36px;
       padding-right: 12px;
+      word-break: break-all;
     }
 
     &.el-icon-success {
