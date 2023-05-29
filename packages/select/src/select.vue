@@ -14,6 +14,8 @@
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
+          :style="{maxWidth:`${collapseTagMaxWidth}px`}"
+          ref="collapseTagsText"
           type="info"
           @close="deleteTag($event, selected[0])"
           disable-transitions>
@@ -23,6 +25,7 @@
           v-if="selected.length > 1"
           :closable="false"
           :size="collapseTagSize"
+          ref="collapseTagsNum"
           type="info"
           disable-transitions>
           <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
@@ -330,7 +333,8 @@
         currentPlaceholder: '',
         menuVisibleOnFocus: false,
         isOnComposition: false,
-        isSilentBlur: false
+        isSilentBlur: false,
+        collapseTagMaxWidth: 0
       };
     },
 
@@ -567,6 +571,7 @@
         this.selected = result;
         this.$nextTick(() => {
           this.resetInputHeight();
+          this.resetCollapseTagWidth();
         });
       },
 
@@ -841,6 +846,26 @@
           return item.value;
         } else {
           return getValueByPath(item.value, this.valueKey);
+        }
+      },
+
+      resetCollapseTagWidth() {
+        if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
+          this.$nextTick(()=>{
+            const tags = this.$refs.tags;
+            const tagsWidth = tags ? Math.round(tags.getBoundingClientRect().width) : 0;
+
+            const collapseTagsText = this.$refs.collapseTagsText;
+            const collapseTagsTextMarginLeft = collapseTagsText ? Math.ceil(parseFloat(getComputedStyle(collapseTagsText.$el).marginLeft)) : 0;
+            const collapseTagsTextBorderLeftWidth = collapseTagsText ? Math.ceil(parseFloat(getComputedStyle(collapseTagsText.$el).borderLeftWidth)) : 0;
+
+            const collapseTagsNum = this.$refs.collapseTagsNum;
+            const collapseTagsNumWidth = collapseTagsNum ? Math.ceil(collapseTagsNum.$el.getBoundingClientRect().width) : 0;
+            const collapseTagsNumMarginLeft = collapseTagsNum ? Math.ceil(parseFloat(getComputedStyle(collapseTagsNum.$el).marginLeft)) : 0;
+            const collapseTagsNumBorderLeftWidth = collapseTagsNum ? Math.ceil(parseFloat(getComputedStyle(collapseTagsNum.$el).borderLeftWidth)) : 0;
+
+            this.collapseTagMaxWidth = tagsWidth - collapseTagsNumWidth - collapseTagsNumMarginLeft - collapseTagsNumBorderLeftWidth - collapseTagsTextMarginLeft - collapseTagsTextBorderLeftWidth;
+          });
         }
       }
     },
