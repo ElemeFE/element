@@ -1,5 +1,31 @@
 ## Changelog
 
+### 2.15.13
+
+*2023-02-12*
+
+#### Bug fixes
+- Docs
+  - Fix Statistic docs (#22383 by @JUST-Limbo) 
+  - Fix Input docs (#22093 by @lm312)  
+  - Fix en-US docs (#22268 #22269 #22270 by @Hazel-Lin)  
+  - Fix Pagination docs (#22288 by @xujintai123)
+  - Fix: Links docs (#22370 by @itmier)    
+- Statistics
+  - fix slot display bug  (#22375 by @webvs2)
+- Chore
+  - missing web-type after publishing (#22271 by @loosheng)
+#### Optimization
+- InputNumber
+  - Fix touch one click trigger twice on the window touch pad (#22185 by @mrsai)
+- Image
+  - Add initialIndex prop (#22346 by @inkroom) 
+- Statistics
+  - Updated countdown feature to localize lodash Closes (#22260 by @webvs2)
+  - Update code and doc (#22276 by @webvs2)
+- Other
+  - fix web-types type props (#22281 by @whzxc)
+
 ### 2.15.12
 
 *2022-11-16*
