@@ -224,6 +224,10 @@
     &.gutter {
       width: 0;
     }
+
+    &-row-hover {
+      background-color: $--table-row-hover-background-color;
+    }
   }
 
   .cell {
