@@ -110,7 +110,10 @@ export default {
       store: [],
       menus: [],
       activePath: [],
-      loadCount: 0
+      loadCount: 0,
+      multiplePreLoadCheckedNodes: [], // 多选懒加载回显数据时需要预加载的节点value
+      multiplePreLoadLastNodes: [], // 选中的节点的最后一个节点
+      multipleLoadCount: 0
     };
   },
 
@@ -159,6 +162,7 @@ export default {
   mounted() {
     if (!this.isEmptyValue(this.value)) {
       this.syncCheckedValue();
+      this.initMultiplePreLoadCheckedNodes();
     }
   },
 
@@ -296,7 +300,7 @@ export default {
       this.checkedValue = value;
     },
     lazyLoad(node, onFullfiled) {
-      const { config } = this;
+      const { config, multiple } = this;
       if (!node) {
         node = node || { root: true, level: 0 };
         this.store = new Store([], config);
@@ -315,17 +319,51 @@ export default {
           const valueKey = this.config.value;
           const leafKey = this.config.leaf;
 
-          if (Array.isArray(dataList) && dataList.filter(item => item[valueKey] === nodeValue).length > 0) {
-            const checkedNode = this.store.getNodeByValue(nodeValue);
+          // 应该是这里出错了，这个如果是多选 nodeValue是一个数组，而item[valueKey]却是基本数据类型 导致不会在lazyLoad了
+          if (multiple) {
+            let nodeValues = [];
 
-            if (!checkedNode.data[leafKey]) {
-              this.lazyLoad(checkedNode, () => {
-                this.handleExpand(checkedNode);
-              });
+            this.checkedValue.forEach(multipleValues => {
+              if (multipleValues.length > node.level) {
+                const nodeValue = multipleValues[node.level];
+                !nodeValues.includes(nodeValue) && nodeValues.push(nodeValue);
+              }
+            });
+
+            // console.info(nodeValues, 'nodeValues');
+            if (Array.isArray(dataList)) {
+              let checkedNodes = dataList.filter(item => nodeValues.includes(item[valueKey]));
+              if (checkedNodes.length) {
+                checkedNodes.forEach(node => {
+                  const checkedNode = this.store.getNodeByValue(node.value);
+                  if (checkedNode) {
+                    this.checkNodeIsChecked(checkedNode);
+                    if (!checkedNode.data[leafKey]) {
+                      this.lazyLoad(checkedNode, () => {
+                        this.handleExpand(checkedNode);
+                      });
+                    }
+                    if (this.multipleLoadCount === this.multiplePreLoadLastNodes.length) {
+                      console.log('loadCount', '几次loadCount');
+                      // this.$parent.computePresentTags();
+                      this.$parent.computePresentContent();
+                    }
+                  }
+                });
+              }
             }
+          } else {
+            if (Array.isArray(dataList) && dataList.filter(item => item[valueKey] === nodeValue).length > 0) {
+              const checkedNode = this.store.getNodeByValue(nodeValue);
 
-            if (this.loadCount === this.checkedValue.length) {
-              this.$parent.computePresentText();
+              if (!checkedNode.data[leafKey]) {
+                this.lazyLoad(checkedNode, () => {
+                  this.handleExpand(checkedNode);
+                });
+              }
+              if (this.loadCount === this.multiplePreLoadLastNodes) {
+                this.$parent.computePresentText();
+              }
             }
           }
         }
@@ -367,6 +405,7 @@ export default {
       const { checkedValue, multiple } = this;
       if (multiple) {
         const nodes = this.getFlattedNodes(leafOnly);
+        // return nodes;
         return nodes.filter(node => node.checked);
       } else {
         return this.isEmptyValue(checkedValue)
@@ -384,6 +423,35 @@ export default {
         this.calculateMultiCheckedValue();
       } else {
         this.checkedValue = emitPath ? [] : null;
+      }
+    },
+    initMultiplePreLoadCheckedNodes() {
+      const { multiple, value } = this;
+
+      if (multiple) {
+        // 多选
+        let multiplePreLoadCheckedNodes = [];
+        let multiplePreLoadLastNodes = [];
+
+        value.forEach(valueList => {
+          const length = valueList.length;
+          valueList.forEach((item, index) => {
+            if (index + 1 !== length) {
+              !multiplePreLoadCheckedNodes.includes(item) && multiplePreLoadCheckedNodes.push(item);
+            } else {
+              multiplePreLoadLastNodes.push(item); // 最后的节点必定不会重复
+            }
+          });
+        });
+        this.multiplePreLoadCheckedNodes = multiplePreLoadCheckedNodes;
+        this.multiplePreLoadLastNodes = multiplePreLoadLastNodes;
+      }
+    },
+    checkNodeIsChecked(node) {
+      const {multiplePreLoadLastNodes} = this;
+      if (multiplePreLoadLastNodes.includes(node.value)) {
+        node.doCheck(true);
+        this.multipleLoadCount++;
       }
     }
   }
