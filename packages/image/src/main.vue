@@ -135,11 +135,23 @@
       loadImage() {
         if (this.$isServer) return;
 
+        if(!this.src) {
+          // fail
+          this.loading = false;
+          this.error = true;
+          return;
+        }
         // reset status
         this.loading = true;
         this.error = false;
 
+        if(this.img) {
+          // clear event callback
+          this.img.onload = null
+          this.img.onerror = null
+        }
         const img = new Image();
+        this.img = img;
         img.onload = e => this.handleLoad(e, img);
         img.onerror = this.handleError.bind(this);
 
