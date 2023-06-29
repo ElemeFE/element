@@ -147,8 +147,8 @@
 
         if(this.img) {
           // clear event callback
-          this.img.onload = null
-          this.img.onerror = null
+          this.img.onload = null;
+          this.img.onerror = null;
         }
         const img = new Image();
         this.img = img;
