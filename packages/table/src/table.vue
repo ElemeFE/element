@@ -447,12 +447,20 @@
         if (this.fit) {
           addResizeListener(this.$el, this.resizeListener);
         }
+
+        // fix issue (https://github.com/ElemeFE/element/issues/22603)
+        if(this.height !== undefined){
+          addResizeListener(this.body, this.resizeBodyListener);
+        }
       },
 
       unbindEvents() {
         this.bodyWrapper.removeEventListener('scroll', this.onScroll, { passive: true });
         if (this.fit) {
           removeResizeListener(this.$el, this.resizeListener);
+        }
+        if(this.height !== undefined){
+          removeResizeListener(this.body, this.resizeBodyListener);
         }
       },
 
@@ -475,6 +483,23 @@
         if (shouldUpdateLayout) {
           this.resizeState.width = width;
           this.resizeState.height = height;
+          this.doLayout();
+        }
+      },
+
+      resizeBodyListener(){
+        if (!this.$ready) return;
+        let shouldUpdateLayout = false;
+        const el = this.body;
+        const { height: oldHeight } = this.resizeBodyState;
+
+        const height = el.offsetHeight;
+        if ((this.height || this.shouldUpdateHeight) && oldHeight !== height) {
+          shouldUpdateLayout = true;
+        }
+        
+        if (shouldUpdateLayout) {
+          this.resizeBodyState.height = height;
           this.doLayout();
         }
       },
@@ -503,6 +528,10 @@
 
       bodyWrapper() {
         return this.$refs.bodyWrapper;
+      },
+
+      body() {
+        return this.bodyWrapper.querySelector('.el-table__body');
       },
 
       shouldUpdateHeight() {
@@ -652,6 +681,11 @@
         width: this.$el.offsetWidth,
         height: this.$el.offsetHeight
       };
+      if (this.height !== undefined) {
+        this.resizeBodyState = {
+          height: this.body.offsetHeight
+        };
+      }
 
       // init filters
       this.store.states.columns.forEach(column => {
@@ -696,6 +730,9 @@
         resizeProxyVisible: false,
         resizeState: {
           width: null,
+          height: null
+        },
+        resizeBodyState: {
           height: null
         },
         // 是否拥有多级表头
