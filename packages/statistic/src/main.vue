@@ -50,7 +50,7 @@ export default {
       default: null
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, Date],
       default: ''
     },
     prefix: {
@@ -90,43 +90,40 @@ export default {
   watch: {
     value: function() {
       this.branch();
+    },
+    groupSeparator() {
+      this.dispose();
+    },
+    mulriple() {
+      this.dispose();
     }
   },
   methods: {
     branch() {
       let { timeIndices, countDown, dispose} = this;
-      timeIndices ? countDown() : dispose();
+      if (timeIndices) {
+        countDown(this.value.valueOf() || this.value);
+      } else {
+        dispose();
+      }
     },
     magnification(num, mulriple = 1000, groupSeparator = ',') {
       // magnification factor
-      const level = String(mulriple).length - 1;
-      const reg = new RegExp(`\\d{1,${level}}(?=(\\d{${level}})+$)`, 'g');
-      const result = String(num)
-        .replace(reg, '$&,')
-        .split(',')
-        .join(groupSeparator);
-      return result;
+      const level = String(mulriple).length ;
+      return num.replace(new RegExp(`(\\d)(?=(\\d{${level - 1}})+$)`, 'g'), `$1${groupSeparator}`);
     },
     dispose() {
-      let { value, precision, groupSeparator, rate } = this;
+      let { value, rate, groupSeparator } = this;
       if (!isNumber(value)) return false;
-      let [integer, decimal] = String(value).split('.');
-      if (precision) {
-        decimal = `${decimal || ''}${(1)
-          .toFixed(precision)
-          .replace('.', '')
-          .slice(1)}`;
-        decimal = decimal.slice(0, precision);
+      if (this.precision) {
+        value = value.toFixed(this.precision);
       }
-      let result = 0;
+      let [integer, decimal] = String(value).split('.');
       // 1000 multiplying power
       if (groupSeparator) {
         integer = this.magnification(integer, rate, groupSeparator);
       }
-
-      result = [integer, decimal].join(
-        decimal ? this.decimalSeparator : ''
-      );
+      let result = `${integer}${decimal ? this.decimalSeparator + decimal : ''}`;
       this.disposeValue = result;
       return result;
     },
@@ -188,12 +185,12 @@ export default {
       }
       return result;
     },
-    countDown() {
-      let {REFRESH_INTERVAL, timeTask, diffDate, formatTimeStr, stopTime, suspend} = this;
+    countDown(timeVlaue) {
+      let {REFRESH_INTERVAL, timeTask, diffDate, formatTimeStr, stopTime, suspend } = this;
       if (timeTask) return;
       let than = this;
       this.timeTask = setInterval(()=> {
-        let diffTiem = diffDate(than.value, Date.now());
+        let diffTiem = diffDate(timeVlaue, Date.now());
         than.disposeValue = formatTimeStr(diffTiem);
         stopTime(diffTiem);
       }, REFRESH_INTERVAL);

@@ -8,25 +8,39 @@ Countdown mode
 
 The component provides a thousandth place display, but you can use rate to set the 10,000th place, and so on
 :::demo
+
 ```html
 <template>
   <div>
     <el-row :gutter="20">
       <el-col :span="6">
         <div>
-          <el-statistic group-separator="," :precision="2" :value="value2" :title="title"></el-statistic>
+          <el-statistic
+            group-separator=","
+            :precision="2"
+            :value="value2"
+            :title="title"
+          ></el-statistic>
         </div>
       </el-col>
       <el-col :span="6">
         <div>
           <el-statistic title="Gender Distribution">
-            <template slot="formatter"> 456/2 </template>
+            <template slot="formatter">
+              456/2
+            </template>
           </el-statistic>
         </div>
       </el-col>
       <el-col :span="6">
         <div>
-          <el-statistic group-separator="," :precision="2" decimal-separator="." :value="value1" :title="title">
+          <el-statistic
+            group-separator=","
+            :precision="2"
+            decimal-separator="."
+            :value="value1"
+            :title="title"
+          >
             <template slot="prefix">
               <i class="el-icon-s-flag" style="color: red"></i>
             </template>
@@ -41,7 +55,11 @@ The component provides a thousandth place display, but you can use rate to set t
           <el-statistic :value="like ? 521 : 520" title="Feedback">
             <template slot="suffix">
               <span @click="like = !like" class="like">
-                <i class="el-icon-star-on" style="color:red" v-show="!!like"></i>
+                <i
+                  class="el-icon-star-on"
+                  style="color:red"
+                  v-show="!!like"
+                ></i>
                 <i class="el-icon-star-off" v-show="!like"></i>
               </span>
             </template>
@@ -59,7 +77,7 @@ The component provides a thousandth place display, but you can use rate to set t
         like: true,
         value1: 4154.564,
         value2: 2222,
-        title: 'Growth this year',
+        title: "Growth this year",
       };
     },
   };
@@ -72,44 +90,73 @@ The component provides a thousandth place display, but you can use rate to set t
   }
 </style>
 ```
+
 :::
 
-### 倒计时
+### Count down
 
 :::warning
 Suspend is tentative, it ** just pauses the countdown, not the time, because value points to a future time node **
 
-If you need to add time to the original, please note that the overall time (the amount of time added and the original time) must be a ** future ** time node, otherwise it is still the end of the countdown
+If you need to add time to the original, please note that the overall time (the amount of time added and the original time) must be a **future** time node, otherwise it is still the end of the countdown
 :::
 :::demo Providing a future time via 'value' will enable the countdown function
+
 ```html
 <template>
   <div>
     <el-row :gutter="20">
       <el-col :span="14">
-        <div style="width: 100%; display: inline-block; ">
-          <el-statistic :value="deadline2" time-indices title="商品降价">
-            <template slot="suffix"> The rush is about to begin </template>
-          </el-statistic>
-        </div>
-        <div style="width: 100%; display: inline-block; margin-top: 50px; ">
-          <el-statistic @finish="hilarity" :value="deadline3" time-indices title="The Value of Time">
-            <template slot="suffix">
-              <el-button type="primary " size="small" @click="add">add 10 second</el-button>
-            </template>
-          </el-statistic>
-        </div>
+        <el-card shadow="hover" style="width: 100%; ">
+          <div style="width: 100%; display: inline-block; ">
+            <el-statistic
+              :value="deadline2"
+              time-indices
+              title="🎉Price reduction of goods🎉"
+            >
+              <template slot="suffix">
+                panic purchase
+              </template>
+            </el-statistic>
+          </div>
+        </el-card>
+        <el-card shadow="hover" style="width: 100%;margin-top: 20px; ">
+          <div style="width: 100%; display: inline-block;">
+            <el-statistic
+              @finish="hilarity"
+              :value="deadline3"
+              time-indices
+              title="The Value of Time"
+            >
+              <template slot="suffix">
+                <el-button type="primary " size="small" @click="add"
+                  >add 10s</el-button
+                >
+              </template>
+            </el-statistic>
+          </div>
+        </el-card>
       </el-col>
       <el-col :span="10">
         <el-card shadow="hover" style="width: 100%;">
           <div slot="header" class="clearfix">
-            <span>文嘉《明日歌》</span>
-            <el-button style="float: right; padding: 3px 0" type="text" @click="clickFn">暂停</el-button>
+            <span style="font-size: 14px;">Henry·Wadsworth·Longfellow</span>
+            <el-button
+              style="float: right; padding: 3px 0"
+              type="text"
+              @click="clickFn"
+              >suspend</el-button
+            >
           </div>
-          <div style="font-size: 18px;text-align: center; ">明日复明日</div>
-          <div style="font-size: 18px;text-align: center;">明日何其多</div>
-          <div style="font-size: 18px;text-align: center;">我生待明日</div>
-          <div style="font-size: 18px;text-align: center;">万事成蹉跎</div>
+          <div style="font-size: 16px;text-align: left;">
+            Don't sigh in the past, it is no longer back
+          </div>
+          <div style="font-size: 16px;text-align: left;margin-top: 15px;">
+            Be wise to improve the present
+          </div>
+          <div style="font-size: 16px;text-align: left;margin-top: 15px;">
+            To not worry not afraid of the firm will into the complicated future
+          </div>
           <div style="margin-top: 40px;"></div>
           <el-statistic
             ref="statistic"
@@ -139,8 +186,9 @@ If you need to add time to the original, please note that the overall time (the 
     methods: {
       hilarity() {
         this.$notify({
-          title: 'Prompt',
-          message: "Time is up, do you know that an inch of gold can't buy an inch of time?",
+          title: "Prompt",
+          message:
+            "Time is up, do you know that an inch of gold can't buy an inch of time?",
           duration: 0,
         });
       },
@@ -155,6 +203,7 @@ If you need to add time to the original, please note that the overall time (the 
   };
 </script>
 ```
+
 :::
 
 ### Statistic Attributes
@@ -165,7 +214,7 @@ If you need to add time to the original, please note that the overall time (the 
 | decimal-separator | Setting the decimal point      | string                      | -               | .       |
 | formatter         | Custom numerical presentation  | v-slot \|({value}) => VNode | -               | -       |
 | group-separator   | Sets the thousandth identifier | string                      | -               | ,       |
-| precision         | numerical precision            | number                      | -               | 0       |
+| precision         | numerical precision            | number                      | -               | -       |
 | prefix            | Sets the prefix of a number    | string \| v-slot            | -               | -       |
 | suffix            | Sets the suffix of a number    | string \| v-slot            | -               | -       |
 | title             | Numeric titles                 | string \| v-slot            | -               | -       |
