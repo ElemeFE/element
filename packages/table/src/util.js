@@ -253,3 +253,21 @@ export function walkTreeNode(root, cb, childrenKey = 'children', lazyKey = 'hasC
     }
   });
 }
+
+export const objectEquals = function(objectA, objectB) {
+  // 取对象a和b的属性名
+  let aProps = Object.getOwnPropertyNames(objectA);
+  let bProps = Object.getOwnPropertyNames(objectB);
+  // 判断属性名的length是否一致
+  if (aProps.length !== bProps.length) {
+    return false;
+  }
+  // 循环取出属性名，再判断属性值是否一致
+  for (let i = 0; i < aProps.length; i++) {
+    let propName = aProps[i];
+    if (objectA[propName] !== objectB[propName]) {
+      return false;
+    }
+  }
+  return true;
+};

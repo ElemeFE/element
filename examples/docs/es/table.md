@@ -1822,6 +1822,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | fit                    | especifica si el ancho de la columna se adapta automáticamente a su contenedor | boolean                                  | —                              | true                                     |
 | show-header            | especifica si la cabecera de la tabla es visible | boolean                                  | —                              | true                                     |
 | highlight-current-row  | especifica si la fila actual es resaltado | boolean                                  | —                              | false                                    |
+| highlight-selection-row | resaltar la selección de líneas de verificación | boolean | — | false |
 | current-row-key        | clave de la fila actual, un ajuste de propiedad única | string,number                            | —                              | —                                        |
 | row-class-name         | función que devuelve nombres de clases personalizadas para una fila, o una cadena asignando nombres de clases para cada fila | Function({row, rowIndex})/String         | —                              | —                                        |
 | row-style              | función que devuelve el estilo personalizado para una fila, o un objeto asignando estilos personalizado para cada fila | Function({row, rowIndex})/Object         | —                              | —                                        |
