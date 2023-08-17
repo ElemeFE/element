@@ -18,7 +18,9 @@
       "starter": "脚手架",
       "feedback": "反馈建议",
       "contribution": "贡献指南",
-      "eleme": "饿了么"
+      "eleme": "饿了么",
+      "elemeTech": "饿了么技术",
+      "elemeDesign": "饿了么设计"
     },
     "header": {
       "guide": "指南",
@@ -49,7 +51,9 @@
       "starter": "Starter kit",
       "feedback": "Feedback",
       "contribution": "Contribution",
-      "eleme": "Eleme"
+      "eleme": "Eleme",
+      "elemeTech": "Eleme Tech",
+      "elemeDesign": "Eleme Design"
     },
     "header": {
       "guide": "Guide",
@@ -80,7 +84,9 @@
       "starter": "Kit de inicio",
       "feedback": "Comentarios",
       "contribution": "Contribución",
-      "eleme": "Eleme"
+      "eleme": "Eleme",
+      "elemeTech": "Eleme Tecnología",
+      "elemeDesign": "Eleme Diseño"
     },
     "header": {
       "guide": "Guía",
@@ -111,7 +117,9 @@
       "starter": "Kit de démarrage",
       "feedback": "Commentaires",
       "contribution": "Contribution",
-      "eleme": "Eleme"
+      "eleme": "Eleme",
+      "elemeTech": "Eleme Technologie",
+      "elemeDesign": "Eleme Conception"
     },
     "header": {
       "guide": "Guide",
