@@ -38,9 +38,11 @@
 
 > A Vue.js 2.0 UI Toolkit for Web.
 
-Element will stay with Vue 2.x 
+Element will stay with Vue 2.x
 
 For Vue 3.0, we recommend using [Element Plus](https://github.com/element-plus/element-plus)(Element Plus is a community develop project)
+
+For MiniProgram development, we recommend using [MorJS](https://github.com/eleme/morjs)
 
 ## Links
 - Homepage and documentation
