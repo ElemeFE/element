@@ -1,5 +1,25 @@
 ## Changelog
 
+### 2.15.14
+
+*2023-08-24*
+
+#### Bug fixes
+- Img
+  - Delete referrerpolicy prop (#22651 by @xinguanhua)
+#### Optimization
+- Docs
+  - Update readme and website example links (#22642 by @lyfeyaj)
+  - Update popper links (#22539 by @brizer)
+- I18n
+  - Update translation of Spanish (#22430 by @jcardus)
+  - Add sr-Latn translation (#22567 by @N-M)
+  - Update Uzbek translation (#22390 by @akahon)
+- Statistics
+  - Fix doc; Optimized code (#22384 by @webvs2)
+- Table
+  - Add highlight selection row (#22382 by @wangdaodao)
+
 ### 2.15.13
 
 *2023-02-12*

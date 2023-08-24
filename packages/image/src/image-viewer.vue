@@ -43,7 +43,6 @@
           :key="url"
           :src="currentImg"
           :style="imgStyle"
-          referrerpolicy='no-referrer'
           @load="handleImgLoad"
           @error="handleImgError"
           @mousedown="handleMouseDown">
