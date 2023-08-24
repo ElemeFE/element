@@ -1,5 +1,25 @@
 ## 更新日志
 
+### 2.15.14
+
+*2023-08-24*
+
+#### Bug 修复
+- Img
+  - 删除 referrerpolicy 属性 (#22651 by @xinguanhua)
+#### 优化
+- Docs
+  - 更新 readme and website example links (#22642 by @lyfeyaj)
+  - 更新 popper 官方文档链接 (#22539 by @brizer)
+- I18n
+  - 更新 西班牙语 翻译 (#22430 by @jcardus)
+  - 新增 塞尔维亚语（拉丁) 翻译 (#22567 by @N-M)
+  - 更新 乌兹别克语 翻译 (#22390 by @akahon)
+- Statistics
+  - 文档更新; 代码优化 (#22384 by @webvs2)
+- Table
+  - 增加高亮选中行属性 (#22382 by @wangdaodao)
+
 ### 2.15.13
 
 *2023-02-12*
