@@ -23,7 +23,7 @@
       <div class="footer-social">
         <p class="footer-social-title">Element {{ version && version.slice(0, 3) }} Fullerene</p>
         <el-popover
-          ref="weixin"
+          ref="elemetech"
           placement="top"
           width="120"
           popper-class="footer-popover"
@@ -31,6 +31,7 @@
           <div class="footer-popover-title">{{ langConfig.elemeTech }}</div>
           <img src="https://gw.alicdn.com/imgextra/i4/O1CN01dBDgJP1t4R3qikGBP_!!6000000005848-0-tps-344-344.jpg" alt="">
         </el-popover>
+        <i class="doc-icon-weixin elementdoc" v-popover:elemetech></i>
         <el-popover
           ref="weixin"
           placement="top"
@@ -145,6 +146,8 @@
 
     img {
       size: 100px;
+      width: 100px;
+      height: 100px;
       margin: 10px;
     }
   }
