@@ -65,7 +65,8 @@
             @click="clear"
           ></i>
           <i v-if="showPwdVisible"
-            class="el-input__icon el-icon-view el-input__clear"
+            class="el-input__icon el-input__clear"
+            :class="passwordVisible ? 'el-icon-view'  : 'el-icon-minus'"
             @click="handlePasswordVisible"
           ></i>
           <span v-if="isWordLimitVisible" class="el-input__count">
