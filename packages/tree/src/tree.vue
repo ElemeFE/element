@@ -291,6 +291,16 @@
         this.treeItems[0] && this.treeItems[0].setAttribute('tabindex', 0);
       },
 
+      initFocusedItem(direction) {
+        if (!this.treeItemArray.length) return;
+        if (direction === 'next') {
+          this.treeItemArray[0].focus();
+        }
+        if (direction === 'prev') {
+          this.treeItemArray[this.treeItemArray.length - 1].focus();
+        }
+      },
+
       handleKeydown(ev) {
         const currentItem = ev.target;
         if (currentItem.className.indexOf('el-tree-node') === -1) return;
