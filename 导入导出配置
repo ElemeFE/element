@@ -1,0 +1,65 @@
+导入导出配置
+@ExcelIgnore
+@ExcelProperty("姓名") 
+//导出
+    @RequestMapping("exportExcel")
+    public void exportExcel(HttpServletResponse response) throws IOException {
+        //1.设置响应数据
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        String fileName = URLEncoder.encode("教师列表", "UTF-8").replaceAll("/+", "%20");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        //2.查询要导出的数据
+        List<TeacherVo> stuList = teacherService.findList();
+        //3.使用EasyExcel完成导出
+        EasyExcel.write(response.getOutputStream())
+                .head(TeacherVo.class)
+                .excelType(ExcelTypeEnum.XLSX)
+                .sheet("教师列表")
+                .doWrite(stuList);
+        
+        
+    }
+
+ @RequestMapping("/importExcel")
+    public R importExcel(MultipartFile file) throws IOException {
+        
+        
+        EasyExcel.read(file.getInputStream(), TeacherVo.class, new AnalysisEventListener() {
+            @Override
+            public void invoke(Object o, AnalysisContext analysisContext) {
+                //多表
+                TeacherVo studentVo= (TeacherVo) o;
+                String cname = studentVo.getCname();
+                LambdaQueryWrapper<Cony> qw = new LambdaQueryWrapper<>();
+                qw.eq(Cony::getName,cname);
+                List<Cony> deptList = conyMapper.selectList(qw);
+                Integer sid = deptList.get(0).getId();
+                studentVo.setSid(sid);
+                teacherService.save(studentVo);
+            }
+            
+            @Override
+            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+            
+            }
+        }).sheet().doRead();
+        
+        return new R(1,"导入成功");
+    }
+
+
+importExcel(){
+                this.dialogVisible2=true;
+            },
+            importExcelSuccess(){
+                this.$message({
+                    message: "导入excel成功",
+                    type: 'success'
+                });
+                this.dialogVisible2=false;
+                this.initData();
+            },
+            handleImgUploadSuccess(res,file){
+                this.form.img = res;
+            },        
