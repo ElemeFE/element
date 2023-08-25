@@ -20,6 +20,7 @@
       <el-scrollbar
         @mouseenter.native="emitSelectRange('minutes')"
         @mousemove.native="adjustCurrentSpinner('minutes')"
+        v-show="showMinutes"
         class="el-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         view-class="el-time-spinner__list"
@@ -67,7 +68,8 @@
       </div>
       <div
         @mouseenter="emitSelectRange('minutes')"
-        class="el-time-spinner__wrapper is-arrow">
+        class="el-time-spinner__wrapper is-arrow"
+        v-if="showMinutes">
         <i v-repeat-click="decrease" class="el-time-spinner__arrow el-icon-arrow-up"></i>
         <i v-repeat-click="increase" class="el-time-spinner__arrow el-icon-arrow-down"></i>
         <ul class="el-time-spinner__list" ref="minutes">
@@ -115,6 +117,10 @@
     props: {
       date: {},
       defaultValue: {}, // reserved for future use
+      showMinutes: {
+        type: Boolean,
+        default: true
+      },
       showSeconds: {
         type: Boolean,
         default: true
