@@ -232,7 +232,8 @@ export default {
   data() {
     return {
       dropDownVisible: false,
-      checkedValue: this.value,
+      // the value may be a string , causing the first deleting without the 'find' function
+      checkedValue: typeof this.value === 'string' ? [this.value] : this.value,
       inputHover: false,
       inputValue: null,
       presentText: null,
