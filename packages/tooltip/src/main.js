@@ -14,6 +14,10 @@ export default {
       type: Number,
       default: 0
     },
+    closeDelay: {
+      type: Number,
+      default: 200
+    },
     disabled: Boolean,
     manual: Boolean,
     effect: {
@@ -71,8 +75,9 @@ export default {
         return this.node;
       }
     }).$mount();
-
-    this.debounceClose = debounce(200, () => this.handleClosePopper());
+  },
+  created() {
+    this.debounceClose = debounce(this.closeDelay, () => this.handleClosePopper());
   },
 
   render(h) {
