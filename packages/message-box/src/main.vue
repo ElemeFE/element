@@ -64,6 +64,7 @@
           <el-button
             :loading="confirmButtonLoading"
             ref="confirm"
+            type="primary"
             :class="[ confirmButtonClasses ]"
             v-show="showConfirmButton"
             :round="roundButton"
@@ -140,7 +141,7 @@
       },
 
       confirmButtonClasses() {
-        return `el-button--primary ${ this.confirmButtonClass }`;
+        return `${ this.confirmButtonClass }`;
       },
       cancelButtonClasses() {
         return `${ this.cancelButtonClass }`;
