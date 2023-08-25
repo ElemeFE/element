@@ -74,13 +74,17 @@ export default {
                 }
               }
             }
+            const { startRow = -1, endRow = -1 } = store.states.hoverState;
+            const cellStartRow = $index;
+            const cellEndRow = cellStartRow + rowspan - 1;
+            const isHover = cellStartRow <= endRow && cellEndRow >= startRow;
             return (
               <td
                 style={this.getCellStyle($index, cellIndex, row, column)}
-                class={this.getCellClass($index, cellIndex, row, column)}
+                class={this.getCellClass($index, cellIndex, row, column, isHover)}
                 rowspan={rowspan}
                 colspan={colspan}
-                on-mouseenter={($event) => this.handleCellMouseEnter($event, row)}
+                on-mouseenter={($event) => this.handleCellMouseEnter($event, row, $index, rowspan)}
                 on-mouseleave={this.handleCellMouseLeave}
               >
                 {
