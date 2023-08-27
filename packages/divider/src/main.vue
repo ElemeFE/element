@@ -3,11 +3,12 @@
     v-bind="data.attrs"
     v-on="listeners"
     :class="[data.staticClass, 'el-divider', `el-divider--${props.direction}`]"
+    :style="customStyle"
   >
     <div
       v-if="slots().default && props.direction !== 'vertical'"
       :class="['el-divider__text', `is-${props.contentPosition}`]"
-     >
+    >
       <slot />
     </div>
   </div>
@@ -15,23 +16,28 @@
 
 <script>
 export default {
-  name: 'ElDivider',
+  name: "ElDivider",
   props: {
+    customStyle: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
     direction: {
       type: String,
-      default: 'horizontal',
+      default: "horizontal",
       validator(val) {
-        return ['horizontal', 'vertical'].indexOf(val) !== -1;
-      }
+        return ["horizontal", "vertical"].indexOf(val) !== -1;
+      },
     },
     contentPosition: {
       type: String,
-      default: 'center',
+      default: "center",
       validator(val) {
-        return ['left', 'center', 'right'].indexOf(val) !== -1;
-      }
-    }
-  }
+        return ["left", "center", "right"].indexOf(val) !== -1;
+      },
+    },
+  },
 };
-
 </script>
