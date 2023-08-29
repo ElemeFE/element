@@ -1,6 +1,6 @@
 ## 内置过渡动画
 
-Element 内应用在部分组件的过渡动画，你也可以直接使用。在使用之前请阅读 [transition 组件文档](https://cn.vuejs.org/v2/api/#transition) 。
+Element 内应用在部分组件的过渡动画，你也可以直接使用。在使用之前请阅读 [transition 组件文档](https://v2.cn.vuejs.org/v2/api/#transition) 。
 
 ### fade 淡入淡出
 
