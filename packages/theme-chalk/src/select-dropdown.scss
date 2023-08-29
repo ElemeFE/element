@@ -35,6 +35,9 @@
         -moz-osx-font-smoothing: grayscale;
       }
     }
+    & .el-select-dropdown__item.selected.is-disabled {
+      color: #C0C4CC;
+    }
   }
 
   .el-scrollbar.is-empty .el-select-dropdown__list{
