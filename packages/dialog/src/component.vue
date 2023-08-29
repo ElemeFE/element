@@ -69,7 +69,7 @@
       },
 
       appendToIframeParent: {
-        type: HTMLElement,
+        type: Boolean,
         default: false
       },
 
