@@ -162,7 +162,10 @@
         this._closing = true;
 
         this.onClose && this.onClose();
-        messageBox.closeDialog(); // 解绑
+        if (messageBox) {
+          messageBox.closeDialog(); // 解绑
+          messageBox = null;
+        }
         if (this.lockScroll) {
           setTimeout(this.restoreBodyStyle, 200);
         }
@@ -191,7 +194,11 @@
         }
         this.action = action;
         if (typeof this.beforeClose === 'function') {
+          window.removeEventListener('hashchange', this.close);
           this.close = this.getSafeClose();
+          if (this.closeOnHashChange) {
+            window.addEventListener('hashchange', this.close);
+          }
           this.beforeClose(action, this, this.close);
         } else {
           this.doClose();
@@ -287,11 +294,12 @@
     },
 
     beforeDestroy() {
-      if (this.closeOnHashChange) {
-        window.removeEventListener('hashchange', this.close);
-      }
+      window.removeEventListener('hashchange', this.close);
       setTimeout(() => {
-        messageBox.closeDialog();
+        if (messageBox) {
+          messageBox.closeDialog();
+          messageBox = null;
+        }
       });
     },
 

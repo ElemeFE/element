@@ -170,9 +170,7 @@
     mounted() {
       this.popperElm = this.$el;
       this.referenceElm = this.cell;
-      this.table.bodyWrapper.addEventListener('scroll', () => {
-        this.updatePopper();
-      });
+      this.table.bodyWrapper.addEventListener('scroll', this.updatePopper);
 
       this.$watch('showPopper', (value) => {
         if (this.column) this.column.filterOpened = value;
@@ -189,6 +187,9 @@
           this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
         }
       }
+    },
+    beforeDestroy() {
+      this.table.bodyWrapper.removeEventListener('scroll', this.updatePopper);
     }
   };
 </script>

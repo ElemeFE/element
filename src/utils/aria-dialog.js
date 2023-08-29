@@ -70,6 +70,7 @@ aria.Dialog.prototype.closeDialog = function() {
       this.focusAfterClosed.focus();
     });
   }
+  tabEvent = null;
 };
 
 aria.Dialog.prototype.trapFocus = function(event) {

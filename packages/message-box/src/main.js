@@ -75,6 +75,15 @@ const initInstance = () => {
   instance.callback = defaultCallback;
 };
 
+const destroyInstance = () => {
+  if (msgQueue.length === 0 && instance) {
+    instance.$destroy();
+    instance.$el.parentNode.removeChild(instance.$el);
+    instance = null;
+    currentMsg = null;
+  }
+};
+
 const showNextMsg = () => {
   if (!instance) {
     initInstance();
@@ -98,6 +107,7 @@ const showNextMsg = () => {
       let oldCb = instance.callback;
       instance.callback = (action, instance) => {
         oldCb(action, instance);
+        destroyInstance();
         showNextMsg();
       };
       if (isVNode(instance.message)) {
@@ -210,6 +220,7 @@ MessageBox.close = () => {
   instance.visible = false;
   msgQueue = [];
   currentMsg = null;
+  destroyInstance();
 };
 
 export default MessageBox;

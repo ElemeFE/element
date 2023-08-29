@@ -220,18 +220,27 @@ export default {
   },
 
   destroyed() {
-    const reference = this.reference;
+    let reference = this.reference || this.$refs.reference;
+    if (!reference) reference = this.referenceElm;
+    const popper = this.popper || this.$refs.popper;
 
     off(reference, 'click', this.doToggle);
+    off(reference, 'click', this.handleClick);
     off(reference, 'mouseup', this.doClose);
     off(reference, 'mousedown', this.doShow);
     off(reference, 'focusin', this.doShow);
     off(reference, 'focusout', this.doClose);
+    off(reference, 'focusout', this.handleBlur);
     off(reference, 'mousedown', this.doShow);
     off(reference, 'mouseup', this.doClose);
     off(reference, 'mouseleave', this.handleMouseLeave);
     off(reference, 'mouseenter', this.handleMouseEnter);
+    off(reference, 'keydown', this.handleKeydown);
     off(document, 'click', this.handleDocumentClick);
+    off(popper, 'focusin', this.handleFocus);
+    off(popper, 'focusout', this.handleBlur);
+    off(popper, 'mouseenter', this.handleMouseEnter);
+    off(popper, 'mouseleave', this.handleMouseLeave);
   }
 };
 </script>
