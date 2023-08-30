@@ -1,6 +1,6 @@
 ## Built-in transition
 
-You can use Element's built-in transitions directly. Before that, please read the [transition docs](https://vuejs.org/v2/api/#transition).
+You can use Element's built-in transitions directly. Before that, please read the [transition docs](https://v2.vuejs.org/v2/api/#transition).
 
 ### fade
 
