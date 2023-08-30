@@ -1089,7 +1089,7 @@ Vous pouvez filtrer la table pour obtenir rapidement les lignes désirées.
 
 Vous pouvez customiser le contenu des colonnes afin de pouvoir utiliser d'autres composants.
 
-:::demo Vous avez acccès aux données suivantes: `row`, `column`, `$index` et `store` (gestionnaire d'état de Table) grâce aux [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots).
+:::demo Vous avez acccès aux données suivantes: `row`, `column`, `$index` et `store` (gestionnaire d'état de Table) grâce aux [Scoped slot](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots).
 ```html
 <template>
   <el-table
@@ -1171,7 +1171,7 @@ Vous pouvez customiser le contenu des colonnes afin de pouvoir utiliser d'autres
 
 Vous pouvez également personnaliser le header de la table.
 
-:::demo Vous pouvez personnaliser le header grâce aux [slots avec portée](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+:::demo Vous pouvez personnaliser le header grâce aux [slots avec portée](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots).
 ```html
 <template>
   <el-table
