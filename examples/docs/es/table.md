@@ -1089,7 +1089,7 @@ Filtra la tabla para encontrar la información que necesita.
 
 Personalice la columna de la tabla para que pueda integrarse con otros componentes.
 
-:::demo Tiene acceso a la siguiente información: row, column, $index, store (gestor de estados de la tabla) por [Scoped slots](https://vuejs.org/v2/guide/components.html#Scoped-Slots).
+:::demo Tiene acceso a la siguiente información: row, column, $index, store (gestor de estados de la tabla) por [Scoped slots](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots).
 ```html
 <template>
   <el-table
@@ -1170,7 +1170,7 @@ Personalice la columna de la tabla para que pueda integrarse con otros component
 ### Table con cabecera personalizada
 
 Se puede personalizar el encabezado de la tabla para que se pueda adaptar aún más.
-:::demo Puede personalizar el aspecto del encabezado con header [scoped slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+:::demo Puede personalizar el aspecto del encabezado con header [scoped slots](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots).
 ```html
 <template>
   <el-table
