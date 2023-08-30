@@ -1088,7 +1088,7 @@ Filter the table to find desired data.
 ### Custom column template
 
 Customize table column so it can be integrated with other components.
-:::demo You have access to the following data: row, column, $index and store (state management of Table) by [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots).
+:::demo You have access to the following data: row, column, $index and store (state management of Table) by [Scoped slot](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots).
 ```html
 <template>
   <el-table
@@ -1169,7 +1169,7 @@ Customize table column so it can be integrated with other components.
 ### Table with custom header
 
 Customize table header so it can be even more customized.
-:::demo You can customize how the header looks by header [scoped slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+:::demo You can customize how the header looks by header [scoped slots](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots).
 ```html
 <template>
   <el-table
