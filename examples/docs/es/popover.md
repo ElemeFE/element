@@ -4,7 +4,7 @@
 
 Similar a un Tooltip, Popover está construido con `Vue-popper`. Así que para atributos duplicados, por favor refiérase a la documentación de Tooltip.
 
-:::demo El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click`, `focus` o `manual`. En cuanto al elemento desencadenante, puedes escribirlo de dos maneras diferentes: usando el `slot="reference"`[named slot](https://vuejs.org/v2/guide/components.html#Named-Slots), o usando la directiva `v-popover` y poniendo  el `ref` de Popover.
+:::demo El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click`, `focus` o `manual`. En cuanto al elemento desencadenante, puedes escribirlo de dos maneras diferentes: usando el `slot="reference"`[named slot](https://v2.vuejs.org/v2/guide/components-slots#Named-Slots), o usando la directiva `v-popover` y poniendo  el `ref` de Popover.
 
 ```html
 <template>
