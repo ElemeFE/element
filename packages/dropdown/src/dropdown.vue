@@ -207,7 +207,7 @@
         let { trigger, show, hide, handleClick, splitButton, handleTriggerKeyDown, handleItemKeyDown } = this;
         this.triggerElm = splitButton
           ? this.$refs.trigger.$el
-          : this.$slots.default[0].elm;
+          : this.$refs.default;
 
         let dropdownElm = this.dropdownElm;
 
@@ -284,7 +284,9 @@
 
       return (
         <div class="el-dropdown" v-clickoutside={hide} aria-disabled={disabled}>
-          {triggerElm}
+          <div ref="default">
+            {triggerElm}
+          </div>
           {menuElm}
         </div>
       );
