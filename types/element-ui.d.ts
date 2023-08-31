@@ -316,7 +316,7 @@ export class Tooltip extends ElTooltip {}
 export class Transfer extends ElTransfer {}
 
 /** Tree Component */
-export class Tree<K = any, D = TreeData> extends ElTree<K, D> {}
+export class Tree<K = any, D extends TreeData = TreeData> extends ElTree<K, D> {}
 
 /** Upload Component */
 export class Upload extends ElUpload {}

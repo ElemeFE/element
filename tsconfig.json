@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": true,
+    "noEmit": true,
+    "paths": {
+      "resize-observer-polyfill": ["./types/overrides/resize-observer-polyfill"]
+    }
+  },
+  "include": ["src/**/*", "packages/**/*", "types/**/*"],
+  "exclude": ["node_modules/**/*"]
+}
