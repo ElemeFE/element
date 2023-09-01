@@ -560,6 +560,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | default-first-option | seleccione la primera opción de coincidencia en la tecla enter. Uso con `filterable` o `remote`. | boolean  | -                 | false            |
 | popper-append-to-body| si añadir o no el menu popup al body. Si el posicionamiento del popup es incorrecto, puede intentar poner este `prop` en `false`. | boolean | - | true |
 | automatic-dropdown | para non-filterable Select, este `prop` decide si el menú de opciones aparece cuando la entrada está enfocada | boolean | - | false |
+| fix-dropdown-width            | Whether to fix the width of the dropdown, the same as the Select | boolean | - | false |
 
 ### Eventos Select
 | Nombre         | Descripción                                                  | Parámetros                                |
