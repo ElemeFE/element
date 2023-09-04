@@ -106,6 +106,9 @@ export interface ElMessageBoxOptions {
   /** Whether to close MessageBox when hash changes */
   closeOnHashChange?: boolean
 
+  /** Whether to close MessageBox when the active history entry changes */
+  closeOnPopstate?: boolean
+
   /** Whether to show an input */
   showInput?: boolean
 

@@ -10,6 +10,7 @@ const defaults = {
   closeOnClickModal: true,
   closeOnPressEscape: true,
   closeOnHashChange: true,
+  closeOnPopstate: true,
   inputValue: null,
   inputPlaceholder: '',
   inputType: 'text',

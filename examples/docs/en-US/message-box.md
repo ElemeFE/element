@@ -317,6 +317,7 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 | closeOnClickModal | whether MessageBox can be closed by clicking the mask | boolean | — | true (false when called with alert) |
 | closeOnPressEscape | whether MessageBox can be closed by pressing the ESC | boolean | — | true (false when called with alert) |
 | closeOnHashChange | whether to close MessageBox when hash changes | boolean | — | true |
+| closeOnPopstate | whether to close MessageBox when the active history entry changes | boolean | — | true |
 | showInput | whether to show an input | boolean | — | false (true when called with prompt) |
 | inputPlaceholder | placeholder of input | string | — | — |
 | inputType | type of input | string | — | text |
