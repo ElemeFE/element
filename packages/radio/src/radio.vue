@@ -69,7 +69,8 @@
       disabled: Boolean,
       name: String,
       border: Boolean,
-      size: String
+      size: String,
+      notNeedGroup: Boolean,
     },
 
     data() {
@@ -80,6 +81,7 @@
     computed: {
       isGroup() {
         let parent = this.$parent;
+        if(notNeedGroup) return false;
         while (parent) {
           if (parent.$options.componentName !== 'ElRadioGroup') {
             parent = parent.$parent;
