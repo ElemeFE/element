@@ -15,6 +15,8 @@ const Notification = function(options) {
   const userOnClose = options.onClose;
   const id = 'notification_' + seed++;
   const position = options.position || 'top-right';
+  const content = Vue.prototype.$ELEMENT && Vue.prototype.$ELEMENT.content && document.getElementById(Vue.prototype.$ELEMENT.content);
+  const targetElement = content || document.body;
 
   options.onClose = function() {
     Notification.close(id, userOnClose);
@@ -30,7 +32,7 @@ const Notification = function(options) {
   }
   instance.id = id;
   instance.$mount();
-  document.body.appendChild(instance.$el);
+  targetElement.appendChild(instance.$el);
   instance.visible = true;
   instance.dom = instance.$el;
   instance.dom.style.zIndex = PopupManager.nextZIndex();

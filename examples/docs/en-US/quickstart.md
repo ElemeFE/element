@@ -254,7 +254,7 @@ Vue.prototype.$message = Message;
 
 ### Global config
 
-When importing Element, you can define a global config object. For now this object has two properties: `size` and `zIndex`. The property `size` sets the default size for all components and the property `zIndex` sets the initial z-index (default: 2000) for modal boxes:
+When importing Element, you can define a global config object. For now this object has three properties: `size` | `zIndex` | `content`. The property `size` sets the default size for all components and the property `zIndex` sets the initial z-index (default: 2000) for modal boxes, `content` is used in the micro front-end to solve the problem of sub application floating windows being mounted in the main application' body 'container, resulting in uncontrollable styles :
 
 Fully import Element：
 
@@ -275,6 +275,27 @@ Vue.use(Button);
 ```
 
 With the above config, the default size of all components that have size attribute will be 'small', and the initial z-index of modal boxes is 3000.
+
+#### For micro front-end floating window escape sub applications
+
+If the `content` field is set, all floating windows will be mounted in the `content` container:
+
+```js
+Vue.use(Element, { content: 'content' });
+```
+
+```html
+<template>
+  <div id="app">
+    <!-- The original logic -->
+    ...
+    <!-- Mount the container, if forgotten, it will automatically be mounted to the body -->
+    <div id="content"></div>
+  </div>
+</template>
+```
+
+According to the above settings, all floating windows in the project will be mounted to the `content` container.
 
 ### Start coding
 

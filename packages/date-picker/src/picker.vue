@@ -100,6 +100,7 @@ const NewPopper = {
     arrowOffset: Popper.props.arrowOffset,
     transformOrigin: Popper.props.transformOrigin
   },
+  computed: Popper.computed,
   methods: Popper.methods,
   data() {
     return merge({ visibleArrow: true }, Popper.data);

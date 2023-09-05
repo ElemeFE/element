@@ -254,7 +254,7 @@ Vue.prototype.$message = Message;
 
 ### Configuration globale
 
-Lors de l'import d'Element, vous pouvez définir un objet de configuration global. Actuellement il possède de propriétés: `size` et `zIndex`. La propriété `size` détermine la taille par défaut de tout les composants et `zIndex` règle le z-index initial (default: 2000) des fenêtres modales:
+Lors de l'import d'Element, vous pouvez définir un objet de configuration global. Actuellement il possède de propriétés: `size` et `zIndex`. La propriété `size` détermine la taille par défaut de tout les composants et `zIndex` règle le z-index initial (default: 2000) des fenêtres modales, `content` dans le microfrontal pour résoudre le problème de la fenêtre flottante de la Sous - application montée dans le conteneur `body` de l'application principale provoquant un style incontrôlable:
 
 Import total d'Element：
 
@@ -275,6 +275,26 @@ Vue.use(Button);
 ```
 
 Avec la configuration ci-dessus, la taille par défaut des composants ayant l'attribut size sera 'small', et le z-index initial des fenêtres modales est 3000.
+
+#### Pour la Sous - application micro front Floating Window Escape
+
+Si vous définissez le champ `content`, les fenêtres flottantes sont toutes montées dans le conteneur `content`:
+
+```js
+Vue.use(Element, { content: 'content' });
+```
+
+```html
+<template>
+  <div id="app">
+    <!-- La logique originale -->
+    ...
+    <!-- Monter le conteneur, automatiquement dans le corps si oublié -->
+    <div id="content"></div>
+  </div>
+</template>
+```
+En suivant les paramètres ci - dessus, toutes les fenêtres flottantes du projet sont montées dans le conteneur `content`.
 
 ### Commencer à développer
 
