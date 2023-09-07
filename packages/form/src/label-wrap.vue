@@ -30,8 +30,8 @@ export default {
 
   methods: {
     getLabelWidth() {
-      if (this.$el && this.$el.firstElementChild) {
-        const computedWidth = window.getComputedStyle(this.$el.firstElementChild).width;
+      if (this.$el) {
+        const computedWidth = window.getComputedStyle(this.$el).width;
         return Math.ceil(parseFloat(computedWidth));
       } else {
         return 0;
