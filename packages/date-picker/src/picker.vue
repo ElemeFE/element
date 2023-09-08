@@ -420,6 +420,7 @@ export default {
 
   data() {
     return {
+      placement: null,
       pickerVisible: false,
       showClose: false,
       userInput: null,
