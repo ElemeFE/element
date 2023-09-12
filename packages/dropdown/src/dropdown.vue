@@ -235,6 +235,7 @@
         }
       },
       handleMenuItemClick(command, instance) {
+        clearTimeout(this.timeout);
         if (this.hideOnClick) {
           this.visible = false;
         }
