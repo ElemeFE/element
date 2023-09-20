@@ -64,8 +64,12 @@
             @mousedown.prevent
             @click="clear"
           ></i>
-          <i v-if="showPwdVisible"
+          <i v-if="showPwdVisible && !passwordVisible"
             class="el-input__icon el-icon-view el-input__clear"
+            @click="handlePasswordVisible"
+          ></i>
+          <i v-if="showPwdVisible && passwordVisible"
+            class="el-input__icon el-icon-close-view el-input__clear"
             @click="handlePasswordVisible"
           ></i>
           <span v-if="isWordLimitVisible" class="el-input__count">
@@ -109,10 +113,10 @@
 </template>
 <script>
   import emitter from 'element-ui/src/mixins/emitter';
-  import Migrating from 'element-ui/src/mixins/migrating';
-  import calcTextareaHeight from './calcTextareaHeight';
-  import merge from 'element-ui/src/utils/merge';
-  import {isKorean} from 'element-ui/src/utils/shared';
+import Migrating from 'element-ui/src/mixins/migrating';
+import merge from 'element-ui/src/utils/merge';
+import { isKorean } from 'element-ui/src/utils/shared';
+import calcTextareaHeight from './calcTextareaHeight';
 
   export default {
     name: 'ElInput',
