@@ -47,6 +47,27 @@ export default {
       type: Boolean,
       default: true
     },
+    filterType: {
+      type: String,
+      default: 'checkbox',
+      validator(val) {
+        return ['checkbox', 'input'].indexOf(val) !== -1;
+      }
+    },
+    filterTypeOptions: {
+      type: Object,
+      default() {
+        return {
+          placeholder: this.label
+        };
+      },
+      validator(val) {
+        return Object.keys(val).length &&
+        ['placeholder'].every((key) => {
+          return Object.keys(val).includes(key);
+        });
+      }
+    },
     index: [Number, Function],
     sortOrders: {
       type: Array,
@@ -281,7 +302,7 @@ export default {
     const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'type', 'renderHeader', 'formatter', 'fixed', 'resizable'];
     const sortProps = ['sortMethod', 'sortBy', 'sortOrders'];
     const selectProps = ['selectable', 'reserveSelection'];
-    const filterProps = ['filterMethod', 'filters', 'filterMultiple', 'filterOpened', 'filteredValue', 'filterPlacement'];
+    const filterProps = ['filterMethod', 'filters', 'filterMultiple', 'filterOpened', 'filteredValue', 'filterPlacement', 'filterType', 'filterTypeOptions'];
 
     let column = this.getPropsData(basicProps, sortProps, selectProps, filterProps);
     column = mergeOptions(defaults, column);

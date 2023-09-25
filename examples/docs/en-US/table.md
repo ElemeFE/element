@@ -1085,6 +1085,80 @@ Filter the table to find desired data.
 ```
 :::
 
+Filter the table with input field
+
+:::demo Set attribute `filters-type="input"` to make  column filterable by input field. `filters-type` is an string accepts only two arguments `checkbox` and `input`, also you can specify a `filter-type-options` for `input` filter.
+```html
+<template>
+  <el-table
+    ref="filterTable"
+    :data="tableData"
+    style="width: 100%">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="Name"
+      width="180"
+      filter-type="input"
+      :filter-method="filterHandler"
+      :filter-type-options="filterTypeOptions"
+       filter-placement="top-end"
+      >
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="Address"
+      :filter-method="filterHandler"
+      :formatter="formatter"
+      filter-type="input"
+      filter-placement="top-end">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          name: 'Antony',
+          address: '82 S. 6th Street Corona, CA 92882',
+        }, {
+          name: 'Sadi',
+          address: '7815 Marlborough Lane San Diego, CA 92114',
+        }, {
+          name: 'Anton',
+          address: '68 Sierra Avenue Los Angeles, CA 90006',
+        }]
+      }
+    },
+    methods: {
+      formatter(row, column) {
+        return row.address;
+      },
+      filterHandler(value, row, column) {
+        const property = column['property'];
+        return row[property].toLowerCase().includes(value.toLowerCase());
+      }
+    },
+
+    computed: {
+      filterTypeOptions() {
+        return {
+          placeholder: 'custom label',
+          clearable: true,
+          delay: 300,
+        };
+      },
+    }
+  }
+</script>
+```
+:::
+
 ### Custom column template
 
 Customize table column so it can be integrated with other components.
@@ -1912,6 +1986,8 @@ You can customize row index in `type=index` columns.
 | filter-multiple | whether data filtering supports multiple options | Boolean | — | true |
 | filter-method | data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` | Function(value, row, column) | — | — |
 | filtered-value | filter value for selected data, might be useful when table header is rendered with `render-header` | Array | — | — |
+| filter-type | specify type of filter | String | `checkbox`,`input` | `checkbox` |
+| filter-type-options | if filter-type set to `input` then you can specify some option for input eg `placeholder`, `clearable` and `delay`. <br> `filter-type=input` trigger on input event for not call it immediately you can specify a `delay` by default it's `500ms`  | Object | `{placeholder: string, clearable: boolean, delay: number}` | `{label: column label}` |
 
 ### Table-column Scoped Slot
 | Name | Description |
