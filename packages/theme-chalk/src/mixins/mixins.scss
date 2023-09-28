@@ -10,7 +10,7 @@
       @content;
     }
   } @else {
-    @warn "Undefeined points: `#{$map}`";
+    @warn "Undefined points: `#{$map}`";
   }
 }
 
