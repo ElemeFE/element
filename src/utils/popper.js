@@ -460,6 +460,8 @@
             // here it could be both `body` or `documentElement` thanks to Firefox, we then check both
             if (target === root.document.body || target === root.document.documentElement) {
                 target = root;
+            } else {
+                root.addEventListener('scroll', this.state.updateBound, true);
             }
             target.addEventListener('scroll', this.state.updateBound);
             this.state.scrollTarget = target;
