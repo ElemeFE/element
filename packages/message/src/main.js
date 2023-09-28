@@ -8,6 +8,7 @@ let MessageConstructor = Vue.extend(Main);
 let instance;
 let instances = [];
 let seed = 1;
+const instanceSpacing = 16;
 
 const Message = function(options) {
   if (Vue.prototype.$isServer) return;
@@ -35,7 +36,7 @@ const Message = function(options) {
   document.body.appendChild(instance.$el);
   let verticalOffset = options.offset || 20;
   instances.forEach(item => {
-    verticalOffset += item.$el.offsetHeight + 16;
+    verticalOffset += item.$el.offsetHeight + instanceSpacing;
   });
   instance.verticalOffset = verticalOffset;
   instance.visible = true;
@@ -78,7 +79,7 @@ Message.close = function(id, userOnClose) {
   for (let i = index; i < len - 1 ; i++) {
     let dom = instances[i].$el;
     dom.style['top'] =
-      parseInt(dom.style['top'], 10) - removedHeight - 16 + 'px';
+      parseInt(dom.style['top'], 10) - removedHeight - instanceSpacing + 'px';
   }
 };
 
