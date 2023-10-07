@@ -405,6 +405,7 @@
 
         const targetPosition = dropNode.$el.getBoundingClientRect();
         const treePosition = this.$el.getBoundingClientRect();
+        const treeScrollTop = this.$el.scrollTop;
 
         let dropType;
         const prevPercent = dropPrev ? (dropInner ? 0.25 : (dropNext ? 0.45 : 1)) : -1;
@@ -429,7 +430,7 @@
         } else if (dropType === 'after') {
           indicatorTop = iconPosition.bottom - treePosition.top;
         }
-        dropIndicator.style.top = indicatorTop + 'px';
+        dropIndicator.style.top = indicatorTop + treeScrollTop + 'px';
         dropIndicator.style.left = (iconPosition.right - treePosition.left) + 'px';
 
         if (dropType === 'inner') {
