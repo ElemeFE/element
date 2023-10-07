@@ -74,7 +74,7 @@ const getScrollOptions = (el, vm) => {
         value = Number.isNaN(value) ? defaultValue : value;
         break;
       case Boolean:
-        value = isDefined(value) ? value === 'false' ? false : Boolean(value) : defaultValue;
+        value = isDefined(value) ? value === false ? false : Boolean(value) : defaultValue;
         break;
       default:
         value = type(value);
