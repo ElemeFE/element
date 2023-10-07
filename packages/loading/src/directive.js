@@ -8,6 +8,22 @@ const Mask = Vue.extend(Loading);
 const loadingDirective = {};
 loadingDirective.install = Vue => {
   if (Vue.prototype.$isServer) return;
+
+  function endLoading(el, binding) {
+    afterLeave(el.instance, _ => {
+      if (!el.instance.hiding) return;
+      el.domVisible = false;
+      const target = binding.modifiers.fullscreen || binding.modifiers.body
+        ? document.body
+        : el;
+      removeClass(target, 'el-loading-parent--relative');
+      removeClass(target, 'el-loading-parent--hidden');
+      el.instance.hiding = false;
+    }, 300, true);
+    el.instance.visible = false;
+    el.instance.hiding = true;
+  }
+
   const toggleLoading = (el, binding) => {
     if (binding.value) {
       Vue.nextTick(() => {
@@ -42,20 +58,19 @@ loadingDirective.install = Vue => {
             insertDom(el, el, binding);
           }
         }
+        //
+        if (binding.value instanceof Promise) {
+          binding.value
+            .then(() => {
+              endLoading(el, binding);
+            })
+            .catch(() => {
+              endLoading(el, binding);
+            })
+        }
       });
     } else {
-      afterLeave(el.instance, _ => {
-        if (!el.instance.hiding) return;
-        el.domVisible = false;
-        const target = binding.modifiers.fullscreen || binding.modifiers.body
-          ? document.body
-          : el;
-        removeClass(target, 'el-loading-parent--relative');
-        removeClass(target, 'el-loading-parent--hidden');
-        el.instance.hiding = false;
-      }, 300, true);
-      el.instance.visible = false;
-      el.instance.hiding = true;
+      endLoading(el, binding);
     }
   };
   const insertDom = (parent, el, binding) => {
