@@ -1,3 +1,4 @@
+
 <template>
   <div
     class="el-progress"
@@ -28,6 +29,7 @@
           :d="trackPath"
           :stroke="defineBackColor"
           :stroke-width="relativeStrokeWidth"
+          
           fill="none"
           :style="trailPathStyle"></path>
         <path
@@ -209,7 +211,6 @@
       },
       getLevelColor(percentage) {
         const colorArray = this.getColorArray().sort((a, b) => a.percentage - b.percentage);
-
         for (let i = 0; i < colorArray.length; i++) {
           if (colorArray[i].percentage > percentage) {
             return colorArray[i].color;
