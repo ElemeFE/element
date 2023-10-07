@@ -180,19 +180,22 @@ export default {
       arrow.setAttribute('x-arrow', '');
       arrow.className = 'popper__arrow';
       element.appendChild(arrow);
+    },
+    handleDestory() {
+      this.doDestroy(true);
+      if (this.popperElm && this.popperElm.parentNode === document.body) {
+        this.popperElm.removeEventListener('click', stop);
+        document.body.removeChild(this.popperElm);
+      }
     }
   },
 
   beforeDestroy() {
-    this.doDestroy(true);
-    if (this.popperElm && this.popperElm.parentNode === document.body) {
-      this.popperElm.removeEventListener('click', stop);
-      document.body.removeChild(this.popperElm);
-    }
+    this.handleDestory();
   },
 
   // call destroy in keep-alive mode
   deactivated() {
-    this.$options.beforeDestroy[0].call(this);
+    this.handleDestory();
   }
 };
