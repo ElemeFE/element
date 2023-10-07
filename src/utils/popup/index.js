@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
 import PopupManager from 'element-ui/src/utils/popup/popup-manager';
-import getScrollBarWidth from '../scrollbar-width';
+import getScrollBarWidthAndHeight from '../scrollbar-width-and-height';
 import { getStyle, addClass, removeClass, hasClass } from '../dom';
 
 let idSeed = 1;
@@ -137,7 +137,7 @@ export default {
             this.bodyPaddingRight = document.body.style.paddingRight;
             this.computedBodyPaddingRight = parseInt(getStyle(document.body, 'paddingRight'), 10);
           }
-          scrollBarWidth = getScrollBarWidth();
+          scrollBarWidth = getScrollBarWidthAndHeight().scrollBarWidth;
           let bodyHasOverflow = document.documentElement.clientHeight < document.body.scrollHeight;
           let bodyOverflowY = getStyle(document.body, 'overflowY');
           if (scrollBarWidth > 0 && (bodyHasOverflow || bodyOverflowY === 'scroll') && this.withoutHiddenClass) {
