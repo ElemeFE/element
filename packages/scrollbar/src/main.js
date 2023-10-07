@@ -93,7 +93,7 @@ export default {
         </div>
       ]);
     }
-    return h('div', { class: 'el-scrollbar' }, nodes);
+    return h('div', { 'class': ['el-scrollbar', this.always ? 'is-always' : ''] }, nodes);
   },
 
   methods: {
