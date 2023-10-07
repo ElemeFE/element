@@ -178,6 +178,7 @@ Des radios affichés comme des boutons standards.
 | value / v-model | La valeur liée. | string / number / boolean | — | — |
 | label | La valeur du radio. | string / number / boolean | — | — |
 | disabled | Si le radio est désactivé. | boolean | — | false |
+| controllable | Désactiver les événements du clavier. | boolean | — | false |
 | border  | Si une bordure doit être affichée autour du radio. | boolean   | — | false |
 | size  | Taille du radio, ne marche que si `border` est `true`. | string  | medium / small / mini | — |
 | name | Attribut 'name' natif. | string | — | — |
