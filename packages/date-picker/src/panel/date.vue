@@ -136,6 +136,7 @@
           plain
           size="mini"
           class="el-picker-panel__link-btn"
+          :disabled="!value || disabledDate(value)"
           @click="confirm">
           {{ t('el.datepicker.confirm') }}
         </el-button>
