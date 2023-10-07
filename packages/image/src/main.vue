@@ -11,7 +11,7 @@
       class="el-image__inner"
       v-bind="$attrs"
       v-on="$listeners"
-      @click="clickHandler"
+      @click.stop="clickHandler"
       :src="src"
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
