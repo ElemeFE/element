@@ -71,6 +71,7 @@
 
     methods: {
       handleClick(evt) {
+        if (this.disabled || this.loading) return
         this.$emit('click', evt);
       }
     }
