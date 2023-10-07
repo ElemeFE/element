@@ -451,6 +451,7 @@ export default {
     handleClear() {
       this.presentText = '';
       this.panel.clearCheckedNodes();
+      this.$emit('clear');
     },
     handleExpandChange(value) {
       this.$nextTick(this.updatePopper.bind(this));
