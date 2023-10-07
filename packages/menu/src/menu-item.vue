@@ -55,10 +55,12 @@
         return this.index === this.rootMenu.activeIndex;
       },
       hoverBackground() {
+        if (this.active && this.mode !== 'horizontal') return this.rootMenu.activeBackgroundColor || this.rootMenu.hoverBackground;
         return this.rootMenu.hoverBackground;
       },
       backgroundColor() {
-        return this.rootMenu.backgroundColor || '';
+        if (this.mode === 'horizontal') return this.rootMenu.backgroundColor || '';
+        return (this.active ? (this.rootMenu.activeBackgroundColor || this.rootMenu.backgroundColor) : this.rootMenu.backgroundColor) || '';
       },
       activeTextColor() {
         return this.rootMenu.activeTextColor || '';
