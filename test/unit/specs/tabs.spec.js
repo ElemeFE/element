@@ -499,6 +499,44 @@ describe('Tabs', () => {
       });
     }, 100);
   });
+  it('nav btn disabled', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs" style="width: 200px;">
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    setTimeout(_ => {
+      const btnPrev = vm.$el.querySelector('.el-tabs__nav-prev');
+      btnPrev.click();
+      vm.$nextTick(_ => {
+        const tabNav = vm.$el.querySelector('.el-tabs__nav-wrap');
+        expect(tabNav.__vue__.scrollState.prev).to.be.equal(0);
+        expect(btnPrev.classList.contains('is-disabled')).to.be.true;
+        expect(tabNav.__vue__.scrollState.next).to.be.true;
+
+        const btnNext = vm.$el.querySelector('.el-tabs__nav-next');
+        const clickNext = () => {
+          if (tabNav.__vue__.scrollState.next) {
+            btnNext.click();
+            setTimeout(_ => { clickNext(); }, 500); // wait for transition end
+          } else {
+            expect(btnNext.classList.contains('is-disabled')).to.be.true;
+            done();
+          }
+        };
+        clickNext();
+      });
+    }, 100);
+  });
   it('should work with lazy', done => {
     vm = createVue({
       template: `
