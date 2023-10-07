@@ -77,6 +77,14 @@ export default {
     }
   },
   watch: {
+    value: {
+      immediate: true,
+      handler(val) {
+        if (val) {
+          this.$nextTick(()=> off(this.referenceElement, 'click', this.doToggle));
+        }
+      }
+    },
     showPopper(val) {
       if (this.disabled) {
         return;
@@ -92,6 +100,8 @@ export default {
     if (!reference && this.$refs.wrapper.children) {
       reference = this.referenceElm = this.$refs.wrapper.children[0];
     }
+
+    this.referenceElement = reference;
     // 可访问性
     if (reference) {
       addClass(reference, 'el-popover__reference');
