@@ -195,6 +195,7 @@
           this.suggestions = [];
           return;
         }
+        this.activated = true;
         this.debouncedGetData(value);
       },
       handleChange(value) {
