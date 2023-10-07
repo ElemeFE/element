@@ -36,7 +36,7 @@
           :stroke="stroke"
           fill="none"
           :stroke-linecap="strokeLinecap"
-          :stroke-width="percentage ? relativeStrokeWidth : 0"
+          :stroke-width="relativeStrokeWidth"
           :style="circlePathStyle"></path>
       </svg>
     </div>
