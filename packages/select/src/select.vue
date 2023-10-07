@@ -9,7 +9,7 @@
       v-if="multiple"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
-      <span v-if="collapseTags && selected.length">
+      <span ref="collapseTags" v-if="collapseTags && selected.length">
         <el-tag
           :closable="!selectDisabled"
           :size="collapseTagSize"
@@ -348,6 +348,7 @@
       value(val, oldVal) {
         if (this.multiple) {
           this.resetInputHeight();
+          this.resetTagWidth();
           if ((val && val.length > 0) || (this.$refs.input && this.query !== '')) {
             this.currentPlaceholder = '';
           } else {
@@ -567,6 +568,7 @@
         this.selected = result;
         this.$nextTick(() => {
           this.resetInputHeight();
+          this.resetTagWidth();
         });
       },
 
@@ -645,6 +647,7 @@
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
         this.inputLength = this.$refs.input.value.length * 15 + 20;
         this.resetInputHeight();
+        this.resetTagWidth();
       },
 
       resetInputHeight() {
@@ -803,7 +806,11 @@
 
       handleResize() {
         this.resetInputWidth();
-        if (this.multiple) this.resetInputHeight();
+
+        if (this.multiple) {
+          this.resetInputHeight();
+          this.resetTagWidth();
+        }
       },
 
       checkDefaultFirstOption() {
@@ -842,6 +849,18 @@
         } else {
           return getValueByPath(item.value, this.valueKey);
         }
+      },
+
+      resetTagWidth() {
+        if (!this.collapseTags && this.selected.length === 0) return;
+        this.$nextTick(() => {
+          if (!this.$refs.collapseTags || !this.$refs.collapseTags.childNodes.length === 0) return;
+          const [labelTag, countTag] = this.$refs.collapseTags.childNodes;
+          const collapseTagWidth = countTag.offsetWidth || 0;
+          const inputLength = this.$refs.input ? Math.min(50, this.$refs.input.value.length * 15 + 20) : 0;
+          // 12 - margin | 2 - tag width buffer
+          labelTag.style.maxWidth = `calc(100% - ${inputLength}px - ${collapseTagWidth + 12 + 2}px)`;
+        });
       }
     },
 
@@ -884,6 +903,7 @@
       }
       if (this.remote && this.multiple) {
         this.resetInputHeight();
+        this.resetInputWidth();
       }
       this.$nextTick(() => {
         if (reference && reference.$el) {
