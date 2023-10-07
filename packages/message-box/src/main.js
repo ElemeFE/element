@@ -26,6 +26,7 @@ const defaults = {
   confirmButtonClass: '',
   cancelButtonClass: '',
   customClass: '',
+  customStyle: {},
   beforeClose: null,
   dangerouslyUseHTMLString: false,
   center: false,
