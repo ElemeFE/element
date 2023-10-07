@@ -279,10 +279,6 @@
       cursor: pointer;
     }
 
-    &.active + li {
-      border-left: 0;
-    }
-
     &:hover {
       color: $--pagination-hover-color;
     }
