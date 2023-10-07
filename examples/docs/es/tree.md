@@ -811,7 +811,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | draggable             | si se habilita la función de drag & drop en los nodos | boolean            | —    | false |
 | allow-drag            | esta función se ejecutará antes de arrastrar un nodo. si devuelve `false`, el nodo no puede ser arrastrado. | Function(nodo) | —  | —  |
 | allow-drop            | esta función se ejecutará al arrastrar y soltar un nodo. si devuelve false, el nodo arrastrando no se puede soltar en el nodo destino. `type` tiene tres valores posibles: 'prev' (insertar el nodo de arrastre antes del nodo de destino), 'inner' (insertar el nodo de arrastre en el nodo de destino) y 'next' (insertar el nodo de arrastre después del nodo de destino) | Function(Nodoquesearrastra, Nododestino, type) | —    | —     |
-
+| filter-check-strictly | Whether to check the parent time only check the filtered child when `show-checkbox` is `true`  | boolean  | —               | false   |
 ### props
 | Atributo | Descripción                              | Tipo                          | Valores aceptados | Por defecto |
 | -------- | ---------------------------------------- | ----------------------------- | ----------------- | ----------- |
