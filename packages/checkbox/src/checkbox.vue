@@ -5,7 +5,8 @@
       border && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
       { 'is-disabled': isDisabled },
       { 'is-bordered': border },
-      { 'is-checked': isChecked }
+      { 'is-checked': isChecked },
+      { 'is-editable': editable },
     ]"
     :id="id"
   >
@@ -27,24 +28,24 @@
         type="checkbox"
         :aria-hidden="indeterminate ? 'true' : 'false'"
         :name="name"
-        :disabled="isDisabled"
+        :disabled="!editable||isDisabled"
         :true-value="trueLabel"
         :false-value="falseLabel"
         v-model="model"
         @change="handleChange"
-        @focus="focus = true"
+        @focus="editable?focus = true:()=>{}"
         @blur="focus = false">
       <input
         v-else
         class="el-checkbox__original"
         type="checkbox"
         :aria-hidden="indeterminate ? 'true' : 'false'"
-        :disabled="isDisabled"
+        :disabled="!editable||isDisabled"
         :value="label"
         :name="name"
         v-model="model"
         @change="handleChange"
-        @focus="focus = true"
+        @focus="editable?focus = true:()=>{}"
         @blur="focus = false">
     </span>
     <span class="el-checkbox__label" v-if="$slots.default || label">
@@ -162,6 +163,10 @@
     },
 
     props: {
+      editable: {
+        type: Boolean,
+        default: true
+      },
       value: {},
       label: {},
       indeterminate: Boolean,
@@ -188,6 +193,9 @@
         }
       },
       handleChange(ev) {
+        if (!this.editable) {
+          return;
+        }
         if (this.isLimitExceeded) return;
         let value;
         if (ev.target.checked) {
@@ -214,6 +222,9 @@
     },
 
     watch: {
+      editable() {
+
+      },
       value(value) {
         this.dispatch('ElFormItem', 'el.form.change', value);
       }

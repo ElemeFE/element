@@ -38,6 +38,7 @@
         v-if="showCheckbox"
         v-model="node.checked"
         :indeterminate="node.indeterminate"
+        :editable="!disabled"
         :disabled="!!node.disabled"
         @click.native.stop
         @change="handleCheckChange"
@@ -58,6 +59,7 @@
         :aria-expanded="expanded"
       >
         <el-tree-node
+          :disabled="disabled"
           :render-content="renderContent"
           v-for="child in node.childNodes"
           :render-after-expand="renderAfterExpand"
@@ -73,7 +75,7 @@
 
 <script type="text/jsx">
   import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
-  import ElCheckbox from 'element-ui/packages/checkbox';
+  import ElCheckbox from '../../checkbox';
   import emitter from 'element-ui/src/mixins/emitter';
   import { getNodeKey } from './model/util';
 
@@ -85,6 +87,10 @@
     mixins: [emitter],
 
     props: {
+      disabled: {
+        type: Boolean,
+        default: false
+      },
       node: {
         default() {
           return {};
@@ -168,6 +174,9 @@
       },
 
       handleClick() {
+        if (this.disabled) {
+          return
+        }
         const store = this.tree.store;
         store.setCurrentNode(this.node);
         this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode);
@@ -203,6 +212,9 @@
       },
 
       handleCheckChange(value, ev) {
+        if (this.disabled) {
+          return
+        }
         this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
         this.$nextTick(() => {
           const store = this.tree.store;
@@ -221,12 +233,12 @@
       },
 
       handleDragStart(event) {
-        if (!this.tree.draggable) return;
+        if (!this.tree.draggable||this.disabled) return;
         this.tree.$emit('tree-node-drag-start', event, this);
       },
 
       handleDragOver(event) {
-        if (!this.tree.draggable) return;
+        if (!this.tree.draggable||this.disabled) return;
         this.tree.$emit('tree-node-drag-over', event, this);
         event.preventDefault();
       },
@@ -234,9 +246,8 @@
       handleDrop(event) {
         event.preventDefault();
       },
-
       handleDragEnd(event) {
-        if (!this.tree.draggable) return;
+        if (!this.tree.draggable||this.disabled) return;
         this.tree.$emit('tree-node-drag-end', event, this);
       }
     },

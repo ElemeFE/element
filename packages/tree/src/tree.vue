@@ -13,6 +13,7 @@
       v-for="child in root.childNodes"
       :node="child"
       :props="props"
+      :disabled="disabled"
       :render-after-expand="renderAfterExpand"
       :show-checkbox="showCheckbox"
       :key="getNodeKey(child)"
@@ -64,6 +65,10 @@
     },
 
     props: {
+      disabled: {
+        type: Boolean,
+        default: false
+      },
       data: {
         type: Array
       },
