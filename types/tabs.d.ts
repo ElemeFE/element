@@ -28,4 +28,7 @@ export declare class ElTabs extends ElementUIComponent {
 
   /** Hook function before switching tab. If false or a Promise is returned and then is rejected, switching will be prevented */
   beforeLeave: (activeName: string, oldActiveName: string) => boolean | Promise<any>
+
+  /** Whether Tab is toggled with arrow keys */
+  controllable: boolean
 }

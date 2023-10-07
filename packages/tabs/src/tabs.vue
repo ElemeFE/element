@@ -20,7 +20,11 @@
         default: 'top'
       },
       beforeLeave: Function,
-      stretch: Boolean
+      stretch: Boolean,
+      controllable: {
+        type: Boolean,
+        default: true
+      }
     },
 
     provide() {
@@ -120,7 +124,8 @@
         editable,
         addable,
         tabPosition,
-        stretch
+        stretch,
+        controllable
       } = this;
 
       const newButton = editable || addable
@@ -144,7 +149,8 @@
           editable,
           type,
           panes,
-          stretch
+          stretch,
+          controllable
         },
         ref: 'nav'
       };
@@ -171,7 +177,7 @@
         </div>
       );
     },
-  
+
     created() {
       if (!this.currentName) {
         this.setCurrentName('0');
