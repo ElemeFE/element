@@ -50,7 +50,7 @@ Luego edite .babelrc:
 
 ```json
 {
-  "presets": [["es2015", { "modules": false }]],
+  "presets": [["@babel/preset-env", { "modules": false }]],
   "plugins": [
     [
       "component",
