@@ -516,6 +516,57 @@ Custom validate callback function must be called. See more advanced usage at [as
 When an `el-form-item` is nested in another `el-form-item`, its label width will be `0`. You can set `label-width` on that `el-form-item` if needed.
 :::
 
+### Warning only rule
+
+:::demo Rule with `warningOnly` will not block form submission but show warning message.
+
+```html
+<el-form :model="warningForm" ref="warningForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item
+    label="url"
+    prop="url"
+    :rules="[{ required: true }, { type: 'url', warningOnly: true }, { type: 'string', min: 6 }]"
+  >
+    <el-input v-model="warningForm.url" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('warningForm')">Submit</el-button>
+    <el-button @click="resetForm('warningForm')">Reset</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        warningForm: {
+          url: ''
+        }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid, _, noWarning) => {
+          if (valid) {
+            if (noWarning) {
+              alert('submit!');
+            } else {
+              alert('please notice warning');
+            }
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Size control
 
 All components in a Form inherit their `size` attribute from that Form. Similarly, FormItem also has a `size` attribute.
@@ -641,6 +692,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 |      Name     | Description |
 |---------------|-------------|
 |      error    | Custom content to display validation message. The scope parameter is { error } |
+|      warning  | Custom content to display warning message. The scope parameter is { warning } |
 
 ### Form-Item Methods
 

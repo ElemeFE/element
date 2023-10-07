@@ -515,6 +515,56 @@ Les callback de validations personnalisées doivent être appelées. Un usage pl
 Lorsqu'un `el-form-item` est imbriqué dans un autre `el-form-item`, la largeur de son label sera `0`. Utilisez `label-width` sur ce `el-form-item` si besoin.
 :::
 
+### Règle d'avertissement
+
+:::demo La règle avec warningOnly ne bloquera pas l'envoi du formulaire.
+```html
+<el-form :model="warningForm" ref="warningForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item
+    label="url"
+    prop="url"
+    :rules="[{ required: true }, { type: 'url', warningOnly: true }, { type: 'string', min: 6 }]"
+  >
+    <el-input v-model="warningForm.url" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('warningForm')">Submit</el-button>
+    <el-button @click="resetForm('warningForm')">Reset</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        warningForm: {
+          url: ''
+        }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid, _, noWarning) => {
+          if (valid) {
+            if (noWarning) {
+              alert('submit!');
+            } else {
+              alert('please notice warning');
+            }
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Taille
 
 Tout les composants d'un formulaire héritent leur attribut `size` de ce formulaire. Il est aussi possible de l'utiliser individuellement sur chaque FormItem.
@@ -641,6 +691,8 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 |      Nom     | Description |
 |---------------|-------------|
 |      error    | Contenu personnalisé pour les messages de validation. Le paramètre du scope est { error }. |
+|      warning    | Contenu personnalisé pour les messages de validation. Le paramètre du scope est { warning }. |
+
 
 ### Méthodes de Form-Item
 

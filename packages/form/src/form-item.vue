@@ -19,21 +19,36 @@
     <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <slot
-          v-if="validateState === 'error' && showMessage && form.showMessage"
-          name="error"
-          :error="validateMessage">
-          <div
-            class="el-form-item__error"
-            :class="{
-              'el-form-item__error--inline': typeof inlineMessage === 'boolean'
-                ? inlineMessage
-                : (elForm && elForm.inlineMessage || false)
-            }"
-          >
-            {{validateMessage}}
-          </div>
-        </slot>
+        <template>
+          <slot
+            v-if="validateState === 'error' && showMessage && form.showMessage"
+            name="error"
+            :error="validateMessage">
+            <div
+              class="el-form-item__error"
+              :class="{
+                'el-form-item__error--inline':
+                  typeof inlineMessage === 'boolean' ? inlineMessage : (elForm && elForm.inlineMessage) || false
+              }"
+            >
+              {{validateMessage}}
+            </div>
+          </slot>
+          <slot
+            v-if="validateState === 'warning' && showMessage && form.showMessage"
+            name="warning"
+            :warning="warningMessage">
+            <div
+              class="el-form-item__warning"
+              :class="{
+                'el-form-item__warning--inline':
+                  typeof inlineMessage === 'boolean' ? inlineMessage : (elForm && elForm.inlineMessage) || false
+              }"
+            >
+              {{warningMessage}}
+            </div>
+          </slot>
+        </template>
       </transition>
     </div>
   </div>
@@ -184,6 +199,7 @@
       return {
         validateState: '',
         validateMessage: '',
+        warningMessage: '',
         validateDisabled: false,
         validator: {},
         isNested: false,
@@ -202,34 +218,96 @@
         this.validateState = 'validating';
 
         const descriptor = {};
+        const rulesClone = [];
         if (rules && rules.length > 0) {
-          rules.forEach(rule => {
+          rules.forEach((rule, ruleIndex) => {
             delete rule.trigger;
+            rulesClone.push({
+              ...rule,
+              ruleIndex
+            });
           });
         }
-        descriptor[this.prop] = rules;
+
+        rulesClone.sort(({ warningOnly: w1, ruleIndex: i1 }, { warningOnly: w2, ruleIndex: i2 }) => {
+          // Keep order if none of them set warningOnly
+          if (!!w1 === !!w2) {
+            return i1 - i2;
+          }
+          if (w1) {
+            return 1;
+          }
+          return -1;
+        });
+
+        descriptor[this.prop] = rulesClone;
+
+        const results = [];
+        rulesClone.forEach((r) =>
+          this.validateRule(r, (result) => {
+            results.push(result);
+
+            if (results.length === rulesClone.length) {
+              const errors = results.filter((r) => r.error && !r.rule.warningOnly);
+              const warnings = results.filter((r) => r.error && r.rule.warningOnly);
+
+              this.validateState = errors.length ? 'error' : warnings.length ? 'warning' : 'success';
+              this.validateMessage = errors.length ? errors[0].error.message : '';
+              this.warningMessage = warnings.length ? warnings[0].error.message : '';
+
+              const invalidFields = {};
+              errors.forEach(
+                (err) => (invalidFields[this.prop] = (invalidFields[this.prop] || []).concat(err.fieldErrors))
+              );
+
+              const warningFields = {};
+              warnings.forEach(
+                (warn) => (warningFields[this.prop] = (warningFields[this.prop] || []).concat(warn.fieldErrors))
+              );
+
+              callback(this.validateMessage, invalidFields, this.warningMessage, warningFields);
+              this.elForm &&
+                this.elForm.$emit(
+                  'validate',
+                  this.prop,
+                  !(errors && errors.length),
+                  this.validateMessage || null,
+                  this.warningMessage || null
+                );
+            }
+          })
+        );
+      },
+      validateRule(rule, callback) {
+        const descriptor = {
+          [this.prop]: rule
+        };
+
+        const model = {
+          [this.prop]: this.fieldValue
+        };
+
+        delete rule.ruleIndex;
 
         const validator = new AsyncValidator(descriptor);
-        const model = {};
-
-        model[this.prop] = this.fieldValue;
-
-        validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
-          this.validateState = !errors ? 'success' : 'error';
-          this.validateMessage = errors ? errors[0].message : '';
-
-          callback(this.validateMessage, invalidFields);
-          this.elForm && this.elForm.$emit('validate', this.prop, !errors, this.validateMessage || null);
+        validator.validate(model, { firstFields: true }, (errors, fields) => {
+          callback({
+            error: errors && errors[0],
+            rule: rule,
+            fieldErrors: fields && fields[this.prop]
+          });
         });
       },
       clearValidate() {
         this.validateState = '';
         this.validateMessage = '';
+        this.warningMessage = '';
         this.validateDisabled = false;
       },
       resetField() {
         this.validateState = '';
         this.validateMessage = '';
+        this.warningMessage = '';
 
         let model = this.form.model;
         let value = this.fieldValue;

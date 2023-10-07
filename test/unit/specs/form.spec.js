@@ -990,4 +990,40 @@ describe('Form', () => {
       }, DELAY);
     }, DELAY);
   });
+  it('has warning fields while form is valid', done => {
+    var checkName = (rule, value, callback) => {
+      if (value.length < 5) {
+        callback(new Error('长度至少为5'));
+      } else {
+        callback();
+      }
+    };
+    vm = createVue({
+      template: `
+        <el-form :model="form" :rules="rules" ref="form">
+          <el-form-item label="活动名称" prop="name" ref="field">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        return {
+          form: {
+            name: ''
+          },
+          rules: {
+            name: [
+              { validator: checkName, trigger: 'change', warningOnly: true }
+            ]
+          }
+        };
+      }
+    }, true);
+    vm.$refs.form.validate((valid, _invalidFields, noWarning, warningFields) => {
+      expect(valid).to.equal(true);
+      expect(noWarning).to.equal(false);
+      expect(warningFields.name.length).to.equal(1);
+      done();
+    });
+  });
 });
