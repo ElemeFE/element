@@ -20,7 +20,7 @@
     props: {
       label: String,
       labelContent: Function,
-      name: String,
+      name: [String, Number],
       closable: Boolean,
       disabled: Boolean,
       lazy: Boolean
@@ -37,15 +37,15 @@
       isClosable() {
         return this.closable || this.$parent.closable;
       },
+      paneName() {
+        return this.name === 0 ? 0 : this.name || this.index;
+      },
       active() {
-        const active = this.$parent.currentName === (this.name || this.index);
+        const active = this.$parent.currentName === this.paneName;
         if (active) {
           this.loaded = true;
         }
         return active;
-      },
-      paneName() {
-        return this.name || this.index;
       }
     },
 

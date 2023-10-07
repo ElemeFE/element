@@ -279,7 +279,7 @@ Seuls les onglets de type carte supportent l'ajout et la suppression.
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | La valeur liée, nom de l'onglet sélectionné. | string   |  —  | Nom du premier onglet. |
+| value / v-model | La valeur liée, nom de l'onglet sélectionné. | string/number   |  —  | Nom du premier onglet. |
 | type     | Type de l'onglet. | string   | card/border-card  |     —    |
 | closable  | Si des onglets peuvent être supprimés. | boolean   | — |  false  |
 | addable  | Si des onglets peuvent être ajoutés. | boolean   | — |  false  |
@@ -303,6 +303,6 @@ Seuls les onglets de type carte supportent l'ajout et la suppression.
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | Titre de l'onglet. | string   | — |    —     |
 | disabled | Si l'onglet est désactivé. | boolean | — | false |
-| name      | Identifiant correspondant au nom des onglets, utilisé par Tabs pour savoir quel est l'onglet actif. | string | — | Numéro de l'onglet dans l'ordre d'apparition, e.g. le premier est '1'. |
+| name      | Identifiant correspondant au nom des onglets, utilisé par Tabs pour savoir quel est l'onglet actif. | string/number | — | Numéro de l'onglet dans l'ordre d'apparition, e.g. le premier est '1'. |
 | closable  | Si l'onglet est supprimable. | boolean   | — |  false  |
 | lazy  | Si le contenu de l'onglet bénéficie du lazy-loading.  | boolean   | — |  false  |

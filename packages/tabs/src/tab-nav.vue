@@ -18,7 +18,7 @@
 
     props: {
       panes: Array,
-      currentName: String,
+      currentName: [String, Number],
       editable: Boolean,
       onTabClick: {
         type: Function,
@@ -216,7 +216,7 @@
         ] : null;
 
       const tabs = this._l(panes, (pane, index) => {
-        let tabName = pane.name || pane.index || index;
+        let tabName = pane.name === 0 ? 0 : pane.name || pane.index || index;
         const closable = pane.isClosable || editable;
 
         pane.index = `${index}`;

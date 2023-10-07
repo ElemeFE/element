@@ -9,7 +9,7 @@ export declare class ElTabPane extends ElementUIComponent {
   disabled: boolean
 
   /** Identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane */
-  name: string
+  name: string | number
 
   /** Whether Tab is closable */
   closable: boolean
