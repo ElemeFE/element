@@ -12,7 +12,12 @@ export interface AutoSize {
   /** Maximum rows to show */
   maxRows: number
 }
-
+export interface FormatterHandler {
+  /**
+   * @param value Current value of the text input
+   */
+  (value: string | number): void
+}
 /** Input Component */
 export declare class ElInput extends ElementUIComponent {
   /** Type of input */
@@ -90,6 +95,11 @@ export declare class ElInput extends ElementUIComponent {
   /** Whether to show wordCount when setting maxLength */
   showWordLimit: boolean
 
+  /**Format value program */
+  formatter:FormatterHandler
+  
+  /**Extract value program */
+  parser:FormatterHandler
   /**
    * Focus the Input component
    */
