@@ -198,9 +198,7 @@ export default {
           treeData[key].loading = false;
           treeData[key].loaded = true;
           treeData[key].expanded = true;
-          if (data.length) {
-            this.$set(lazyTreeNodeMap, key, data);
-          }
+          this.$set(lazyTreeNodeMap, key, data);
           this.table.$emit('expand-change', row, true);
         });
       }
