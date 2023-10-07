@@ -24,8 +24,8 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
 ```html
 <template>
 <el-popconfirm
-  confirm-button-text='好的'
-  cancel-button-text='不用了'
+  confirm-button-text="好的"
+  cancel-button-text="不用了"
   icon="el-icon-info"
   icon-color="red"
   title="这是一段内容确定删除吗？"
