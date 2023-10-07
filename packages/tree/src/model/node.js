@@ -1,6 +1,7 @@
 import objectAssign from 'element-ui/src/utils/merge';
 import { markNodeData, NODE_KEY } from './util';
 import { arrayFindIndex } from 'element-ui/src/utils/util';
+import Vue from 'vue'
 
 export const getChildState = node => {
   let all = true;
@@ -417,12 +418,8 @@ export default class Node {
       children = props.children || 'children';
     }
 
-    if (data[children] === undefined) {
-      data[children] = null;
-    }
-
     if (forceInit && !data[children]) {
-      data[children] = [];
+      Vue.set(data,children,[])
     }
 
     return data[children];
