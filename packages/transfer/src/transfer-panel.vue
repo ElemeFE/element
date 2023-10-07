@@ -13,7 +13,7 @@
     <div :class="['el-transfer-panel__body', hasFooter ? 'is-with-footer' : '']">
       <el-input
         class="el-transfer-panel__filter"
-        v-model="query"
+        v-model="queryStr"
         size="small"
         :placeholder="placeholder"
         @mouseenter.native="inputHover = true"
@@ -25,6 +25,7 @@
         ></i>
       </el-input>
       <el-checkbox-group
+        v-loading="isLoading"
         v-model="checked"
         v-show="!hasNoMatch && data.length > 0"
         :class="{ 'is-filterable': filterable }"
@@ -107,7 +108,13 @@
       format: Object,
       filterMethod: Function,
       defaultChecked: Array,
-      props: Object
+      props: Object,
+      beforeFilter: {
+        type: Function,
+        default() {
+          return () => {};
+        }
+      }
     },
 
     data() {
@@ -116,11 +123,33 @@
         allChecked: false,
         query: '',
         inputHover: false,
-        checkChangeByUser: true
+        checkChangeByUser: true,
+        isLoading: false,
+        queryStr: ''
       };
     },
 
     watch: {
+      queryStr(val, oldVal) {
+        const Promise = window.Promise;
+        const result = this.beforeFilter(this.title, val);
+
+        if (result instanceof Promise) {
+          this.isLoading = true;
+
+          result.then(() => {
+            this.query = val;
+            this.isLoading = false;
+          }).catch(() => {
+            this.query = val;
+            this.isLoading = false;
+          });
+
+        } else {
+          this.query = val;
+        }
+      },
+
       checked(val, oldVal) {
         this.updateAllChecked();
         if (this.checkChangeByUser) {
