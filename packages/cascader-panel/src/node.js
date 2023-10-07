@@ -161,6 +161,8 @@ export default class Node {
         this.setCheckState(checked);
         this.emit('check');
       }
+    } else {
+      this.setCheckState(checked);
     }
   }
 }
