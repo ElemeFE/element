@@ -136,7 +136,7 @@ export default {
 
   methods: {
     updateStatus(val) {
-      const prevChild = this.$parent.$children[this.index - 1];
+      const prevChild = this.$parent.steps[this.index - 1];
 
       if (val > this.index) {
         this.internalStatus = this.$parent.finishStatus;
