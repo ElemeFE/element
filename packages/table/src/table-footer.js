@@ -8,6 +8,13 @@ export default {
 
   render(h) {
     let sums = [];
+    const checkArrayDimension = arr => arr.some(item => Array.isArray(item));
+    function convertTo2DArray(array) {
+      if (array.length === 0) {
+        return array;
+      }
+      return checkArrayDimension(array) ? array : [array];
+    };
     if (this.summaryMethod) {
       sums = this.summaryMethod({ columns: this.columns, data: this.store.states.data });
     } else {
@@ -41,7 +48,7 @@ export default {
         }
       });
     }
-
+    sums = convertTo2DArray(sums);
     return (
       <table
         class="el-table__footer"
@@ -57,7 +64,7 @@ export default {
           }
         </colgroup>
         <tbody class={ [{ 'has-gutter': this.hasGutter }] }>
-          <tr>
+          {sums.map((item, index) => <tr>
             {
               this.columns.map((column, cellIndex) => <td
                 key={cellIndex}
@@ -66,7 +73,7 @@ export default {
                 class={ [...this.getRowClasses(column, cellIndex), 'el-table__cell'] }>
                 <div class={ ['cell', column.labelClassName] }>
                   {
-                    sums[cellIndex]
+                    sums[index][cellIndex]
                   }
                 </div>
               </td>)
@@ -74,7 +81,7 @@ export default {
             {
               this.hasGutter ? <th class="el-table__cell gutter"></th> : ''
             }
-          </tr>
+          </tr>)}
         </tbody>
       </table>
     );
