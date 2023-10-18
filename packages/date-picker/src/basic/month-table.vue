@@ -48,6 +48,7 @@
   export default {
     props: {
       disabledDate: {},
+      cellClassName: {},
       value: {},
       selectionMode: {
         default: 'month'
@@ -129,6 +130,11 @@
           if (cell.end) {
             style['end-date'] = true;
           }
+        }
+        if (typeof this.cellClassName === 'function') {
+          const customClass = this.cellClassName(new Date(year, month, 1));
+          customClass && (style[customClass] = true);
+          style[customClass] = !!customClass;
         }
         return style;
       },
