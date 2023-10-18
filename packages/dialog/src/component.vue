@@ -6,7 +6,8 @@
     <div
       v-show="visible"
       class="el-dialog__wrapper"
-      @click.self="handleWrapperClick">
+      @click.self="handleWrapperClick"
+      @mousedown="e => wrapperMouseDowned = e.target.classList.contains('el-dialog__wrapper')">
       <div
         role="dialog"
         :key="key"
@@ -113,7 +114,8 @@
     data() {
       return {
         closed: false,
-        key: 0
+        key: 0,
+        wrapperMouseDowned: false
       };
     },
 
@@ -163,6 +165,7 @@
         };
       },
       handleWrapperClick() {
+        if (!this.closeOnClickModal || !this.wrapperMouseDowned) return;
         if (!this.closeOnClickModal) return;
         this.handleClose();
       },
