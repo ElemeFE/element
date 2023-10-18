@@ -106,6 +106,7 @@
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
+              :cell-class-name="cellClassName"
               :disabled-date="disabledDate">
             </year-table>
             <month-table
@@ -115,6 +116,7 @@
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
+              :cell-class-name="cellClassName"
               :disabled-date="disabledDate">
             </month-table>
           </div>
