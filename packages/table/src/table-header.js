@@ -89,6 +89,10 @@ export default {
           }
         </colgroup>
         <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
+          <div class="custom-move-indicator-left" id="custom-move-indicator-left">
+          </div>
+          <div class="custom-move-indicator-right" id="custom-move-indicator-right">
+          </div>
           {
             this._l(columnRows, (columns, rowIndex) =>
               <tr
@@ -422,17 +426,34 @@ export default {
         target = target.parentNode;
       }
 
+      const tableHeader = target.parentNode;
+      const tableHeaderStartPosition = tableHeader.getBoundingClientRect().x;
+      const rect = target.getBoundingClientRect();
+
       if (!column || !column.resizable) return;
+      if (this.dragging) {
+        if (event.pageX - rect.left >= 30) {
+          target.style.cursor = 'col-resize';
+          document.getElementById('custom-move-indicator-left').style.display = 'block';
+          document.getElementById('custom-move-indicator-right').style.display = 'block';
+          document.getElementById('custom-move-indicator-left').style.left = (event.pageX - tableHeaderStartPosition - 6) + 'px';
+          document.getElementById('custom-move-indicator-right').style.left = (event.pageX - tableHeaderStartPosition + 8) + 'px';
+        }
+      }
 
       if (!this.dragging && this.border) {
-        let rect = target.getBoundingClientRect();
-
         const bodyStyle = document.body.style;
-        if (rect.width > 12 && rect.right - event.pageX < 8) {
+
+        if (rect.width > 12 && (rect.right - event.pageX < 8)) {
           bodyStyle.cursor = 'col-resize';
+          document.getElementById('custom-move-indicator-left').style.display = 'block';
+          document.getElementById('custom-move-indicator-right').style.display = 'block';
+          document.getElementById('custom-move-indicator-left').style.left = (rect.right - tableHeaderStartPosition - 8) + 'px';
+          document.getElementById('custom-move-indicator-right').style.left = (rect.right - tableHeaderStartPosition + 5) + 'px';
           if (hasClass(target, 'is-sortable')) {
             target.style.cursor = 'col-resize';
           }
+
           this.draggingColumn = column;
         } else if (!this.dragging) {
           bodyStyle.cursor = '';
@@ -447,6 +468,8 @@ export default {
     handleMouseOut() {
       if (this.$isServer) return;
       document.body.style.cursor = '';
+      document.getElementById('custom-move-indicator-left').style.display = 'none';
+      document.getElementById('custom-move-indicator-right').style.display = 'none';
     },
 
     toggleOrder({ order, sortOrders }) {
