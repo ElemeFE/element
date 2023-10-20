@@ -10,6 +10,24 @@
      >
       <slot />
     </div>
+    <div
+        v-if="!slots().default && props.direction !== 'vertical'"
+        :class="['el-divider__text', `is-left`]"
+    >
+      <slot name="left"/>
+    </div>
+    <div
+        v-if="!slots().default && props.direction !== 'vertical'"
+        :class="['el-divider__text', `is-center`]"
+    >
+      <slot name="center"/>
+    </div>
+    <div
+        v-if="!slots().default && props.direction !== 'vertical'"
+        :class="['el-divider__text', `is-right`]"
+    >
+      <slot name="right"/>
+    </div>
   </div>
 </template>
 
