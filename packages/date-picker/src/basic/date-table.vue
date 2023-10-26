@@ -204,7 +204,7 @@
             const start = this.showWeekNumber ? 1 : 0;
             const end = this.showWeekNumber ? 7 : 6;
             const isWeekActive = this.isWeekActive(row[start + 1]);
-            cell.isWeekSelect = isWeekActive
+            cell.isWeekSelect = isWeekActive;
 
             row[start].inRange = isWeekActive;
             row[start].start = isWeekActive;
@@ -331,7 +331,7 @@
               const weekDate = prevDate(item, dayOffset);
               return weekDate.getTime() === newDate.getTime();
             }
-          })
+          });
         }
 
         if (isDate(this.value)) {
@@ -448,27 +448,27 @@
             : [...value, newDate];
           this.$emit('pick', newValue);
         } else if (this.selectionMode === 'weeks') {
-          const value = this.value || []
+          const value = this.value || [];
           const weeks = [...value].map(item => {
-            const weekNumber = getWeekNumber(item)
-            const value = item.getFullYear() + 'w' + weekNumber
+            const weekNumber = getWeekNumber(item);
+            const value = item.getFullYear() + 'w' + weekNumber;
             return {
               year: item.getFullYear(),
               week: weekNumber,
               value: value,
               date: item
-            }
-          })
-          const weekNumber = getWeekNumber(newDate)
-          const val = newDate.getFullYear() + 'w' + weekNumber
+            };
+          });
+          const weekNumber = getWeekNumber(newDate);
+          const val = newDate.getFullYear() + 'w' + weekNumber;
           const current = {
             year: newDate.getFullYear(),
             week: weekNumber,
             value: val,
             date: newDate
-          }
-          const newValue = cell.isWeekSelect ? removeFromArray(weeks, item => item.date.getTime() === newDate.getTime()) : [...weeks, current]
-          this.$emit('pick', newValue)
+          };
+          const newValue = cell.isWeekSelect ? removeFromArray(weeks, item => item.date.getTime() === newDate.getTime()) : [...weeks, current];
+          this.$emit('pick', newValue);
         }
       }
     }

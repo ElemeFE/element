@@ -283,11 +283,11 @@ const TYPE_VALUE_RESOLVER_MAP = {
   },
   weeks: {
     formatter(value, format) {
-      return value.map(date => WEEK_FORMATTER(date, format))
+      return value.map(date => WEEK_FORMATTER(date, format));
     },
     parser(value, format) {
       return (typeof value === 'string' ? value.split(', ') : value)
-        .map(date => date instanceof Date ? date : WEEK_PARSER(date, format))
+        .map(date => date instanceof Date ? date : WEEK_PARSER(date, format));
     }
   }
 };
