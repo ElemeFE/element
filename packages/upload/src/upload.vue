@@ -45,7 +45,8 @@ export default {
     },
     disabled: Boolean,
     limit: Number,
-    onExceed: Function
+    onExceed: Function,
+    onDragInvalidAccept: Function
   },
 
   data() {
@@ -184,7 +185,8 @@ export default {
       listType,
       uploadFiles,
       disabled,
-      handleKeydown
+      handleKeydown,
+      onDragInvalidAccept
     } = this;
     const data = {
       class: {
@@ -200,7 +202,7 @@ export default {
       <div {...data} tabindex="0" >
         {
           drag
-            ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
+            ? <upload-dragger disabled={disabled} on-file={uploadFiles} on-drag-invalid-accept={onDragInvalidAccept}>{this.$slots.default}</upload-dragger>
             : this.$slots.default
         }
         <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>

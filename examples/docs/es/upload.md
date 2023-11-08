@@ -364,6 +364,7 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
 | disabled         | especifica si se deshabilita la carga de archivos            | boolean                            | —                         | false       |
 | limit            | número máximo de cargas permitidas                           | number                             | —                         | —           |
 | on-exceed        | _hook_ lanzado cuando el límite ha sido excedido             | function(files, fileList)          | —                         | -           |
+| on-drag-invalid-accept | _hook_ The format of files placed via drag and drop does not comply with the accept rules | function(file) | — | - |
 
 ### Slot
 | Nombre       | Descripción                   |
