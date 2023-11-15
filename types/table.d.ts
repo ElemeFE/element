@@ -63,6 +63,9 @@ export declare class ElTable extends ElementUIComponent {
   /** Whether current row is highlighted */
   highlightCurrentRow: boolean
 
+  /** Whether selection row is highlighted */
+  highlightSelectionRow: boolean
+
   /** Key of current row, a set only prop */
   currentRowKey: string | number
 

@@ -1,5 +1,51 @@
 ## 更新日志
 
+### 2.15.14
+
+*2023-08-24*
+
+#### Bug 修复
+- Img
+  - 删除 referrerpolicy 属性 (#22651 by @xinguanhua)
+#### 优化
+- Docs
+  - 更新 readme and website example links (#22642 by @lyfeyaj)
+  - 更新 popper 官方文档链接 (#22539 by @brizer)
+- I18n
+  - 更新 西班牙语 翻译 (#22430 by @jcardus)
+  - 新增 塞尔维亚语（拉丁) 翻译 (#22567 by @N-M)
+  - 更新 乌兹别克语 翻译 (#22390 by @akahon)
+- Statistics
+  - 文档更新; 代码优化 (#22384 by @webvs2)
+- Table
+  - 增加高亮选中行属性 (#22382 by @wangdaodao)
+
+### 2.15.13
+
+*2023-02-12*
+
+#### Bug 修复
+- Docs
+  - 修复 Statistic 文案 (#22383 by @JUST-Limbo) 
+  - 修复 Input 文案 (#22093 by @lm312)  
+  - 修复 en-US 文案 (#22268 #22269 #22270 by @Hazel-Lin)  
+  - 修复 Pagination 文案 (#22288 by @xujintai123)  
+  - 修复 Links 文案 (#22370 by @itmier)  
+- Statistics
+  - 修复 slot 显示问题 (#22375 by @webvs2)
+- Chore
+  - 修复 web-type 文件丢失问题 (#22271 by @loosheng)
+#### 优化
+- InputNumber
+  - windows触摸屏响应优化 (#22185 by @mrsai)
+- Image
+  - 新增 initialIndex 属性 (#22346 by @inkroom) 
+- Statistics
+  - countdown 特性更新 (#22260 by @webvs2)
+  - 代码优化及doc更新 (#22276 by @webvs2)
+- 其他
+  - web-type代码优化 (#22281 by @whzxc)
+
 ### 2.15.12
 
 *2022-11-16*

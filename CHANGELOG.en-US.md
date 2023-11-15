@@ -1,5 +1,51 @@
 ## Changelog
 
+### 2.15.14
+
+*2023-08-24*
+
+#### Bug fixes
+- Img
+  - Delete referrerpolicy prop (#22651 by @xinguanhua)
+#### Optimization
+- Docs
+  - Update readme and website example links (#22642 by @lyfeyaj)
+  - Update popper links (#22539 by @brizer)
+- I18n
+  - Update translation of Spanish (#22430 by @jcardus)
+  - Add sr-Latn translation (#22567 by @N-M)
+  - Update Uzbek translation (#22390 by @akahon)
+- Statistics
+  - Fix doc; Optimized code (#22384 by @webvs2)
+- Table
+  - Add highlight selection row (#22382 by @wangdaodao)
+
+### 2.15.13
+
+*2023-02-12*
+
+#### Bug fixes
+- Docs
+  - Fix Statistic docs (#22383 by @JUST-Limbo) 
+  - Fix Input docs (#22093 by @lm312)  
+  - Fix en-US docs (#22268 #22269 #22270 by @Hazel-Lin)  
+  - Fix Pagination docs (#22288 by @xujintai123)
+  - Fix: Links docs (#22370 by @itmier)    
+- Statistics
+  - fix slot display bug  (#22375 by @webvs2)
+- Chore
+  - missing web-type after publishing (#22271 by @loosheng)
+#### Optimization
+- InputNumber
+  - Fix touch one click trigger twice on the window touch pad (#22185 by @mrsai)
+- Image
+  - Add initialIndex prop (#22346 by @inkroom) 
+- Statistics
+  - Updated countdown feature to localize lodash Closes (#22260 by @webvs2)
+  - Update code and doc (#22276 by @webvs2)
+- Other
+  - fix web-types type props (#22281 by @whzxc)
+
 ### 2.15.12
 
 *2022-11-16*

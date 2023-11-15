@@ -1,5 +1,5 @@
 import { arrayFindIndex } from 'element-ui/src/utils/util';
-import { getCell, getColumnByCell, getRowIdentity } from './util';
+import { getCell, getColumnByCell, getRowIdentity, objectEquals } from './util';
 import { getStyle, hasClass, removeClass, addClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTooltip from 'element-ui/packages/tooltip';
@@ -168,9 +168,18 @@ export default {
     },
 
     getRowClass(row, rowIndex) {
+      let selection = this.store.states.selection;
       const classes = ['el-table__row'];
       if (this.table.highlightCurrentRow && row === this.store.states.currentRow) {
         classes.push('current-row');
+      }
+
+      if (this.table.highlightSelectionRow) {
+        for (let i = 0; i < selection.length; i++) {
+          if (objectEquals(row, selection[i])) {
+            classes.push('selection-row');
+          }
+        };
       }
 
       if (this.stripe && rowIndex % 2 === 1) {
