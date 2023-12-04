@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
 import { parseHeight } from './util';
+import { doFlattenColumns } from "./store/watcher";
 
 class TableLayout {
   constructor(options) {
@@ -198,7 +199,7 @@ class TableLayout {
 
     if (fixedColumns.length > 0) {
       let fixedWidth = 0;
-      fixedColumns.forEach(function(column) {
+      doFlattenColumns(fixedColumns).forEach(function(column) {
         fixedWidth += column.realWidth || column.width;
       });
 

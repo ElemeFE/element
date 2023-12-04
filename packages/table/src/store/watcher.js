@@ -13,7 +13,7 @@ const sortData = (data, states) => {
   return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod, sortingColumn.sortBy);
 };
 
-const doFlattenColumns = (columns) => {
+export const doFlattenColumns = (columns) => {
   const result = [];
   columns.forEach((column) => {
     if (column.children) {
