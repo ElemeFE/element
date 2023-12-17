@@ -11,19 +11,19 @@
       <slot />
     </div>
     <div
-        v-if="!slots().default && props.direction !== 'vertical'"
+        v-if="!slots().default && props.direction !== 'vertical' && slots().left"
         :class="['el-divider__text', `is-left`]"
     >
       <slot name="left"/>
     </div>
     <div
-        v-if="!slots().default && props.direction !== 'vertical'"
+        v-if="!slots().default && props.direction !== 'vertical' && slots().center"
         :class="['el-divider__text', `is-center`]"
     >
       <slot name="center"/>
     </div>
     <div
-        v-if="!slots().default && props.direction !== 'vertical'"
+        v-if="!slots().default && props.direction !== 'vertical' && slots().right"
         :class="['el-divider__text', `is-right`]"
     >
       <slot name="right"/>
