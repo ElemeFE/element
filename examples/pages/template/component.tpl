@@ -154,7 +154,9 @@
     align-items: center;
     background: #409EFF;
     transition: 0.5s;
-    cursor: pointer;
+  }
+  .toc.active .toggle {
+    cursor: move;
   }
   .toc .toggle::before {
     content: "+";
@@ -170,6 +172,7 @@
     color: #fff;
     font-weight: 400;
     transition: 0.5s;
+    cursor: pointer;
   }
   .toc .toggle.active::before {
     transform: rotate(45deg);
@@ -206,7 +209,7 @@
       <footer-nav></footer-nav>
     </div>
     <div v-if="anchors && anchors.length > 0" class="toc" :class="{active: expand}">
-      <div class="toggle" :class="{active: expand}" @click="() => expand = !expand"></div>
+      <div class="toggle" :class="{active: expand}" @mousedown="e => handleMouseDown(e)"></div>
       <ul>
         <li v-for="(item, idx) in anchors" :key="item.id" :class="{active: item.active}" @click="handleAnchorClick(idx)"><a :href="item.href">{{ item.title }}</a></li>
       </ul>
@@ -235,7 +238,16 @@
         componentScrollBar: null,
         componentScrollBoxElement: null,
         expand: false,
-        anchors: []
+        anchors: [],
+        dragged: false,
+        tocStartPos: {
+          x: 0,
+          y: 0
+        },
+        tocMovePos: {
+          x: 0,
+          y: 0
+        }
       };
     },
     watch: {
@@ -271,6 +283,45 @@
             href: el.querySelector('a').href
           });
         });
+      },
+
+      handleMouseDown(e){
+        this.tocStartPos = {
+          x: e.clientX,
+          y: e.clientY
+        }
+
+        document.addEventListener('mousemove', this.handleMouseMove);
+        document.addEventListener('mouseup', this.handleMouseUp);
+
+        this.dragged = false;
+
+        e.stopPropagation();
+        e.preventDefault();
+      },
+
+      handleMouseMove(e){
+        this.tocMovePos = {
+          x: this.tocMovePos.x + e.clientX - this.tocStartPos.x,
+          y: this.tocMovePos.y + e.clientY - this.tocStartPos.y
+        }
+
+        document.querySelector('.toc').style.transform = `translate(${this.tocMovePos.x}px, ${this.tocMovePos.y}px)`;
+        this.tocStartPos = {
+          x: e.clientX,
+          y: e.clientY
+        }
+        
+        this.dragged = true
+      },
+
+      handleMouseUp(){
+        document.removeEventListener('mousemove', this.handleMouseMove);
+        document.removeEventListener('mouseup', this.handleMouseUp);
+
+        if(!this.dragged){
+          this.expand = !this.expand
+        }
       },
 
       goAnchor() {
