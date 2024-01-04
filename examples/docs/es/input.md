@@ -196,7 +196,7 @@ El ajuste del prop `autosize` en el tipo de Input textarea hace que la altura se
 <div style="margin: 20px 0;"></div>
 <el-input
   type="textarea"
-  :autosize="{ minRows: 2, maxRows: 4}"
+  :autosize="{ minRows: 2, maxRows: 4 }"
   placeholder="Please input"
   v-model="textarea2">
 </el-input>
