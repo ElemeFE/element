@@ -54,7 +54,6 @@
 
   export default {
     name: 'ElTableFilterPanel',
-
     mixins: [Popper, Locale],
 
     directives: {
@@ -80,7 +79,7 @@
       },
 
       handleOutsideClick() {
-        setTimeout(() => {
+        this.timeOutID = setTimeout(() => {
           this.showPopper = false;
         }, 16);
       },
@@ -121,7 +120,9 @@
       return {
         table: null,
         cell: null,
-        column: null
+        column: null,
+        controller: new window.AbortController(),
+        timeOutID: null
       };
     },
 
@@ -172,6 +173,8 @@
       this.referenceElm = this.cell;
       this.table.bodyWrapper.addEventListener('scroll', () => {
         this.updatePopper();
+      }, {
+        signal: this.controller.signal
       });
 
       this.$watch('showPopper', (value) => {
@@ -183,12 +186,18 @@
         }
       });
     },
+
     watch: {
       showPopper(val) {
         if (val === true && parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
           this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
         }
       }
+    },
+
+    beforeDestroy() {
+      this.controller.abort();
+      clearTimeout(this.timeOutID);
     }
   };
 </script>
