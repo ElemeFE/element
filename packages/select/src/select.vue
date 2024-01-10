@@ -330,7 +330,9 @@
         currentPlaceholder: '',
         menuVisibleOnFocus: false,
         isOnComposition: false,
-        isSilentBlur: false
+        isSilentBlur: false,
+        timeOutID: null,
+        timeOutID2: null
       };
     },
 
@@ -590,7 +592,7 @@
       },
 
       handleBlur(event) {
-        setTimeout(() => {
+        this.timeOutID = setTimeout(() => {
           if (this.isSilentBlur) {
             this.isSilentBlur = false;
           } else {
@@ -669,7 +671,7 @@
       },
 
       resetHoverIndex() {
-        setTimeout(() => {
+        this.timeOutID2 = setTimeout(() => {
           if (!this.multiple) {
             this.hoverIndex = this.options.indexOf(this.selected);
           } else {
@@ -864,6 +866,13 @@
 
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('setSelected', this.setSelected);
+
+      this.$once('hook:beforeDestroy', () => {
+        this.$off('handleOptionClick', this.handleOptionSelect);
+        this.$off('setSelected', this.setSelected);
+        clearTimeout(this.timeOutID);
+        clearTimeout(this.timeOutID2);
+      });
     },
 
     mounted() {

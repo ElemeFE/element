@@ -150,6 +150,11 @@
 
       this.$on('queryChange', this.queryChange);
       this.$on('handleGroupDisabled', this.handleGroupDisabled);
+
+      this.$once('hook:beforeDestroy', () => {
+        this.$off('queryChange', this.queryChange);
+        this.$off('handleGroupDisabled', this.handleGroupDisabled);
+      });
     },
 
     beforeDestroy() {

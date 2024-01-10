@@ -178,6 +178,10 @@
       }
 
       this.$on('tab-nav-update', this.calcPaneInstances.bind(null, true));
+
+      this.$once('hook:beforeDestroy', () => {
+        this.$off('tab-nav-update', this.calcPaneInstances.bind(null, true));
+      });
     },
 
     mounted() {

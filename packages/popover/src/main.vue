@@ -138,6 +138,7 @@ export default {
 
   beforeDestroy() {
     this.cleanup();
+    clearTimeout(this._timer);
   },
 
   deactivated() {
