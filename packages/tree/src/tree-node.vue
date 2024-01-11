@@ -9,7 +9,8 @@
       'is-current': node.isCurrent,
       'is-hidden': !node.visible,
       'is-focusable': !node.disabled,
-      'is-checked': !node.disabled && node.checked
+      'is-checked': !node.disabled && node.checked,
+      ...treeNodeClass && treeNodeClass(node)
     }"
     role="treeitem"
     tabindex="-1"
@@ -92,6 +93,7 @@
       },
       props: {},
       renderContent: Function,
+      treeNodeClass: Function,
       renderAfterExpand: {
         type: Boolean,
         default: true
