@@ -60,6 +60,7 @@
       >
         <el-tree-node
           :render-content="renderContent"
+          :tree-node-class="treeNodeClass"
           v-for="child in node.childNodes"
           :render-after-expand="renderAfterExpand"
           :show-checkbox="showCheckbox"
