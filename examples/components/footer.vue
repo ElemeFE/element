@@ -144,7 +144,7 @@
     }
 
     img {
-      size: 100px;
+      width: 100px;
       margin: 10px;
     }
   }
