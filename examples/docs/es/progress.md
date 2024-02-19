@@ -169,3 +169,6 @@ Puede utilizar el atributo `color` para establecer el color de la barra de progr
 | width        | ancho del canvas que contiene la barra de progreso circula | number  | —                 | 126         |
 | show-text    | mostrar porcentaje                       | boolean | —                 | true        |
 | stroke-linecap  | circle/dashboard tipo de diseño al final del camino | string | butt/round/square | round |
+| format  | personalizar el formato de texto estableciendo format  | function(percentage) | — | — |
+| define-back-color  | background color of progress bar (hex format) | string | — | — |
+| text-color  | text color of progress bar (hex format) | string | — | — |

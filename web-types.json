@@ -1,0 +1,4195 @@
+{
+  "framework": "vue",
+  "name": "element-ui",
+  "version": "2.15.9",
+  "description-markup": "markdown",
+  "contributions": {
+    "html": {
+      "vue-components": [
+        {
+          "name": "ElAlert",
+          "description": "Displays important alert messages.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/alert",
+          "props": [
+            {
+              "name": "type",
+              "description": "Component type",
+              "type": "AlertType",
+              "default": "'info'"
+            },
+            {
+              "name": "effect",
+              "description": "Choose theme",
+              "type": "AlertEffect",
+              "default": "'light'"
+            },
+            {
+              "name": "closable",
+              "description": "If closable or not",
+              "type": "boolean",
+              "default": "true"
+            },
+            {
+              "name": "description",
+              "description": "Descriptive text. Can also be passed with the default slot",
+              "type": "string"
+            },
+            {
+              "name": "title",
+              "description": "Title",
+              "type": "string"
+            },
+            {
+              "name": "showIcon",
+              "description": "If a type icon is displayed",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "center",
+              "description": "whether to center the text",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "closeText",
+              "description": "Customized close button text",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "description"
+            },
+            {
+              "name": "title",
+              "description": "content of the Alert title"
+            }
+          ],
+          "js": {
+            "events": [
+              {
+                "name": "close",
+                "description": "fires when alert is closed"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ElAside",
+          "description": "Container for side sections (usually a side nav).",
+          "doc-url": "https://element.eleme.io/#/en-US/component/container",
+          "props": [
+            {
+              "name": "width",
+              "description": "Width of the side section",
+              "type": "string",
+              "default": "300px"
+            }
+          ]
+        },
+        {
+          "name": "ElAutocomplete",
+          "doc-url": "https://element.eleme.io/#/en-US/component/input#autocomplete-attributes",
+          "props": [
+            {
+              "name": "focus",
+              "description": "Focus the Input component",
+              "type": "function(): void"
+            },
+            {
+              "name": "selectWhenUnmatched",
+              "description": "Whether to emit select event on enter when there is no autocomplete match",
+              "type": "boolean"
+            },
+            {
+              "name": "debounce",
+              "description": "Debounce delay when typing",
+              "type": "number"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for autocomplete's dropdown",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "description": "Name for the inner native input",
+              "type": "string"
+            },
+            {
+              "name": "triggerOnFocus",
+              "description": "Whether show suggestions when input focus",
+              "type": "boolean"
+            },
+            {
+              "name": "placement",
+              "description": "Placement of the popup menu",
+              "type": "SuggestionPlacement"
+            },
+            {
+              "name": "prefixIcon",
+              "description": "Prefix icon class",
+              "type": "string"
+            },
+            {
+              "name": "suffixIcon",
+              "description": "Suffix icon class",
+              "type": "string"
+            },
+            {
+              "name": "fetchSuggestions",
+              "description": "A method to fetch input suggestions. When suggestions are ready, invoke callback(data:[]) to return them to Autocomplete",
+              "type": "FetchSuggestions"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Autocomplete is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "placeholder",
+              "description": "The placeholder of Autocomplete",
+              "type": "string"
+            },
+            {
+              "name": "valueKey",
+              "description": "Key name of the input suggestion object for display",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "description": "Binding value",
+              "type": "string"
+            },
+            {
+              "name": "clearable",
+              "description": "Whether to show clear button",
+              "type": "boolean"
+            },
+            {
+              "name": "popperAppendToBody",
+              "description": "Whether to append the dropdown to body",
+              "type": "boolean"
+            },
+            {
+              "name": "hideLoading",
+              "description": "Whether to hide the loading icon in remote search",
+              "type": "boolean"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Custom content for input suggestions.",
+              "type": "{ item: any }"
+            },
+            {
+              "name": "prefix",
+              "description": "Content as Input prefix"
+            },
+            {
+              "name": "suffix",
+              "description": "Content as Input suffix"
+            },
+            {
+              "name": "prepend",
+              "description": "Content to prepend before Input"
+            },
+            {
+              "name": "append",
+              "description": "Content to append after Input"
+            }
+          ]
+        },
+        {
+          "name": "ElAvatar",
+          "description": "Avatars can be used to represent people or objects. It supports images, Icons, or characters.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/avatar",
+          "props": [
+            {
+              "name": "fit",
+              "type": "'fill' | 'contain' | 'cover' | 'none' | 'scale-down'",
+              "description": "Set how the image fit its container for an image avatar",
+              "default": "'cover'"
+            },
+            {
+              "name": "shape",
+              "type": "'circle' | 'square'",
+              "description": "Avatar shape",
+              "default": "'circle'"
+            },
+            {
+              "name": "alt",
+              "type": "string",
+              "description": "This attribute defines an alternative text description of the image"
+            },
+            {
+              "name": "size",
+              "type": "'large'|'medium'|'small'|number",
+              "description": "Avatar size",
+              "default": "'large'"
+            },
+            {
+              "name": "icon",
+              "type": "string",
+              "description": "Representation type to Icon, more info on Icon Component"
+            },
+            {
+              "name": "src",
+              "type": "string",
+              "description": "The address of the image for an image avatar"
+            },
+            {
+              "name": "srcSet",
+              "type": "string",
+              "description": "A list of one or more strings separated by commas indicating a set of possible image sources for the user agent to use"
+            }
+          ],
+          "js": {
+            "events": [
+              {
+                "name": "error",
+                "description": "handler when img load error, return false to prevent default fallback behavior"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ElBacktop",
+          "description": "A button to back to top",
+          "doc-url": "https://element.eleme.io/#/en-US/component/backtop",
+          "props": [
+            {
+              "name": "bottom",
+              "description": "Backtop bottom position",
+              "type": "string|number"
+            },
+            {
+              "name": "visibilityHeight",
+              "description": "Backtop visibility height",
+              "type": "string|number",
+              "default": "200"
+            },
+            {
+              "name": "right",
+              "description": "Backtop right position",
+              "type": "string|number",
+              "default": "40"
+            },
+            {
+              "name": "target",
+              "description": "Backtop target",
+              "type": "string",
+              "default": "40"
+            }
+          ],
+          "js": {
+            "events": [
+              {
+                "name": "click",
+                "description": "Triggers when click"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ElBadge",
+          "description": "A number or status mark on buttons and icons.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/badge",
+          "props": [
+            {
+              "name": "isDot",
+              "description": "If a little dot is displayed",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "hidden",
+              "description": "Hidden badge",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "value",
+              "description": "Display value",
+              "type": "string|number"
+            },
+            {
+              "name": "max",
+              "description": "Maximum value, shows '{max}+' when exceeded. Only works if `value` is a `Number`",
+              "type": "number"
+            },
+            {
+              "name": "type",
+              "description": "button type",
+              "type": "'primary' | 'success' | 'warning' | 'danger' | 'info'"
+            }
+          ]
+        },
+        {
+          "name": "ElBreadcrumb",
+          "description": "Displays the location of the current page, making it easier to browser back.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/breadcrumb",
+          "props": [
+            {
+              "name": "separatorClass",
+              "description": "Class name of the icon separator",
+              "type": "string"
+            },
+            {
+              "name": "separator",
+              "description": "Separator character",
+              "type": "string",
+              "default": "'/'"
+            }
+          ]
+        },
+        {
+          "name": "ElBreadcrumbItem",
+          "doc-url": "https://element.eleme.io/#/en-US/component/breadcrumb",
+          "props": [
+            {
+              "name": "replace",
+              "description": "If `true`, the navigation will not leave a history record",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "to",
+              "description": "Target route of the link, same as `to` of `vue-router`",
+              "type": "string|object"
+            }
+          ]
+        },
+        {
+          "name": "ElButton",
+          "description": "Commonly used button.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/button",
+          "props": [
+            {
+              "name": "type",
+              "description": "Button type",
+              "type": "'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text'"
+            },
+            {
+              "name": "plain",
+              "description": "Determine whether it's a plain button",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "loading",
+              "description": "Determine whether it's loading",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "size",
+              "description": "Button size",
+              "type": "'medium' | 'small' | 'mini'"
+            },
+            {
+              "name": "icon",
+              "description": "icon class name",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Disable the button",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "autofocus",
+              "description": "Same as native button's `autofocus`",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "round",
+              "description": "Determine whether it's a round button",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "circle",
+              "description": "Determine whether it's a circle button",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "nativeType",
+              "description": "Same as native button's `type`",
+              "type": "'button' | 'submit' | 'reset'",
+              "default": "'button'"
+            }
+          ]
+        },
+        {
+          "name": "ElButtonGroup",
+          "description": "Displayed as a button group, can be used to group a series of similar operations.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/button"
+        },
+        {
+          "name": "ElCalendar",
+          "description": "Display date.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/calendar",
+          "props": [
+            {
+              "name": "range",
+              "description": "time range, including start time and end time. Start time must be start day of week, end time must be end day of week, the time span cannot exceed two months.",
+              "type": "(Date | string | number)[]"
+            },
+            {
+              "name": "value",
+              "description": "Binding value",
+              "type": "Date | string | number"
+            },
+            {
+              "name": "firstDayOfWeek",
+              "description": "First day of week",
+              "type": "number",
+              "default": "1"
+            }
+          ],
+          "slots": [
+            {
+              "name": "dateCell",
+              "type": "{date: Date, data: {type: 'prev-month' | 'current-month' | 'next-month', isSelected: boolean, day: string}}"
+            }
+          ]
+        },
+        {
+          "name": "ElCard",
+          "description": "Integrate information in a card container.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/card",
+          "props": [
+            {
+              "name": "shadow",
+              "description": "When to show card shadows",
+              "type": "'always'| 'hover' | 'never'",
+              "default": "'always'"
+            },
+            {
+              "name": "bodyStyle",
+              "description": "CSS style of body",
+              "type": "object",
+              "default": "{ padding: '20px' }"
+            },
+            {
+              "name": "header",
+              "description": "Title of the card",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Content of the card"
+            },
+            {
+              "name": "header",
+              "description": "Title of the card"
+            }
+          ]
+        },
+        {
+          "name": "ElCarousel",
+          "description": "Loop a series of images or texts in a limited space",
+          "doc-url": "https://element.eleme.io/#/en-US/component/carousel",
+          "props": [
+            {
+              "name": "arrow",
+              "description": "When arrows are shown",
+              "type": "'always'|'hover'|'never'",
+              "default": "'hover'"
+            },
+            {
+              "name": "type",
+              "description": "Type of the Carousel",
+              "type": "'card'"
+            },
+            {
+              "name": "height",
+              "description": "Height of the carousel",
+              "type": "number"
+            },
+            {
+              "name": "autoplay",
+              "description": "Whether automatically loop the slides",
+              "type": "boolean",
+              "default": "true"
+            },
+            {
+              "name": "initialIndex",
+              "description": "Index of the initially active slide (starting from 0)",
+              "type": "number"
+            },
+            {
+              "name": "indicatorPosition",
+              "description": "Position of the indicators",
+              "type": "'outside' | 'none'"
+            },
+            {
+              "name": "interval",
+              "description": "Interval of the auto loop, in milliseconds",
+              "type": "number",
+              "default": "3000"
+            },
+            {
+              "name": "direction",
+              "description": "Display direction",
+              "type": "'horizontal' | 'vertical'",
+              "default": "'horizontal'"
+            },
+            {
+              "name": "trigger",
+              "description": "How indicators are triggered",
+              "type": "'hover' | 'click'",
+              "default": "'hover'"
+            },
+            {
+              "name": "loop",
+              "description": "display the items in loop",
+              "type": "boolean",
+              "default": "true"
+            }
+          ],
+          "js": {
+            "events": [
+              {
+                "name": "change",
+                "description": "triggers when the active slide switches",
+                "doc-url": "https://element.eleme.io/#/en-US/component/carousel#carousel-events"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ElCarouselItem",
+          "doc-url": "https://element.eleme.io/#/en-US/component/carousel#carousel-item-attributes",
+          "props": [
+            {
+              "name": "name",
+              "description": "Name of the item, can be used in `setActiveItem`",
+              "type": "string"
+            },
+            {
+              "name": "label",
+              "description": "Text content for the corresponding indicator",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "ElCascader",
+          "description": "If the options have a clear hierarchical structure, Cascader can be used to view and select them.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/cascader",
+          "props": [
+            {
+              "name": "debounce",
+              "description": "Debounce delay when typing filter keyword, in millisecond",
+              "type": "number"
+            },
+            {
+              "name": "options",
+              "description": "Data of the options",
+              "type": "CascaderOption[]"
+            },
+            {
+              "name": "filterable",
+              "description": "Whether the options can be searched",
+              "type": "boolean"
+            },
+            {
+              "name": "separator",
+              "description": "Separator of option labels",
+              "type": "string"
+            },
+            {
+              "name": "props",
+              "description": "Configuration options",
+              "type": "CascaderProps<any, CascaderOption>"
+            },
+            {
+              "name": "size",
+              "description": "Size of Input",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for Cascader's dropdown",
+              "type": "string"
+            },
+            {
+              "name": "showAllLevels",
+              "description": "Whether to display all levels of the selected value in the input",
+              "type": "boolean"
+            },
+            {
+              "name": "collapseTags",
+              "description": "Whether to collapse selected tags in multiple selection mode",
+              "type": "boolean"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Cascader is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "placeholder",
+              "description": "Input placeholder",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "description": "Selected value",
+              "type": "any"
+            },
+            {
+              "name": "clearable",
+              "description": "Whether selected value can be cleared",
+              "type": "boolean"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Custom label content"
+            },
+            {
+              "name": "empty",
+              "description": "Empty content when no option matches"
+            }
+          ]
+        },
+        {
+          "name": "ElCascaderPanel",
+          "doc-url": "https://element.eleme.io/#/en-US/component/cascader#cascaderpanel-attributes",
+          "props": [
+            {
+              "name": "options",
+              "description": "Data of the options",
+              "type": "CascaderOption[]"
+            },
+            {
+              "name": "border",
+              "description": "Whether to add border",
+              "type": "boolean"
+            },
+            {
+              "name": "props",
+              "description": "Configuration options",
+              "type": "CascaderProps<any, CascaderOption>"
+            },
+            {
+              "name": "value",
+              "description": "Selected value",
+              "type": "any"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Custom label content"
+            }
+          ]
+        },
+        {
+          "name": "ElCheckbox",
+          "description": "A group of options for multiple choices.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/checkbox",
+          "props": [
+            {
+              "name": "indeterminate",
+              "description": "Same as indeterminate in native checkbox",
+              "type": "boolean"
+            },
+            {
+              "name": "checked",
+              "description": "If the checkbox is checked",
+              "type": "boolean"
+            },
+            {
+              "name": "border",
+              "description": "Whether to add a border around Checkbox",
+              "type": "boolean"
+            },
+            {
+              "name": "trueLabel",
+              "description": "Value of the checkbox if it's checked",
+              "type": "string|number"
+            },
+            {
+              "name": "size",
+              "description": "Size of the Checkbox, only works when border is true",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "name",
+              "description": "Native 'name' attribute",
+              "type": "string"
+            },
+            {
+              "name": "falseLabel",
+              "description": "Value of the checkbox if it's not checked",
+              "type": "string|number"
+            },
+            {
+              "name": "disabled",
+              "description": "If the checkbox is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "value",
+              "description": "The form input value",
+              "type": "string|string[]"
+            },
+            {
+              "name": "label",
+              "description": "Value of the checkbox when used inside a checkbox-group",
+              "type": "string|number|boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElCheckboxButton",
+          "doc-url": "https://element.eleme.io/#/en-US/component/checkbox#checkbox-group-attributes",
+          "props": [
+            {
+              "name": "checked",
+              "description": "If the checkbox is checked",
+              "type": "boolean"
+            },
+            {
+              "name": "trueLabel",
+              "description": "Value of the checkbox if it's checked",
+              "type": "string|number"
+            },
+            {
+              "name": "name",
+              "description": "Native 'name' attribute",
+              "type": "string"
+            },
+            {
+              "name": "falseLabel",
+              "description": "Value of the checkbox if it's not checked",
+              "type": "string|number"
+            },
+            {
+              "name": "disabled",
+              "description": "If the checkbox is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "label",
+              "description": "Value of the checkbox when used inside a checkbox-group",
+              "type": "string|number|boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElCheckboxGroup",
+          "doc-url": "https://element.eleme.io/#/en-US/component/checkbox#checkbox-group-attributes",
+          "props": [
+            {
+              "name": "fill",
+              "description": "Border and background color when button is active",
+              "type": "string"
+            },
+            {
+              "name": "textColor",
+              "description": "Font color when button is active",
+              "type": "string"
+            },
+            {
+              "name": "size",
+              "description": "Size of checkbox buttons or bordered checkboxes",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "min",
+              "description": "Minimum number of checkbox checked",
+              "type": "number"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether the nesting checkboxes are disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "max",
+              "description": "Maximum number of checkbox checked",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "ElCol",
+          "props": [
+            {
+              "name": "md",
+              "description": "≥992px Responsive columns or column props object",
+              "type": "ResponsiveColumn"
+            },
+            {
+              "name": "tag",
+              "description": "custom element tag",
+              "type": "string"
+            },
+            {
+              "name": "offset",
+              "description": "Number of spacing on the left side of the grid",
+              "type": "number"
+            },
+            {
+              "name": "push",
+              "description": "Number of columns that grid moves to the right",
+              "type": "number"
+            },
+            {
+              "name": "sm",
+              "description": "≥768px Responsive columns or column props object",
+              "type": "ResponsiveColumn"
+            },
+            {
+              "name": "pull",
+              "description": "Number of columns that grid moves to the left",
+              "type": "number"
+            },
+            {
+              "name": "xl",
+              "description": "≥1920px Responsive columns or column props object",
+              "type": "ResponsiveColumn"
+            },
+            {
+              "name": "xs",
+              "description": "&lt;768px Responsive columns or column props object",
+              "type": "ResponsiveColumn"
+            },
+            {
+              "name": "lg",
+              "description": "≥1200px Responsive columns or column props object",
+              "type": "ResponsiveColumn"
+            },
+            {
+              "name": "span",
+              "description": "Number of column the grid spans",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "ElCollapse",
+          "description": "Use Collapse to store contents.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/collapse",
+          "props": [
+            {
+              "name": "accordion",
+              "description": "Whether to activate accordion mode",
+              "type": "boolean"
+            },
+            {
+              "name": "value",
+              "description": "Currently active panel",
+              "type": "string|number|string[]|number[]"
+            }
+          ]
+        },
+        {
+          "name": "ElCollapseItem",
+          "doc-url": "https://element.eleme.io/#/en-US/component/collapse#collapse-item-attributes",
+          "props": [
+            {
+              "name": "name",
+              "description": "Unique identification of the panel",
+              "type": "string|number"
+            },
+            {
+              "name": "title",
+              "description": "Title of the panel",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Disable the collapse item",
+              "type": "boolean"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Content of the collapse item"
+            },
+            {
+              "name": "title",
+              "description": "Title of the collapse item"
+            }
+          ]
+        },
+        {
+          "name": "ElColorPicker",
+          "description": "ColorPicker is a color selector supporting multiple color formats.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/color-picker",
+          "props": [
+            {
+              "name": "showAlpha",
+              "description": "Whether to display the alpha slider",
+              "type": "boolean"
+            },
+            {
+              "name": "colorFormat",
+              "description": "Custom class name for ColorPicker's dropdown",
+              "type": "ColorFormat"
+            },
+            {
+              "name": "size",
+              "description": "Size of ColorPicker",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "popperClass",
+              "description": "Whether to display the alpha slider",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether to disable the ColorPicker",
+              "type": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElComponent",
+          "props": []
+        },
+        {
+          "name": "ElContainer",
+          "description": "Wrapper container. When nested with a `<el-header>` or `<el-footer>`, all its child elements will be vertically arranged. Otherwise horizontally.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/container",
+          "props": [
+            {
+              "name": "direction",
+              "description": "Layout direction for child elements",
+              "type": "\"horizontal\"|\"vertical\""
+            }
+          ]
+        },
+        {
+          "name": "ElDatePicker",
+          "description": "Use Date Picker for date input.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/date-picker",
+          "props": [
+            {
+              "name": "defaultValue",
+              "description": "Default date of the calendar",
+              "type": "Date|number|string"
+            },
+            {
+              "name": "type",
+              "description": "Type of the picker",
+              "type": "DatePickerType"
+            },
+            {
+              "name": "align",
+              "description": "Alignment",
+              "type": "ElementUIHorizontalAlignment"
+            },
+            {
+              "name": "readonly",
+              "description": "Whether DatePicker is read only",
+              "type": "boolean"
+            },
+            {
+              "name": "format",
+              "description": "Format of the picker",
+              "type": "string"
+            },
+            {
+              "name": "size",
+              "description": "Size of Input",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for DatePicker's dropdown",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "description": "name for the inner native input",
+              "type": "string"
+            },
+            {
+              "name": "startPlaceholder",
+              "description": "Placeholder for the start date in range mode",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether DatePicker is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "placeholder",
+              "description": "Placeholder",
+              "type": "string"
+            },
+            {
+              "name": "endPlaceholder",
+              "description": "Placeholder for the end date in range mode",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "description": "The value of the date picker",
+              "type": "Date|string|Date[]|string[]"
+            },
+            {
+              "name": "rangeSeparator",
+              "description": "Range separator",
+              "type": "string"
+            },
+            {
+              "name": "clearable",
+              "description": "Whether to show clear button",
+              "type": "boolean"
+            },
+            {
+              "name": "editable",
+              "description": "Whether the input is editable",
+              "type": "boolean"
+            },
+            {
+              "name": "pickerOptions",
+              "description": "Additional options, check the table below",
+              "type": "DatePickerOptions"
+            },
+            {
+              "name": "valueFormat",
+              "description": "Format of binding value. If not specified, the binding value will be a Date object",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "range-separator",
+              "description": "Custom range separator content"
+            }
+          ]
+        },
+        {
+          "name": "ElDescriptions",
+          "description": "Display multiple fields in list form.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/descriptions",
+          "props": [
+            {
+              "name": "labelStyle",
+              "description": "custom label style",
+              "type": "object"
+            },
+            {
+              "name": "contentClassName",
+              "description": "custom content class name",
+              "type": "string"
+            },
+            {
+              "name": "border",
+              "description": "with or without border",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "size of list",
+              "type": "\"medium\"|\"small\"|\"mini\""
+            },
+            {
+              "name": "labelClassName",
+              "description": "custom label class name",
+              "type": "string"
+            },
+            {
+              "name": "title",
+              "description": "title text, display on the top left",
+              "type": "string"
+            },
+            {
+              "name": "contentStyle",
+              "description": "custom content style",
+              "type": "object"
+            },
+            {
+              "name": "extra",
+              "description": "extra text, display on the top right",
+              "type": "string"
+            },
+            {
+              "name": "direction",
+              "description": "direction of list",
+              "type": "\"vertical\"|\"horizontal\""
+            },
+            {
+              "name": "column",
+              "description": "numbers of Descriptions Item in one line",
+              "type": "number"
+            },
+            {
+              "name": "colon",
+              "description": "change default props colon value of Descriptions Item",
+              "type": "boolean"
+            }
+          ],
+          "slots": [
+            {
+              "name": "extra",
+              "description": "title slot: custom extra area, display on the top right"
+            },
+            {
+              "name": "title",
+              "description": "title slot: custom title, display on the top left"
+            }
+          ]
+        },
+        {
+          "name": "ElDescriptionsItem",
+          "doc-url": "https://element.eleme.io/#/en-US/component/descriptions#descriptions-item-attributes",
+          "props": [
+            {
+              "name": "labelStyle",
+              "description": "custom label style",
+              "type": "object"
+            },
+            {
+              "name": "contentClassName",
+              "description": "custom content class name",
+              "type": "string"
+            },
+            {
+              "name": "labelClassName",
+              "description": "custom label class name",
+              "type": "string"
+            },
+            {
+              "name": "contentStyle",
+              "description": "custom content style",
+              "type": "object"
+            },
+            {
+              "name": "label",
+              "description": "label text",
+              "type": "string"
+            },
+            {
+              "name": "span",
+              "description": "the number of columns included",
+              "type": "number"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "default slot: custom content"
+            },
+            {
+              "name": "label",
+              "description": "label slot: custom label"
+            }
+          ]
+        },
+        {
+          "name": "ElDialog",
+          "description": "Informs users while preserving the current page state.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/dialog",
+          "props": [
+            {
+              "name": "closeOnPressEscape",
+              "description": "Whether the Dialog can be closed by pressing ESC",
+              "type": "boolean"
+            },
+            {
+              "name": "showClose",
+              "description": "Whether to show a close button",
+              "type": "boolean"
+            },
+            {
+              "name": "closeOnClickModal",
+              "description": "Whether the Dialog can be closed by clicking the mask",
+              "type": "boolean"
+            },
+            {
+              "name": "lockScroll",
+              "description": "Whether scroll of body is disabled while Dialog is displayed",
+              "type": "boolean"
+            },
+            {
+              "name": "modal",
+              "description": "Whether a mask is displayed",
+              "type": "boolean"
+            },
+            {
+              "name": "fullscreen",
+              "description": "Whether the Dialog takes up full screen",
+              "type": "boolean"
+            },
+            {
+              "name": "destroyOnClose",
+              "description": "Whether to destroy elements in Dialog when closed",
+              "type": "boolean"
+            },
+            {
+              "name": "title",
+              "description": "Title of Dialog",
+              "type": "string"
+            },
+            {
+              "name": "top",
+              "description": "Value for margin-top of Dialog CSS",
+              "type": "string"
+            },
+            {
+              "name": "modalAppendToBody",
+              "description": "Whether to append modal to body element. If false, the modal will be appended to Dialog's parent element",
+              "type": "boolean"
+            },
+            {
+              "name": "center",
+              "description": "Whether to align the header and footer in center",
+              "type": "boolean"
+            },
+            {
+              "name": "width",
+              "description": "Width of Dialog",
+              "type": "string"
+            },
+            {
+              "name": "customClass",
+              "description": "Custom class names for Dialog",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Content of the Dialog"
+            },
+            {
+              "name": "footer",
+              "description": "Content of the Dialog footer"
+            },
+            {
+              "name": "title",
+              "description": "Content of the Dialog title"
+            }
+          ]
+        },
+        {
+          "name": "ElDivider",
+          "description": "The dividing line that separates the content.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/divider",
+          "props": [
+            {
+              "name": "vertical",
+              "description": "enable vertical divider",
+              "type": "boolean"
+            },
+            {
+              "name": "posiiton",
+              "description": "customize the content on the divider line",
+              "type": "ContentPosition"
+            }
+          ]
+        },
+        {
+          "name": "ElDrawer",
+          "description": "Sometimes, `Dialog` does not always satisfy our requirements, let's say you have a massive form, or you need space to display something like `terms & conditions`, `Drawer` has almost identical API with `Dialog`, but it introduces different user experience.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/drawer",
+          "props": [
+            {
+              "name": "closeOnPressEscape",
+              "description": "Whether the Drawer can be closed by pressing ESC",
+              "type": "boolean"
+            },
+            {
+              "name": "showClose",
+              "description": "Whether the close button should be rendered to control the drawer's visible state",
+              "type": "boolean"
+            },
+            {
+              "name": "wrapperClosable",
+              "description": "Flag attribute whi",
+              "type": "boolean"
+            },
+            {
+              "name": "modal",
+              "description": "Equivalent to `Dialog`'s modal attribute, determines whether the dark shadowing background should show",
+              "type": "boolean"
+            },
+            {
+              "name": "visible",
+              "description": "Whether the drawer component should show, also can be decorated by `.sync`",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "The size of the drawer component, supporting number with unit of pixel, string by percentage e.g. 30%",
+              "type": "number|string"
+            },
+            {
+              "name": "appendToBody",
+              "description": "Equivalent to `Dialog`'s append to body attribute, when applying nested drawer, make sure this one is set to true",
+              "type": "boolean"
+            },
+            {
+              "name": "position",
+              "description": "Attributes that controls the drawer's direction of display",
+              "type": "Direction"
+            },
+            {
+              "name": "destroyOnClose",
+              "description": "Determine whether the wrapped children should be destroyed, if true, children's destroyed life cycle method will be called all local state will be destroyed",
+              "type": "boolean"
+            },
+            {
+              "name": "title",
+              "description": "The Drawer's title, also can be replaced by named slot `title`",
+              "type": "string"
+            },
+            {
+              "name": "modalAppendToBody",
+              "description": "Equivalent to `Dialog`'s modal-append-to-body attribute, determines whether the shadowing background should be inserted direct to DocumentBody element",
+              "type": "boolean"
+            },
+            {
+              "name": "customClass",
+              "description": "Custom class names for Dialog",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Main Content Slots"
+            },
+            {
+              "name": "title",
+              "description": "Title Slots"
+            }
+          ]
+        },
+        {
+          "name": "ElDropdown",
+          "description": "Toggleable menu for displaying lists of links and actions.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/dropdown",
+          "props": [
+            {
+              "name": "type",
+              "description": "Menu button type. only works when split-button is true",
+              "type": "ButtonType"
+            },
+            {
+              "name": "tabindex",
+              "description": "Dropdown tabindex",
+              "type": "number"
+            },
+            {
+              "name": "size",
+              "description": "menu size, also works on the split button",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "placement",
+              "description": "Placement of the menu",
+              "type": "DropdownMenuAlignment"
+            },
+            {
+              "name": "hideTimeout",
+              "description": "Delay time before hide a dropdown",
+              "type": "number"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Dropdown is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "splitButton",
+              "description": "Whether a button group is displayed",
+              "type": "boolean"
+            },
+            {
+              "name": "trigger",
+              "description": "How to trigger",
+              "type": "DropdownMenuTrigger"
+            },
+            {
+              "name": "showTimeout",
+              "description": "Delay time before show a dropdown",
+              "type": "number"
+            },
+            {
+              "name": "hideOnClick",
+              "description": "Whether to hide menu after clicking menu-item",
+              "type": "boolean"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Content of Dropdown. Notice: Must be a valid html dom element (ex. `<span>`, `<button>` etc.) or `el-component`, to attach the trigger listener"
+            },
+            {
+              "name": "dropdown",
+              "description": "Content of the Dropdown Menu, usually a `<el-dropdown-menu>` element"
+            }
+          ]
+        },
+        {
+          "name": "ElDropdownItem",
+          "doc-url": "https://element.eleme.io/#/en-US/component/dropdown#dropdown-menu-item-attributes",
+          "props": [
+            {
+              "name": "divided",
+              "description": "Whether a divider is displayed",
+              "type": "boolean"
+            },
+            {
+              "name": "icon",
+              "description": "Icon to show on left side of text",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether the item is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "command",
+              "description": "A command to be dispatched to Dropdown's command callback",
+              "type": "string|number|object"
+            }
+          ]
+        },
+        {
+          "name": "ElDropdownMenu",
+          "doc-url": "https://element.eleme.io/#/en-US/component/dropdown",
+          "props": []
+        },
+        {
+          "name": "ElEmpty",
+          "description": "Placeholder hints for empty states.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/empty",
+          "props": [
+            {
+              "name": "image",
+              "description": "image URL",
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "description": "description",
+              "type": "string"
+            },
+            {
+              "name": "imageSize",
+              "description": "image size (width)",
+              "type": "number"
+            }
+          ],
+          "slots": [
+            {
+              "name": "image",
+              "description": "image slot: Custom image"
+            },
+            {
+              "name": "default",
+              "description": "default slot:  \bCustom bottom content"
+            },
+            {
+              "name": "description",
+              "description": "description slot: Custom description"
+            }
+          ]
+        },
+        {
+          "name": "ElFooter",
+          "description": "Container for footers.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/container",
+          "props": [
+            {
+              "name": "height",
+              "description": "Height of the footer",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "ElForm",
+          "description": "Form consists of `input`, `radio`, `select`, `checkbox` and so on. With form, you can collect, verify and submit data.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/form",
+          "props": [
+            {
+              "name": "rules",
+              "description": "Validation rules of form",
+              "type": "object"
+            },
+            {
+              "name": "labelWidth",
+              "description": "Width of label, and all form items will inherit from Form",
+              "type": "string"
+            },
+            {
+              "name": "model",
+              "description": "Data of form component",
+              "type": "object"
+            },
+            {
+              "name": "inlineMessage",
+              "description": "Whether to display the error message inline with the form item",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Controls the size of components in this form",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "showMessage",
+              "description": "Whether to show the error message",
+              "type": "boolean"
+            },
+            {
+              "name": "statusIcon",
+              "description": "Whether to display an icon indicating the validation result",
+              "type": "boolean"
+            },
+            {
+              "name": "labelPosition",
+              "description": "Position of label",
+              "type": "FormItemLabelPosition"
+            },
+            {
+              "name": "labelSuffix",
+              "description": "Suffix of the label",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether the form is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "validate",
+              "description": "Validate the whole form",
+              "type": "{(ValidateCallback): void, (): Promise<boolean>}"
+            },
+            {
+              "name": "validateOnRuleChange",
+              "description": "Whether to trigger validation when the `rules` prop is changed",
+              "type": "boolean"
+            },
+            {
+              "name": "inline",
+              "description": "Whether the form is inline",
+              "type": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElFormItem",
+          "doc-url": "https://element.eleme.io/#/en-US/component/form#form-item-attributes",
+          "props": [
+            {
+              "name": "labelWidth",
+              "description": "Width of label, e.g. '50px'",
+              "type": "string"
+            },
+            {
+              "name": "rules",
+              "description": "Validation rules of form",
+              "type": "object"
+            },
+            {
+              "name": "required",
+              "description": "Whether the field is required or not, will be determined by validation rules if omitted",
+              "type": "boolean"
+            },
+            {
+              "name": "inlineMessage",
+              "description": "Whether to display the error message inline with the form item",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Controls the size of components in this form",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "showMessage",
+              "description": "Whether to show the error message",
+              "type": "boolean"
+            },
+            {
+              "name": "error",
+              "description": "Field error message, set its value and the field will validate error and show this message immediately",
+              "type": "string"
+            },
+            {
+              "name": "prop",
+              "description": "A key of `model` of the enclosing `el-form` component",
+              "type": "string"
+            },
+            {
+              "name": "label",
+              "description": "Label",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Content of Form Item"
+            },
+            {
+              "name": "label",
+              "description": "Content of label"
+            },
+            {
+              "name": "error",
+              "description": "Custom content to display validation message.",
+              "type": "{error: string}"
+            }
+          ]
+        },
+        {
+          "name": "ElHeader",
+          "description": "Container for headers.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/container",
+          "props": [
+            {
+              "name": "height",
+              "description": "Height of the header",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "ElIcon",
+          "description": "Element provides a set of common icons.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/icon",
+          "props": [
+            {
+              "name": "name",
+              "description": "Icon name",
+              "doc-url": "https://element.eleme.io/#/en-US/component/icon#icons",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "ElImage",
+          "description": "Besides the native features of img, support lazy load, custom placeholder and load failure, etc.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/image",
+          "props": [
+            {
+              "name": "fit",
+              "description": "Indicate how the image should be resized to fit its container, same as native 'object-fit'",
+              "type": "ObjectFit"
+            },
+            {
+              "name": "zIndex",
+              "type": "number"
+            },
+            {
+              "name": "alt",
+              "description": "Native 'alt' attribute",
+              "type": "string"
+            },
+            {
+              "name": "scrollContainer",
+              "description": "Scroll container that to add scroll listener when using lazy load",
+              "type": "string|HTMLElement"
+            },
+            {
+              "name": "lazy",
+              "description": "Whether to use lazy load",
+              "type": "boolean"
+            },
+            {
+              "name": "previewSrcList",
+              "type": "string[]"
+            },
+            {
+              "name": "referrerPolicy",
+              "description": "Native 'referrerPolicy' attribute",
+              "type": "string"
+            },
+            {
+              "name": "src",
+              "description": "Image source",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "placeholder",
+              "description": "Placeholder content when image hasn't loaded yet"
+            },
+            {
+              "name": "error",
+              "description": "Error content when error occurs to image load"
+            }
+          ]
+        },
+        {
+          "name": "ElInput",
+          "description": "Input data using mouse or keyboard.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/input",
+          "props": [
+            {
+              "name": "type",
+              "description": "Type of input",
+              "type": "InputType"
+            },
+            {
+              "name": "readonly",
+              "description": "Same as readonly in native input",
+              "type": "boolean"
+            },
+            {
+              "name": "showWordLimit",
+              "description": "Whether to show wordCount when setting maxLength",
+              "type": "boolean"
+            },
+            {
+              "name": "maxlength",
+              "description": "Maximum Input text length",
+              "type": "number"
+            },
+            {
+              "name": "validateEvent",
+              "description": "Whether to trigger form validatio",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Size of Input, works when type is not 'textarea'",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "name",
+              "description": "Same as name in native input",
+              "type": "string"
+            },
+            {
+              "name": "prefixIcon",
+              "description": "Prefix icon class",
+              "type": "string"
+            },
+            {
+              "name": "minlength",
+              "description": "Minimum Input text length",
+              "type": "number"
+            },
+            {
+              "name": "suffixIcon",
+              "description": "Suffix icon class",
+              "type": "string"
+            },
+            {
+              "name": "min",
+              "description": "Same as min in native input",
+              "type": "any"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Input is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "placeholder",
+              "description": "Placeholder of Input",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "description": "Binding value",
+              "type": "string|number"
+            },
+            {
+              "name": "autoComplete",
+              "type": "string"
+            },
+            {
+              "name": "clearable",
+              "description": "Whether the input is clearable",
+              "type": "boolean"
+            },
+            {
+              "name": "autocomplete",
+              "description": "Same as autocomplete in native input",
+              "type": "string"
+            },
+            {
+              "name": "max",
+              "description": "Same as max in native input",
+              "type": "any"
+            },
+            {
+              "name": "rows",
+              "description": "Number of rows of textarea, only works when type is 'textarea'",
+              "type": "number"
+            },
+            {
+              "name": "autofocus",
+              "description": "Same as autofocus in native input",
+              "type": "boolean"
+            },
+            {
+              "name": "form",
+              "description": "Same as form in native input",
+              "type": "string"
+            },
+            {
+              "name": "resize",
+              "description": "Control the resizability",
+              "type": "Resizability"
+            },
+            {
+              "name": "showPassword",
+              "description": "Whether to show password",
+              "type": "boolean"
+            },
+            {
+              "name": "step",
+              "description": "Same as step in native input",
+              "type": "any"
+            },
+            {
+              "name": "autosize",
+              "description": "Whether textarea has an adaptive height, only works when type is 'textarea'",
+              "type": "boolean|AutoSize"
+            }
+          ],
+          "slots": [
+            {
+              "name": "prefix",
+              "description": "Content as Input prefix, only works when `type` is 'text'"
+            },
+            {
+              "name": "suffix",
+              "description": "Content as Input suffix, only works when `type` is 'text'"
+            },
+            {
+              "name": "prepend",
+              "description": "Content to prepend before Input, only works when `type` is 'text'"
+            },
+            {
+              "name": "append",
+              "description": "Content to append after Input, only works when `type` is 'text'"
+            }
+          ]
+        },
+        {
+          "name": "ElInputNumber",
+          "description": "Input numerical values with a customizable range.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/input-number",
+          "props": [
+            {
+              "name": "controls",
+              "description": "Whether to enable the control buttons",
+              "type": "boolean"
+            },
+            {
+              "name": "precision",
+              "description": "Precision of input value",
+              "type": "number"
+            },
+            {
+              "name": "debounce",
+              "description": "Debounce delay when typing, in milliseconds",
+              "type": "number"
+            },
+            {
+              "name": "stepStrictly",
+              "description": "whether input value can only be multiple of step",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Size of the component",
+              "type": "InputNumberSize"
+            },
+            {
+              "name": "name",
+              "description": "Same as name in native input",
+              "type": "string"
+            },
+            {
+              "name": "min",
+              "description": "The minimum allowed value",
+              "type": "number"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether the component is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "controlsPosition",
+              "description": "Position of the control buttons",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "description": "Binding value",
+              "type": "number"
+            },
+            {
+              "name": "max",
+              "description": "The maximum allowed value",
+              "type": "number"
+            },
+            {
+              "name": "step",
+              "description": "Incremental step",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "ElLink",
+          "description": "Text hyperlink",
+          "doc-url": "https://element.eleme.io/#/en-US/component/link",
+          "props": [
+            {
+              "name": "underline",
+              "description": "Link underline",
+              "type": "boolean"
+            },
+            {
+              "name": "type",
+              "description": "Link type",
+              "type": "LinkType"
+            },
+            {
+              "name": "href",
+              "description": "Link href",
+              "type": "string"
+            },
+            {
+              "name": "icon",
+              "description": "Link icon, accepts an icon name of Element icon component",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Disable the link",
+              "type": "boolean"
+            },
+            {
+              "name": "target",
+              "description": "Link target",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "ElMain",
+          "description": "Container for main sections.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/container",
+          "props": []
+        },
+        {
+          "name": "ElMenu",
+          "description": "Menu that provides navigation for your website.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/menu",
+          "props": [
+            {
+              "name": "defaultOpeneds",
+              "description": "Array that contains keys of currently active sub-menus",
+              "type": "string[]"
+            },
+            {
+              "name": "mode",
+              "description": "Menu display mode",
+              "type": "MenuDisplayMode"
+            },
+            {
+              "name": "router",
+              "description": "Whether vue-router mode is activated. If true, index will be used as 'path' to activate the route action",
+              "type": "boolean"
+            },
+            {
+              "name": "uniqueOpened",
+              "description": "Whether only one sub-menu can be active",
+              "type": "boolean"
+            },
+            {
+              "name": "textColor",
+              "description": "Text color of Menu (hex format)",
+              "type": "string"
+            },
+            {
+              "name": "defaultActive",
+              "description": "Index of currently active menu",
+              "type": "string"
+            },
+            {
+              "name": "activeTextColor",
+              "description": "Text color of currently active menu item (hex format)",
+              "type": "string"
+            },
+            {
+              "name": "backgroundColor",
+              "description": "Background color of Menu (hex format)",
+              "type": "string"
+            },
+            {
+              "name": "menuTrigger",
+              "description": "How sub-menus are triggered, only works when mode is 'horizontal'",
+              "type": "string"
+            },
+            {
+              "name": "collapse",
+              "description": "Whether the menu is collapsed (available only in vertical mode)",
+              "type": "boolean"
+            },
+            {
+              "name": "collapseTransition",
+              "description": "Whether the menu collapse transition is active",
+              "type": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElMenuItem",
+          "doc-url": "https://element.eleme.io/#/en-US/component/menu#menu-item-attribute",
+          "props": [
+            {
+              "name": "index",
+              "description": "Unique identification",
+              "type": "string"
+            },
+            {
+              "name": "route",
+              "description": "Vue Router object",
+              "type": "object"
+            }
+          ]
+        },
+        {
+          "name": "ElMenuItemGroup",
+          "doc-url": "https://element.eleme.io/#/en-US/component/menu#menu-item-attribute",
+          "props": [
+            {
+              "name": "title",
+              "description": "Group title",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "ElOption",
+          "doc-url": "https://element.eleme.io/#/en-US/component/select#option-attributes",
+          "props": [
+            {
+              "name": "disabled",
+              "description": "Whether option is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "value",
+              "description": "Value of option",
+              "type": "any"
+            },
+            {
+              "name": "label",
+              "description": "Label of option, same as value if omitted",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "ElOptionGroup",
+          "doc-url": "https://element.eleme.io/#/en-US/component/select#option-group-attributes",
+          "props": [
+            {
+              "name": "disabled",
+              "description": "Whether to disable all options in this group",
+              "type": "boolean"
+            },
+            {
+              "name": "label",
+              "description": "Name of the group",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "ElPageHeader",
+          "description": "If path of the page is simple, it is recommended to use PageHeader instead of the Breadcrumb.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/page-header",
+          "props": [
+            {
+              "name": "title",
+              "description": "title",
+              "type": "String"
+            },
+            {
+              "name": "content",
+              "description": "content",
+              "type": "String"
+            }
+          ],
+          "slots": [
+            {
+              "name": "title",
+              "description": "Title content"
+            },
+            {
+              "name": "content",
+              "description": "Content"
+            }
+          ]
+        },
+        {
+          "name": "ElPagination",
+          "description": "If you have too much data to display in one page, use pagination.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/pagination",
+          "props": [
+            {
+              "name": "small",
+              "description": "Whether to use small pagination",
+              "type": "boolean"
+            },
+            {
+              "name": "pageSize",
+              "description": "Item count of each page",
+              "type": "number"
+            },
+            {
+              "name": "prevText",
+              "description": "Text for the prev button",
+              "type": "string"
+            },
+            {
+              "name": "nextText",
+              "description": "Text for the prev button",
+              "type": "string"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for the page size Select's dropdown",
+              "type": "string"
+            },
+            {
+              "name": "pageSizes",
+              "description": "Options of item count per page",
+              "type": "number[]"
+            },
+            {
+              "name": "total",
+              "description": "Total item count",
+              "type": "number"
+            },
+            {
+              "name": "pageCount",
+              "description": "Total page count. Set either total or page-count and pages will be displayed; if you need page-sizes, total is required",
+              "type": "number"
+            },
+            {
+              "name": "pagerCount",
+              "description": "Number of pagers",
+              "type": "number"
+            },
+            {
+              "name": "hideOnSinglePage",
+              "description": "Whether to hide when thers's only one page",
+              "type": "boolean"
+            },
+            {
+              "name": "layout",
+              "description": "Layout of Pagination. Elements separated with a comma.\nAccepted values: `sizes`, `prev`, `pager`, `next`, `jumper`, `-&gt;`, `total`, `slot`",
+              "type": "string"
+            },
+            {
+              "name": "currentPage",
+              "description": "Current page number",
+              "type": "number"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Custom content. To use this, you need to declare `slot` in `layout`"
+            }
+          ]
+        },
+        {
+          "name": "ElPopconfirm",
+          "description": "A simple confirmation dialog of an element click action.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/popconfirm",
+          "props": [
+            {
+              "name": "visibleArrow",
+              "description": "Whether a tooltip arrow is displayed or not. For more info, please refer to Vue-popper",
+              "type": "boolean"
+            },
+            {
+              "name": "offset",
+              "description": "Popover offset",
+              "type": "number"
+            },
+            {
+              "name": "tabindex",
+              "description": "Popover tabindex",
+              "type": "number"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for popover",
+              "type": "string"
+            },
+            {
+              "name": "placement",
+              "description": "Popover placement",
+              "type": "PopoverPlacement"
+            },
+            {
+              "name": "icon",
+              "description": "Popconfirm icon",
+              "type": "string"
+            },
+            {
+              "name": "title",
+              "description": "Popconfirm title",
+              "type": "string"
+            },
+            {
+              "name": "content",
+              "description": "Popover content, can be replaced with a default slot",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Popover is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "popperOptions",
+              "description": "Parameters for popper.js",
+              "type": "object"
+            },
+            {
+              "name": "value",
+              "description": "Whether popover is visible",
+              "type": "boolean"
+            },
+            {
+              "name": "confirmButtonText",
+              "description": "Popconfirm ok text",
+              "type": "string"
+            },
+            {
+              "name": "cancelButtonText",
+              "description": "Popconfirm cancel text",
+              "type": "string"
+            },
+            {
+              "name": "cancelButtonType",
+              "description": "Popconfirm cancal type",
+              "type": "string"
+            },
+            {
+              "name": "hideIcon",
+              "description": "Popconfirm hide icon",
+              "type": "boolean"
+            },
+            {
+              "name": "trigger",
+              "description": "How the popover is triggered",
+              "type": "PopoverTrigger"
+            },
+            {
+              "name": "confirmButtonType",
+              "description": "Popconfirm ok type",
+              "type": "string"
+            },
+            {
+              "name": "transition",
+              "description": "Popover transition animation",
+              "type": "string"
+            },
+            {
+              "name": "closeDelay",
+              "description": "Delay before disappearing when trigger is hover, in milliseconds",
+              "type": "number"
+            },
+            {
+              "name": "openDelay",
+              "description": "Delay before appearing when trigger is hover, in milliseconds",
+              "type": "number"
+            },
+            {
+              "name": "iconColor",
+              "description": "Popconfirm icon color",
+              "type": "string"
+            },
+            {
+              "name": "width",
+              "description": "Popover width",
+              "type": "string|number"
+            }
+          ],
+          "slots": [
+            {
+              "name": "reference",
+              "description": "HTML element that triggers popover"
+            },
+            {
+              "name": "default",
+              "description": "Content of popover"
+            }
+          ]
+        },
+        {
+          "name": "ElPopover",
+          "description": "Similar to Tooltip, Popover is also built with `Vue-popper`",
+          "doc-url": "https://element.eleme.io/#/en-US/component/popover",
+          "props": [
+            {
+              "name": "visibleArrow",
+              "description": "Whether a tooltip arrow is displayed or not. For more info, please refer to Vue-popper",
+              "type": "boolean"
+            },
+            {
+              "name": "offset",
+              "description": "Popover offset",
+              "type": "number"
+            },
+            {
+              "name": "tabindex",
+              "description": "Popover tabindex",
+              "type": "number"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for popover",
+              "type": "string"
+            },
+            {
+              "name": "placement",
+              "description": "Popover placement",
+              "type": "PopoverPlacement"
+            },
+            {
+              "name": "title",
+              "description": "Popover title",
+              "type": "string"
+            },
+            {
+              "name": "content",
+              "description": "Popover content, can be replaced with a default slot",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Popover is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "popperOptions",
+              "description": "Parameters for popper.js",
+              "type": "object"
+            },
+            {
+              "name": "value",
+              "description": "Whether popover is visible",
+              "type": "boolean"
+            },
+            {
+              "name": "trigger",
+              "description": "How the popover is triggered",
+              "type": "PopoverTrigger"
+            },
+            {
+              "name": "transition",
+              "description": "Popover transition animation",
+              "type": "string"
+            },
+            {
+              "name": "closeDelay",
+              "description": "Delay before disappearing when trigger is hover, in milliseconds",
+              "type": "number"
+            },
+            {
+              "name": "openDelay",
+              "description": "Delay before appearing when trigger is hover, in milliseconds",
+              "type": "number"
+            },
+            {
+              "name": "width",
+              "description": "Popover width",
+              "type": "string|number"
+            }
+          ],
+          "slots": [
+            {
+              "name": "reference",
+              "description": "HTML element that triggers popover"
+            },
+            {
+              "name": "default",
+              "description": "Content of popover"
+            }
+          ]
+        },
+        {
+          "name": "ElProgress",
+          "description": "Progress is used to show the progress of current operation, and inform the user the current status.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/progress",
+          "props": [
+            {
+              "name": "showText",
+              "description": "Whether to show percentage",
+              "type": "boolean"
+            },
+            {
+              "name": "type",
+              "description": "The type of progress bar",
+              "type": "ProgressType"
+            },
+            {
+              "name": "percentage",
+              "description": "Percentage, required",
+              "type": "number"
+            },
+            {
+              "name": "strokeLinecap",
+              "description": "Circle progress bar stroke line cap",
+              "type": "string"
+            },
+            {
+              "name": "status",
+              "description": "The current status of progress bar",
+              "type": "ProgressStatus"
+            },
+            {
+              "name": "strokeWidth",
+              "description": "The width of progress bar",
+              "type": "number"
+            },
+            {
+              "name": "color",
+              "description": "Background color of progress bar. Overrides `status` prop",
+              "type": "string|Function|Array<string|{color: string, percentage: number}>"
+            },
+            {
+              "name": "textInside",
+              "description": "Whether to place the percentage inside progress bar, only works when type is 'line'",
+              "type": "boolean"
+            },
+            {
+              "name": "width",
+              "description": "The canvas width of circle progress bar",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "ElRadio",
+          "description": "Single selection among multiple options.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/radio",
+          "props": [
+            {
+              "name": "border",
+              "description": "Whether to add a border around Radio",
+              "type": "boolean"
+            },
+            {
+              "name": "name",
+              "description": "Native 'name' attribute",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether radio is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "value",
+              "description": "The form input value",
+              "type": "string"
+            },
+            {
+              "name": "label",
+              "description": "The value of radio",
+              "type": "string|number|boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElRadioButton",
+          "doc-url": "https://element.eleme.io/#/en-US/component/radio#radio-group-attributes",
+          "props": [
+            {
+              "name": "name",
+              "description": "Native 'name' attribute",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether radio is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "value",
+              "description": "The form input value",
+              "type": "string"
+            },
+            {
+              "name": "label",
+              "description": "The value of radio",
+              "type": "string|number"
+            }
+          ]
+        },
+        {
+          "name": "ElRadioGroup",
+          "doc-url": "https://element.eleme.io/#/en-US/component/radio#radio-group-attributes",
+          "props": [
+            {
+              "name": "fill",
+              "description": "Border and background color when button is active",
+              "type": "string"
+            },
+            {
+              "name": "textColor",
+              "description": "Font color when button is active",
+              "type": "string"
+            },
+            {
+              "name": "size",
+              "description": "The size of radio buttons",
+              "type": "RadioGroupSize"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether the nesting radios are disabled",
+              "type": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElRate",
+          "description": "Used for rating",
+          "doc-url": "https://element.eleme.io/#/en-US/component/rate",
+          "props": [
+            {
+              "name": "showText",
+              "description": "Whether to display texts",
+              "type": "boolean"
+            },
+            {
+              "name": "voidColor",
+              "description": "Color of unselected icons",
+              "type": "string"
+            },
+            {
+              "name": "voidIconClass",
+              "description": "Class name of unselected icons",
+              "type": "string"
+            },
+            {
+              "name": "highThreshold",
+              "description": "Threshold value between medium and high level. The value itself will be included in high level",
+              "type": "number"
+            },
+            {
+              "name": "textColor",
+              "description": "Color of texts",
+              "type": "string"
+            },
+            {
+              "name": "scoreTemplate",
+              "description": "Text template when the component is read-only",
+              "type": "string"
+            },
+            {
+              "name": "allowHalf",
+              "description": "Whether picking half start is allowed",
+              "type": "boolean"
+            },
+            {
+              "name": "showScore",
+              "description": "Whether to display current score. show-score and show-text cannot be true at the same time",
+              "type": "boolean"
+            },
+            {
+              "name": "colors",
+              "description": "Colors for icons. If array, it should have 3 elements, each of which corresponds with a score level, else if object, the key should be threshold value between two levels, and the value should be corresponding color",
+              "type": "string[]|RateColors"
+            },
+            {
+              "name": "iconClasses",
+              "description": "Class names of icons. If array, it should have 3 elements, each of which corresponds with a score level, else if object, the key should be threshold value between two levels, and the value should be corresponding class name",
+              "type": "string[]|RateIconClasses"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Rate is read-only",
+              "type": "boolean"
+            },
+            {
+              "name": "max",
+              "description": "Max rating score",
+              "type": "number"
+            },
+            {
+              "name": "lowThreshold",
+              "description": "Threshold value between low and medium level. The value itself will be included in low level",
+              "type": "number"
+            },
+            {
+              "name": "disabledVoidIconClass",
+              "description": "Class name of unselected read-only icons",
+              "type": "string"
+            },
+            {
+              "name": "texts",
+              "description": "Text array",
+              "type": "string[]"
+            },
+            {
+              "name": "disabledVoidColor",
+              "description": "Color of unselected read-only icons",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "ElResult",
+          "description": "Used to give feedback on the result of user's operation or access exception.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/result",
+          "props": [
+            {
+              "name": "subTitle",
+              "description": "sub title",
+              "type": "string"
+            },
+            {
+              "name": "icon",
+              "description": "icon type",
+              "type": "\"success\"|\"warning\"|\"info\"|\"error\""
+            },
+            {
+              "name": "title",
+              "description": "title",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "subTitle",
+              "description": "subTitle slot: custom sub title"
+            },
+            {
+              "name": "extra",
+              "description": "extra slot: custom extra area, display on the top right"
+            },
+            {
+              "name": "icon",
+              "description": "icon slot: custom icon"
+            },
+            {
+              "name": "title",
+              "description": "title slot: custom title"
+            }
+          ]
+        },
+        {
+          "name": "ElRow",
+          "props": [
+            {
+              "name": "type",
+              "description": "Layout mode. You can use flex. Works in modern browsers",
+              "type": "string"
+            },
+            {
+              "name": "align",
+              "description": "Vertical alignment of flex layout",
+              "type": "VertialAlignment"
+            },
+            {
+              "name": "justify",
+              "description": "Horizontal alignment of flex layout",
+              "type": "HorizontalAlignment"
+            },
+            {
+              "name": "tag",
+              "description": "Custom element tag",
+              "type": "string"
+            },
+            {
+              "name": "gutter",
+              "description": "Grid spacing",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "ElSelect",
+          "description": "When there are plenty of options, use a drop-down menu to display and select desired ones.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/select",
+          "props": [
+            {
+              "name": "remoteMethod",
+              "description": "Custom remote search method",
+              "type": "QueryChangeHandler"
+            },
+            {
+              "name": "remote",
+              "description": "Whether options are loaded from server",
+              "type": "boolean"
+            },
+            {
+              "name": "filterable",
+              "description": "Whether Select is filterable",
+              "type": "boolean"
+            },
+            {
+              "name": "loadingText",
+              "description": "Displayed text while loading data from server",
+              "type": "string"
+            },
+            {
+              "name": "multipleLimit",
+              "description": "Maximum number of options user can select when multiple is true. No limit when set to 0",
+              "type": "number"
+            },
+            {
+              "name": "loading",
+              "description": "Whether Select is loading data from server",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Size of Input",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for Select's dropdown",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "description": "The name attribute of select input",
+              "type": "string"
+            },
+            {
+              "name": "allowCreate",
+              "description": "Whether creating new items is allowed. To use this, filterable must be true",
+              "type": "boolean"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Select is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "placeholder",
+              "description": "Placeholder",
+              "type": "string"
+            },
+            {
+              "name": "valueKey",
+              "description": "Unique identity key name for value, required when value is an object",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "description": "The form input value",
+              "type": "any"
+            },
+            {
+              "name": "autoComplete",
+              "type": "string"
+            },
+            {
+              "name": "clearable",
+              "description": "Whether single select can be cleared",
+              "type": "boolean"
+            },
+            {
+              "name": "filterMethod",
+              "description": "Custom filter method",
+              "type": "QueryChangeHandler"
+            },
+            {
+              "name": "autocomplete",
+              "description": "Same as autocomplete in native input",
+              "type": "string"
+            },
+            {
+              "name": "multiple",
+              "description": "Whether multiple-select is activated",
+              "type": "boolean"
+            },
+            {
+              "name": "noDataText",
+              "description": "Displayed text when there is no options",
+              "type": "string"
+            },
+            {
+              "name": "popperAppendToBody",
+              "description": "Whether to append the popper menu to body",
+              "type": "boolean"
+            },
+            {
+              "name": "defaultFirstOption",
+              "description": "Select first matching option on enter key. Use with filterable or remote",
+              "type": "boolean"
+            },
+            {
+              "name": "noMatchText",
+              "description": "Displayed text when no data matches the filtering query",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Option component list"
+            },
+            {
+              "name": "prefix",
+              "description": "Content as Select prefix"
+            },
+            {
+              "name": "empty",
+              "description": "Content when there is no options"
+            }
+          ]
+        },
+        {
+          "name": "ElSkeleton",
+          "description": "When loading data, and you need a rich experience for visual and interactions for your end users, you can choose `skeleton`.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/skeleton",
+          "props": [
+            {
+              "name": "count",
+              "description": "how many fake items to render to the DOM; default: 1",
+              "type": "number"
+            },
+            {
+              "name": "loading",
+              "description": "whether showing the skeleton; default true",
+              "type": "boolean"
+            },
+            {
+              "name": "animated",
+              "description": "whether showing the animation; default: false",
+              "type": "boolean"
+            },
+            {
+              "name": "throttle",
+              "description": "Rendering delay in millseconds; default: 0",
+              "type": "number"
+            },
+            {
+              "name": "rows",
+              "description": "numbers of the row, only useful when no template slot were given; default: 4",
+              "type": "boolean"
+            }
+          ],
+          "slots": [
+            {
+              "name": "template",
+              "description": "template slot: Custom rendering skeleton template"
+            },
+            {
+              "name": "default",
+              "description": "default slot:  \bReal rendering DOM"
+            }
+          ]
+        },
+        {
+          "name": "ElSkeletonItem",
+          "doc-url": "https://element.eleme.io/#/en-US/component/skeleton#skeleton-item-attributes",
+          "props": [
+            {
+              "name": "variant",
+              "description": "The current rendering skeleton type; default: text",
+              "type": "\"p\"|\"text\"|\"h1\"|\"h3\"|\"caption\"|\"button\"|\"image\"|\"circle\"|\"rect\""
+            }
+          ]
+        },
+        {
+          "name": "ElSlider",
+          "description": "Drag the slider within a fixed range.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/slider",
+          "props": [
+            {
+              "name": "showInputControls",
+              "description": "Whether to display control buttons when show-input is true",
+              "type": "boolean"
+            },
+            {
+              "name": "debounce",
+              "description": "Debounce delay when typing, in milliseconds, works when show-input is true",
+              "type": "number"
+            },
+            {
+              "name": "showInput",
+              "description": "Whether to display an input box, works when range is false",
+              "type": "boolean"
+            },
+            {
+              "name": "formatTooltip",
+              "description": "Format of displayed tooltip value",
+              "type": "SliderTooltipFormat"
+            },
+            {
+              "name": "height",
+              "description": "Slider height, required in vertical mode",
+              "type": "boolean"
+            },
+            {
+              "name": "range",
+              "description": "Whether to select a range",
+              "type": "boolean"
+            },
+            {
+              "name": "vertical",
+              "description": "Vertical mode",
+              "type": "boolean"
+            },
+            {
+              "name": "showStops",
+              "description": "Whether to display breakpoints",
+              "type": "boolean"
+            },
+            {
+              "name": "min",
+              "description": "Minimum value",
+              "type": "number"
+            },
+            {
+              "name": "inputSize",
+              "description": "Size of the input box",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Slider is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "value",
+              "description": "Current value of the slider",
+              "type": "number|number[]"
+            },
+            {
+              "name": "tooltipClass",
+              "description": "Custom class name for the tooltip",
+              "type": "string"
+            },
+            {
+              "name": "max",
+              "description": "Maximum value",
+              "type": "number"
+            },
+            {
+              "name": "showTooltip",
+              "description": "Whether to display tooltip value",
+              "type": "boolean"
+            },
+            {
+              "name": "marks",
+              "description": "Custom marks",
+              "type": "{[p: number]: string|{style: object, label: string|VNode}}"
+            },
+            {
+              "name": "step",
+              "description": "Step size",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "ElSpinner",
+          "props": [
+            {
+              "name": "type",
+              "description": "The type of spinner",
+              "type": "string"
+            },
+            {
+              "name": "radius",
+              "description": "The radius of spinner",
+              "type": "number"
+            },
+            {
+              "name": "strokeColor",
+              "description": "The color of spinner",
+              "type": "string"
+            },
+            {
+              "name": "strokeWidth",
+              "description": "The width of spinner",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "ElStep",
+          "doc-url": "https://element.eleme.io/#/en-US/component/steps#step-attributes",
+          "props": [
+            {
+              "name": "status",
+              "description": "Current status. It will be automatically set by Steps if not configured.",
+              "type": "StepStatus"
+            },
+            {
+              "name": "icon",
+              "description": "Step icon",
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "description": "Step description",
+              "type": "string"
+            },
+            {
+              "name": "title",
+              "description": "Step title",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "icon",
+              "description": "Custom icon"
+            },
+            {
+              "name": "description",
+              "description": "Step description"
+            },
+            {
+              "name": "title",
+              "description": "Step title"
+            }
+          ]
+        },
+        {
+          "name": "ElSteps",
+          "description": "Guide the user to complete tasks in accordance with the process. Its steps can be set according to the actual application scenario and the number of the steps can't be less than 2.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/steps",
+          "props": [
+            {
+              "name": "processStatus",
+              "description": "Status of current step",
+              "type": "StepStatus"
+            },
+            {
+              "name": "simple",
+              "description": "Whether to apply simple theme",
+              "type": "boolean"
+            },
+            {
+              "name": "space",
+              "description": "The spacing of each step, will be responsive if omitted. Support percentage.",
+              "type": "number|string"
+            },
+            {
+              "name": "active",
+              "description": "Current activation step",
+              "type": "number"
+            },
+            {
+              "name": "direction",
+              "description": "Display direction",
+              "type": "StepsDirection"
+            },
+            {
+              "name": "alignCenter",
+              "description": "Whether step description is centered",
+              "type": "boolean"
+            },
+            {
+              "name": "finishStatus",
+              "description": "Status of end step",
+              "type": "StepStatus"
+            }
+          ]
+        },
+        {
+          "name": "ElSubmenu",
+          "doc-url": "https://element.eleme.io/#/en-US/component/menu#submenu-attribute",
+          "props": [
+            {
+              "name": "index",
+              "description": "Unique identification",
+              "type": "string|null"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for the popup menu",
+              "type": "string"
+            },
+            {
+              "name": "hideTimeout",
+              "description": "Delay time before hiding a sub-menu",
+              "type": "number"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether the sub-menu is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "popperAppendToBody",
+              "description": "Whether to append the popper menu to body",
+              "type": "boolean"
+            },
+            {
+              "name": "showTimeout",
+              "description": "Delay time before showing a sub-menu",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "ElSwitch",
+          "description": "Switch is used for switching between two opposing states.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/switch",
+          "props": [
+            {
+              "name": "activeText",
+              "description": "Text displayed when in on state",
+              "type": "string"
+            },
+            {
+              "name": "activeIconClass",
+              "description": "Class name of the icon displayed when in on state, overrides on-text",
+              "type": "string"
+            },
+            {
+              "name": "inactiveValue",
+              "description": "Switch value when in off state",
+              "type": "string|boolean|number"
+            },
+            {
+              "name": "validateEvent",
+              "description": "Whether to trigger form validation",
+              "type": "boolean"
+            },
+            {
+              "name": "inactiveIconClass",
+              "description": "Class name of the icon displayed when in off state, overrides off-text",
+              "type": "string"
+            },
+            {
+              "name": "activeColor",
+              "description": "Background color when in on state",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "description": "Input name of Switch",
+              "type": "string"
+            },
+            {
+              "name": "activeValue",
+              "description": "Switch value when in on state",
+              "type": "string|boolean|number"
+            },
+            {
+              "name": "inactiveText",
+              "description": "Text displayed when in off state",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Switch is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "value",
+              "description": "Whether Switch is on",
+              "type": "boolean"
+            },
+            {
+              "name": "inactiveColor",
+              "description": "Background color when in off state",
+              "type": "string"
+            },
+            {
+              "name": "width",
+              "description": "Width of Switch",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "ElTabPane",
+          "doc-url": "https://element.eleme.io/#/en-US/component/tabs#tab-pane-attributes",
+          "props": [
+            {
+              "name": "name",
+              "description": "Identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane",
+              "type": "string"
+            },
+            {
+              "name": "closable",
+              "description": "Whether Tab is closable",
+              "type": "boolean"
+            },
+            {
+              "name": "lazy",
+              "description": "Whether Tab is lazily rendered",
+              "type": "boolean"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Tab is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "label",
+              "description": "Title of the tab",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "ElTable",
+          "description": "Display multiple data with similar format. You can sort, filter, compare your data in a table.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/table",
+          "props": [
+            {
+              "name": "showSummary",
+              "description": "Whether to display a summary row",
+              "type": "boolean"
+            },
+            {
+              "name": "data",
+              "description": "Table data",
+              "type": "object[]"
+            },
+            {
+              "name": "rowStyle",
+              "description": "Function that returns custom style for a row, or an object assigning custom style for every row",
+              "type": "object|(function(rowCallbackParams): object)"
+            },
+            {
+              "name": "defaultSort",
+              "description": "Set the default sort column and order",
+              "type": "DefaultSortOptions"
+            },
+            {
+              "name": "fit",
+              "description": "Whether width of column automatically fits its container",
+              "type": "boolean"
+            },
+            {
+              "name": "headerRowStyle",
+              "description": "Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header",
+              "type": "object|(function(rowCallbackParams): object)"
+            },
+            {
+              "name": "stripe",
+              "description": "Whether table is striped",
+              "type": "boolean"
+            },
+            {
+              "name": "defaultExpandAll",
+              "description": "Whether expand all rows by default. Only works when the table has a column `type=\"expand\"`",
+              "type": "Boolean"
+            },
+            {
+              "name": "height",
+              "description": "Table's height. By default it has an auto height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles",
+              "type": "string|number"
+            },
+            {
+              "name": "border",
+              "description": "Whether table has vertical border",
+              "type": "boolean"
+            },
+            {
+              "name": "sumText",
+              "description": "Displayed text for the first column of summary row",
+              "type": "string"
+            },
+            {
+              "name": "selectOnIndeterminate",
+              "description": "Controls the behavior of master checkbox in multi-select tables when only some rows are selected",
+              "type": "boolean"
+            },
+            {
+              "name": "rowClassName",
+              "description": "Function that returns custom class names for a row, or a string assigning class names for every row",
+              "type": "string|(function(rowCallbackParams): string)"
+            },
+            {
+              "name": "headerRowClassName",
+              "description": "Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header",
+              "type": "string|(function(rowCallbackParams): string)"
+            },
+            {
+              "name": "currentRowKey",
+              "description": "Key of current row, a set only prop",
+              "type": "string|number"
+            },
+            {
+              "name": "indent",
+              "description": "Horizontal indentation of nodes in adjacent levels in pixels",
+              "type": "number"
+            },
+            {
+              "name": "lazy",
+              "description": "Whether to lazy load tree structure data, used with load attribute",
+              "type": "boolean"
+            },
+            {
+              "name": "emptyText",
+              "description": "Displayed text when data is empty. You can customize this area with `slot=\"empty\"`",
+              "type": "String"
+            },
+            {
+              "name": "maxHeight",
+              "description": "Table's max-height. The height of the table starts from auto until it reaches the maxHeight limit. The maxHeight is measured in pixels, same as height",
+              "type": "string|number"
+            },
+            {
+              "name": "tooltipEffect",
+              "description": "Tooltip effect property",
+              "type": "TooltipEffect"
+            },
+            {
+              "name": "showHeader",
+              "description": "Whether table header is visible",
+              "type": "boolean"
+            },
+            {
+              "name": "highlightCurrentRow",
+              "description": "Whether current row is highlighted",
+              "type": "boolean"
+            },
+            {
+              "name": "cellStyle",
+              "description": "Function that returns custom style for a cell, or an object assigning custom style for every cell",
+              "type": "object|(function(cellCallbackParams): object)"
+            },
+            {
+              "name": "headerCellClassName",
+              "description": "Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header",
+              "type": "string|(function(cellCallbackParams): string)"
+            },
+            {
+              "name": "headerCellStyle",
+              "description": "Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header",
+              "type": "object|(function(cellCallbackParams): object)"
+            },
+            {
+              "name": "cellClassName",
+              "description": "Function that returns custom class names for a cell, or a string assigning class names for every cell",
+              "type": "string|(function(cellCallbackParams): string)"
+            },
+            {
+              "name": "expandRowKeys",
+              "description": "Set expanded rows by this prop. Prop's value is the keys of expand rows, you should set row-key before using this prop",
+              "type": "any[]"
+            }
+          ],
+          "slots": [
+            {
+              "name": "append",
+              "description": "Contents to be inserted after the last row. You may need this slot if you want to implement infinite scroll for the table. This slot will be displayed above the summary row if there is one."
+            }
+          ]
+        },
+        {
+          "name": "ElTableColumn",
+          "doc-url": "https://element.eleme.io/#/en-US/component/table#table-column-attributes",
+          "props": [
+            {
+              "name": "type",
+              "description": "Type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1). If set to `expand`, the column will display expand icon.",
+              "type": "TableColumnType"
+            },
+            {
+              "name": "align",
+              "description": "Alignment",
+              "type": "ElementUIHorizontalAlignment"
+            },
+            {
+              "name": "headerAlign",
+              "description": "Alignment of the table header. If omitted, the value of the `align` attribute will be applied",
+              "type": "ElementUIHorizontalAlignment"
+            },
+            {
+              "name": "sortOrders",
+              "description": "The order of the sorting strategies used when sorting the data. Works when `sortable` is `true`.",
+              "type": "SortOrders[]"
+            },
+            {
+              "name": "filterPlacement",
+              "description": "Placement for the filter dropdown",
+              "type": "PopoverPlacement"
+            },
+            {
+              "name": "reserveSelection",
+              "description": "Whether to reserve selection after data refreshing, works when `type` is `'selection'`",
+              "type": "boolean"
+            },
+            {
+              "name": "fixed",
+              "description": "Whether column is fixed at left/right. Will be fixed at left if `true`",
+              "type": "boolean|TableColumnFixedType"
+            },
+            {
+              "name": "columnKey",
+              "description": "Column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered",
+              "type": "string"
+            },
+            {
+              "name": "labelClassName",
+              "description": "Class name of the label of this column",
+              "type": "string"
+            },
+            {
+              "name": "className",
+              "description": "Class name of cells in the column",
+              "type": "string"
+            },
+            {
+              "name": "prop",
+              "description": "Field name. You can also use its alias: property",
+              "type": "string"
+            },
+            {
+              "name": "showOverflowTooltip",
+              "description": "Whether to hide extra content and show them in a tooltip when hovering on the cell",
+              "type": "boolean"
+            },
+            {
+              "name": "filterMultiple",
+              "description": "Whether data filtering supports multiple options",
+              "type": "Boolean"
+            },
+            {
+              "name": "resizable",
+              "description": "Whether column width can be resized. Works when border of `el-table` is `true`",
+              "type": "boolean"
+            },
+            {
+              "name": "filteredValue",
+              "description": "Filter value for selected data, might be useful when table header is rendered with `render-header`",
+              "type": "TableColumnFilter[]"
+            },
+            {
+              "name": "minWidth",
+              "description": "Column minimum width. Columns with `width` has a fixed width, while columns with `min-width` has a width that is distributed in proportion",
+              "type": "string"
+            },
+            {
+              "name": "label",
+              "description": "Column label",
+              "type": "string"
+            },
+            {
+              "name": "sortable",
+              "description": "Whether column can be sorted",
+              "type": "boolean|\"custom\""
+            },
+            {
+              "name": "filters",
+              "description": "An array of data filtering options",
+              "type": "TableColumnFilter[]"
+            },
+            {
+              "name": "width",
+              "description": "Column width",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Custom content for table columns.",
+              "type": "{ row: any, column: any, $index: any }"
+            },
+            {
+              "name": "header",
+              "description": "Custom content for table header.",
+              "type": "{ column: any, $index: any }"
+            }
+          ]
+        },
+        {
+          "name": "ElTabs",
+          "description": "Divide data collections which are related yet belong to different types.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/tabs",
+          "props": [
+            {
+              "name": "type",
+              "description": "Type of Tab",
+              "type": "TabType"
+            },
+            {
+              "name": "closable",
+              "description": "Whether Tab is closable",
+              "type": "boolean"
+            },
+            {
+              "name": "tabPosition",
+              "description": "Position of tabs",
+              "type": "TabPosition"
+            },
+            {
+              "name": "stretch",
+              "description": "Whether width of tab automatically fits its container",
+              "type": "Boolean"
+            },
+            {
+              "name": "value",
+              "description": "Name of the selected tab",
+              "type": "string"
+            },
+            {
+              "name": "editable",
+              "description": "Whether Tab is addable and closable",
+              "type": "boolean"
+            },
+            {
+              "name": "addable",
+              "description": "Whether Tab is addable",
+              "type": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElTag",
+          "description": "Used for marking and selection.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/tag",
+          "props": [
+            {
+              "name": "disableTransitions",
+              "description": "Whether the removal animation is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "type",
+              "description": "Tag type",
+              "type": "TagType"
+            },
+            {
+              "name": "hit",
+              "description": "Whether Tag has a highlighted border",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Tag size",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "effect",
+              "description": "Tag theme",
+              "type": "TagTheme"
+            },
+            {
+              "name": "color",
+              "description": "Background color of the tag",
+              "type": "string"
+            },
+            {
+              "name": "closable",
+              "description": "Whether Tab can be removed",
+              "type": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElTimePicker",
+          "description": "Use Time Picker for time input.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/time-picker",
+          "props": [
+            {
+              "name": "align",
+              "description": "Alignment",
+              "type": "ElementUIHorizontalAlignment"
+            },
+            {
+              "name": "readonly",
+              "description": "Whether DatePicker is read only",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Size of Input",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for TimePicker's dropdown",
+              "type": "string"
+            },
+            {
+              "name": "startPlaceholder",
+              "description": "Placeholder for the start time in range mode",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether DatePicker is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "placeholder",
+              "description": "Placeholder",
+              "type": "string"
+            },
+            {
+              "name": "endPlaceholder",
+              "description": "Placeholder for the end time in range mode",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "description": "Value of the picker",
+              "type": "string|Date"
+            },
+            {
+              "name": "rangeSeparator",
+              "description": "Range separator",
+              "type": "string"
+            },
+            {
+              "name": "clearable",
+              "description": "Whether to show clear button",
+              "type": "boolean"
+            },
+            {
+              "name": "editable",
+              "description": "Whether the input is editable",
+              "type": "boolean"
+            },
+            {
+              "name": "pickerOptions",
+              "description": "Additional options, check the table below",
+              "type": "TimePickerOptions"
+            },
+            {
+              "name": "isRange",
+              "description": "Whether to pick a time range",
+              "type": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElTimeSelect",
+          "doc-url": "https://element.eleme.io/#/en-US/component/time-picker#time-select-options",
+          "props": [
+            {
+              "name": "align",
+              "description": "Alignment",
+              "type": "ElementUIHorizontalAlignment"
+            },
+            {
+              "name": "readonly",
+              "description": "Whether DatePicker is read only",
+              "type": "boolean"
+            },
+            {
+              "name": "size",
+              "description": "Size of Input",
+              "type": "ElementUIComponentSize"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for TimePicker's dropdown",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether DatePicker is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "placeholder",
+              "description": "Placeholder",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "description": "Value of the picker",
+              "type": "string|Date"
+            },
+            {
+              "name": "clearable",
+              "description": "Whether to show clear button",
+              "type": "boolean"
+            },
+            {
+              "name": "editable",
+              "description": "Whether the input is editable",
+              "type": "boolean"
+            },
+            {
+              "name": "pickerOptions",
+              "description": "Additional options, check the table below",
+              "type": "TimeSelectOptions"
+            }
+          ]
+        },
+        {
+          "name": "ElTimeline",
+          "description": "Visually display timeline.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/timeline",
+          "props": [
+            {
+              "name": "reverse",
+              "type": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "ElTimelineItem",
+          "doc-url": "https://element.eleme.io/#/en-US/component/timeline#timeline-item-attributes",
+          "props": [
+            {
+              "name": "type",
+              "type": "TimelineItemType"
+            },
+            {
+              "name": "size",
+              "type": "TimelineItemSize"
+            },
+            {
+              "name": "placement",
+              "type": "TimelineItemPlacement"
+            },
+            {
+              "name": "icon",
+              "type": "string"
+            },
+            {
+              "name": "hideTimestamp",
+              "type": "boolean"
+            },
+            {
+              "name": "timestamp",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Custom content for timeline item"
+            },
+            {
+              "name": "dot",
+              "description": "Custom defined node"
+            }
+          ]
+        },
+        {
+          "name": "ElTooltip",
+          "description": "Display prompt information for mouse hover.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/tooltip",
+          "props": [
+            {
+              "name": "visibleArrow",
+              "description": "Whether an arrow is displayed. For more information, check Vue-popper page",
+              "type": "boolean"
+            },
+            {
+              "name": "hideAfter",
+              "description": "Timeout in milliseconds to hide tooltip",
+              "type": "string"
+            },
+            {
+              "name": "offset",
+              "description": "Offset of the Tooltip",
+              "type": "number"
+            },
+            {
+              "name": "tabindex",
+              "description": "Tooltip tabindex",
+              "type": "number"
+            },
+            {
+              "name": "effect",
+              "description": "Tooltip theme",
+              "type": "TooltipEffect"
+            },
+            {
+              "name": "popperClass",
+              "description": "Custom class name for Tooltip's popper",
+              "type": "string"
+            },
+            {
+              "name": "placement",
+              "description": "Position of Tooltip",
+              "type": "PopoverPlacement"
+            },
+            {
+              "name": "manual",
+              "description": "Whether to control Tooltip manually. mouseenter and mouseleave won't have effects if set to true",
+              "type": "boolean"
+            },
+            {
+              "name": "content",
+              "description": "Display content, can be overridden by slot#content",
+              "type": "String"
+            },
+            {
+              "name": "enterable",
+              "description": "Whether the mouse can enter the tooltip",
+              "type": "string"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether Tooltip is disabled",
+              "type": "boolean"
+            },
+            {
+              "name": "popperOptions",
+              "description": "Popper.js parameters",
+              "type": "object"
+            },
+            {
+              "name": "value",
+              "description": "Visibility of Tooltip",
+              "type": "boolean"
+            },
+            {
+              "name": "transition",
+              "description": "Animation name",
+              "type": "string"
+            },
+            {
+              "name": "openDelay",
+              "description": "Delay of appearance, in millisecond",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "ElTransfer",
+          "doc-url": "https://element.eleme.io/#/en-US/component/transfer",
+          "props": [
+            {
+              "name": "data",
+              "description": "Data source",
+              "type": "TransferData[]"
+            },
+            {
+              "name": "leftDefaultChecked",
+              "description": "Key array of initially checked data items of the left list",
+              "type": "any[]"
+            },
+            {
+              "name": "renderContent",
+              "description": "Custom render function for data items",
+              "type": "TransferRenderContent"
+            },
+            {
+              "name": "filterable",
+              "description": "Whether Transfer is filterable",
+              "type": "boolean"
+            },
+            {
+              "name": "format",
+              "description": "Texts for checking status in list header",
+              "type": "TransferFormat"
+            },
+            {
+              "name": "filterPlaceholder",
+              "description": "Placeholder for the filter input",
+              "type": "string"
+            },
+            {
+              "name": "buttonTexts",
+              "description": "Custom button texts",
+              "type": "string[]"
+            },
+            {
+              "name": "props",
+              "description": "Prop aliases for data source",
+              "type": "TransferProps"
+            },
+            {
+              "name": "rightDefaultChecked",
+              "description": "Key array of initially checked data items of the right list",
+              "type": "any[]"
+            },
+            {
+              "name": "targetOrder",
+              "description": "Order strategy for elements in the target list",
+              "type": "string"
+            },
+            {
+              "name": "titles",
+              "description": "Custom list titles",
+              "type": "string[]"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Custom content for data items.",
+              "type": "{ option: any }"
+            },
+            {
+              "name": "left-footer",
+              "description": "Content of left list footer"
+            },
+            {
+              "name": "right-footer",
+              "description": "Content of right list footer"
+            }
+          ]
+        },
+        {
+          "name": "ElTree",
+          "description": "Display a set of data with hierarchies.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/tree",
+          "props": [
+            {
+              "name": "data",
+              "description": "Tree data",
+              "type": "TreeData[]"
+            },
+            {
+              "name": "checkOnClickNode",
+              "description": "Whether to check or uncheck node when clicking on the node, if false, the node can only be checked or unchecked by clicking on the checkbox.",
+              "type": "boolean"
+            },
+            {
+              "name": "defaultExpandAll",
+              "description": "Whether to expand all nodes by default",
+              "type": "boolean"
+            },
+            {
+              "name": "highlightCurrent",
+              "description": "Whether current node is highlighted",
+              "type": "boolean"
+            },
+            {
+              "name": "expandOnClickNode",
+              "description": "Whether to expand or collapse node when clicking on the node. If false, then expand or collapse node only when clicking on the arrow icon.",
+              "type": "boolean"
+            },
+            {
+              "name": "accordion",
+              "description": "Whether only one node among the same level can be expanded at one time",
+              "type": "boolean"
+            },
+            {
+              "name": "props",
+              "description": "Configuration options, see the following table",
+              "type": "TreeProps"
+            },
+            {
+              "name": "showCheckbox",
+              "description": "Whether node is selectable",
+              "type": "boolean"
+            },
+            {
+              "name": "defaultExpandedKeys",
+              "description": "Array of keys of initially expanded nodes",
+              "type": "any[]"
+            },
+            {
+              "name": "indent",
+              "description": "Horizontal indentation of nodes in adjacent levels in pixels",
+              "type": "number"
+            },
+            {
+              "name": "emptyText",
+              "description": "Text displayed when data is void",
+              "type": "string"
+            },
+            {
+              "name": "draggable",
+              "description": "Whether enable tree nodes drag and drop",
+              "type": "boolean"
+            },
+            {
+              "name": "defaultCheckedKeys",
+              "description": "Array of keys of initially checked nodes",
+              "type": "any[]"
+            },
+            {
+              "name": "checkStrictly",
+              "description": "Whether checked state of a node not affects its father and child nodes when show-checkbox is true",
+              "type": "boolean"
+            },
+            {
+              "name": "store",
+              "description": "TreeStore",
+              "type": "TreeStore<any, TreeData>"
+            },
+            {
+              "name": "iconClass",
+              "description": "Custom tree node icon",
+              "type": "string"
+            },
+            {
+              "name": "autoExpandParent",
+              "description": "Whether to expand father node when a child node is expanded",
+              "type": "boolean"
+            },
+            {
+              "name": "nodeKey",
+              "description": "Unique identity key name for nodes, its value should be unique across the whole tree",
+              "type": "string"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "Custom content for tree nodes.",
+              "type": "{ node: any, data: any }"
+            }
+          ]
+        },
+        {
+          "name": "ElUpload",
+          "description": "Upload files by clicking or drag-and-drop",
+          "doc-url": "https://element.eleme.io/#/en-US/component/upload",
+          "props": [
+            {
+              "name": "data",
+              "description": "Additions options of request",
+              "type": "object"
+            },
+            {
+              "name": "showFileList",
+              "description": "Whether to show the uploaded file list",
+              "type": "boolean"
+            },
+            {
+              "name": "limit",
+              "description": "Maximum number of uploads allowed",
+              "type": "number"
+            },
+            {
+              "name": "action",
+              "description": "Request URL (required)",
+              "type": "string"
+            },
+            {
+              "name": "drag",
+              "description": "Whether to activate drag and drop mode",
+              "type": "boolean"
+            },
+            {
+              "name": "fileList",
+              "description": "Default uploaded files",
+              "type": "FileListItem[]"
+            },
+            {
+              "name": "accept",
+              "description": "Accepted file types, will not work when thumbnail-mode is true",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "description": "Key name for uploaded file",
+              "type": "string"
+            },
+            {
+              "name": "listType",
+              "description": "Type of fileList",
+              "type": "ListType"
+            },
+            {
+              "name": "autoUpload",
+              "description": "Whether to auto upload file",
+              "type": "boolean"
+            },
+            {
+              "name": "disabled",
+              "description": "Whether to disable upload",
+              "type": "boolean"
+            },
+            {
+              "name": "headers",
+              "description": "Request headers",
+              "type": "object"
+            },
+            {
+              "name": "thumbnailMode",
+              "description": "Whether thumbnail is displayed",
+              "type": "boolean"
+            },
+            {
+              "name": "multiple",
+              "description": "Whether uploading multiple files is permitted",
+              "type": "boolean"
+            },
+            {
+              "name": "withCredentials",
+              "description": "Whether cookies are sent",
+              "type": "boolean"
+            }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "Content which triggers file dialog"
+            },
+            {
+              "name": "tip",
+              "description": "Content of tips"
+            }
+          ]
+        }
+      ],
+      "vue-directives": [
+        {
+          "name": "loading",
+          "description": "Displays animation in a container (such as a table) while loading data.\n\nElement provides two ways to invoke Loading: directive and service. For the custom directive `v-loading`, you just need to bind a boolean value to it. By default, the loading mask will append to the element where the directive is used. Adding the `body` modifier makes the mask append to the body element.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/loading",
+          "attribute-value": {
+            "type": "boolean",
+            "required": true
+          },
+          "modifiers": [
+            {
+              "name": "body",
+              "description": "Make the mask append to the body element",
+              "type": "boolean"
+            },
+            {
+              "name": "fullscreen",
+              "type": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "infinite-scroll",
+          "description": "Add `v-infinite-scroll` to the list to automatically execute loading method when scrolling to the bottom.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/infiniteScroll",
+          "attribute-value": {
+            "type": "Function",
+            "required": true
+          }
+        },
+        {
+          "name": "popover",
+          "doc-url": "https://element.eleme.io/#/en-US/component/popover",
+          "description": "Use the `v-popover` directive and set it to Popover's ref to trigger element."
+        }
+      ]
+    }
+  }
+}

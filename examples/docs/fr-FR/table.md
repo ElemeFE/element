@@ -1824,6 +1824,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | fit | Si la largeur des colonnes s'adapte au conteneur. | boolean | — | true |
 | show-header | Si le header de la table est visible. | boolean | — | true |
 | highlight-current-row | Si la ligne courante est mise en valeur. | boolean | — | false |
+| highlight-selection-row | Sélectionner la ligne à cocher en surbrillance | boolean | — | false |
 | current-row-key | Clé de la ligne actuelle. Propriété set-only. | string,number | — | — |
 | row-class-name | Fonction qui retourne un nom de classe pour chaque ligne. Peut aussi être une simple chaîne de caractères assignant une classe à chaque ligne. | Function({row, rowIndex})/String | — | — |
 | row-style | Fonction qui retourne un style pour chaque ligne. Peut aussi être un objet assignant un style à chaque ligne. | Function({row, rowIndex})/Object | — | — |

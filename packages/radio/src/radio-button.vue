@@ -24,6 +24,7 @@
       tabindex="-1"
       @focus="focus = true"
       @blur="focus = false"
+      autocomplete="off"
     >
     <span
       class="el-radio-button__inner"

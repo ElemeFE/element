@@ -337,15 +337,18 @@
         this.focused = true;
         this.$emit('focus', event);
       },
-      handleCompositionStart() {
+      handleCompositionStart(event) {
+        this.$emit('compositionstart', event);
         this.isComposing = true;
       },
       handleCompositionUpdate(event) {
+        this.$emit('compositionupdate', event);
         const text = event.target.value;
         const lastCharacter = text[text.length - 1] || '';
         this.isComposing = !isKorean(lastCharacter);
       },
       handleCompositionEnd(event) {
+        this.$emit('compositionend', event);
         if (this.isComposing) {
           this.isComposing = false;
           this.handleInput(event);
@@ -403,7 +406,9 @@
       },
       handlePasswordVisible() {
         this.passwordVisible = !this.passwordVisible;
-        this.focus();
+        this.$nextTick(() => {
+          this.focus();
+        });
       },
       getInput() {
         return this.$refs.input || this.$refs.textarea;

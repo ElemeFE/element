@@ -95,6 +95,11 @@
       },
       validateStatus(value) {
         this.validateState = value;
+      },
+      rules(value) {
+        if ((!value || value.length === 0) && this.required === undefined) {
+          this.clearValidate();
+        }
       }
     },
     computed: {

@@ -80,6 +80,15 @@ import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
 import { ElDrawer } from './drawer'
 import { ElPopconfirm } from './popconfirm'
+import { ElSkeleton } from './skeleton'
+import { ElSkeletonItem } from './skeleton-item'
+import { ElCascaderPanel } from './cascader-panel'
+import { ElEmpty } from './empty'
+import { ElSpinner } from './spinner'
+import { ElDescriptions } from './descriptions'
+import { ElDescriptionsItem } from './descriptions-item'
+import { ElResult } from './result'
+import { ElStatistic } from './statistic'
 
 export interface InstallationOptions {
   locale: any,
@@ -344,3 +353,30 @@ export class Drawer extends ElDrawer {}
 
 /** Popconfirm Component */
 export class Popconfirm extends ElPopconfirm {}
+
+/** Skeleton Component */
+export class Skeleton extends ElSkeleton {}
+
+/** Skeleton Item Component */
+export class SkeletonItem extends ElSkeletonItem {}
+
+/** CascaderPanel Component */
+export class CascaderPanel extends ElCascaderPanel {}
+
+/** Empty Component */
+export class Empty extends ElEmpty {}
+
+/** Spinner Component */
+export class Spinner extends ElSpinner {}
+
+/** Description Component */
+export class Descriptions extends ElDescriptions {}
+
+/** Description Item Component */
+export class DescriptionsItem extends ElDescriptionsItem {}
+
+/** Result Component */
+export class Result extends ElResult {}
+
+/** Statistic Component */
+export class Statistic extends ElStatistic {}

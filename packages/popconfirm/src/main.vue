@@ -20,14 +20,14 @@
         :type="cancelButtonType" 
         @click="cancel"
       >
-        {{cancelButtonText}}
+        {{ displayCancelButtonText }}
       </el-button>
       <el-button 
         size="mini" 
         :type="confirmButtonType" 
         @click="confirm"
       >
-        {{confirmButtonText}}
+        {{ displayConfirmButtonText }}
       </el-button>
     </div>
   </div>
@@ -47,12 +47,10 @@ export default {
       type: String
     },
     confirmButtonText: {
-      type: String,
-      default: t('el.popconfirm.confirmButtonText')
+      type: String
     },
     cancelButtonText: {
-      type: String,
-      default: t('el.popconfirm.cancelButtonText')
+      type: String
     },
     confirmButtonType: {
       type: String,
@@ -83,6 +81,14 @@ export default {
     return {
       visible: false
     };
+  },
+  computed: {
+    displayConfirmButtonText() {
+      return this.confirmButtonText || t('el.popconfirm.confirmButtonText');
+    },
+    displayCancelButtonText() {
+      return this.cancelButtonText || t('el.popconfirm.cancelButtonText');
+    }
   },
   methods: {
     confirm() {

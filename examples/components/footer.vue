@@ -10,6 +10,7 @@
         <a :href="'/#/' + lang + '/component/custom-theme'" class="footer-main-link" target="_blank">{{ langConfig.theme }}</a>
         <a href="https://github.com/elemefe/element-react" class="footer-main-link" target="_blank">Element-React</a>
         <a href="https://github.com/ElemeFE/element-angular" class="footer-main-link" target="_blank">Element-Angular</a>
+        <a href="https://github.com/eleme/morjs" class="footer-main-link" target="_blank">MorJS</a>
       </div>
       <div class="footer-main">
         <h4>{{ langConfig.community }}</h4>
@@ -27,8 +28,17 @@
           width="120"
           popper-class="footer-popover"
           trigger="hover">
-          <div class="footer-popover-title">{{ langConfig.eleme }} UED</div>
-          <img src="../assets/images/qrcode.png" alt="">
+          <div class="footer-popover-title">{{ langConfig.elemeTech }}</div>
+          <img src="https://gw.alicdn.com/imgextra/i4/O1CN01dBDgJP1t4R3qikGBP_!!6000000005848-0-tps-344-344.jpg" alt="">
+        </el-popover>
+        <el-popover
+          ref="weixin"
+          placement="top"
+          width="120"
+          popper-class="footer-popover"
+          trigger="hover">
+          <div class="footer-popover-title">{{ langConfig.elemeDesign }}</div>
+          <img src="https://gw.alicdn.com/imgextra/i4/O1CN015ha1O71yg3g1QaKEi_!!6000000006607-0-tps-1280-1280.jpg" alt="">
         </el-popover>
         <i class="doc-icon-weixin elementdoc" v-popover:weixin></i>
         <a href="https://github.com/elemefe" target="_blank">

@@ -27,6 +27,10 @@
       justify-content: space-around;
     }
 
+    @include when(align-top) {
+      align-items: flex-start;
+    }
+
     @include when(align-middle) {
       align-items: center;
     }

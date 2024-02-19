@@ -34,6 +34,7 @@
         :name="name"
         :disabled="isDisabled"
         tabindex="-1"
+        autocomplete="off"
       >
     </span>
     <span class="el-radio__label" @keydown.stop>

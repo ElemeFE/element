@@ -3,7 +3,7 @@
     text-align: center;
   }
   .banner-desc {
-    padding-top: 20px;
+    padding-top: 50px;
 
     h1 {
       font-size: <%= titleSize >px;

@@ -1,10 +1,10 @@
 <template>
   <transition name="viewer-fade">
-    <div tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
-      <div class="el-image-viewer__mask"></div>
+    <div tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper" :style="{ 'z-index': viewerZIndex }">
+      <div class="el-image-viewer__mask" @click.self="handleMaskClick"></div>
       <!-- CLOSE -->
       <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
-        <i class="el-icon-circle-close"></i>
+        <i class="el-icon-close"></i>
       </span>
       <!-- ARROW -->
       <template v-if="!isSingle">
@@ -54,6 +54,7 @@
 <script>
 import { on, off } from 'element-ui/src/utils/dom';
 import { rafThrottle, isFirefox } from 'element-ui/src/utils/util';
+import { PopupManager } from 'element-ui/src/utils/popup';
 
 const Mode = {
   CONTAIN: {
@@ -91,6 +92,14 @@ export default {
     initialIndex: {
       type: Number,
       default: 0
+    },
+    appendToBody: {
+      type: Boolean,
+      default: true
+    },
+    maskClosable: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -135,6 +144,10 @@ export default {
         style.maxWidth = style.maxHeight = '100%';
       }
       return style;
+    },
+    viewerZIndex() {
+      const nextZIndex = PopupManager.nextZIndex();
+      return this.zIndex > nextZIndex ? this.zIndex : nextZIndex;
     }
   },
   watch: {
@@ -159,7 +172,8 @@ export default {
       this.onClose();
     },
     deviceSupportInstall() {
-      this._keyDownHandler = rafThrottle(e => {
+      this._keyDownHandler = e => {
+        e.stopPropagation();
         const keyCode = e.keyCode;
         switch (keyCode) {
           // ESC
@@ -187,7 +201,7 @@ export default {
             this.handleActions('zoomOut');
             break;
         }
-      });
+      };
       this._mouseWheelHandler = rafThrottle(e => {
         const delta = e.wheelDelta ? e.wheelDelta : -e.detail;
         if (delta > 0) {
@@ -234,6 +248,11 @@ export default {
       });
 
       e.preventDefault();
+    },
+    handleMaskClick() {
+      if (this.maskClosable) {
+        this.hide();
+      }
     },
     reset() {
       this.transform = {
@@ -294,9 +313,18 @@ export default {
   },
   mounted() {
     this.deviceSupportInstall();
+    if (this.appendToBody) {
+      document.body.appendChild(this.$el);
+    }
     // add tabindex then wrapper can be focusable via Javascript
     // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs['el-image-viewer__wrapper'].focus();
+  },
+  destroyed() {
+    // if appendToBody is true, remove DOM node after destroy
+    if (this.appendToBody && this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el);
+    }
   }
 };
 </script>

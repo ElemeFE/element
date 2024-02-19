@@ -1,5 +1,359 @@
 ## Changelog
 
+### 2.15.14
+
+*2023-08-24*
+
+#### Bug fixes
+- Img
+  - Delete referrerpolicy prop (#22651 by @xinguanhua)
+#### Optimization
+- Docs
+  - Update readme and website example links (#22642 by @lyfeyaj)
+  - Update popper links (#22539 by @brizer)
+- I18n
+  - Update translation of Spanish (#22430 by @jcardus)
+  - Add sr-Latn translation (#22567 by @N-M)
+  - Update Uzbek translation (#22390 by @akahon)
+- Statistics
+  - Fix doc; Optimized code (#22384 by @webvs2)
+- Table
+  - Add highlight selection row (#22382 by @wangdaodao)
+
+### 2.15.13
+
+*2023-02-12*
+
+#### Bug fixes
+- Docs
+  - Fix Statistic docs (#22383 by @JUST-Limbo) 
+  - Fix Input docs (#22093 by @lm312)  
+  - Fix en-US docs (#22268 #22269 #22270 by @Hazel-Lin)  
+  - Fix Pagination docs (#22288 by @xujintai123)
+  - Fix: Links docs (#22370 by @itmier)    
+- Statistics
+  - fix slot display bug  (#22375 by @webvs2)
+- Chore
+  - missing web-type after publishing (#22271 by @loosheng)
+#### Optimization
+- InputNumber
+  - Fix touch one click trigger twice on the window touch pad (#22185 by @mrsai)
+- Image
+  - Add initialIndex prop (#22346 by @inkroom) 
+- Statistics
+  - Updated countdown feature to localize lodash Closes (#22260 by @webvs2)
+  - Update code and doc (#22276 by @webvs2)
+- Other
+  - fix web-types type props (#22281 by @whzxc)
+
+### 2.15.12
+
+*2022-11-16*
+
+#### Bug fixes
+- Statistic：
+  - Fixed the thousandth bit bug (#22252 by @webvs2)
+- Other
+  - Fix 2.15.11 element-theme-chalk publish fail bug
+
+### 2.15.11
+
+*2022-11-15*
+
+#### Bug fixes
+- Docs
+  - Fix Radio docs (#22178 by @bchen1029) 
+  - Fix Progress docs
+#### Optimization
+- I18n
+  - Update translation of Malaysian (#22185 by @z4q)
+  - Update translation of Norwegian (#22145 by @Barsnes)
+- Progress
+  - Add defineBackColor and textColor prop (#22089 by @lm312)
+- Statistics
+  - Add new component Statistics (#22159 by @webvs2)
+- Other
+  - Add Web Types to improve code assistance in WebStorm IDE and other JetBrains IDEs (#22135 by @piotrtomiak)
+
+### 2.15.10
+
+*2022-09-13*
+
+#### Bug fixes
+
+- DatePicker
+  - Fix props placement error (#21908 by @lqzhgood)
+- Loading
+  - Fix sticky DOM error (#22087 by @zzjjhh001)
+- Docs
+  - Fix Popover docs (#22083 by @lm312)
+  - Fix Skeleton docs (#22092 by @lm312)
+  - Fix DatePicker docs (#21970 by @guojiongwei)
+- Tree: 
+  - fix lazy-load default check problem (#21934 by @kiss-yu)
+
+#### Optimization
+
+- I18n
+  - Add translation of Sinhalese (#21936 by @sayuri-gi)
+  - Update translation of Spanish (#21924 by @jcardus)
+  - Add translation of Malaysian (#22028 by @iorange0411)
+  - Update translation of Swahili (#21904 by @Cholowao)
+- Utils
+  - update date-util.js (#22099 by @Due07)  
+- DatePicker
+  - add months And years type (#21918 by @akiko123456)
+
+### 2.15.9
+
+*2022-06-02*
+
+#### Bug fixes
+
+- Table
+  - Fix Tabl-header shake bug (#21863 by @bofeng)
+  - Fix when partial import  show `el-checkbox not imported` error (#21828 by @bobohuochai)
+- FormItem
+  - Fix  change rules  verification not reset bug (#21892 by @bofeng)
+- Cascader
+  - Fix change options unexpect error (#21759 by @louiebb)
+- Docs
+  - Fix Popover docs (#21843 by @lod61)
+  - Fix Calendar docs (#21814 by @GoJam11)
+  - Fix TimePicker docs (#21803 by @Alanscut)
+  - Fix DatePicker docs (#21877 by @Nirvanaiu)
+- Other
+  - Fix codepen display bug (#21863 by @bofeng)
+
+#### Optimization
+
+- I18n
+  - Add translation of Swahili (#21895 by @quilltouch)
+- Chore
+  - Use launch-editor-middleware in dev environment (#21633 by @polemices)
+- DatePicker & Cascader
+  - Optimize the dropdown animation direction (#21806 by @XivLaw)
+- Tooltip
+  - Optimize `getFirstElement` code (#21886 by @zhankang)
+- Input
+  - Optimize scss code (#21558 by @cheese-git)
+
+### 2.15.8
+
+*2022-04-12*
+
+#### Bug fixes
+
+- Drawer
+  - Fix appendToBody failure problem (#21264 by @cs1707)
+- Switch
+  - Fix toggling value problem(#19473 by @EdwinBetanc0urt)
+- Docs
+  - Fix input docs (#21723 by @justforuse)
+  - Fix DatePicker docs (#21663 by @justforuse)
+  - Fix Skeleton docs (#21601 by @yanwydxf)
+- Others
+  - Fix vue version (#21736 by @ckvv)
+
+#### Optimization
+
+- I18n
+  - add translation of Azerbaijani (#21012 by @ricardotondello)
+  - update translation of Slovenian (#21729 by @patik123)
+  - update translation of Slovak (#21711 by @sjaustirni )
+  - add translation of Icelandic (#21709 by @aronhr)
+  - add translation of Bengali (#21485 by @llwwtt)
+
+#### Others
+
+- Due to compatibility considerations, the PR on node-sass (#21019 by @linxsbox) of 2.15.7 release has been withdrawn and will be published in an appropriate version after re-evaluation.
+
+### 2.15.7
+
+*2021-11-18*
+
+#### Bug fixes
+
+- Select
+  - fix click icon triggering dropdown (#21314 by @dennyak47)
+  - fix keydown event when composition (#21336 by @bchen1029)
+- Badge
+  - fix type class when is-dot (#21308 by @adaex)
+- Form
+  - validate method reject error info (#21374 by @cs1707)
+- Table
+  - fix resizeObserver loop limit exceeded (#21255 by @tomieric)
+  - fix toggleAllSelection bug when table is empty (#21456 by @cs1707)
+  - optimize performance (#21330 by @cs1707)
+- Button
+  - fix disabled priority (#21375 by @cs1707)
+- Descriptions
+  - fix label slot bug (#21462 by @cs1707)
+- SASS
+  - replace node-sass with dart-sass (#21019 by @linxsbox)
+- Docs
+  - fix skeleton typos (#21408 by @zhhbstudio)
+
+### 2.15.6
+
+*2021-09-02*
+
+#### Bug fixes
+
+- Cascader
+  - fix a bug that makes the browser jitter in zoom mode (#21207 by @cs1707)
+  - optimize performance (#21231 by @cs1707)
+- Select
+  - fix long text overflow in multiple mode (#21237 by @cs1707)
+- Dropdown
+  - add disabled property (#21235 by @mshioda)
+- Radio
+  - fix checked state when browser go back (#21250 by @cs1707)
+- Descriptions
+  - fix type declaration (#21265 by @adaex)
+  - avoid table style conflict (#21254 by @adaex)
+- Drawer
+  - fix append to body (#21264 by @cs1707)
+- Local
+  - fix italian mistake (#21012 by @ricardotondello)
+
+### 2.15.5
+
+*2021-08-04*
+
+#### Bug fixes
+
+- Select
+  - fix resetInputHeight (#21201 by @cs1707)
+
+### 2.15.4
+
+*2021-08-03*
+
+#### New features
+
+- Descriptions 
+  - add description component (#21129 by @cs1707)
+- Result 
+  - add result component (#21171 by @cs1707)
+
+#### Bug fixes
+
+- Utils 
+  - fix isScroll (#21098 by @canvascat)
+- Translation 
+  - update it.js (#21133 by @bliberi)
+- RadioGroup 
+  - fix RadioGroup used in component causes exception #17908 (#20783 by @lceric)
+- Message 
+  - fix message[type] (#21088 by @cs1707)
+- Carousel 
+  - reset the timer when setActiveItem method is called (#20846 by @Nekojita1)
+- Cascader 
+  - fix emitPath (#21185 by @cs1707)
+- Select 
+  - fix select filterable bug (#17494 by @profore)
+  - fix a bug that makes the browser jitter in zoom mode (#21197 by @cs1707)
+- Tree 
+  - fix insertChild (#21194 by @cs1707)
+
+### 2.15.3
+
+*2021-06-29*
+
+#### New features
+
+- Skeleton
+  - add skeleton component (#21038 by @cs1707)
+- Empty
+  - add empty component (#21080 by @cs1707)
+
+#### Bug fixes
+
+- Local
+  - fix week translations for hr locale (#21040 by @cs1707)
+- Table
+  - fix lazy load data (#21041 by @cs1707)
+- Docs
+  - fix form hide-required-asterisk description (#21045 by @cs1707)
+- Drawer:
+  - fix destroy (#20715 by @zj9495)
+- Row
+  - fix align top (#20963 by @cs1707)
+- Select
+  - fix the bug when the value is Boolean (#21052 by @cs1707)
+- Calendar
+  - fix first-day-of-week (#21057 by @cs1707)
+- Utils
+  - fix isScroll (#21065 by @cs1707)
+  - fix(utils.dom by @fw6)
+- TypeScript
+  - add CascaderPanel export type (#21070 by @qige2016)
+  - add spinner.d.ts (#21090 by @qige2016)
+  
+### 2.15.2
+
+*2021-05-28*
+
+#### Bug fixes
+
+- Image
+  - fix z-index and keydown event add stopPropagation (#20859 by @cs1707)
+- Input
+  - fix show password cursor (#20870 by @cs1707)
+  - fix show password icon in edge (#20902 by @cs1707)
+- Carousel
+  - fix interval and scale bug (#20931 by @cs1707)
+- Cascader
+  - fix delete tag bug (#20939 by @cs1707)
+- Drawer
+  - add overflow auto (#20948 by @cs1707)
+- Others
+  - fix isFunction (#20912 by @cs1707)
+
+### 2.15.1
+
+*2021-02-23*
+
+#### Bug fixes
+
+- Drawer
+  - bugfix (by @cs1707)
+- Image
+  - fix incorrect image object fit ratio in IE (#19583 by @charlie0228)
+- Cascader
+  - fix cascader panel active path (#20730 by @cs1707)
+- Calendar 
+  - fix calendar component i18n bug (#20758 by @iamkun)
+- ColorPicker
+  - fix bugs (by @UxieVerity)
+
+#### Optimization
+
+- Doc
+  - update Axure resource v2.1.0 (by @iamkun)
+
+### 2.15.0
+
+*2021-01-15*
+
+#### Bug fixes
+
+- Select
+  - Fix placeholder i18n bug (#17644 by @nzh63)
+- Popconfirm
+  - Popconfirm i18n bug by @iamkun
+- Drawer
+  - Fix focus bug (#20626 by @cs1707)
+- Image
+  - Preview optimization (#20652 by @cs1707)
+
+#### Optimization
+
+- Doc
+  - Fix typo in french translation of datetime-picker.md (#20543 by @lonk)
+  - Add format attribute description to the progress component (#20641 by @cs1707)
+
 ### 2.14.1
 
 *2020-11-11*

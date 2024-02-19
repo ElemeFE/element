@@ -62,7 +62,8 @@
       zIndex: {
         type: Number,
         default: 2000
-      }
+      },
+      initialIndex: Number
     },
 
     data() {
@@ -95,9 +96,15 @@
       },
       imageIndex() {
         let previewIndex = 0;
+        const initialIndex = this.initialIndex;
+        if (initialIndex >= 0) {
+          previewIndex = initialIndex;
+          return previewIndex;
+        }
         const srcIndex = this.previewSrcList.indexOf(this.src);
         if (srcIndex >= 0) {
           previewIndex = srcIndex;
+          return previewIndex;
         }
         return previewIndex;
       }
@@ -204,7 +211,8 @@
 
         if (!imageWidth || !imageHeight || !containerWidth || !containerHeight) return {};
 
-        const vertical = imageWidth / imageHeight < 1;
+        const imageAspectRatio = imageWidth / imageHeight;
+        const containerAspectRatio = containerWidth / containerHeight;
 
         if (fit === ObjectFit.SCALE_DOWN) {
           const isSmaller = imageWidth < containerWidth && imageHeight < containerHeight;
@@ -215,9 +223,9 @@
           case ObjectFit.NONE:
             return { width: 'auto', height: 'auto' };
           case ObjectFit.CONTAIN:
-            return vertical ? { width: 'auto' } : { height: 'auto' };
+            return (imageAspectRatio < containerAspectRatio) ? { width: 'auto' } : { height: 'auto' };
           case ObjectFit.COVER:
-            return vertical ? { height: 'auto' } : { width: 'auto' };
+            return (imageAspectRatio < containerAspectRatio) ? { height: 'auto' } : { width: 'auto' };
           default:
             return {};
         }
