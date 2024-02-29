@@ -291,6 +291,65 @@ Picking a month range is supported.
 ```
 :::
 
+### Year Range
+
+Picking a year range is supported.
+:::demo When in range mode, the left and right panels are linked by default. If you want the two panels to switch current years independently, you can use the `unlinkPanels` attribute. 
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">Default</span>
+    <el-date-picker
+      v-model="value1"
+      type="yearrange"
+      range-separator="To"
+      start-placeholder="Start year"
+      end-placeholder="End year">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">With quick options</span>
+    <el-date-picker
+      v-model="value2"
+      type="yearrange"
+      align="right"
+      unlink-panels
+      range-separator="To"
+      start-placeholder="Start year"
+      end-placeholder="End year"
+      :picker-options="pickerOptions">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        pickerOptions: {
+          shortcuts: [{
+            text: 'This year',
+            onClick(picker) {
+              picker.$emit('pick', [new Date(), new Date()]);
+            }
+          }, {
+            text: 'Since 2000',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date(new Date('2000').getFullYear(), 0);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value1: '',
+        value2: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ###  Default Value
 
 If user hasn't picked a date, shows today's calendar by default. You can use `default-value` to set another date. Its value should be parsable by `new Date()`.
