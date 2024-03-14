@@ -15,7 +15,7 @@
     tabindex="-1"
     :aria-expanded="expanded"
     :aria-disabled="node.disabled"
-    :aria-checked="node.checked"
+    :aria-checked="node.checked ? 'true' : 'false'"
     :draggable="tree.draggable"
     @dragstart.stop="handleDragStart"
     @dragover.stop="handleDragOver"

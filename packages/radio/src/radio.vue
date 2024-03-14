@@ -9,7 +9,7 @@
       { 'is-checked': model === label }
     ]"
     role="radio"
-    :aria-checked="model === label"
+    :aria-checked="model === label ? 'true' : 'false'"
     :aria-disabled="isDisabled"
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="model = isDisabled ? model : label"

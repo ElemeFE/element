@@ -8,7 +8,7 @@
         { 'is-focus': focus },
       ]"
     role="checkbox"
-    :aria-checked="isChecked"
+    :aria-checked="isChecked ? 'true' : 'false'"
     :aria-disabled="isDisabled"
     >
     <input

@@ -8,7 +8,7 @@
       { 'is-focus': focus }
     ]"
     role="radio"
-    :aria-checked="value === label"
+    :aria-checked="value === label ? 'true' : 'false'"
     :aria-disabled="isDisabled"
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="value = isDisabled ? value : label"
