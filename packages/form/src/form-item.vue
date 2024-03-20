@@ -100,6 +100,8 @@
         if ((!value || value.length === 0) && this.required === undefined) {
           this.clearValidate();
         }
+        this.removeValidateEvents();
+        this.addValidateEvents();
       }
     },
     computed: {
