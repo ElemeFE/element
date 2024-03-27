@@ -432,10 +432,7 @@
         if (this.multiple) {
           this.resetInputHeight();
         }
-        let inputs = this.$el.querySelectorAll('input');
-        if ([].indexOf.call(inputs, document.activeElement) === -1) {
-          this.setSelected();
-        }
+        this.setSelected();
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
           this.checkDefaultFirstOption();
         }
