@@ -113,6 +113,8 @@ loadingDirective.install = Vue => {
 
     update: function(el, binding) {
       el.instance.setText(el.getAttribute('element-loading-text'));
+      el.instance.setSpinner(el.getAttribute('element-loading-spinner'));
+      el.instance.setBackground(el.getAttribute('element-loading-background'));
       if (binding.oldValue !== binding.value) {
         toggleLoading(el, binding);
       }
