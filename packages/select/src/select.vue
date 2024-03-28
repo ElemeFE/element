@@ -416,7 +416,7 @@
 
               if (this.selectedLabel) {
                 this.currentPlaceholder = this.selectedLabel;
-                this.selectedLabel = '';
+                // this.selectedLabel = '';
               }
             }
           }
@@ -743,7 +743,7 @@
           if (this.menuVisibleOnFocus) {
             this.menuVisibleOnFocus = false;
           } else {
-            this.visible = !this.visible;
+            this.visible = true;
           }
           if (this.visible) {
             (this.$refs.input || this.$refs.reference).focus();

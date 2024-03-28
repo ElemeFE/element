@@ -141,6 +141,9 @@ Scan the QR code using [Dingtalk App](https://www.dingtalk.com/) to join in disc
 
 <img alt="Join Discusion Group" src="https://user-images.githubusercontent.com/17680888/93177882-0ae92d80-f766-11ea-870d-3fa2d7f06454.png" width="300">
 
+## Env
+
+* node: `v11.15.0`
 
 ## LICENSE
 [MIT](LICENSE)
