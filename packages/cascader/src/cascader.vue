@@ -162,6 +162,7 @@ const PopperMixin = {
     popperOptions: Popper.props.popperOptions,
     transformOrigin: Popper.props.transformOrigin
   },
+  computed: Popper.computed,
   methods: Popper.methods,
   data: Popper.data,
   beforeDestroy: Popper.beforeDestroy

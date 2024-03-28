@@ -15,6 +15,7 @@
       popperOptions: Popper.props.popperOptions
     },
     data: Popper.data,
+    computed: Popper.computed,
     methods: Popper.methods,
     beforeDestroy: Popper.beforeDestroy,
     deactivated: Popper.deactivated

@@ -254,7 +254,7 @@ Vue.prototype.$message = Message;
 
 ### Configuración global
 
-Cuando importa Element, puede definir un objeto global de configuración. Por ahora este elemento solo contiene dos propiedades: `size`, `zIndex`. `size` define el tamaño por defecto de todos los componentes.
+Cuando importa Element, puede definir un objeto global de configuración. Por ahora este elemento solo contiene dos propiedades: `size`, `zIndex`. `size` define el tamaño por defecto de todos los componentes. 'content' en la parte delantera del micro, se utiliza para resolver el problema de que las ventanas flotantes de la subaplicación se montan en el contenedor de la aplicación principal 'body' y el estilo no se puede controlar.
 
 La propiedad `zIndex` indica el z-index inicial (por defecto: 2000) para los modal:
 
@@ -278,6 +278,26 @@ Vue.use(Button);
 
 Con la anterior configuración, el tamaño por defecto de todos los componentes que tienen el atributo `size` será `small`. El valor inicial de z-index para los modals se ha establecido a 3000.
 
+#### Para la aplicación de escape de ventanas flotantes en la parte delantera del micro
+
+Si se establece el campo `content`, la ventana flotante se montará en el contenedor `content`:
+
+```js
+Vue.use(Element, { content: 'content' });
+```
+
+```html
+<template>
+  <div id="app">
+    <!-- La lógica original -->
+    ...
+    <!-- Montaje del contenedor, si se olvida, se monta automáticamente en el cuerpo -->
+    <div id="content"></div>
+  </div>
+</template>
+```
+
+Siguiendo la configuración anterior, todas las ventanas flotantes del proyecto se montarán en el contenedor `content`.
 ### Empiece ya!
 
 Ahora ha incorporado Vue y Element a su proyecto y es el momento para comenzar a programar. Por favor, refiérase a la documentación de cada componente para aprender cómo usarlos.

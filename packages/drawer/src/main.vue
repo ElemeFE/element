@@ -118,6 +118,10 @@ export default {
     },
     drawerSize() {
       return typeof this.size === 'number' ? `${this.size}px` : this.size;
+    },
+    elementContent() {
+      const content = this.$ELEMENT && this.$ELEMENT.content && document.getElementById(this.$ELEMENT.content);
+      return content || document.body;
     }
   },
   data() {
@@ -132,7 +136,7 @@ export default {
         this.closed = false;
         this.$emit('open');
         if (this.appendToBody) {
-          document.body.appendChild(this.$el);
+          this.elementContent.appendChild(this.$el);
         }
         this.prevActiveElement = document.activeElement;
       } else {
@@ -191,7 +195,7 @@ export default {
       this.rendered = true;
       this.open();
       if (this.appendToBody) {
-        document.body.appendChild(this.$el);
+        this.elementContent.appendChild(this.$el);
       }
     }
   },

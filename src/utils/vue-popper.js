@@ -76,6 +76,13 @@ export default {
     }
   },
 
+  computed: {
+    elementContent() {
+      const content = Vue.prototype.$ELEMENT && Vue.prototype.$ELEMENT.content && document.getElementById(Vue.prototype.$ELEMENT.content);
+      return content || document.body;
+    }
+  },
+
   methods: {
     createPopper() {
       if (this.$isServer) return;
@@ -96,7 +103,7 @@ export default {
 
       if (!popper || !reference) return;
       if (this.visibleArrow) this.appendArrow(popper);
-      if (this.appendToBody) document.body.appendChild(this.popperElm);
+      if (this.appendToBody) this.elementContent.appendChild(this.popperElm);
       if (this.popperJS && this.popperJS.destroy) {
         this.popperJS.destroy();
       }
@@ -185,9 +192,9 @@ export default {
 
   beforeDestroy() {
     this.doDestroy(true);
-    if (this.popperElm && this.popperElm.parentNode === document.body) {
+    if (this.popperElm && this.popperElm.parentNode === this.elementContent) {
       this.popperElm.removeEventListener('click', stop);
-      document.body.removeChild(this.popperElm);
+      this.elementContent.removeChild(this.popperElm);
     }
   },
 

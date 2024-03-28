@@ -254,7 +254,7 @@ Vue.prototype.$message = Message;
 
 ### 全局配置
 
-在引入 Element 时，可以传入一个全局配置对象。该对象目前支持 `size` 与 `zIndex` 字段。`size` 用于改变组件的默认尺寸，`zIndex` 设置弹框的初始 z-index（默认值：2000）。按照引入 Element 的方式，具体操作如下：
+在引入 Element 时，可以传入一个全局配置对象。该对象目前支持 `size`、`zIndex` 和 `content` 字段。`size` 用于改变组件的默认尺寸，`zIndex` 设置弹框的初始 z-index（默认值：2000）。`content` 在微前端中，用于解决子应用浮窗挂载到主应用 `body` 容器中导致样式无法控制。按照引入 Element 的方式，具体操作如下：
 
 完整引入 Element：
 
@@ -275,6 +275,27 @@ Vue.use(Button);
 ```
 
 按照以上设置，项目中所有拥有 `size` 属性的组件的默认尺寸均为 'small'，弹框的初始 z-index 为 3000。
+
+#### 针对微前端浮窗逃逸子应用
+
+如果设置 `content` 字段，浮窗都会挂载到 `content` 容器中：
+
+```js
+Vue.use(Element, { content: 'content' });
+```
+
+```html
+<template>
+  <div id="app">
+    <!-- 原来的逻辑 -->
+    ...
+    <!-- 挂载容器，如果忘记，会自动挂载到 body 中 -->
+    <div id="content"></div>
+  </div>
+</template>
+```
+
+按照以上设置，项目中所有的浮窗都会挂载到 `content` 容器中。
 
 ### 开始使用
 

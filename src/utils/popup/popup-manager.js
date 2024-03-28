@@ -97,7 +97,9 @@ const PopupManager = {
     if (dom && dom.parentNode && dom.parentNode.nodeType !== 11) {
       dom.parentNode.appendChild(modalDom);
     } else {
-      document.body.appendChild(modalDom);
+      const content = Vue.prototype.$ELEMENT && Vue.prototype.$ELEMENT.content && document.getElementById(Vue.prototype.$ELEMENT.content);
+      const targetElement = content || document.body;
+      targetElement.appendChild(modalDom);
     }
 
     if (zIndex) {

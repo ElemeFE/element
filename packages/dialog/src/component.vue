@@ -127,7 +127,7 @@
             this.$refs.dialog.scrollTop = 0;
           });
           if (this.appendToBody) {
-            document.body.appendChild(this.$el);
+            this.elementContent.appendChild(this.$el);
           }
         } else {
           this.$el.removeEventListener('scroll', this.updatePopper);
@@ -151,6 +151,10 @@
           }
         }
         return style;
+      },
+      elementContent() {
+        const content = this.$ELEMENT && this.$ELEMENT.content && document.getElementById(this.$ELEMENT.content);
+        return content || document.body;
       }
     },
 
@@ -197,7 +201,7 @@
         this.rendered = true;
         this.open();
         if (this.appendToBody) {
-          document.body.appendChild(this.$el);
+          this.elementContent.appendChild(this.$el);
         }
       }
     },

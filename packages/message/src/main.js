@@ -32,7 +32,9 @@ const Message = function(options) {
     instance.message = null;
   }
   instance.$mount();
-  document.body.appendChild(instance.$el);
+  const content = Vue.prototype.$ELEMENT && Vue.prototype.$ELEMENT.content && document.getElementById(Vue.prototype.$ELEMENT.content);
+  const targetElement = content || document.body;
+  targetElement.appendChild(instance.$el);
   let verticalOffset = options.offset || 20;
   instances.forEach(item => {
     verticalOffset += item.$el.offsetHeight + 16;
