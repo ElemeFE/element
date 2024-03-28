@@ -389,11 +389,15 @@ export default {
         // 使用二维数组，避免修改 $index
         return [[
           tr,
-          <tr key={'expanded-row__' + tr.key}>
-            <td colspan={ this.columnsCount } class="el-table__cell el-table__expanded-cell">
-              { renderExpanded(this.$createElement, { row, $index, store: this.store }) }
-            </td>
-          </tr>]];
+          !this.fixed
+            ? (
+              <tr key={'expanded-row__' + tr.key}>
+                <td colspan={ this.columnsCount } class="el-table__cell el-table__expanded-cell">
+                  { renderExpanded(this.$createElement, { row, $index, store: this.store }) }
+                </td>
+              </tr>
+            ) : (<tr></tr>)
+        ]];
       } else if (Object.keys(treeData).length) {
         assertRowKey();
         // TreeTable 时，rowKey 必须由用户设定，不使用 getKeyOfRow 计算
