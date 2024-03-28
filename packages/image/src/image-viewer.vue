@@ -40,6 +40,7 @@
           v-if="i === index"
           ref="img"
           class="el-image-viewer__img"
+          v-bind="$attrs"
           :key="url"
           :src="currentImg"
           :style="imgStyle"
