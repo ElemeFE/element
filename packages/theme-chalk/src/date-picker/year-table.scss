@@ -13,7 +13,9 @@
     text-align: center;
     padding: 20px 3px;
     cursor: pointer;
-
+    &.in-range {
+      padding: 20px 0px;
+    }
     &.today {
       .cell {
         color: $--color-primary;
@@ -31,17 +33,51 @@
       }
     }
 
+    & div {
+      height: 44px;
+      padding: 6px 0;
+      box-sizing: border-box;
+    }
+
     .cell {
-      width: 48px;
+      width: 60px;
       height: 32px;
       display: block;
       line-height: 32px;
       color: $--datepicker-font-color;
       margin: 0 auto;
+      border-radius: 16px;
 
       &:hover {
         color: $--datepicker-hover-font-color;
       }
+    }
+    
+    &.in-range div {
+      background-color: $--datepicker-inrange-background-color;
+      &:hover {
+        background-color: $--datepicker-inrange-hover-background-color;
+      }
+    }
+    &.start-date div,
+    &.end-date div {
+      color: $--color-white;
+    }
+
+    &.start-date .cell,
+    &.end-date .cell {
+      color: $--color-white;
+      background-color: $--datepicker-active-color;
+    }
+
+    &.start-date div {
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+    }
+
+    &.end-date div {
+      border-top-right-radius: 24px;
+      border-bottom-right-radius: 24px;
     }
 
     &.current:not(.disabled) .cell {
