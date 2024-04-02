@@ -129,7 +129,7 @@
           type="text"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
-          v-show="selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years'">
+          v-show="selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years' && selectionMode !== 'weeks'">
           {{ t('el.datepicker.now') }}
         </el-button>
         <el-button
@@ -194,6 +194,7 @@
         if (this.selectionMode === 'dates' && this.value) return;
         if (this.selectionMode === 'months' && this.value) return;
         if (this.selectionMode === 'years' && this.value) return;
+        if (this.selectionMode === 'weeks' && this.value) return;
         if (isDate(val)) {
           this.date = new Date(val);
         } else {
@@ -361,6 +362,9 @@
           this.emit(value.date);
         } else if (this.selectionMode === 'dates') {
           this.emit(value, true); // set false to keep panel open
+        } else if (this.selectionMode === 'weeks') {
+          value = value.map(item => item.date);
+          this.emit(value, true);
         }
       },
 
@@ -388,7 +392,7 @@
       },
 
       confirm() {
-        if (this.selectionMode === 'dates' || this.selectionMode === 'months' || this.selectionMode === 'years') {
+        if (this.selectionMode === 'dates' || this.selectionMode === 'months' || this.selectionMode === 'years' || this.selectionMode === 'weeks') {
           this.emit(this.value);
         } else {
           // value were emitted in handle{Date,Time}Pick, nothing to update here
@@ -558,7 +562,7 @@
       },
 
       footerVisible() {
-        return this.showTime || this.selectionMode === 'dates' || this.selectionMode === 'months' || this.selectionMode === 'years';
+        return this.showTime || this.selectionMode === 'dates' || this.selectionMode === 'months' || this.selectionMode === 'years' || this.selectionMode === 'weeks';
       },
 
       visibleTime() {

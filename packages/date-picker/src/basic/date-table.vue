@@ -5,7 +5,7 @@
     class="el-date-table"
     @click="handleClick"
     @mousemove="handleMouseMove"
-    :class="{ 'is-week-mode': selectionMode === 'week' }">
+    :class="{ 'is-week-mode': selectionMode === 'week' || selectionMode === 'weeks' }">
     <tbody>
     <tr>
       <th v-if="showWeekNumber">{{ t('el.datepicker.week') }}</th>
@@ -199,11 +199,13 @@
             this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
           }
 
-          if (this.selectionMode === 'week') {
+          if (this.selectionMode === 'week' || this.selectionMode === 'weeks') {
+            const cell = row[1];
             const start = this.showWeekNumber ? 1 : 0;
             const end = this.showWeekNumber ? 7 : 6;
             const isWeekActive = this.isWeekActive(row[start + 1]);
 
+            cell.isWeekSelect = isWeekActive;
             row[start].inRange = isWeekActive;
             row[start].start = isWeekActive;
             row[end].inRange = isWeekActive;
@@ -271,7 +273,7 @@
           classes.push('current');
         }
 
-        if (cell.inRange && ((cell.type === 'normal' || cell.type === 'today') || this.selectionMode === 'week')) {
+        if (cell.inRange && ((cell.type === 'normal' || cell.type === 'today') || this.selectionMode === 'week' || this.selectionMode === 'weeks')) {
           classes.push('in-range');
 
           if (cell.start) {
@@ -304,7 +306,7 @@
       },
 
       isWeekActive(cell) {
-        if (this.selectionMode !== 'week') return false;
+        if (this.selectionMode !== 'week' && this.selectionMode !== 'weeks') return false;
         const newDate = new Date(this.year, this.month, 1);
         const year = newDate.getFullYear();
         const month = newDate.getMonth();
@@ -320,6 +322,18 @@
         }
 
         newDate.setDate(parseInt(cell.text, 10));
+
+        if (this.selectionMode === 'weeks') {
+          const value = this.value || [];
+          return value.some(item => {
+            item = new Date(item);
+            if (isDate(item)) {
+              const dayOffset = (item.getDay() - this.firstDayOfWeek + 7) % 7 - 1;
+              const weekDate = prevDate(item, dayOffset);
+              return weekDate.getTime() === newDate.getTime();
+            }
+          });
+        }
 
         if (isDate(this.value)) {
           const dayOffset = (this.value.getDay() - this.firstDayOfWeek + 7) % 7 - 1;
@@ -398,7 +412,7 @@
         if (target.tagName !== 'TD') return;
 
         const row = target.parentNode.rowIndex - 1;
-        const column = this.selectionMode === 'week' ? 1 : target.cellIndex;
+        const column = (this.selectionMode === 'week' || this.selectionMode === 'weeks') ? 1 : target.cellIndex;
         const cell = this.rows[row][column];
 
         if (cell.disabled || cell.type === 'week') return;
@@ -433,6 +447,28 @@
           const newValue = cell.selected
             ? removeFromArray(value, date => date.getTime() === newDate.getTime())
             : [...value, newDate];
+          this.$emit('pick', newValue);
+        } else if (this.selectionMode === 'weeks') {
+          const value = this.value || [];
+          const weeks = [...value].map(item => {
+            const weekNumber = getWeekNumber(item);
+            const value = item.getFullYear() + 'w' + weekNumber;
+            return {
+              year: item.getFullYear(),
+              week: weekNumber,
+              value: value,
+              date: item
+            };
+          });
+          const weekNumber = getWeekNumber(newDate);
+          const val = newDate.getFullYear() + 'w' + weekNumber;
+          const current = {
+            year: newDate.getFullYear(),
+            week: weekNumber,
+            value: val,
+            date: newDate
+          };
+          const newValue = cell.isWeekSelect ? removeFromArray(weeks, item => item.date.getTime() === newDate.getTime()) : [...weeks, current];
           this.$emit('pick', newValue);
         }
       }

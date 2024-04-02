@@ -2,7 +2,7 @@
   <el-input
     class="el-date-editor"
     :class="'el-date-editor--' + type"
-    :readonly="!editable || readonly || type === 'dates' || type === 'week' || type === 'years' || type === 'months'"
+    :readonly="!editable || readonly || type === 'dates' || type === 'week' || type === 'years' || type === 'months' || type ==='weeks'"
     :disabled="pickerDisabled"
     :size="pickerSize"
     :name="name"
@@ -114,6 +114,7 @@ const DEFAULT_FORMATS = {
   datetime: 'yyyy-MM-dd HH:mm:ss',
   time: 'HH:mm:ss',
   week: 'yyyywWW',
+  weeks: 'yyyywWW',
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
   monthrange: 'yyyy-MM',
@@ -135,7 +136,8 @@ const HAVE_TRIGGER_TYPES = [
   'datetimerange',
   'dates',
   'months',
-  'years'
+  'years',
+  'weeks'
 ];
 const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime();
@@ -144,6 +146,24 @@ const DATE_FORMATTER = function(value, format) {
 const DATE_PARSER = function(text, format) {
   if (format === 'timestamp') return new Date(Number(text));
   return parseDate(text, format);
+};
+const WEEK_FORMATTER = function(value, format) {
+  const week = getWeekNumber(value);
+  const month = value.getMonth();
+  const trueDate = new Date(value);
+  if (week === 1 && month === 11) {
+    trueDate.setHours(0, 0, 0, 0);
+    trueDate.setDate(trueDate.getDate() + 3 - (trueDate.getDay() + 6) % 7);
+  }
+  let date = formatDate(trueDate, format);
+
+  date = /WW/.test(date)
+    ? date.replace(/WW/, week < 10 ? '0' + week : week)
+    : date.replace(/W/, week);
+  return date;
+};
+const WEEK_PARSER = function(text, format) {
+  return TYPE_VALUE_RESOLVER_MAP.date.parser(text, format);
 };
 const RANGE_FORMATTER = function(value, format) {
   if (Array.isArray(value) && value.length === 2) {
@@ -180,25 +200,8 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   },
   week: {
-    formatter(value, format) {
-      let week = getWeekNumber(value);
-      let month = value.getMonth();
-      const trueDate = new Date(value);
-      if (week === 1 && month === 11) {
-        trueDate.setHours(0, 0, 0, 0);
-        trueDate.setDate(trueDate.getDate() + 3 - (trueDate.getDay() + 6) % 7);
-      }
-      let date = formatDate(trueDate, format);
-
-      date = /WW/.test(date)
-        ? date.replace(/WW/, week < 10 ? '0' + week : week)
-        : date.replace(/W/, week);
-      return date;
-    },
-    parser(text, format) {
-      // parse as if a normal date
-      return TYPE_VALUE_RESOLVER_MAP.date.parser(text, format);
-    }
+    formatter: WEEK_FORMATTER,
+    parser: WEEK_PARSER
   },
   date: {
     formatter: DATE_FORMATTER,
@@ -276,6 +279,15 @@ const TYPE_VALUE_RESOLVER_MAP = {
     parser(value, format) {
       return (typeof value === 'string' ? value.split(', ') : value)
         .map(date => date instanceof Date ? date : DATE_PARSER(date, format));
+    }
+  },
+  weeks: {
+    formatter(value, format) {
+      return value.map(date => WEEK_FORMATTER(date, format));
+    },
+    parser(value, format) {
+      return (typeof value === 'string' ? value.split(', ') : value)
+        .map(date => date instanceof Date ? date : WEEK_PARSER(date, format));
     }
   }
 };
@@ -516,6 +528,8 @@ export default {
         return 'months';
       } else if (this.type === 'years') {
         return 'years';
+      } else if (this.type === 'weeks') {
+        return 'weeks';
       }
 
       return 'day';
@@ -538,7 +552,7 @@ export default {
       } else if (this.userInput !== null) {
         return this.userInput;
       } else if (formattedValue) {
-        return (this.type === 'dates' || this.type === 'years' || this.type === 'months')
+        return (this.type === 'dates' || this.type === 'years' || this.type === 'months' || this.type === 'weeks')
           ? formattedValue.join(', ')
           : formattedValue;
       } else {
@@ -740,7 +754,7 @@ export default {
       if (!this.pickerVisible) return;
       this.pickerVisible = false;
 
-      if (this.type === 'dates' || this.type === 'years' || this.type === 'months') {
+      if (this.type === 'dates' || this.type === 'years' || this.type === 'months' || this.type === 'weeks') {
         // restore to former value
         const oldValue = parseAsFormatAndType(this.valueOnOpen, this.valueFormat, this.type, this.rangeSeparator) || this.valueOnOpen;
         this.emitInput(oldValue);
