@@ -1,9 +1,10 @@
+import {isFirefox} from 'element-ui/src/utils/util';
 let hiddenTextarea;
 
 const HIDDEN_STYLE = `
   height:0 !important;
   visibility:hidden !important;
-  overflow:hidden !important;
+  ${isFirefox() ? '' : 'overflow:hidden !important;'}
   position:absolute !important;
   z-index:-1000 !important;
   top:0 !important;
