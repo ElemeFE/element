@@ -78,6 +78,7 @@ const webpackConfig = {
         test: /\.(scss|css)$/,
         use: [
           isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          'vue-style-loader',
           'css-loader',
           'sass-loader'
         ]

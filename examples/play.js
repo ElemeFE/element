@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Element from 'main/index.js';
+import Element from '/src/index.js';
 import App from './play/index.vue';
 import 'packages/theme-chalk/src/index.scss';
 

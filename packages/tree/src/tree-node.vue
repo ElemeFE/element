@@ -9,7 +9,8 @@
       'is-current': node.isCurrent,
       'is-hidden': !node.visible,
       'is-focusable': !node.disabled,
-      'is-checked': !node.disabled && node.checked
+      'is-checked': !node.disabled && node.checked,
+      ...treeNodeClass && treeNodeClass(node)
     }"
     role="treeitem"
     tabindex="-1"
@@ -59,6 +60,7 @@
       >
         <el-tree-node
           :render-content="renderContent"
+          :tree-node-class="treeNodeClass"
           v-for="child in node.childNodes"
           :render-after-expand="renderAfterExpand"
           :show-checkbox="showCheckbox"
@@ -92,6 +94,7 @@
       },
       props: {},
       renderContent: Function,
+      treeNodeClass: Function,
       renderAfterExpand: {
         type: Boolean,
         default: true

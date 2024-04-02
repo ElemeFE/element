@@ -17,6 +17,7 @@
       :show-checkbox="showCheckbox"
       :key="getNodeKey(child)"
       :render-content="renderContent"
+      :tree-node-class="treeNodeClass"
       @node-expand="handleNodeExpand">
     </el-tree-node>
     <div class="el-tree__empty-block" v-if="isEmpty">
@@ -97,6 +98,7 @@
       defaultExpandedKeys: Array,
       currentNodeKey: [String, Number],
       renderContent: Function,
+      treeNodeClass: Function,
       showCheckbox: {
         type: Boolean,
         default: false
