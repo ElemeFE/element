@@ -14,6 +14,7 @@
             class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="minSpinner"
+              :show-minutes="showMinutes"
               :show-seconds="showSeconds"
               :am-pm-mode="amPmMode"
               @change="handleMinChange"
@@ -30,6 +31,7 @@
             class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="maxSpinner"
+              :show-minutes="showMinutes"
               :show-seconds="showSeconds"
               :am-pm-mode="amPmMode"
               @change="handleMaxChange"
@@ -72,7 +74,7 @@
   const minTimeOfDay = function(date) {
     return modifyDate(MIN_TIME, date.getFullYear(), date.getMonth(), date.getDate());
   };
-  
+
   const maxTimeOfDay = function(date) {
     return modifyDate(MAX_TIME, date.getFullYear(), date.getMonth(), date.getDate());
   };
@@ -88,6 +90,9 @@
     components: { TimeSpinner },
 
     computed: {
+      showMinutes() {
+        return (this.format || '').indexOf('mm') !== -1;
+      },
       showSeconds() {
         return (this.format || '').indexOf('ss') !== -1;
       },
@@ -206,7 +211,7 @@
 
       changeSelectionRange(step) {
         const list = this.showSeconds ? [0, 3, 6, 11, 14, 17] : [0, 3, 8, 11];
-        const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []);
+        const mapping = ['hours'].concat(this.showMinutes ? ['minutes', 'seconds'] : this.showSeconds ? ['seconds'] : []);
         const index = list.indexOf(this.selectionRange[0]);
         const next = (index + step + list.length) % list.length;
         const half = list.length / 2;
