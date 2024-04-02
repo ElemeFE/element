@@ -95,6 +95,7 @@
     &.is-leaf {
       color: transparent;
       cursor: default;
+      visibility: hidden;
     }
   }
 
