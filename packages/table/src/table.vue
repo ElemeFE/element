@@ -672,6 +672,13 @@
       this.$ready = true;
     },
 
+    activated() {
+      this.bindEvents();
+    },
+
+    deactivated() {
+      this.unbindEvents();
+    },
     destroyed() {
       this.unbindEvents();
     },
