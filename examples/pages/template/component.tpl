@@ -128,6 +128,75 @@
       }
     }
   }
+  .toc {
+    position: fixed;
+    top: 105px;
+    right: 25px;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    background-color: #fff;
+    z-index: 999;
+    border-radius: 4px;
+    overflow: hidden;
+    font-size: 12px;
+    transition: width 0.5s, height 0.5s;
+  }
+  .toc.active {
+    width: fit-content;
+    height: fit-content;
+  }
+  .toc .toggle {
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: #409EFF;
+    transition: 0.5s;
+  }
+  .toc.active .toggle {
+    cursor: move;
+  }
+  .toc .toggle::before {
+    content: "+";
+    position: absolute;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    line-height: 20px;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 400;
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  .toc .toggle.active::before {
+    transform: rotate(45deg);
+  }
+  .toc ul,
+  .toc li {
+    margin: 0;
+    padding: 0;
+  }
+  .toc ul {
+    padding-top: 4px;
+  }
+  .toc li {
+    list-style: none;
+    padding: 0 20px;
+    line-height: 24px;
+  }
+  .toc li a {
+    cursor: pointer;
+    color: #444;
+  }
+  .toc li.active a {
+    color: #409EFF;
+  }
 </style>
 <template>
   <el-scrollbar class="page-component__scroll" ref="componentScrollBar">
@@ -138,6 +207,12 @@
     <div class="page-component__content">
       <router-view class="content"></router-view>
       <footer-nav></footer-nav>
+    </div>
+    <div v-if="anchors && anchors.length > 0" class="toc" :class="{active: expand}">
+      <div class="toggle" :class="{active: expand}" @mousedown="e => handleMouseDown(e)"></div>
+      <ul>
+        <li v-for="(item, idx) in anchors" :key="item.id" :class="{active: item.active}" @click="handleAnchorClick(idx)"><a :href="item.href">{{ item.title }}</a></li>
+      </ul>
     </div>
     <el-backtop 
       v-if="showBackToTop"
@@ -161,7 +236,18 @@
         scrollTop: 0,
         showHeader: true,
         componentScrollBar: null,
-        componentScrollBoxElement: null
+        componentScrollBoxElement: null,
+        expand: false,
+        anchors: [],
+        dragged: false,
+        tocStartPos: {
+          x: 0,
+          y: 0
+        },
+        tocMovePos: {
+          x: 0,
+          y: 0
+        }
       };
     },
     watch: {
@@ -183,6 +269,59 @@
           const href = a.getAttribute('href');
           a.href = basePath + href;
         });
+      },
+
+      getAnchor() {
+        const h3s = document.querySelectorAll('.element-doc>h3');
+        const els = Array.from(h3s);
+
+        els.forEach(el => {
+          this.anchors.push({
+            active: false,
+            id: el.id,
+            title: el.textContent.substring(2),
+            href: el.querySelector('a').href
+          });
+        });
+      },
+
+      handleMouseDown(e){
+        this.tocStartPos = {
+          x: e.clientX,
+          y: e.clientY
+        }
+
+        document.addEventListener('mousemove', this.handleMouseMove);
+        document.addEventListener('mouseup', this.handleMouseUp);
+
+        this.dragged = false;
+
+        e.stopPropagation();
+        e.preventDefault();
+      },
+
+      handleMouseMove(e){
+        this.tocMovePos = {
+          x: this.tocMovePos.x + e.clientX - this.tocStartPos.x,
+          y: this.tocMovePos.y + e.clientY - this.tocStartPos.y
+        }
+
+        document.querySelector('.toc').style.transform = `translate(${this.tocMovePos.x}px, ${this.tocMovePos.y}px)`;
+        this.tocStartPos = {
+          x: e.clientX,
+          y: e.clientY
+        }
+        
+        this.dragged = true
+      },
+
+      handleMouseUp(){
+        document.removeEventListener('mousemove', this.handleMouseMove);
+        document.removeEventListener('mouseup', this.handleMouseUp);
+
+        if(!this.dragged){
+          this.expand = !this.expand
+        }
       },
 
       goAnchor() {
@@ -210,6 +349,16 @@
           bus.$emit('fadeNav');
         }
         this.scrollTop = scrollTop;
+      },
+
+      handleAnchorClick(idx) {
+        this.anchors.map((anchor, index) => {
+          anchor.active = false;
+          if (idx === index) {
+            anchor.active = true;
+          }
+          return anchor;
+        });
       }
     },
     computed: {
@@ -229,6 +378,7 @@
       this.componentScrollBox.addEventListener('scroll', this.throttledScrollHandler);
       this.renderAnchorHref();
       this.goAnchor();
+      this.getAnchor();
       document.body.classList.add('is-component');
     },
     destroyed() {
@@ -248,6 +398,8 @@
         if (toPath !== fromPath) {
           document.documentElement.scrollTop = document.body.scrollTop = 0;
           this.renderAnchorHref();
+          this.anchors = [];
+          this.getAnchor();
         }
       }, 100);
     }
