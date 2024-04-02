@@ -25,6 +25,7 @@ class TableLayout {
     this.bodyHeight = null; // Table Height - Table Header Height
     this.fixedBodyHeight = null; // Table Height - Table Header Height - Scroll Bar Height
     this.gutterWidth = scrollbarWidth();
+    this.bodyWidthOffset = 0;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
@@ -134,6 +135,7 @@ class TableLayout {
     const fit = this.fit;
     const bodyWidth = this.table.$el.clientWidth;
     let bodyMinWidth = 0;
+    let widthOffset = 0;
 
     const flattenColumns = this.getFlattenColumns();
     let flexColumns = flattenColumns.filter((column) => typeof column.width !== 'number');
@@ -168,9 +170,24 @@ class TableLayout {
             column.realWidth = (column.minWidth || 80) + flexWidth;
           });
 
-          flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth;
+          const isBoxSmaller = !!this._lastTotalFlexWidth && this._lastTotalFlexWidth > totalFlexWidth;
+          const firstRealWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth;
+          // If the container box becomes smaller and the value of `firstRealWidth` increases,
+          // we shouldn't update the `realWidth` of the first flexible column.
+          // In certain situations, the `firstRealWidth` value may increase despite the container getting smaller
+          // due to the rounding down of decimal values in the remaining columns' `realWidth`.
+          // This can cause the columns' width to be repeatedly updated, leading to behavior like that seen in issue #16167.
+          // See: https://github.com/ElemeFE/element/issues/16167
+          if (!isBoxSmaller || firstRealWidth < flexColumns[0].realWidth) {
+            flexColumns[0].realWidth = firstRealWidth;
+          } else {
+            // add an offset to the body width to ensure that the final width of all columns is not larger than it should be
+            widthOffset = firstRealWidth - flexColumns[0].realWidth;
+          }
+          this._lastTotalFlexWidth = totalFlexWidth;
         }
       } else { // HAVE HORIZONTAL SCROLL BAR
+        this._lastTotalFlexWidth = null;
         this.scrollX = true;
         flexColumns.forEach(function(column) {
           column.realWidth = column.minWidth;
@@ -180,6 +197,10 @@ class TableLayout {
       this.bodyWidth = Math.max(bodyMinWidth, bodyWidth);
       this.table.resizeState.width = this.bodyWidth;
     } else {
+      // reset flexible data
+      this._lastTotalFlexWidth = null;
+      widthOffset = 0;
+
       flattenColumns.forEach((column) => {
         if (!column.width && !column.minWidth) {
           column.realWidth = 80;
@@ -214,6 +235,8 @@ class TableLayout {
 
       this.rightFixedWidth = rightFixedWidth;
     }
+
+    this.bodyWidthOffset = widthOffset;
 
     this.notifyObservers('columns');
   }
