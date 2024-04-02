@@ -53,7 +53,8 @@ export default {
 
       if (activeNode.contains(e.target)) {
         clearTimeout(hoverTimer);
-
+        // fix: svg->path can not clear, line:69 not invoke
+        this.hoverTimer = null;
         const { left } = this.$el.getBoundingClientRect();
         const startX = e.clientX - left;
         const { offsetWidth, offsetHeight } = this.$el;
