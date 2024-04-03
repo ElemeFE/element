@@ -19,7 +19,7 @@
 <details>
   <summary>如何在 Table 组件的每一行添加操作该行数据的按钮？</summary>
   
-  使用 [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots) 即可：
+  使用 [Scoped slot](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots) 即可：
   ```html
   <el-table-column label="操作">
     <template slot-scope="props">
@@ -33,13 +33,13 @@
 <details>
   <summary>Tree 组件的 `render-content` 和 Table 组件的 `render-header` 怎么用？</summary>
   
-  请阅读 Vue 文档 [Render Function](http://vuejs.org/v2/guide/render-function.html) 的相关内容。注意，使用 JSX 来写 Render Function 的话，需要安装 `babel-plugin-transform-vue-jsx`，并参照其[文档](https://github.com/vuejs/babel-plugin-transform-vue-jsx)进行配置。
+  请阅读 Vue 文档 [Render Function](https://v2.vuejs.org/v2/guide/render-function) 的相关内容。注意，使用 JSX 来写 Render Function 的话，需要安装 `babel-plugin-transform-vue-jsx`，并参照其[文档](https://github.com/vuejs/babel-plugin-transform-vue-jsx)进行配置。
 </details>
 
 <details>
   <summary>所有组件的任意属性都支持 `.sync` 修饰符吗？</summary>
   
-  不是。对于支持 `.sync` 修饰符的属性，我们会在文档的 API 表格中注明。更多 `.sync` 的用法请查看 [Vue 文档](https://vuejs.org/v2/guide/components.html#sync-Modifier)。
+  不是。对于支持 `.sync` 修饰符的属性，我们会在文档的 API 表格中注明。更多 `.sync` 的用法请查看 [Vue 文档](https://v2.vuejs.org/v2/guide/components-custom-events#sync-Modifier)。
 </details>
 
 <details>
@@ -91,7 +91,7 @@
 <details>
   <summary>How do I add buttons in each row of Table to operate data of that row?</summary>
   
-  Just use [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots):
+  Just use [Scoped slot](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots):
   ```html
   <el-table-column label="Operations">
     <template slot-scope="props">
@@ -105,13 +105,13 @@
 <details>
   <summary>How do `render-content` of Tree and `render-header` of Table work?</summary>
   
-  Please refer to [Render Function](http://vuejs.org/v2/guide/render-function.html) in Vue's documentation. In addition, if you are writing render functions with JSX, `babel-plugin-transform-vue-jsx` is required. See [here](https://github.com/vuejs/babel-plugin-transform-vue-jsx) for its configurations.
+  Please refer to [Render Function](https://v2.vuejs.org/v2/guide/render-function) in Vue's documentation. In addition, if you are writing render functions with JSX, `babel-plugin-transform-vue-jsx` is required. See [here](https://github.com/vuejs/babel-plugin-transform-vue-jsx) for its configurations.
 </details>
 
 <details>
   <summary>Can I use `.sync` modifier on every attribute?</summary>
   
-  No, only a few attributes supports the `.sync` modifier, and we have explicitly marked them on the documentation's API table. For more information about `.sync`, please refer to [Vue documentation](https://vuejs.org/v2/guide/components.html#sync-Modifier).
+  No, only a few attributes supports the `.sync` modifier, and we have explicitly marked them on the documentation's API table. For more information about `.sync`, please refer to [Vue documentation](https://v2.vuejs.org/v2/guide/components-custom-events#sync-Modifier).
 </details>
 
 <details>
@@ -165,7 +165,7 @@
 <details>
   <summary>¿Como agrego botones en cada linea de una tabla para que operen en los datos de esa linea?</summary>
   
-  Simplemente agregue [“Scoped slot”](https://vuejs.org/v2/guide/components.html#Scoped-Slots):
+  Simplemente agregue [“Scoped slot”](https://v2.vuejs.org/v2/guide/components-slots#Scoped-Slots):
   ```html
   <el-table-column label="Operaciones">
     <template slot-scope="props">
@@ -179,13 +179,13 @@
 <details>
   <summary>¿Como funcionan `render-content` de `Tree` y `render-header` de `Table`?</summary>
   
-  Por favor refiérase a [Función de representación](http://vuejs.org/v2/guide/render-function.html) en la documentación de `Vue`. Adicionalmente, sí usted está escribiendo funciones de representar con JSX, se requiere el componente `babel-plugin-transform-vue-jsx`. Más información [aquí](https://github.com/vuejs/babel-plugin-transform-vue-jsx) para su uso y configuración.
+  Por favor refiérase a [Función de representación](https://v2.vuejs.org/v2/guide/render-function) en la documentación de `Vue`. Adicionalmente, sí usted está escribiendo funciones de representar con JSX, se requiere el componente `babel-plugin-transform-vue-jsx`. Más información [aquí](https://github.com/vuejs/babel-plugin-transform-vue-jsx) para su uso y configuración.
 </details>
 
 <details>
   <summary>¿Puedo usar el modificador `.sync` con cada atributo?</summary>
   
-  No, solamente un grupo pequeño de atributos apoyan el modificador `.sync`, y están anotados claramente en la documentación del IPA. Para información adicional sobre `.sync`, por favor refiérase a [documentación de Vue](https://vuejs.org/v2/guide/components.html#sync-Modifier).
+  No, solamente un grupo pequeño de atributos apoyan el modificador `.sync`, y están anotados claramente en la documentación del IPA. Para información adicional sobre `.sync`, por favor refiérase a [documentación de Vue](https://v2.vuejs.org/v2/guide/components-custom-events#sync-Modifier).
 </details>
 
 <details>

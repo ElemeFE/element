@@ -2,7 +2,7 @@
 
 ¡Hola! Gracias por elegir [Element UI](http://element.eleme.io/#/en-US).
 
-`Element UI` es un archivo de componentes para desarrolladores y para gerentes de productos ‘web’ basado en [Vue 2.0](https://vuejs.org/)
+`Element UI` es un archivo de componentes para desarrolladores y para gerentes de productos ‘web’ basado en [Vue 2.0](https://v2.vuejs.org/)
 
 Estamos orgullosos de que usted esta interesado en contribuir al proyecto `Element`. Antes de someter sus contribuciones, por favor tome un momentito para leer estas simples guías para contribuidores.
 
