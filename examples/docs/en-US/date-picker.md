@@ -510,3 +510,4 @@ When picking a date range, you can assign the time part for start date and end d
 | Name    | Description |
 |---------|-------------|
 | range-separator  | custom range separator content |
+| sidebar | Date panel side slot |

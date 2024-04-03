@@ -510,3 +510,4 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | Nombre          | Descripción                           |
 | --------------- | ------------------------------------- |
 | range-separator | Separador de los rangos personalizado |
+| sidebar | Ranura lateral del panel de fecha |

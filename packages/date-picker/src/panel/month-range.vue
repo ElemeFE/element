@@ -7,14 +7,18 @@
         'has-sidebar': $slots.sidebar || shortcuts
       }, popperClass]">
       <div class="el-picker-panel__body-wrapper">
-        <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
-        <div class="el-picker-panel__sidebar" v-if="shortcuts">
-          <button
-            type="button"
-            class="el-picker-panel__shortcut"
-            v-for="(shortcut, key) in shortcuts"
-            :key="key"
-            @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
+        <div class="el-picker-panel__sidebar" v-if="shortcuts || $slots.sidebar">
+          <template v-if="shortcuts">
+            <button
+              type="button"
+              class="el-picker-panel__shortcut"
+              v-for="(shortcut, key) in shortcuts"
+              :key="key"
+              @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
+          </template>
+          <template v-if="$slots.sidebar">
+            <slot name="sidebar"></slot>
+          </template>
         </div>
         <div class="el-picker-panel__body">
           <div class="el-picker-panel__content el-date-range-picker__content is-left">

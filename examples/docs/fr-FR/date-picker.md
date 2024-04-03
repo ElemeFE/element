@@ -489,3 +489,4 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 | Nom    | Description |
 |---------|-------------|
 | range-separator  | Séparateur d'intervalle personnalisé. |
+| sidebar | Fentes latérales du panneau de date |
