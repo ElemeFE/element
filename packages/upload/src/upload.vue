@@ -142,7 +142,7 @@ export default {
         filename: this.name,
         action: this.action,
         onProgress: e => {
-          this.onProgress(e, rawFile);
+          return this.onProgress(e, rawFile);
         },
         onSuccess: res => {
           this.onSuccess(res, rawFile);
