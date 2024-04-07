@@ -267,10 +267,11 @@ export default {
 
   render(h) {
     let uploadList;
-
     if (this.showFileList) {
+      const date = new Date();
       uploadList = (
         <UploadList
+          key={date.getTime()}
           disabled={this.uploadDisabled}
           listType={this.listType}
           files={this.uploadFiles}
