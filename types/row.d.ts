@@ -4,7 +4,7 @@ import { ElementUIComponent } from './component'
 export type HorizontalAlignment = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
 
 /** vertical alignment of flex layout */
-export type VertialAlignment = 'top' | 'middle' | 'bottom'
+export type VerticalAlignment = 'top' | 'middle' | 'bottom'
 
 /** Row Layout Component */
 export declare class ElRow extends ElementUIComponent {
@@ -18,7 +18,7 @@ export declare class ElRow extends ElementUIComponent {
   justify: HorizontalAlignment
 
   /** Vertical alignment of flex layout */
-  align: VertialAlignment
+  align: VerticalAlignment
 
   /** Custom element tag */
   tag: string
