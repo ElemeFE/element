@@ -40,6 +40,7 @@ export const isDateObject = function(val) {
 export const formatDate = function(date, format) {
   date = toDate(date);
   if (!date) return '';
+  format = format === 'timestamp' ? undefined : format;
   return fecha.format(date, format || 'yyyy-MM-dd', getI18nSettings());
 };
 
