@@ -1,7 +1,17 @@
 import { addClass, removeClass } from 'element-ui/src/utils/dom';
-
+// 私有变量，是否调用了afterLeave
+let _isAfterLeaave = true;
 class Transition {
   beforeEnter(el) {
+    if (!_isAfterLeaave) {
+      _isAfterLeaave = true;
+      removeClass(el, 'collapse-transition');
+      el.style.height = '';
+      el.style.overflow = el.dataset.oldOverflow;
+      el.style.paddingTop = el.dataset.oldPaddingTop;
+      el.style.paddingBottom = el.dataset.oldPaddingBottom;
+    }
+    _isAfterLeaave = false;
     addClass(el, 'collapse-transition');
     if (!el.dataset) el.dataset = {};
 
@@ -56,6 +66,7 @@ class Transition {
   }
 
   afterLeave(el) {
+    _isAfterLeaave = true;
     removeClass(el, 'collapse-transition');
     el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
