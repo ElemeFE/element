@@ -6,8 +6,10 @@
 @mixin res($key, $map: $--breakpoints) {
   // 循环断点Map，如果存在则返回
   @if map-has-key($map, $key) {
-    @media only screen and #{inspect(map-get($map, $key))} {
-      @content;
+    @media only screen {
+      @media #{inspect(map-get($map, $key))} {
+        @content;
+      }
     }
   } @else {
     @warn "Undefeined points: `#{$map}`";
@@ -187,4 +189,3 @@
     @content
   }
 }
-
