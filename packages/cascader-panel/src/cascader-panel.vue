@@ -165,6 +165,10 @@ export default {
   methods: {
     initStore() {
       const { config, options } = this;
+      // 当options改变的时候如果activePath不是空的状态则会去查找Node,此时因为options改变了有可能找不到
+      // 在执行expandNodes的时候返回[null],
+      // 导致handleExpand的第一个参数为null报错
+      this.activePath = [];
       if (config.lazy && isEmpty(options)) {
         this.lazyLoad();
       } else {
