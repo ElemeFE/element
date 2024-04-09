@@ -384,7 +384,7 @@
       minTimePickerVisible(val) {
         if (val) {
           this.$nextTick(() => {
-            this.$refs.minTimePicker.date = this.minDate;
+            this.$refs.minTimePicker.date = this.minDate || new Date();
             this.$refs.minTimePicker.value = this.minDate;
             this.$refs.minTimePicker.adjustSpinners();
           });
