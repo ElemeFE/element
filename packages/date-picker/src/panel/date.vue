@@ -381,7 +381,8 @@
       changeToNow() {
         // NOTE: not a permanent solution
         //       consider disable "now" button in the future
-        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(new Date())) {
+        const time = parseDate(formatDate(new Date(), this.timeFormat), this.timeFormat);
+        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(time)) {
           this.date = new Date();
           this.emit(this.date);
         }
