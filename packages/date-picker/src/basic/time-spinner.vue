@@ -27,8 +27,8 @@
         tag="ul"
         ref="minutes">
         <li
-          @click="handleClick('minutes', { value: key, disabled: false })"
           v-for="(enabled, key) in minutesList"
+          @click="handleClick('minutes', { value: key, disabled: !enabled })"
           :key="key"
           class="el-time-spinner__item"
           :class="{ 'active': key === minutes, disabled: !enabled }">{{ ('0' + key).slice(-2) }}</li>
@@ -44,10 +44,10 @@
         tag="ul"
         ref="seconds">
         <li
-          @click="handleClick('seconds', { value: key, disabled: false })"
-          v-for="(second, key) in 60"
+          v-for="(enabled, key) in secondsList"
+          @click="handleClick('seconds', { value: key, disabled: !enabled })"
           class="el-time-spinner__item"
-          :class="{ 'active': key === seconds }"
+          :class="{ 'active': key === seconds, disabled: !enabled }"
           :key="key">{{ ('0' + key).slice(-2) }}</li>
       </el-scrollbar>
     </template>
@@ -101,7 +101,7 @@
 </template>
 
 <script type="text/babel">
-  import { getRangeHours, getRangeMinutes, modifyTime } from 'element-ui/src/utils/date-util';
+  import { getRangeHours, getRangeMinutes, getRangeSeconds, modifyTime } from 'element-ui/src/utils/date-util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
 
@@ -141,6 +141,9 @@
       },
       minutesList() {
         return getRangeMinutes(this.selectableRange, this.hours);
+      },
+      secondsList() {
+        return getRangeSeconds(this.selectableRange, this.hours, this.minutes);
       },
       arrowHourList() {
         const hours = this.hours;
