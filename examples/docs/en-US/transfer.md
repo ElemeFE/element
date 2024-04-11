@@ -79,6 +79,70 @@ You can search and filter data items.
 ```
 :::
 
+### Asynchronous Filterable
+ When you filter the data items from remote server, you can wait the filtered or paginated data transfer ready. And then, finish the search and filter process.
+ :::demo Execute asynchronous process in `before-query` method, and return a promise object which you do the remote action. `before-query` has `title` and`query` arguments.
+```html
+<template>
+  <el-transfer
+    filterable
+    :filter-method="filterMethod"
+    filter-placeholder="State Abbreviations"
+    v-model="value2"
+    :before-filter="beforeFilter"
+    :data="data2">
+  </el-transfer>
+</template>
+ <script>
+  export default {
+    data() {
+      return {
+        data2: [
+          { key: 'WDC', initial: 'WDC', label: 'Washington' },
+          { key: 'NYC', initial: 'NYC', label: 'New York' },
+        ],
+        value2: [],
+        filterMethod(query, item) {
+          return item.initial.indexOf(query) > -1;
+        }
+      };
+    },
+    methods: {
+      generateData() {
+        const data = [];
+        const states = ['California', 'Illinois', 'Maryland', 'Texas', 'Florida', 'Colorado', 'Connecticut '];
+        const initials = ['CA', 'IL', 'MD', 'TX', 'FL', 'CO', 'CT'];
+        states.forEach((city, index) => {
+          data.push({
+            label: city,
+            key: initials[index],
+            initial: initials[index]
+          });
+        });
+        return data;
+      },
+      requestApi(url) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(this.generateData());
+          }, 1000);
+        });
+      },
+      beforeFilter(title, query) {
+        if(title === 'List 1') {
+          return this.requestApi(`/api/states?name=${query}&limit=10&offset=1`)
+            .then((data) => {
+              this.data2 = data;
+            });
+        }
+      }
+    }
+  };
+</script>
+```
+:::
+
+
 ### Customizable
 
 You can customize list titles, button texts, render function for data items, checking status texts in list footer and list footer contents.
