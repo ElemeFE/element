@@ -128,6 +128,10 @@ Watcher.prototype.mutations = {
 
   setCurrentRow(states, row) {
     this.updateCurrentRow(row);
+  },
+
+  setHoverState(states, state) {
+    states.hoverState = state;
   }
 };
 

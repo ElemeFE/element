@@ -67,7 +67,8 @@ export default Vue.extend({
         sortProp: null,
         sortOrder: null,
 
-        hoverRow: null
+        hoverRow: null,
+        hoverState: {}
       }
     };
   },

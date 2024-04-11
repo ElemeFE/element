@@ -215,7 +215,7 @@ export default {
       return cellStyle;
     },
 
-    getCellClass(rowIndex, columnIndex, row, column) {
+    getCellClass(rowIndex, columnIndex, row, column, isHover) {
       const classes = [column.id, column.align, column.className];
 
       if (this.isColumnHidden(columnIndex)) {
@@ -236,6 +236,10 @@ export default {
 
       classes.push('el-table__cell');
 
+      if (isHover) {
+        classes.push('el-table__cell-row-hover');
+      }
+
       return classes.join(' ');
     },
 
@@ -247,12 +251,14 @@ export default {
       return widthArr.reduce((acc, width) => acc + width, -1);
     },
 
-    handleCellMouseEnter(event, row) {
+    handleCellMouseEnter(event, row, startRow, rowSpan) {
       const table = this.table;
       const cell = getCell(event);
 
       if (cell) {
         const column = getColumnByCell(table, cell);
+        const endRow = startRow + rowSpan - 1;
+        this.store.commit('setHoverState', { startRow, endRow });
         const hoverState = table.hoverState = { cell, column, row };
         table.$emit('cell-mouse-enter', hoverState.row, hoverState.column, hoverState.cell, event);
       }
@@ -291,6 +297,7 @@ export default {
       const cell = getCell(event);
       if (!cell) return;
 
+      this.store.commit('setHoverState', {});
       const oldHoverState = this.table.hoverState || {};
       this.table.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
     },
