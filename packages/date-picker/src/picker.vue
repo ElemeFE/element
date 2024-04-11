@@ -119,7 +119,8 @@ const DEFAULT_FORMATS = {
   monthrange: 'yyyy-MM',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
   year: 'yyyy',
-  years: 'yyyy'
+  years: 'yyyy',
+  yearrange: 'yyyy'
 };
 const HAVE_TRIGGER_TYPES = [
   'date',
@@ -135,7 +136,8 @@ const HAVE_TRIGGER_TYPES = [
   'datetimerange',
   'dates',
   'months',
-  'years'
+  'years',
+  'yearrange'
 ];
 const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime();
@@ -235,6 +237,10 @@ const TYPE_VALUE_RESOLVER_MAP = {
   year: {
     formatter: DATE_FORMATTER,
     parser: DATE_PARSER
+  },
+  yearrange: {
+    formatter: RANGE_FORMATTER,
+    parser: RANGE_PARSER
   },
   number: {
     formatter(value) {

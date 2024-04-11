@@ -288,6 +288,66 @@
 ```
 :::
 
+### 选择年份范围
+
+可在一个选择器中便捷地选择一个年份范围
+
+:::demo 在选择年份范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换，可以使用`unlink-panels`属性解除联动。
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">默认</span>
+    <el-date-picker
+      v-model="value1"
+      type="yearrange"
+      range-separator="至"
+      start-placeholder="开始年份"
+      end-placeholder="结束年份">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">带快捷选项</span>
+    <el-date-picker
+      v-model="value2"
+      type="yearrange"
+      align="right"
+      unlink-panels
+      range-separator="至"
+      start-placeholder="开始年份"
+      end-placeholder="结束年份"
+      :picker-options="pickerOptions">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        pickerOptions: {
+          shortcuts: [{
+            text: '今年',
+            onClick(picker) {
+              picker.$emit('pick', [new Date(), new Date()]);
+            }
+          }, {
+            text: '2000年至今',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date(new Date('2000').getFullYear(), 0);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value1: '',
+        value2: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 
 ###  日期格式
 

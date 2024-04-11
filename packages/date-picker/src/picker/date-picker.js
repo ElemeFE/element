@@ -2,12 +2,15 @@ import Picker from '../picker';
 import DatePanel from '../panel/date';
 import DateRangePanel from '../panel/date-range';
 import MonthRangePanel from '../panel/month-range';
+import YearRangePanel from '../panel/year-range';
 
 const getPanel = function(type) {
   if (type === 'daterange' || type === 'datetimerange') {
     return DateRangePanel;
   } else if (type === 'monthrange') {
     return MonthRangePanel;
+  } else if (type === 'yearrange') {
+    return YearRangePanel;
   }
   return DatePanel;
 };

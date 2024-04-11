@@ -12,7 +12,7 @@
     width: 220px;
   }
 
-  @include m((monthrange)) {
+  @include m((monthrange, yearrange)) {
     &.el-input,
     &.el-input__inner {
       width: 300px;
