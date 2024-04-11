@@ -452,7 +452,6 @@
         const text = event.target.value;
         if (event.type === 'compositionend') {
           this.isOnComposition = false;
-          this.$nextTick(_ => this.handleQueryChange(text));
         } else {
           const lastCharacter = text[text.length - 1] || '';
           this.isOnComposition = !isKorean(lastCharacter);
