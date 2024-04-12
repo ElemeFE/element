@@ -270,6 +270,7 @@ export default {
       }
     },
     handleExpand(node, silent) {
+      if(isEmpty(node)) return
       const { activePath } = this;
       const { level } = node;
       const path = activePath.slice(0, level - 1);
