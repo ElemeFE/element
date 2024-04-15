@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
+import { isEqual } from 'element-ui/src/utils/util';
 import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
 import expand from './expand';
 import current from './current';
@@ -119,7 +120,7 @@ export default Vue.extend({
     // 选择
     isSelected(row) {
       const { selection = [] } = this.states;
-      return selection.indexOf(row) > -1;
+      return selection.findIndex((selectionRow)=> isEqual(selectionRow, row)) > -1;
     },
 
     clearSelection() {
