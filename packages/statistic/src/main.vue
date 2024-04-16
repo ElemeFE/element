@@ -196,6 +196,7 @@ export default {
       }, REFRESH_INTERVAL);
       this.$once('hook:beforeDestroy', () => {
         suspend(true);
+        clearInterval(this.timeTask);
       });
 
     }

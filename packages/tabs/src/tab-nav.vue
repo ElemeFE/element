@@ -37,7 +37,10 @@
         scrollable: false,
         navOffset: 0,
         isFocus: false,
-        focusable: true
+        focusable: true,
+        timeOutID: null,
+        timeOutID2: null,
+        timeOutID3: null
       };
     },
 
@@ -174,7 +177,7 @@
         if (visibility === 'hidden') {
           this.focusable = false;
         } else if (visibility === 'visible') {
-          setTimeout(() => {
+          this.timeOutID = setTimeout(() => {
             this.focusable = true;
           }, 50);
         }
@@ -183,7 +186,7 @@
         this.focusable = false;
       },
       windowFocusHandler() {
-        setTimeout(() => {
+        this.timeOutID2 = setTimeout(() => {
           this.focusable = true;
         }, 50);
       }
@@ -279,7 +282,7 @@
       document.addEventListener('visibilitychange', this.visibilityChangeHandler);
       window.addEventListener('blur', this.windowBlurHandler);
       window.addEventListener('focus', this.windowFocusHandler);
-      setTimeout(() => {
+      this.timeOutID3 = setTimeout(() => {
         this.scrollToActiveTab();
       }, 0);
     },
@@ -289,6 +292,9 @@
       document.removeEventListener('visibilitychange', this.visibilityChangeHandler);
       window.removeEventListener('blur', this.windowBlurHandler);
       window.removeEventListener('focus', this.windowFocusHandler);
+      clearTimeout(this.timeOutID);
+      clearTimeout(this.timeOutID2);
+      clearTimeout(this.timeOutID3);
     }
   };
 </script>

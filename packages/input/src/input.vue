@@ -425,6 +425,10 @@
 
     created() {
       this.$on('inputSelect', this.select);
+
+      this.$once('hook:beforeDestroy', () => {
+        this.$off('inputSelect', this.select);
+      });
     },
 
     mounted() {

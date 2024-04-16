@@ -296,6 +296,11 @@
         if (rules.length || this.required !== undefined) {
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
+
+          this.$once('hook:beforeDestroy', () => {
+            this.$off('el.form.blur', this.onFieldBlur);
+            this.$off('el.form.change', this.onFieldChange);
+          });
         }
       },
       removeValidateEvents() {
