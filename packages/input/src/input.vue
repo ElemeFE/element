@@ -363,7 +363,9 @@
         // should remove the following line when we don't support IE
         if (event.target.value === this.nativeInputValue) return;
 
-        this.$emit('input', event.target.value);
+        if (!this.disabled && !this.readonly) {
+          this.$emit('input', event.target.value);
+        }
 
         // ensure native input value is controlled
         // see: https://github.com/ElemeFE/element/issues/12850
