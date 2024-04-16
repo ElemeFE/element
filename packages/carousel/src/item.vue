@@ -61,7 +61,7 @@
       },
 
       calcCardTranslate(index, activeIndex) {
-        const parentWidth = this.$parent.$el.offsetWidth;
+        const parentWidth = this.$parent.$el.getBoundingClientRect().width;
         if (this.inStage) {
           return parentWidth * ((2 - CARD_SCALE) * (index - activeIndex) + 1) / 4;
         } else if (index < activeIndex) {
@@ -72,7 +72,7 @@
       },
 
       calcTranslate(index, activeIndex, isVertical) {
-        const distance = this.$parent.$el[isVertical ? 'offsetHeight' : 'offsetWidth'];
+        const distance = this.$parent.$el.getBoundingClientRect()[isVertical ? 'height' : 'width'];
         return distance * (index - activeIndex);
       },
 
