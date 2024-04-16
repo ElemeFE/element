@@ -436,6 +436,10 @@
       },
 
       handleKeyControl(keyCode) {
+        const mode = this.selectionMode;
+        if (mode === 'dates' || mode === 'months' || mode === 'years') {
+          return;
+        };
         const mapping = {
           'year': {
             38: -4, 40: 4, 37: -1, 39: 1, offset: (date, step) => date.setFullYear(date.getFullYear() + step)
@@ -450,7 +454,6 @@
             38: -7, 40: 7, 37: -1, 39: 1, offset: (date, step) => date.setDate(date.getDate() + step)
           }
         };
-        const mode = this.selectionMode;
         const year = 3.1536e10;
         const now = this.date.getTime();
         const newDate = new Date(this.date.getTime());
