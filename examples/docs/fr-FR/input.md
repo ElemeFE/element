@@ -191,7 +191,7 @@ Configurer la propriété `autosize` pour une zone de texte permet de rendre la 
 <div style="margin: 20px 0;"></div>
 <el-input
   type="textarea"
-  :autosize="{ minRows: 2, maxRows: 4}"
+  :autosize="{ minRows: 2, maxRows: 4 }"
   placeholder="Entrez quelque chose"
   v-model="textarea2">
 </el-input>
