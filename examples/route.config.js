@@ -1,58 +1,18 @@
 import navConfig from './nav.config';
 import langs from './i18n/route';
 
-const LOAD_MAP = {
-  'zh-CN': name => {
-    return r => require.ensure([], () =>
-      r(require(`./pages/zh-CN/${name}.vue`)),
-    'zh-CN');
-  },
-  'en-US': name => {
-    return r => require.ensure([], () =>
-      r(require(`./pages/en-US/${name}.vue`)),
-    'en-US');
-  },
-  'es': name => {
-    return r => require.ensure([], () =>
-      r(require(`./pages/es/${name}.vue`)),
-    'es');
-  },
-  'fr-FR': name => {
-    return r => require.ensure([], () =>
-      r(require(`./pages/fr-FR/${name}.vue`)),
-    'fr-FR');
-  }
+/** 加载pages路径下的vue页面 */
+const load = (lang, path) => {
+  return r => import(`./pages/${lang}/${path}.vue`)
+    .then(module => r(module.default))
+    .catch(error => console.error('加载vue页面出错',error));// eslint-disable-line
 };
 
-const load = function(lang, path) {
-  return LOAD_MAP[lang](path);
-};
-
-const LOAD_DOCS_MAP = {
-  'zh-CN': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/zh-CN${path}.md`)),
-    'zh-CN');
-  },
-  'en-US': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/en-US${path}.md`)),
-    'en-US');
-  },
-  'es': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/es${path}.md`)),
-    'es');
-  },
-  'fr-FR': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/fr-FR${path}.md`)),
-    'fr-FR');
-  }
-};
-
-const loadDocs = function(lang, path) {
-  return LOAD_DOCS_MAP[lang](path);
+/** 加载docs路径下的MD文档 */
+const loadDocs = (lang, path) => {
+  return r => import(`./docs/${lang}${path}.md`)
+    .then(module => r(module.default))
+    .catch(error => console.error('加载文档出错',error));// eslint-disable-line
 };
 
 const registerRoute = (navConfig) => {
