@@ -34,7 +34,7 @@ Watcher.prototype.mutations = {
       if (!array) array = parent.children = [];
     }
 
-    if (typeof index !== 'undefined') {
+    if (typeof index !== 'undefined' && index !== -1) {
       array.splice(index, 0, column);
     } else {
       array.push(column);
