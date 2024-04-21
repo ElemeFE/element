@@ -144,8 +144,8 @@
     }
 
     img {
-      width: 100px;
-      margin: 10px;
+      width: 100%;
+      height: 100%;
     }
   }
   @media (max-width: 1140px) {
