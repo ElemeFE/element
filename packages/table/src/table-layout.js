@@ -23,6 +23,7 @@ class TableLayout {
     this.footerHeight = 44; // Table Footer Height
     this.viewportHeight = null; // Table Height - Scroll Bar Height
     this.bodyHeight = null; // Table Height - Table Header Height
+    this.bodyViewportHeight = null; // Table Height - Table Header Height - Scroll Bar Height
     this.fixedBodyHeight = null; // Table Height - Table Header Height - Scroll Bar Height
     this.gutterWidth = scrollbarWidth();
 
@@ -47,7 +48,7 @@ class TableLayout {
     if (this.table.$el && bodyWrapper) {
       const body = bodyWrapper.querySelector('.el-table__body');
       const prevScrollY = this.scrollY;
-      const scrollY = body.offsetHeight > this.bodyHeight;
+      const scrollY = body.offsetHeight > this.bodyViewportHeight;
       this.scrollY = scrollY;
       return prevScrollY !== scrollY;
     }
@@ -109,7 +110,7 @@ class TableLayout {
     if (this.height !== null) {
       this.bodyHeight = tableHeight - headerHeight - footerHeight + (footerWrapper ? 1 : 0);
     }
-    this.fixedBodyHeight = this.scrollX ? (this.bodyHeight - this.gutterWidth) : this.bodyHeight;
+    this.bodyViewportHeight = this.fixedBodyHeight = this.scrollX ? (this.bodyHeight - this.gutterWidth) : this.bodyHeight;
 
     const noData = !(this.store.states.data && this.store.states.data.length);
     this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterWidth) : tableHeight;
