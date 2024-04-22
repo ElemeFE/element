@@ -369,6 +369,7 @@ http-request | Écrase le xhr par défaut, afin que vous puissiez implémenter v
 disabled | Si le composant est désactivé. | boolean | — | false |
 limit | Nombre maximum d'envoi autorisés. | number | — | — |
 on-exceed | Fonction pour quand la limite d'envoi est dépassée. | function(files, fileList) | — | - |
+on-drag-invalid-accept | hook function when the format of the file placed by dragging does not comply with the accept rules | function(file) | — | — |
 
 ### Slot
 

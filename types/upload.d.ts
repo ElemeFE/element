@@ -113,6 +113,9 @@ export declare class ElUpload extends ElementUIComponent {
   /** Hook function when limit is exceeded */
   onExceed: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
+  /** hook function when the format of the file placed by dragging does not comply with the accept rules */
+  onDragInvalidAccept: (file: ElUploadInternalFileDetail) => void
+
   /** Clear the upload file list */
   clearFiles (): void;
 

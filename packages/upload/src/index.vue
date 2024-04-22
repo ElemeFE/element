@@ -103,6 +103,10 @@ export default {
     onExceed: {
       type: Function,
       default: noop
+    },
+    onDragInvalidAccept: {
+      type: Function,
+      default: noop
     }
   },
 
@@ -313,7 +317,8 @@ export default {
         'on-error': this.handleError,
         'on-preview': this.onPreview,
         'on-remove': this.handleRemove,
-        'http-request': this.httpRequest
+        'http-request': this.httpRequest,
+        'on-drag-invalid-accept': this.onDragInvalidAccept
       },
       ref: 'upload-inner'
     };

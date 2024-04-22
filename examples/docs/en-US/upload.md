@@ -368,6 +368,7 @@ http-request | override default xhr behavior, allowing you to implement your own
 disabled | whether to disable upload | boolean | — | false |
 limit | maximum number of uploads allowed | number | — | — |
 on-exceed | hook function when limit is exceeded | function(files, fileList) | — | - |
+on-drag-invalid-accept | hook function when the format of the file placed by dragging does not comply with the accept rules | function(file) | — | — |
 
 ### Slot
 | Name | Description |

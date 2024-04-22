@@ -51,15 +51,29 @@
             .map(type => type.trim())
             .filter(type => type)
             .some(acceptedType => {
+              let pass = true;
               if (/\..+$/.test(acceptedType)) {
-                return extension === acceptedType;
+                pass = extension === acceptedType;
+                if (!pass) {
+                  this.$emit('drag-invalid-accept', file);
+                }
+                return pass;
               }
               if (/\/\*$/.test(acceptedType)) {
-                return baseType === acceptedType.replace(/\/\*$/, '');
+                pass = baseType === acceptedType.replace(/\/\*$/, '');
+                if (!pass) {
+                  this.$emit('drag-invalid-accept', file);
+                }
+                return pass;
               }
               if (/^[^\/]+\/[^\/]+$/.test(acceptedType)) {
-                return type === acceptedType;
+                pass = type === acceptedType;
+                if (!pass) {
+                  this.$emit('drag-invalid-accept', file);
+                }
+                return pass;
               }
+              this.$emit('drag-invalid-accept', file);
               return false;
             });
         }));
