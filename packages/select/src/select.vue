@@ -342,7 +342,8 @@
       },
 
       propPlaceholder(val) {
-        this.cachedPlaceHolder = this.currentPlaceholder = val;
+        this.currentPlaceholder = (this.value && this.value.length > 0) ? '' : val;
+        this.cachedPlaceHolder = val;
       },
 
       value(val, oldVal) {
