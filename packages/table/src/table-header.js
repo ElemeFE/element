@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
+import { rafThrottle } from 'element-ui/src/utils/util';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import FilterPanel from './filter-panel.vue';
 import LayoutObserver from './layout-observer';
@@ -372,14 +373,14 @@ export default {
         document.onselectstart = function() { return false; };
         document.ondragstart = function() { return false; };
 
-        const handleMouseMove = (event) => {
+        const _handleMouseMove = rafThrottle((event) => {
           const deltaLeft = event.clientX - this.dragState.startMouseLeft;
           const proxyLeft = this.dragState.startLeft + deltaLeft;
 
           resizeProxy.style.left = Math.max(minLeft, proxyLeft) + 'px';
-        };
+        });
 
-        const handleMouseUp = () => {
+        const _handleMouseUp = () => {
           if (this.dragging) {
             const {
               startColumnLeft,
@@ -400,8 +401,8 @@ export default {
             table.resizeProxyVisible = false;
           }
 
-          document.removeEventListener('mousemove', handleMouseMove);
-          document.removeEventListener('mouseup', handleMouseUp);
+          document.removeEventListener('mousemove', _handleMouseMove);
+          document.removeEventListener('mouseup', _handleMouseUp);
           document.onselectstart = null;
           document.ondragstart = null;
 
@@ -410,8 +411,8 @@ export default {
           }, 0);
         };
 
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('mousemove', _handleMouseMove);
+        document.addEventListener('mouseup', _handleMouseUp);
       }
     },
 
