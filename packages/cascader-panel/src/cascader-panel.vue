@@ -237,14 +237,17 @@ export default {
 
       switch (keyCode) {
         case KeyCode.up:
+          e.preventDefault();
           const prev = getSibling(target, -1);
           focusNode(prev);
           break;
         case KeyCode.down:
+          e.preventDefault();
           const next = getSibling(target, 1);
           focusNode(next);
           break;
         case KeyCode.left:
+          e.preventDefault();
           const preMenu = this.$refs.menu[getMenuIndex(target) - 1];
           if (preMenu) {
             const expandedNode = preMenu.$el.querySelector('.el-cascader-node[aria-expanded="true"]');
@@ -252,6 +255,7 @@ export default {
           }
           break;
         case KeyCode.right:
+          e.preventDefault();
           const nextMenu = this.$refs.menu[getMenuIndex(target) + 1];
           if (nextMenu) {
             const firstNode = nextMenu.$el.querySelector('.el-cascader-node[tabindex="-1"]');
