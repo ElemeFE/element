@@ -470,8 +470,10 @@
         this.previousQuery = val;
         this.$nextTick(() => {
           if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
+          if (this.hoverIndex > -1 && !this.options[this.hoverIndex].visible) {
+            this.hoverIndex = -1;
+          }
         });
-        this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
           this.$nextTick(() => {
             const length = this.$refs.input.value.length * 15 + 20;
