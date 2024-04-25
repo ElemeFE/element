@@ -176,12 +176,17 @@ export default {
       const file = this.getFile(rawFile);
       this.onProgress(ev, file, this.uploadFiles);
       file.status = 'uploading';
-      file.percentage = ev.percent || 0;
+      const percentage = ev.percent || 0;
+      if (ev.percent > 99) {
+        percentage = 99; 
+      }
+      file.percentage = percentage;
     },
     handleSuccess(res, rawFile) {
       const file = this.getFile(rawFile);
 
       if (file) {
+        file.percentage = 100;
         file.status = 'success';
         file.response = res;
 
