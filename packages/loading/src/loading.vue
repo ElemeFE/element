@@ -35,6 +35,12 @@
       },
       setText(text) {
         this.text = text;
+      },
+      setSpinner(spinner) {
+        this.spinner = spinner;
+      },
+      setBackground(background) {
+        this.background = background;
       }
     }
   };
