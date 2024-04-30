@@ -46,7 +46,7 @@
         }">
       </table-body>
       <div
-        v-if="!data || data.length === 0"
+        v-if="!data || data.length === 0 || tableData.length === 0"
         class="el-table__empty-block"
         ref="emptyBlock"
         :style="emptyBlockStyle">
