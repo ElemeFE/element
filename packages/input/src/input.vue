@@ -113,6 +113,7 @@
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
   import {isKorean} from 'element-ui/src/utils/shared';
+  import {getSelectionInformation, restoreSelection} from './inputSelection';
 
   export default {
     name: 'ElInput',
@@ -332,6 +333,7 @@
         if (!input) return;
         if (input.value === this.nativeInputValue) return;
         input.value = this.nativeInputValue;
+        restoreSelection(this.selectionInformation);
       },
       handleFocus(event) {
         this.focused = true;
@@ -368,6 +370,8 @@
         // ensure native input value is controlled
         // see: https://github.com/ElemeFE/element/issues/12850
         this.$nextTick(this.setNativeInputValue);
+
+        this.selectionInformation = getSelectionInformation(event.target);
       },
       handleChange(event) {
         this.$emit('change', event.target.value);
