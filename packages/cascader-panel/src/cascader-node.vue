@@ -75,9 +75,11 @@
       },
 
       handleCheckChange() {
-        const { panel, value, node } = this;
+        const { panel, value, node, config } = this;
         panel.handleCheckChange(value);
-        panel.handleExpand(node);
+        if (!config.lazy) {
+          panel.handleExpand(node);
+        }
       },
 
       handleMultiCheckChange(checked) {
