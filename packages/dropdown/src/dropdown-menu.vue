@@ -1,17 +1,27 @@
 <template>
   <transition name="el-zoom-in-top" @after-leave="doDestroy">
-    <ul class="el-dropdown-menu el-popper" :class="[size && `el-dropdown-menu--${size}`]" v-show="showPopper">
-      <slot></slot>
-    </ul>
+    <div class="el-dropdown-menu el-popper" :class="[size && `el-dropdown-menu--${size}`]" v-show="showPopper">
+      <el-scrollbar 
+        tag="ul"
+        wrap-class="dropdown-scrollbar__wrap"
+        view-class="dropdown-scrollbar__list">
+        <slot></slot>
+      </el-scrollbar>
+    </div>
   </transition>
 </template>
 <script>
+  import ElScrollbar from 'element-ui/packages/scrollbar';
   import Popper from 'element-ui/src/utils/vue-popper';
 
   export default {
     name: 'ElDropdownMenu',
 
     componentName: 'ElDropdownMenu',
+
+    components: {
+      ElScrollbar
+    },
 
     mixins: [Popper],
 
