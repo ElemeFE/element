@@ -316,6 +316,17 @@
           ev.preventDefault();
           hasInput.click();
         }
+      },
+      throttle(fn, time) {
+        let canUse = true ;
+        return function() {
+          if (!canUse) { return false; }
+          canUse = false;
+          setTimeout(() => {
+            fn.apply(this, arguments);
+            canUse = true;
+          }, time);
+        };
       }
     },
 
@@ -358,7 +369,7 @@
         this.$emit('node-drag-start', treeNode.node, event);
       });
 
-      this.$on('tree-node-drag-over', (event, treeNode) => {
+      this.$on('tree-node-drag-over', this.throttle((event, treeNode) => {
         const dropNode = findNearestComponent(event.target, 'ElTreeNode');
         const oldDropNode = dragState.dropNode;
         if (oldDropNode && oldDropNode !== dropNode) {
@@ -442,7 +453,7 @@
         dragState.allowDrop = dragState.showDropIndicator || userAllowDropInner;
         dragState.dropType = dropType;
         this.$emit('node-drag-over', draggingNode.node, dropNode.node, event);
-      });
+      }, 100));
 
       this.$on('tree-node-drag-end', (event) => {
         const { draggingNode, dropType, dropNode } = dragState;
