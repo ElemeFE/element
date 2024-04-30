@@ -261,7 +261,9 @@
 
     watch: {
       value(val) {
-        this.$nextTick(this.resizeTextarea);
+        if (this.autosize) {
+          this.$nextTick(this.resizeTextarea);
+        }
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.change', [val]);
         }
@@ -278,7 +280,9 @@
       type() {
         this.$nextTick(() => {
           this.setNativeInputValue();
-          this.resizeTextarea();
+          if (this.autosize) {
+            this.resizeTextarea();
+          }
           this.updateIconOffset();
         });
       }
