@@ -94,7 +94,7 @@
       @compositionend="handleComposition"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
-      <template slot="prefix" v-if="$slots.prefix">
+      <template slot="prefix">
         <slot name="prefix"></slot>
       </template>
       <template slot="suffix">
