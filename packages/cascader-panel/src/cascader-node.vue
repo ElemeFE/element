@@ -75,8 +75,11 @@
       },
 
       handleCheckChange() {
-        const { panel, value, node } = this;
+        const { panel, value, node, config: { checkStrictly }} = this;
         panel.handleCheckChange(value);
+        if (checkStrictly) {
+          return false;
+        }
         panel.handleExpand(node);
       },
 
