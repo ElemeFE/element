@@ -57,6 +57,7 @@
   export default {
     props: {
       disabledDate: {},
+      cellClassName: {},
       value: {},
       defaultValue: {
         validator(val) {
@@ -85,6 +86,11 @@
         style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year) >= 0;
         style.today = today.getFullYear() === year;
         style.default = this.defaultValue && this.defaultValue.getFullYear() === year;
+        if (typeof this.cellClassName === 'function') {
+          const customClass = this.cellClassName(new Date(year, 0));
+          customClass && (style[customClass] = true);
+          style[customClass] = !!customClass;
+        }
 
         return style;
       },
