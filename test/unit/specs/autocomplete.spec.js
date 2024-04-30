@@ -396,7 +396,7 @@ describe('Autocomplete', () => {
         let suggestionsList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
         let highlightedItem = suggestionsList[8];
         expect(highlightedItem.classList.contains('highlighted')).to.be.true;
-        expect(suggestions.scrollTop === highlightedItem.scrollHeight).to.be.true;
+        expect(suggestions.scrollTop === highlightedItem.offsetTop).to.be.true;
         done();
       });
     }, 500);

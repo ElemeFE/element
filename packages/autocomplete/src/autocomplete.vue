@@ -250,15 +250,10 @@
         const suggestionList = suggestion.querySelectorAll('.el-autocomplete-suggestion__list li');
 
         let highlightItem = suggestionList[index];
-        let scrollTop = suggestion.scrollTop;
         let offsetTop = highlightItem.offsetTop;
 
-        if (offsetTop + highlightItem.scrollHeight > (scrollTop + suggestion.clientHeight)) {
-          suggestion.scrollTop += highlightItem.scrollHeight;
-        }
-        if (offsetTop < scrollTop) {
-          suggestion.scrollTop -= highlightItem.scrollHeight;
-        }
+        suggestion.scrollTop = offsetTop;
+
         this.highlightedIndex = index;
         let $input = this.getInput();
         $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
