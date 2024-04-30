@@ -137,8 +137,9 @@ export default {
       const style = {
         transform: `scale(${scale}) rotate(${deg}deg)`,
         transition: enableTransition ? 'transform .3s' : '',
-        'margin-left': `${offsetX}px`,
-        'margin-top': `${offsetY}px`
+        /* fixed the margin movement distance is not correct */
+        'margin-left': `${offsetX * 2}px`,
+        'margin-top': `${offsetY * 2}px`
       };
       if (this.mode === Mode.CONTAIN) {
         style.maxWidth = style.maxHeight = '100%';
