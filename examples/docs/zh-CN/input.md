@@ -673,7 +673,29 @@ export default {
 </script>
 ```
 :::
+### 格式化
+:::demo  `formatter` 和 `parser` 可配合实现格式化能力（仅`type`为text生效）。
+```html
+<template>
+  <el-input
+    v-model="input"
+    placeholder="Please input"
+    :formatter="(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+    :parser="(value) => value.replace(/\$\s?|(,*)/g, '')"
+  />
+</template>
 
+<script>
+export default {
+  data() {
+    return {
+      input: '',
+    }
+  }
+}
+</script>
+```
+:::
 ### Input Attributes
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
@@ -703,8 +725,10 @@ export default {
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
-| tabindex | 输入框的tabindex | string | - | - |
-| validate-event | 输入时是否触发表单的校验 | boolean | - | true |
+| tabindex | 输入框的tabindex | string | — | — |
+| validate-event | 输入时是否触发表单的校验 | boolean | — | true |
+| formatter | 指定输入值的格式。(仅当 type 是"text"时才能工作) | Function | — | — |
+| parser |  指定从格式化器输入中提取的值。(仅当 type 是"text"时才起作用) | Function | — | — |
 
 ### Input Slots
 | name | 说明 |

@@ -480,4 +480,30 @@ describe('Input', () => {
     await waitImmediate();
     expect(inputElm4.classList.contains('is-exceed')).to.false;
   });
+  it('formatter Processing test', async() => {
+    vm = createVue({
+      template: `
+      <el-input
+      v-model="input"
+      placeholder="请输入内容"
+      :formatter="(value) => value + 'input'"
+      :parser="(value) => value.replace(/input/g, '')"
+    ></el-input>
+      `,
+      data() {
+        return {
+          input: ''
+        };
+      }
+    }, true);
+    let inputElm = vm.$el.querySelector('input');
+    expect(inputElm.getAttribute('placeholder')).to.equal('请输入内容');
+    let evt = document.createEvent('HTMLEvents');
+    evt = new Event('input', {'bubbles': true, 'cancelable': true});
+    inputElm.value = 'text';
+    inputElm.dispatchEvent(evt);
+    await waitImmediate();
+    expect(inputElm.value).to.equal('textinput');
+  });
+
 });
