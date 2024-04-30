@@ -52,6 +52,10 @@ export default {
     tabindex: {
       type: Number,
       default: 0
+    },
+    hideImmediatly: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -72,7 +76,7 @@ export default {
       }
     }).$mount();
 
-    this.debounceClose = debounce(200, () => this.handleClosePopper());
+    this.debounceClose = debounce(200, () => this.handleClosePopper(),{ atBegin: this.hideImmediatly });
   },
 
   render(h) {
