@@ -5,6 +5,8 @@ import Element from 'main/index.js';
 import hljs from 'highlight.js';
 import routes from './route.config';
 import demoBlock from './components/demo-block';
+import demoIcon from './components/demo-icon';
+
 import MainFooter from './components/footer';
 import MainHeader from './components/header';
 import SideNav from './components/side-nav';
@@ -20,6 +22,7 @@ import icon from './icon.json';
 Vue.use(Element);
 Vue.use(VueRouter);
 Vue.component('demo-block', demoBlock);
+Vue.component('demo-icon', demoIcon);
 Vue.component('main-footer', MainFooter);
 Vue.component('main-header', MainHeader);
 Vue.component('side-nav', SideNav);
