@@ -105,6 +105,10 @@
               "title": "Cascader 级联选择器"
             },
             {
+              "path": "/tree-select",
+              "title": "TreeSelect 树形选择器"
+            },
+            {
               "path": "/switch",
               "title": "Switch 开关"
             },
@@ -421,6 +425,10 @@
             {
               "path": "/cascader",
               "title": "Cascader"
+            },
+            {
+              "path": "/tree-select",
+              "title": "TreeSelect"
             },
             {
               "path": "/switch",
