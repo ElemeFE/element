@@ -126,6 +126,16 @@ loadingDirective.install = Vue => {
         toggleLoading(el, { value: false, modifiers: binding.modifiers });
       }
       el.instance && el.instance.$destroy();
+      const tid = setTimeout(() => {
+        clearTimeout(tid);
+        el.instance = null;
+        el.mask = null;
+        el.maskStyle = null;
+        el.originalPosition = null;
+        el.originalOverflow = null;
+        el.domVisible = null;
+        el.domInserted = null;
+      }, 500);
     }
   });
 };

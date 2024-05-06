@@ -491,6 +491,10 @@
     updated() {
       this.treeItems = this.$el.querySelectorAll('[role=treeitem]');
       this.checkboxItems = this.$el.querySelectorAll('input[type=checkbox]');
+    },
+
+    beforeDestroy() {
+      this.$el.removeEventListener('keydown', this.handleKeydown);
     }
   };
 </script>
