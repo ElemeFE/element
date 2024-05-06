@@ -113,7 +113,8 @@
     data() {
       return {
         closed: false,
-        key: 0
+        key: 0,
+        escape: null
       };
     },
 
@@ -199,6 +200,14 @@
         if (this.appendToBody) {
           document.body.appendChild(this.$el);
         }
+      };
+      if (this.closeOnPressEscape && !this.modal) {
+        this.escape = e => {
+          if (e.keyCode === 27) {
+            this.hide();
+          }
+        };
+        window.addEventListener('keydown', this.escape);
       }
     },
 
@@ -206,6 +215,9 @@
       // if appendToBody is true, remove DOM node after destroy
       if (this.appendToBody && this.$el && this.$el.parentNode) {
         this.$el.parentNode.removeChild(this.$el);
+      };
+      if (this.closeOnPressEscape && !this.modal) {
+        window.removeEventListener('keydown', this.escape);
       }
     }
   };
