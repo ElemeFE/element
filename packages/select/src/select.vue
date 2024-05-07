@@ -402,7 +402,10 @@
             }
           }
         } else {
-          this.broadcast('ElSelectDropdown', 'updatePopper');
+          // 延时更新位置，经多轮测试，延时30ms完美解决
+          setTimeout(() => {
+            this.broadcast('ElSelectDropdown', 'updatePopper');
+          }, 30);
           if (this.filterable) {
             this.query = this.remote ? '' : this.selectedLabel;
             this.handleQueryChange(this.query);
