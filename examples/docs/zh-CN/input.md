@@ -549,6 +549,7 @@ export default {
   v-model="state"
   :fetch-suggestions="querySearchAsync"
   placeholder="请输入内容"
+  clearable
   @select="handleSelect"
 ></el-autocomplete>
 <script>
