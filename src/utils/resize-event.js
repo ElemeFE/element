@@ -1,5 +1,4 @@
 import ResizeObserver from 'resize-observer-polyfill';
-import { debounce } from 'throttle-debounce';
 
 const isServer = typeof window === 'undefined';
 
@@ -8,9 +7,7 @@ const resizeHandler = function(entries) {
   for (let entry of entries) {
     const listeners = entry.target.__resizeListeners__ || [];
     if (listeners.length) {
-      listeners.forEach(fn => {
-        fn();
-      });
+      listeners.forEach(fn => window.requestAnimationFrame(() => fn()));
     }
   }
 };
@@ -20,7 +17,7 @@ export const addResizeListener = function(element, fn) {
   if (isServer) return;
   if (!element.__resizeListeners__) {
     element.__resizeListeners__ = [];
-    element.__ro__ = new ResizeObserver(debounce(16, resizeHandler));
+    element.__ro__ = new ResizeObserver(resizeHandler);
     element.__ro__.observe(element);
   }
   element.__resizeListeners__.push(fn);
