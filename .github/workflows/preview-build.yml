@@ -18,6 +18,9 @@ jobs:
           node-version: '10.15.0'
           registry-url: https://registry.npmjs.com/
 
+      - name: Check types
+        run: npm run check-types
+
       - name: Build
         run: npm run bootstrap && npm run deploy:build
         
