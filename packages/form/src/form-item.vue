@@ -149,10 +149,6 @@
         if (!model || !this.prop) { return; }
 
         let path = this.prop;
-        if (path.indexOf(':') !== -1) {
-          path = path.replace(/:/, '.');
-        }
-
         return getPropByPath(model, path, true).v;
       },
       isRequired() {
@@ -234,10 +230,6 @@
         let model = this.form.model;
         let value = this.fieldValue;
         let path = this.prop;
-        if (path.indexOf(':') !== -1) {
-          path = path.replace(/:/, '.');
-        }
-
         let prop = getPropByPath(model, path, true);
 
         this.validateDisabled = true;
