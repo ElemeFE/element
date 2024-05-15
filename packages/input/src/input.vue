@@ -219,7 +219,7 @@
         return this.disabled || (this.elForm || {}).disabled;
       },
       nativeInputValue() {
-        return this.value === null || this.value === undefined ? '' : String(this.value);
+        return this.value === null || this.value === undefined ? '' : (this.upperLimit ? String(this.value).substring(0, this.upperLimit) : String(this.value));
       },
       showClear() {
         return this.clearable &&
