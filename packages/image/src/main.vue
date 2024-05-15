@@ -70,7 +70,7 @@
       return {
         loading: true,
         error: false,
-        show: !this.lazy,
+        show: !(this.lazy || this.$attrs.loading === 'lazy'),
         imageWidth: 0,
         imageHeight: 0,
         showViewer: false
@@ -120,7 +120,8 @@
     },
 
     mounted() {
-      if (this.lazy) {
+      // fix https://github.com/ElemeFE/element/issues/22873
+      if (this.lazy || this.$attrs.loading === 'lazy') {
         this.addLazyLoadListener();
       } else {
         this.loadImage();
@@ -128,7 +129,7 @@
     },
 
     beforeDestroy() {
-      this.lazy && this.removeLazyLoadListener();
+      (this.lazy || this.$attrs.loading === 'lazy') && this.removeLazyLoadListener();
     },
 
     methods: {
