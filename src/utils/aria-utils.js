@@ -100,7 +100,14 @@ aria.Utils.triggerEvent = function(elm, name, ...opts) {
   }
   const evt = document.createEvent(eventName);
 
-  evt.initEvent(name, ...opts);
+  // fix initEvent need params error on IE
+  if (opts.length >= 2) {
+    evt.initEvent(name, ...opts);
+  } else if (opts.length === 1) {
+    evt.initEvent(name, ...[opts], false);
+  } else {
+    evt.initEvent(name, ...[false, false]);
+  }
   elm.dispatchEvent
     ? elm.dispatchEvent(evt)
     : elm.fireEvent('on' + name, evt);

@@ -3,6 +3,7 @@
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Popper from 'element-ui/src/utils/vue-popper';
+  import Utils from '../../../src/utils/aria-utils';
 
   const poperMixins = {
     props: {
@@ -198,7 +199,8 @@
         }, showTimeout);
 
         if (this.appendToBody) {
-          this.$parent.$el.dispatchEvent(new MouseEvent('mouseenter'));
+          // this.$parent.$el.dispatchEvent(new MouseEvent('mouseenter'));
+          Utils.triggerEvent(this.$parent.$el, 'mouseenter');
         }
       },
       handleMouseleave(deepDispatch = false) {
