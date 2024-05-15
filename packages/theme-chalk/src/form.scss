@@ -68,6 +68,9 @@
     .el-form-item__error {
       padding-top: 2px;
     }
+    .el-form-item__warning {
+      padding-top: 2px;
+    }
   }
   @include m(mini) {
     .el-form-item__label {
@@ -80,6 +83,9 @@
       margin-bottom: 18px;
     }
     .el-form-item__error {
+      padding-top: 1px;
+    }
+    .el-form-item__warning {
       padding-top: 1px;
     }
   }
@@ -114,6 +120,24 @@
   }
   @include e(error) {
     color: $--color-danger;
+    font-size: 12px;
+    line-height: 1;
+    padding-top: 4px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    @include m(inline) {
+      position: relative;
+      top: auto;
+      left: auto;
+      display: inline-block;
+      margin-left: 10px;
+    }
+  }
+
+  @include e(warning) {
+    color: $--color-warning;
     font-size: 12px;
     line-height: 1;
     padding-top: 4px;
