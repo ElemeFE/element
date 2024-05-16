@@ -53,7 +53,13 @@ export default {
 
   watch: {
     normalizedData: 'updateTreeData',
-    normalizedLazyNode: 'updateTreeData'
+    normalizedLazyNode: 'updateTreeData',
+    'states.expandRowKeys': {
+      immediate: true,
+      handler: function(n) {
+        this.table && this.table.$emit('update:expandRowKeys', n);
+      }
+    }
   },
 
   methods: {
@@ -99,14 +105,20 @@ export default {
           treeData: oldTreeData,
           defaultExpandAll,
           expandRowKeys,
-          lazy
+          lazy,
+          lastDataKeysMap
         } = this.states;
         const rootLazyRowKeys = [];
         const getExpanded = (oldValue, key) => {
-          const included =
-            defaultExpandAll ||
-            (expandRowKeys && expandRowKeys.indexOf(key) !== -1);
-          return !!((oldValue && oldValue.expanded) || included);
+          if (!lastDataKeysMap[key]) {
+            if (defaultExpandAll) {
+              if (expandRowKeys.indexOf(key) === -1) {
+                expandRowKeys.push(key);
+              }
+              return true;
+            }
+          }
+          return expandRowKeys.indexOf(key) !== -1;
         };
         // 合并 expanded 与 display，确保数据刷新后，状态不变
         keys.forEach(key => {
@@ -167,6 +179,18 @@ export default {
         expanded = typeof expanded === 'undefined' ? !data.expanded : expanded;
         treeData[id].expanded = expanded;
         if (oldExpanded !== expanded) {
+          if (expanded) {
+            if (this.states.expandRowKeys.indexOf(`${id}`) === -1) {
+              this.states.expandRowKeys.push(`${id}`);
+            }
+          } else {
+            for (let i = this.states.expandRowKeys.length - 1;i >= 0;i--) {
+              if (`${id}` === this.states.expandRowKeys[i]) {
+                this.states.expandRowKeys.splice(i, 1);
+                break;
+              }
+            }
+          }
           this.table.$emit('expand-change', row, expanded);
         }
         this.updateTableScrollY();
