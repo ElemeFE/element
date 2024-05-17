@@ -10,7 +10,7 @@
 
     props: {
       type: String,
-      activeName: String,
+      activeName: [String, Number],
       closable: Boolean,
       addable: Boolean,
       value: {},
@@ -31,7 +31,7 @@
 
     data() {
       return {
-        currentName: this.value || this.activeName,
+        currentName: this.value === 0 ? 0 : this.value || this.activeName,
         panes: []
       };
     },
@@ -173,7 +173,7 @@
     },
   
     created() {
-      if (!this.currentName) {
+      if (this.currentName !== 0 && !this.currentName) {
         this.setCurrentName('0');
       }
 

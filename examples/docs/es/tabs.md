@@ -278,7 +278,7 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 ### Atributos de Pestañas
 | Atributo       | Descripción                          | Tipo    | Valores aceptados     | Por defecto                 |
 | -------------- | ------------------------------------ | ------- | --------------------- | --------------------------- |
-| value / v-model | valor enlazado, nombre de la pestaña seleccionada    | string  | —                     | nombre de la primer pestaña |
+| value / v-model | valor enlazado, nombre de la pestaña seleccionada    | string/number  | —                     | nombre de la primer pestaña |
 | type           | tipo de Pestaña                      | string  | card/border-card      | —                           |
 | closable       | si la Pestaña es cerrable            | boolean | —                     | false                       |
 | addable        | si la Pestaña es añadible            | boolean | —                     | false                       |
@@ -300,6 +300,6 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | -------- | ------------------------------------------------------------ | ------- | ----------------- | ------------------------------------------------------------ |
 | label    | título de la pestaña                                         | string  | —                 | —                                                            |
 | disabled | si la Tabulación está deshabilitada                          | boolean | —                 | false                                                        |
-| name     | identificador correspondiente al value de la Tabulación, representando el alias del tab-pane | string  | —                 | número ordinal del tab-pane en la secuencia, p.ej el primer tab-pane de pestañas es '1' |
+| name     | identificador correspondiente al value de la Tabulación, representando el alias del tab-pane | string/number  | —                 | número ordinal del tab-pane en la secuencia, p.ej el primer tab-pane de pestañas es '1' |
 | closable | si el Tab es cerrable                                        | boolean | —                 | false                                                        |
 | lazy     | si Tab es renderizado con `lazy-load`                        | boolean | —                 | false                                                        |
