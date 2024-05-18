@@ -1,7 +1,7 @@
 // reference https://github.com/noeldelgado/gemini-scrollbar/blob/master/index.js
 
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
+import scrollbarWidthAndHeight from 'element-ui/src/utils/scrollbar-width-and-height';
 import { toObject } from 'element-ui/src/utils/util';
 import Bar from './bar';
 
@@ -40,7 +40,7 @@ export default {
   },
 
   render(h) {
-    let gutter = scrollbarWidth();
+    let gutter = scrollbarWidthAndHeight().scrollBarWidth;
     let style = this.wrapStyle;
 
     if (gutter) {

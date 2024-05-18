@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
+import scrollbarWidthAndHeight from 'element-ui/src/utils/scrollbar-width-and-height';
 import { parseHeight } from './util';
 
 class TableLayout {
@@ -24,7 +24,9 @@ class TableLayout {
     this.viewportHeight = null; // Table Height - Scroll Bar Height
     this.bodyHeight = null; // Table Height - Table Header Height
     this.fixedBodyHeight = null; // Table Height - Table Header Height - Scroll Bar Height
-    this.gutterWidth = scrollbarWidth();
+    let obj = scrollbarWidthAndHeight();
+    this.gutterWidth = obj.scrollBarWidth;
+    this.gutterHeight = obj.scrollBarHeight;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
@@ -109,10 +111,10 @@ class TableLayout {
     if (this.height !== null) {
       this.bodyHeight = tableHeight - headerHeight - footerHeight + (footerWrapper ? 1 : 0);
     }
-    this.fixedBodyHeight = this.scrollX ? (this.bodyHeight - this.gutterWidth) : this.bodyHeight;
+    this.fixedBodyHeight = this.scrollX ? (this.bodyHeight - this.gutterHeight) : this.bodyHeight;
 
     const noData = !(this.store.states.data && this.store.states.data.length);
-    this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterWidth) : tableHeight;
+    this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterHeight) : tableHeight;
     this.updateScrollY();
     this.notifyObservers('scrollable');
   }
