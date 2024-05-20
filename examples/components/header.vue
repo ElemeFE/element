@@ -282,7 +282,7 @@
 </style>
 <template>
   <div class="headerWrapper">
-    <div id="v3-banner" v-if="isHome">
+    <div id="v3-banner">
       <template v-if="lang === 'zh-CN'">
         您正在浏览基于 Vue 2.x 的文档;
         <a href="https://element-plus.org/#/zh-CN">点击查看 Vue 3.x 版本。</a>
