@@ -1810,6 +1810,107 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 ```
 :::
 
+### Desplácese a la posición especificada
+
+:::demo Puede llamar a los métodos de los componentes `scrolltrow` y `scrolltop` para especificar la ubicación del rollo.
+```html
+<template>
+  <div>
+    <el-button @click="scrollToRow(8)">scrollToRow-8</el-button>
+    <el-button @click="scrollToTop(200)">scrollToTop-200</el-button>
+    <br />
+    <el-table :data="tableData" height="300px" ref="table" style="width: 100%; margin-top: 10px">
+      <el-table-column type="index" width="50"></el-table-column>
+      <el-table-column prop="date" label="Date" width="180"></el-table-column>
+      <el-table-column prop="name" label="Name" width="180"></el-table-column>
+      <el-table-column prop="address" label="Address"></el-table-column>
+    </el-table>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      tableData: [{
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }]
+    };
+  },
+  methods: {
+    scrollToRow(row) {
+      this.$refs.table.scrollToRow(row)
+    },
+    scrollToTop(top) {
+      this.$refs.table.scrollToTop(top)
+    }
+  }
+};
+</script>
+```
+:::
+
 ### Atributos de la tabla
 | Atributo               | Descripción                              | Tipo                                     | Valores aceptados              | Por defecto                              |
 | ---------------------- | ---------------------------------------- | ---------------------------------------- | ------------------------------ | ---------------------------------------- |
@@ -1881,6 +1982,8 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | clearFilter        | Se utiliza para borrar todas las condiciones de filtro cuando no se pasan parámetros, los datos se restaurarán a un estado sin filtrar, o se puede pasar una matriz de columnas para borrar las condiciones de filtro de la columna especificada.  | columnKey |
 | doLayout | refresca el layout del Table. Cuando la visibilidad de Table cambia, puede que necesite llamar a este método para obtener un diseño correcto | — |
 | sort | Ordenar tabla manualmente. La propiedad `prop` se utiliza para establecer la columna de ordenación, la propiedad `order` se utiliza para establecer el orden. | prop: string, order: string |
+| scrollToRow | especifica que se desplaza a una línea de la tabla, y el número de línea comienza en 1. | row: number |
+| scrollToTop | especifica una altura a la que desplazarse a la tabla. | top: number |
 
 ### Slots de la tabla
 | Nombre | Descripción                              |

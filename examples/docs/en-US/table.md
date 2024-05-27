@@ -1805,6 +1805,107 @@ You can customize row index in `type=index` columns.
 ```
 :::
 
+### Scroll to the specified position
+
+:::demo You can call the components `scrollToRow` and `scrollToTop` methods to specify the position to scroll.
+```html
+<template>
+  <div>
+    <el-button @click="scrollToRow(8)">scrollToRow-8</el-button>
+    <el-button @click="scrollToTop(200)">scrollToTop-200</el-button>
+    <br />
+    <el-table :data="tableData" height="300px" ref="table" style="width: 100%; margin-top: 10px">
+      <el-table-column type="index" width="50"></el-table-column>
+      <el-table-column prop="date" label="Date" width="180"></el-table-column>
+      <el-table-column prop="name" label="Name" width="180"></el-table-column>
+      <el-table-column prop="address" label="Address"></el-table-column>
+    </el-table>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      tableData: [{
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }]
+    };
+  },
+  methods: {
+    scrollToRow(row) {
+      this.$refs.table.scrollToRow(row)
+    },
+    scrollToTop(top) {
+      this.$refs.table.scrollToTop(top)
+    }
+  }
+};
+</script>
+```
+:::
+
 ### Table Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |----------------|----------------------|-----------|-----------------------|----------|
@@ -1876,6 +1977,8 @@ You can customize row index in `type=index` columns.
 | clearFilter | clear filters of the columns whose `columnKey` are passed in. If no params, clear all filters | columnKeys |
 | doLayout | refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
 | sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | prop: string, order: string |
+| scrollToRow | specify to scroll to a row in the table, with row numbers starting from 1. | row: number |
+| scrollToTop | specify to scroll to a certain height in the table. | top: number |
 
 ### Table Slot
 | Name | Description |

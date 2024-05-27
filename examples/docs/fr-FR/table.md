@@ -1811,6 +1811,107 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 ```
 :::
 
+### Faites défiler jusqu'à l'emplacement spécifié
+
+:::demo Vous pouvez appeler les méthodes de composant `scrolltorow` et `scrolltotop` pour spécifier l'emplacement du défilement.
+```html
+<template>
+  <div>
+    <el-button @click="scrollToRow(8)">scrollToRow-8</el-button>
+    <el-button @click="scrollToTop(200)">scrollToTop-200</el-button>
+    <br />
+    <el-table :data="tableData" height="300px" ref="table" style="width: 100%; margin-top: 10px">
+      <el-table-column type="index" width="50"></el-table-column>
+      <el-table-column prop="date" label="Date" width="180"></el-table-column>
+      <el-table-column prop="name" label="Name" width="180"></el-table-column>
+      <el-table-column prop="address" label="Address"></el-table-column>
+    </el-table>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      tableData: [{
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }]
+    };
+  },
+  methods: {
+    scrollToRow(row) {
+      this.$refs.table.scrollToRow(row)
+    },
+    scrollToTop(top) {
+      this.$refs.table.scrollToTop(top)
+    }
+  }
+};
+</script>
+```
+:::
+
 ### Attributs de Table
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
@@ -1885,6 +1986,8 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | clearFilter | Efface les filtres des colonnes dont les `columnKey` sont passées. Si aucun paramètre, efface tout les filtres. | columnKeys |
 | doLayout | Rafraîchi le layout de la table. Quand la visibilité de la table change vous aurez peut-être besoin de cette méthode pour corriger le layout. | — |
 | sort | Tri la table manuellement. La proriété `prop` détermine la colonne, `order` détermine l'ordre de tri. | prop: string, order: string |
+| scrollToRow | Spécifie le défilement vers une ligne de la table, le numéro de ligne commençant par 1. | row: number |
+| scrollToTop | Spécifie le défilement jusqu'à une certaine hauteur dans le tableau. | top: number |
 
 ### Slots de Table
 

@@ -35,6 +35,7 @@
       :class="[layout.scrollX ? `is-scrolling-${scrollPosition}` : 'is-scrolling-none']"
       :style="[bodyHeight]">
       <table-body
+        ref="tableBody"
         :context="context"
         :store="store"
         :stripe="stripe"
@@ -497,6 +498,26 @@
 
       toggleAllSelection() {
         this.store.commit('toggleAllSelection');
+      },
+
+      scrollToRow(rowIndex) {
+        if (rowIndex <= 0) {
+          return;
+        }
+        const rows = this.$refs.tableBody.$el.querySelectorAll('tr');
+        const length = rows.length;
+        if (rowIndex - 1 >= length) {
+          this.scrollToTop(rows[length - 1].offsetTop);
+        } else {
+          this.scrollToTop(rows[rowIndex - 1].offsetTop);
+        }
+      },
+
+      scrollToTop(top) {
+        this.bodyWrapper.scrollTo({
+          top: top,
+          behavior: 'smooth'
+        });
       }
 
     },
