@@ -128,7 +128,8 @@
         type: Number,
         default: 18
       },
-      iconClass: String
+      iconClass: String,
+      filterCheckStrictly: Boolean
     },
 
     computed: {
@@ -173,6 +174,10 @@
 
       checkStrictly(newVal) {
         this.store.checkStrictly = newVal;
+      },
+
+      filterCheckStrictly(newVal) {
+        this.store.filterCheckStrictly = newVal;
       }
     },
 
@@ -330,6 +335,7 @@
         load: this.load,
         currentNodeKey: this.currentNodeKey,
         checkStrictly: this.checkStrictly,
+        filterCheckStrictly: this.filterCheckStrictly,
         checkDescendants: this.checkDescendants,
         defaultCheckedKeys: this.defaultCheckedKeys,
         defaultExpandedKeys: this.defaultExpandedKeys,
