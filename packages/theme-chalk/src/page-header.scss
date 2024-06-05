@@ -31,6 +31,8 @@
     @include e(title) {
       font-size: 14px;
       font-weight: 500;
+      display: flex;
+      align-items: center;
     }
   }
 
