@@ -19,7 +19,8 @@
               @change="handleMinChange"
               :arrow-control="arrowControl"
               @select-range="setMinSelectionRange"
-              :date="minDate">
+              :date="minDate"
+              :format="format">
             </time-spinner>
           </div>
         </div>
@@ -35,7 +36,8 @@
               @change="handleMaxChange"
               :arrow-control="arrowControl"
               @select-range="setMaxSelectionRange"
-              :date="maxDate">
+              :date="maxDate"
+              :format="format">
             </time-spinner>
           </div>
         </div>
