@@ -108,14 +108,14 @@ export default {
       hasCheckedFormat: '{checked}/{total} ausgewählt'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'Fehler'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'Zurück'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'Ja',
+      cancelButtonText: 'Nein'
     },
     empty: {
       description: 'Keine Daten'
