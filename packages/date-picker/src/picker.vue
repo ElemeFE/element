@@ -86,7 +86,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDateObject, getWeekNumber } from 'element-ui/src/utils/date-util';
+import { formatDate, parseDate, isDateObject, getWeekNumber, modifyWithTimeString } from 'element-ui/src/utils/date-util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
@@ -698,7 +698,8 @@ export default {
       const value = this.parseString(this.userInput && this.userInput[0]);
       if (value) {
         this.userInput = [this.formatToString(value), this.displayValue[1]];
-        const newValue = [value, this.picker.value && this.picker.value[1]];
+        const [startTime, endTime] = this.defaultTime || [];
+        const newValue = [modifyWithTimeString(value, startTime), this.picker.value && modifyWithTimeString(this.picker.value[1], endTime)];
         this.picker.value = newValue;
         if (this.isValidValue(newValue)) {
           this.emitInput(newValue);
@@ -711,7 +712,8 @@ export default {
       const value = this.parseString(this.userInput && this.userInput[1]);
       if (value) {
         this.userInput = [this.displayValue[0], this.formatToString(value)];
-        const newValue = [this.picker.value && this.picker.value[0], value];
+        const [startTime, endTime] = this.defaultTime || [];
+        const newValue = [this.picker.value && modifyWithTimeString(this.picker.value[0], startTime), modifyWithTimeString(value, endTime)];
         this.picker.value = newValue;
         if (this.isValidValue(newValue)) {
           this.emitInput(newValue);
