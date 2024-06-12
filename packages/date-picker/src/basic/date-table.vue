@@ -398,7 +398,7 @@
         if (target.tagName !== 'TD') return;
 
         const row = target.parentNode.rowIndex - 1;
-        const column = this.selectionMode === 'week' ? 1 : target.cellIndex;
+        const column = this.selectionMode === 'week' ? 0 : target.cellIndex;
         const cell = this.rows[row][column];
 
         if (cell.disabled || cell.type === 'week') return;
