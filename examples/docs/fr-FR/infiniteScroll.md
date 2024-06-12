@@ -38,7 +38,7 @@ Ajoutez `v-infinite-scroll` à la liste pour exécuter automatiquement la métho
     <ul
       class="list"
       v-infinite-scroll="load"
-      infinite-scroll-disabled="disabled">
+      :infinite-scroll-disabled="disabled">
       <li v-for="i in count" class="list-item">{{ i }}</li>
     </ul>
     <p v-if="loading">Loading...</p>
