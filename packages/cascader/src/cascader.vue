@@ -594,7 +594,7 @@ export default {
       const lastTag = presentTags[lastIndex];
       this.pressDeleteCount = inputValue ? 0 : pressDeleteCount + 1;
 
-      if (!lastTag) return;
+      if (!lastTag || lastTag.key === -1) return;
 
       if (this.pressDeleteCount) {
         if (lastTag.hitState) {
@@ -618,11 +618,13 @@ export default {
       }
     },
     deleteTag(tag) {
-      const { checkedValue } = this;
-      const current = tag.node.getValueByOption();
-      const val = checkedValue.find(n => isEqual(n, current));
-      this.checkedValue = checkedValue.filter(n => !isEqual(n, current));
-      this.$emit('remove-tag', val);
+      if (tag.node) {
+        const { checkedValue } = this;
+        const current = tag.node.getValueByOption();
+        const val = checkedValue.find(n => isEqual(n, current));
+        this.checkedValue = checkedValue.filter(n => !isEqual(n, current));
+        this.$emit('remove-tag', val);
+      }
     },
     updateStyle() {
       const { $el, inputInitialHeight } = this;

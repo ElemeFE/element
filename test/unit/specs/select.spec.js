@@ -450,9 +450,11 @@ describe('Select', () => {
     vm = getSelectVm({ filterable: true });
     const select = vm.$children[0];
     setTimeout(() => {
-      select.selectedLabel = '面';
-      select.onInputChange();
       select.visible = true;
+      select.$nextTick(() => {
+        select.selectedLabel = '面';
+        select.onInputChange();
+      });
       setTimeout(() => {
         expect(select.filteredOptionsCount).to.equal(1);
         done();
