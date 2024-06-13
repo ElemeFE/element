@@ -3,7 +3,7 @@
 @import "tag";
 @import "common/var";
 
-@include b(table-column) {
+@include b(el-table table-column) {
   @include m(selection) {
     .cell {
       padding-left: 14px;
