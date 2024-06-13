@@ -9,35 +9,62 @@ Affiche le nombre de nouveaux messages.
 :::demo La quantité est définit par `value` qui accepte un `Number` ou un `String`.
 
 ```html
-<el-badge :value="12" class="item">
-  <el-button size="small">Commentaires</el-button>
-</el-badge>
-<el-badge :value="3" class="item">
-  <el-button size="small">Réponses</el-button>
-</el-badge>
-<el-badge :value="1" class="item" type="primary">
-  <el-button size="small">Commentaires</el-button>
-</el-badge>
-<el-badge :value="2" class="item" type="warning">
-  <el-button size="small">Réponses</el-button>
-</el-badge>
-
-<el-dropdown trigger="click">
-  <span class="el-dropdown-link">
-    Cliquez<i class="el-icon-caret-bottom el-icon--right"></i>
-  </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item class="clearfix">
-      Commentaires
-      <el-badge class="mark" :value="12" />
-    </el-dropdown-item>
-    <el-dropdown-item class="clearfix">
-      Réponses
-      <el-badge class="mark" :value="3" />
-    </el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
-
+<template>
+  <div>
+    <div>
+      <el-badge :value="12" class="item">
+        <el-button size="small">Commentaires</el-button>
+      </el-badge>
+      <el-badge :value="3" class="item">
+        <el-button size="small">Réponses</el-button>
+      </el-badge>
+      <el-badge :value="1" class="item" type="primary">
+        <el-button size="small">Commentaires</el-button>
+      </el-badge>
+      <el-badge :value="2" class="item" type="warning">
+        <el-button size="small">Réponses</el-button>
+      </el-badge>
+      <el-dropdown trigger="click" class="item">
+        <span class="el-dropdown-link">
+          Cliquez<i class="el-icon-caret-bottom el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item class="clearfix">
+            Commentaires
+            <el-badge class="mark" :value="12" />
+          </el-dropdown-item>
+          <el-dropdown-item class="clearfix">
+            Réponses
+            <el-badge class="mark" :value="3" />
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+    <div style="margin-top: 20px">
+      <el-badge :value="0" :show-zero="show" class="item">
+        <el-button size="small" @click="show = !show">show-zero: {{ show }}</el-button>
+      </el-badge>
+      <el-badge :value="2" class="item" background-color="#8C18FF">
+        <el-button size="small">background-color</el-button>
+      </el-badge>
+      <el-badge :value="1" :badge-style="{'color':'#000'}" class="item" type="primary">
+        <el-button size="small">badge-style</el-button>
+      </el-badge>
+      <el-badge :value="3" :offset="[10, 10]" class="item">
+        <el-button size="small">offset</el-button>
+      </el-badge>
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        show: false
+      };
+    }
+  };
+</script>
 <style>
 .item {
   margin-top: 10px;
@@ -123,3 +150,13 @@ Utilisez un point rouge pour signaler du contenu devant être remarqué.
 | is-dot        | Affiche un point rouge. | boolean   |    —           |  false  |
 | hidden        | Cache le badge.    | boolean         |          —            |  false  |
 | type          | Type du bouton.     | string          | primary / success / warning / danger / info |   —  |
+| show-zero    | Si le badge est affiché lorsque la valeur est zéro.            | boolean          | — |    true    |
+| background-color    | Couleur de fond des points             | string          | — |    —    |
+| offset    | Décalage de badge            | [ left:number, top:number ]          | — |    —    |
+| badge-style    | Styles personnalisés de badges           | object          | — |    —    |
+| badge-class    | Catégories personnalisées de badges        | string          | — |    —    |
+
+### Badge Slot
+| Name | Description |
+|------|--------|
+| default | Personnaliser le contenu par défaut |

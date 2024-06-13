@@ -8,35 +8,65 @@
 :::demo 定义`value`属性，它接受`Number`或者`String`。
 
 ```html
-<el-badge :value="12" class="item">
-  <el-button size="small">评论</el-button>
-</el-badge>
-<el-badge :value="3" class="item">
-  <el-button size="small">回复</el-button>
-</el-badge>
-<el-badge :value="1" class="item" type="primary">
-  <el-button size="small">评论</el-button>
-</el-badge>
-<el-badge :value="2" class="item" type="warning">
-  <el-button size="small">回复</el-button>
-</el-badge>
-
-<el-dropdown trigger="click">
-  <span class="el-dropdown-link">
-    点我查看<i class="el-icon-caret-bottom el-icon--right"></i>
-  </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item class="clearfix">
-      评论
-      <el-badge class="mark" :value="12" />
-    </el-dropdown-item>
-    <el-dropdown-item class="clearfix">
-      回复
-      <el-badge class="mark" :value="3" />
-    </el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
-
+<template>
+  <div>
+    <div>
+      <el-badge :value="0" class="item">
+        <el-button size="small">评论</el-button>
+      </el-badge>
+      <el-badge :value="3" class="item">
+        <el-button size="small">回复</el-button>
+      </el-badge>
+      <el-badge :value="1" class="item" type="primary">
+        <el-button size="small">评论</el-button>
+      </el-badge>
+      <el-badge :value="2" class="item" type="warning">
+        <el-button size="small">回复</el-button>
+      </el-badge>
+      <el-badge :value="2" class="item" type="warning">
+        <i class="el-icon-setting"></i>
+      </el-badge>
+      <el-dropdown class="item" trigger="click">
+        <span class="el-dropdown-link">
+          点我查看<i class="el-icon-caret-bottom el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item class="clearfix">
+            评论
+            <el-badge class="mark" :value="12" />
+          </el-dropdown-item>
+          <el-dropdown-item class="clearfix">
+            回复
+            <el-badge class="mark" :value="3" />
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+    <div style="margin-top: 20px">
+      <el-badge :value="0" :show-zero="show" class="item">
+        <el-button size="small" @click="show = !show">show-zero: {{ show }}</el-button>
+      </el-badge>
+      <el-badge :value="2" class="item" background-color="#8C18FF">
+        <el-button size="small">background-color</el-button>
+      </el-badge>
+      <el-badge :value="1" :badge-style="{'color':'#000'}" class="item" type="primary">
+        <el-button size="small">badge-style</el-button>
+      </el-badge>
+      <el-badge :value="3" :offset="[10, 10]" class="item">
+        <el-button size="small">offset</el-button>
+      </el-badge>
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        show: false
+      };
+    }
+  };
+</script>
 <style>
 .item {
   margin-top: 10px;
@@ -118,3 +148,13 @@
 | is-dot       | 小圆点           | boolean         |         —             |  false  |
 | hidden       | 隐藏 badge       | boolean         |         —             |  false  |
 | type         | 类型             | string          | primary / success / warning / danger / info |    —    |
+| show-zero    | 值为零时是否显示 Badge             | boolean          | — |    true    |
+| background-color    | 背景色             | string          | — |    —    |
+| offset    | badge 的偏移量             | [ left:number, top:number ]          | — |    —    |
+| badge-style    | 自定义 badge 样式，如果样式复杂建议使用 `badge-class`            | object          | — |    —    |
+| badge-class    | 自定义 badge 类名            | string          | — |    —    |
+
+### Badge Slot
+| name | 说明 |
+|------|--------|
+| default | 自定义默认内容 |
