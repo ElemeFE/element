@@ -15,7 +15,7 @@
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
-    <template v-if="type !== 'textarea'">
+    <template>
       <!-- 前置元素 -->
       <div class="el-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -39,6 +39,26 @@
         @change="handleChange"
         :aria-label="label"
       >
+      <textarea
+      v-else
+      :tabindex="tabindex"
+      class="el-textarea__inner"
+      @compositionstart="handleCompositionStart"
+      @compositionupdate="handleCompositionUpdate"
+      @compositionend="handleCompositionEnd"
+      @input="handleInput"
+      ref="textarea"
+      v-bind="$attrs"
+      :disabled="inputDisabled"
+      :readonly="readonly"
+      :autocomplete="autoComplete || autocomplete"
+      :style="textareaStyle"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      @change="handleChange"
+      :aria-label="label"
+    >
+    </textarea>
       <!-- 前置内容 -->
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
@@ -55,7 +75,7 @@
           <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
             <slot name="suffix"></slot>
             <i class="el-input__icon"
-              v-if="suffixIcon"
+              v-if="suffixIcon"                                                                                                          
               :class="suffixIcon">
             </i>
           </template>
@@ -79,32 +99,13 @@
           :class="['el-input__validateIcon', validateIcon]">
         </i>
       </span>
+      <span v-if="isWordLimitVisible && type === 'textarea'" class="el-input__count">{{ textLength }}/{{ upperLimit }}</span>
       <!-- 后置元素 -->
       <div class="el-input-group__append" v-if="$slots.append">
         <slot name="append"></slot>
       </div>
     </template>
-    <textarea
-      v-else
-      :tabindex="tabindex"
-      class="el-textarea__inner"
-      @compositionstart="handleCompositionStart"
-      @compositionupdate="handleCompositionUpdate"
-      @compositionend="handleCompositionEnd"
-      @input="handleInput"
-      ref="textarea"
-      v-bind="$attrs"
-      :disabled="inputDisabled"
-      :readonly="readonly"
-      :autocomplete="autoComplete || autocomplete"
-      :style="textareaStyle"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      @change="handleChange"
-      :aria-label="label"
-    >
-    </textarea>
-    <span v-if="isWordLimitVisible && type === 'textarea'" class="el-input__count">{{ textLength }}/{{ upperLimit }}</span>
+    
   </div>
 </template>
 <script>
@@ -210,7 +211,7 @@
         }[this.validateState];
       },
       textareaStyle() {
-        return merge({}, this.textareaCalcStyle, { resize: this.resize });
+        return merge({}, this.textareaCalcStyle, { resize: this.resize }, {paddingRight: 30 + 'px'});
       },
       inputSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
