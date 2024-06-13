@@ -4,28 +4,47 @@ import { addClass, removeClass } from 'element-ui/src/utils/dom';
 let hasModal = false;
 let hasInitZIndex = false;
 let zIndex;
+let independentModal = false;
+let independentModalArr = [];
 
 const getModal = function() {
   if (Vue.prototype.$isServer) return;
-  let modalDom = PopupManager.modalDom;
-  if (modalDom) {
-    hasModal = true;
-  } else {
+  if (independentModal) {
     hasModal = false;
-    modalDom = document.createElement('div');
-    PopupManager.modalDom = modalDom;
+    const independentodalDom = document.createElement('div');
+    PopupManager.independentodalDom = independentodalDom;
 
-    modalDom.addEventListener('touchmove', function(event) {
+    independentodalDom.addEventListener('touchmove', function(event) {
       event.preventDefault();
       event.stopPropagation();
     });
 
-    modalDom.addEventListener('click', function() {
+    independentodalDom.addEventListener('click', function() {
       PopupManager.doOnModalClick && PopupManager.doOnModalClick();
     });
-  }
 
-  return modalDom;
+    return independentodalDom;
+  } else {
+    let modalDom = PopupManager.modalDom;
+    if (modalDom) {
+      hasModal = true;
+    } else {
+      hasModal = false;
+      modalDom = document.createElement('div');
+      PopupManager.modalDom = modalDom;
+
+      modalDom.addEventListener('touchmove', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+
+      modalDom.addEventListener('click', function() {
+        PopupManager.doOnModalClick && PopupManager.doOnModalClick();
+      });
+    }
+
+    return modalDom;
+  }
 };
 
 const instances = {};
@@ -66,17 +85,18 @@ const PopupManager = {
     }
   },
 
-  openModal: function(id, zIndex, dom, modalClass, modalFade) {
+  openModal: function(id, zIndex, dom, modalClass, modalFade, independent) {
     if (Vue.prototype.$isServer) return;
     if (!id || zIndex === undefined) return;
     this.modalFade = modalFade;
-
     const modalStack = this.modalStack;
-
-    for (let i = 0, j = modalStack.length; i < j; i++) {
-      const item = modalStack[i];
-      if (item.id === id) {
-        return;
+    independentModal = independent;
+    if (!independent) {
+      for (let i = 0, j = modalStack.length; i < j; i++) {
+        const item = modalStack[i];
+        if (item.id === id) {
+          return;
+        }
       }
     }
 
@@ -105,48 +125,64 @@ const PopupManager = {
     }
     modalDom.tabIndex = 0;
     modalDom.style.display = '';
-
-    this.modalStack.push({ id: id, zIndex: zIndex, modalClass: modalClass });
+    if (independent) {
+      independentModalArr.push(modalDom);
+    } else {
+      this.modalStack.push({ id: id, zIndex: zIndex, modalClass: modalClass });
+    }
   },
 
   closeModal: function(id) {
-    const modalStack = this.modalStack;
-    const modalDom = getModal();
-
-    if (modalStack.length > 0) {
-      const topItem = modalStack[modalStack.length - 1];
-      if (topItem.id === id) {
-        if (topItem.modalClass) {
-          let classArr = topItem.modalClass.trim().split(/\s+/);
-          classArr.forEach(item => removeClass(modalDom, item));
-        }
-
-        modalStack.pop();
-        if (modalStack.length > 0) {
-          modalDom.style.zIndex = modalStack[modalStack.length - 1].zIndex;
-        }
-      } else {
-        for (let i = modalStack.length - 1; i >= 0; i--) {
-          if (modalStack[i].id === id) {
-            modalStack.splice(i, 1);
-            break;
-          }
-        }
-      }
-    }
-
-    if (modalStack.length === 0) {
+    if (independentModal) {
+      const modalDom = independentModalArr[independentModalArr.length - 1];
       if (this.modalFade) {
         addClass(modalDom, 'v-modal-leave');
       }
       setTimeout(() => {
-        if (modalStack.length === 0) {
-          if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
-          modalDom.style.display = 'none';
-          PopupManager.modalDom = undefined;
-        }
+        if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
+        modalDom.style.display = 'none';
+        PopupManager.independentodalDom = undefined;
         removeClass(modalDom, 'v-modal-leave');
+        independentModalArr.pop();
       }, 200);
+    } else {
+      const modalStack = this.modalStack;
+      const modalDom = getModal();
+      if (modalStack.length > 0) {
+        const topItem = modalStack[modalStack.length - 1];
+        if (topItem.id === id) {
+          if (topItem.modalClass) {
+            let classArr = topItem.modalClass.trim().split(/\s+/);
+            classArr.forEach(item => removeClass(modalDom, item));
+          }
+
+          modalStack.pop();
+          if (modalStack.length > 0) {
+            modalDom.style.zIndex = modalStack[modalStack.length - 1].zIndex;
+          }
+        } else {
+          for (let i = modalStack.length - 1; i >= 0; i--) {
+            if (modalStack[i].id === id) {
+              modalStack.splice(i, 1);
+              break;
+            }
+          }
+        }
+      }
+
+      if (modalStack.length === 0) {
+        if (this.modalFade) {
+          addClass(modalDom, 'v-modal-leave');
+        }
+        setTimeout(() => {
+          if (modalStack.length === 0) {
+            if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
+            modalDom.style.display = 'none';
+            PopupManager.modalDom = undefined;
+          }
+          removeClass(modalDom, 'v-modal-leave');
+        }, 200);
+      }
     }
   }
 };
