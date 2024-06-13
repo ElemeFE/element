@@ -236,5 +236,6 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
 
 | Nom | Description | Paramètres |
 |---------- |-------- |---------- |
+| mousedown | triggers when the user clicks the slider (if the mouse is being dragged, this event only fires when the mouse button is pressed) | value before changing |
 | change | Se déclenche quand la valeur change (si le changement est fait à la souris, se déclenche quand la souris redevient immobile). | La nouvelle valeur. |
 | input | triggers when the data changes (It'll be emitted in real time during sliding) | value after changing |

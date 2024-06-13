@@ -238,6 +238,7 @@ Se soporta la selección de un rango de valores.
 ## Eventos
 | Nombre | Descripción                              | Parámetros     |
 | ------ | ---------------------------------------- | ------------------------ |
+| mousedown | triggers when the user clicks the slider (if the mouse is being dragged, this event only fires when the mouse button is pressed) | value before changing |
 | change | se dispara cuando el valor cambia (si el ratón está comenzando el arrastre este evento sólo se disparara cuando se suelte el ratón) | valor después del cambio |
 | input | Se dispara cuando los datos cambian (funciona en tiempo real) | valor después del cambio |
 

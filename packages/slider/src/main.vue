@@ -27,6 +27,7 @@
       :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
       :style="runwayStyle"
       @click="onSliderClick"
+      @mousedown="emitMouseDown"
       ref="slider">
       <div
         class="el-slider__bar"
@@ -295,6 +296,10 @@
         this.$nextTick(() => {
           this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value);
         });
+      },
+
+      emitMouseDown() {
+        this.$emit('mousedown', this.value);
       },
 
       getStopStyle(position) {
