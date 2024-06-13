@@ -315,6 +315,7 @@ import { MessageBox } from 'element-ui';
 | closeOnClickModal | 是否可通过点击遮罩关闭 MessageBox | boolean | — | true（以 alert 方式调用时为 false） |
 | closeOnPressEscape | 是否可通过按下 ESC 键关闭 MessageBox | boolean | — | true（以 alert 方式调用时为 false） |
 | closeOnHashChange | 是否在 hashchange 时关闭 MessageBox | boolean | — | true |
+| closeOnPopstate | 是否在 活动历史记录条目更改 时关闭 MessageBox | boolean | — | true |
 | showInput | 是否显示输入框 | boolean | — | false（以 prompt 方式调用时为 true）|
 | inputPlaceholder | 输入框的占位符 | string | — | — |
 | inputType | 输入框的类型 | string | — | text |

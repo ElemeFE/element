@@ -319,6 +319,7 @@ Les méthodes correspondantes sont: `MessageBox`, `MessageBox.alert`, `MessageBo
 | closeOnClickModal | Si MessageBox peut être fermée en cliquant en dehors. | boolean | — | true (false dans le cas de alert). |
 | closeOnPressEscape | Si MessageBox peut être fermée en pressant ESC. | boolean | — | true (false dans le cas de alert) |
 | closeOnHashChange | Si MessageBox doit être fermée quand le hash change. | boolean | — | true |
+| closeOnPopstate | Si MessageBox doit être fermée quand le active de l'historique change. | boolean | — | true |
 | showInput | Si un champs d'input doit être affiché. | boolean | — | false (true dans le cas de prompt). |
 | inputPlaceholder | Placeholder du champs d'input. | string | — | — |
 | inputType | Type du champs d'input. | string | — | text |
