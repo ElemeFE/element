@@ -80,7 +80,7 @@ export default {
       title: 'Thông báo',
       confirm: 'OK',
       cancel: 'Hủy',
-      error: 'Dữ liệu không hợp lệ'
+      error: 'Đã xảy ra lỗi'
     },
     upload: {
       deleteTip: 'Nhấn xoá để xoá',
