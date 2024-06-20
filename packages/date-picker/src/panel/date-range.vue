@@ -571,7 +571,7 @@
           this.minTimePickerVisible = visible;
         }
 
-        if (!this.maxDate || this.maxDate && this.maxDate.getTime() < this.minDate.getTime()) {
+        if (!this.unlinkPanels && (!this.maxDate || this.maxDate && this.maxDate.getTime() < this.minDate.getTime())) {
           this.maxDate = new Date(this.minDate);
         }
       },
@@ -589,7 +589,7 @@
           this.maxTimePickerVisible = visible;
         }
 
-        if (this.maxDate && this.minDate && this.minDate.getTime() > this.maxDate.getTime()) {
+        if (!this.unlinkPanels && (this.maxDate && this.minDate && this.minDate.getTime() > this.maxDate.getTime())) {
           this.minDate = new Date(this.maxDate);
         }
       },
