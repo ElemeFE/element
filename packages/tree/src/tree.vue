@@ -128,7 +128,8 @@
         type: Number,
         default: 18
       },
-      iconClass: String
+      iconClass: String,
+      expandIconClass: String
     },
 
     computed: {
