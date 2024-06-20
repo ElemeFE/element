@@ -20,7 +20,7 @@ export default {
       nextYear: 'Anno successivo',
       prevMonth: 'Mese precedente',
       nextMonth: 'Mese successivo',
-      year: 'anno',
+      year: '',
       month1: 'Gennaio',
       month2: 'Febbraio',
       month3: 'Marzo',
@@ -33,7 +33,7 @@ export default {
       month10: 'Ottobre',
       month11: 'Novembre',
       month12: 'Dicembre',
-      // week: 'settimana',
+      week: 'Settimana',
       weeks: {
         sun: 'Dom',
         mon: 'Lun',
