@@ -29,8 +29,8 @@
           <i class="el-image-viewer__actions__divider"></i>
           <i :class="mode.icon" @click="toggleMode"></i>
           <i class="el-image-viewer__actions__divider"></i>
-          <i class="el-icon-refresh-left" @click="handleActions('anticlocelise')"></i>
-          <i class="el-icon-refresh-right" @click="handleActions('clocelise')"></i>
+          <i class="el-icon-refresh-left" @click="handleActions('anticlockwise')"></i>
+          <i class="el-icon-refresh-right" @click="handleActions('clockwise')"></i>
         </div>
       </div>
       <!-- CANVAS -->
@@ -301,10 +301,10 @@ export default {
         case 'zoomIn':
           transform.scale = parseFloat((transform.scale + zoomRate).toFixed(3));
           break;
-        case 'clocelise':
+        case 'clockwise':
           transform.deg += rotateDeg;
           break;
-        case 'anticlocelise':
+        case 'anticlockwise':
           transform.deg -= rotateDeg;
           break;
       }
