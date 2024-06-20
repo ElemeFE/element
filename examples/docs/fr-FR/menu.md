@@ -73,7 +73,7 @@ La barre du haut peut être utilisée pour différents scénarios.
 
 Menu vertical avec sous-menus.
 
-:::demo Vous pouvez utiliser le composant el-menu-item-group pour créer un groupe dans le menu dont le nom sera déterminé par celui de la propriété title ou d'un slot.
+:::demo Vous pouvez utiliser le composant el-menu-item-group pour créer un groupe dans le menu dont le nom sera déterminé par celui de la propriété title ou d'un slot. En outre, lorsque le Menu de navigation est en mode vertical, le menu fournit en outre l'attribut `active-background-color` pour définir la couleur de fond du menu actuellement actif.
 ```html
 <el-row class="tac">
   <el-col :span="12">
@@ -123,7 +123,8 @@ Menu vertical avec sous-menus.
       @close="handleClose"
       background-color="#545c64"
       text-color="#fff"
-      active-text-color="#ffd04b">
+      active-text-color="#ffd04b"
+      active-background-color="#646857">
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -249,6 +250,7 @@ Le menu vertical peut être réduit.
 | mode     | Mode d'affichage du menu.   | string  |   horizontal / vertical   | vertical |
 | collapse  | Si le menu peut être réduit, uniquement disponible en mode vertical. | boolean  |   —   | false |
 | background-color  | Couleur de fond du menu (format hexadécimal). | string |   —   | #ffffff |
+| active-background-color  | Couleur de fond de l'item actif, Utiliser la couleur de fond si elle n'est pas définie (valable uniquement lorsque le mode est vertical et ne supporte que le format Hex) | string |   —   | #ffffff |
 | text-color  | Couleur du texte du menu (format hexadécimal) | string |   —   | #303133 |
 | active-text-color  | Couleur du texte de l'item actif (format hexadécimal). | string |   —   | #409EFF |
 | default-active | Index du menu actif. | string    | — | — |

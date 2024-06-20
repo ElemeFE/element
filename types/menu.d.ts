@@ -20,6 +20,9 @@ export declare class ElMenu extends ElementUIComponent {
   /** Text color of currently active menu item (hex format) */
   activeTextColor: string
 
+  /** Background color of currently active menu item (hex format) */
+  activeBackgroundColor: string
+
   /** Index of currently active menu */
   defaultActive: string
 

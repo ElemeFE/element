@@ -74,7 +74,7 @@
 
 垂直菜单，可内嵌子菜单。
 
-:::demo 通过`el-menu-item-group`组件可以实现菜单进行分组，分组名可以通过`title`属性直接设定，也可以通过具名 slot 来设定。
+:::demo 通过`el-menu-item-group`组件可以实现菜单进行分组，分组名可以通过`title`属性直接设定，也可以通过具名 slot 来设定。另外，导航菜单为垂直模式时，Menu 还额外提供了 `active-background-color` 属性，用来设置当前激活菜单的背景颜色
 ```html
 <el-row class="tac">
   <el-col :span="12">
@@ -125,7 +125,8 @@
       @close="handleClose"
       background-color="#545c64"
       text-color="#fff"
-      active-text-color="#ffd04b">
+      active-text-color="#ffd04b"
+      active-background-color="#646857">
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -249,6 +250,7 @@
 | mode     | 模式   | string  |   horizontal / vertical   | vertical |
 | collapse  | 是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）| boolean  |   —   | false |
 | background-color  | 菜单的背景色（仅支持 hex 格式） | string |   —   | #ffffff |
+| active-background-color  | 当前激活菜单的背景色，未设置则使用背景色（只在 mode 为 vertical 时有效，且仅支持 hex 格式） | string |   —   | #ffffff |
 | text-color  | 菜单的文字颜色（仅支持 hex 格式） | string |   —   | #303133 |
 | active-text-color  | 当前激活菜单的文字颜色（仅支持 hex 格式） | string |   —   | #409EFF |
 | default-active | 当前激活菜单的 index | string    | — | — |

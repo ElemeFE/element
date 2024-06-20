@@ -73,7 +73,7 @@ Top bar NavMenu can be used in a variety of scenarios.
 
 Vertical NavMenu with sub-menus.
 
-:::demo You can use the el-menu-item-group component to create a menu group, and the name of the group is determined by the title prop or a named slot.
+:::demo You can use the el-menu-item-group component to create a menu group, and the name of the group is determined by the title prop or a named slot. In addition, when the navigation menu is in vertical mode, the Menu also provides an additional `active-background-color` attribute to set the background color of the current active menu.
 ```html
 <el-row class="tac">
   <el-col :span="12">
@@ -123,7 +123,8 @@ Vertical NavMenu with sub-menus.
       @close="handleClose"
       background-color="#545c64"
       text-color="#fff"
-      active-text-color="#ffd04b">
+      active-text-color="#ffd04b"
+      active-background-color="#646857">
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -248,6 +249,7 @@ Vertical NavMenu could be collapsed.
 | mode     | menu display mode   | string  |   horizontal / vertical   | vertical |
 | collapse  | whether the menu is collapsed (available only in vertical mode) | boolean  |   —   | false |
 | background-color  | background color of Menu (hex format) | string |   —   | #ffffff |
+| active-background-color  | background color of currently active menu item. If not set, the background color will be used. (valid only when mode is vertical and hex format) | string |   —   | #ffffff |
 | text-color  | text color of Menu (hex format) | string |   —   | #303133 |
 | active-text-color  | text color of currently active menu item (hex format) | string |   —   | #409EFF |
 | default-active | index of currently active menu | string    | — | — |
