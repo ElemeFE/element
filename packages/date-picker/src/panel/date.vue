@@ -319,7 +319,9 @@
             ? modifyTime(this.value, value.getHours(), value.getMinutes(), value.getSeconds())
             : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
           this.date = newDate;
-          this.emit(this.date, true);
+          if (!this.disabledDate || !this.disabledDate(newDate)) {
+            this.emit(this.date, true);
+          }
         } else {
           this.emit(value, true);
         }
@@ -397,7 +399,9 @@
             ? this.value
             : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
           this.date = new Date(value); // refresh date
-          this.emit(value);
+          if (!this.disabledDate || !this.disabledDate(value)) {
+            this.emit(value);
+          }
         }
       },
 
