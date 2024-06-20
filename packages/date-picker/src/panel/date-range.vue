@@ -1,5 +1,5 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
+  <transition name="el-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
     <div
       v-show="visible"
       class="el-picker-panel el-date-range-picker el-popper"
@@ -672,6 +672,29 @@
         if (this.minDate && this.maxDate == null) this.rangeState.selecting = false;
         this.minDate = this.value && isDate(this.value[0]) ? new Date(this.value[0]) : null;
         this.maxDate = this.value && isDate(this.value[0]) ? new Date(this.value[1]) : null;
+      },
+
+      handleEnter() {
+        document.body.addEventListener('keydown', this.handleKeydown);
+      },
+
+      handleLeave() {
+        this.$emit('dodestroy');
+        document.body.removeEventListener('keydown', this.handleKeydown);
+      },
+
+      handleKeydown(event) {
+        const { keyCode } = event;
+
+        // ESC 摁键
+        if (keyCode === 27) {
+          this.resetView();
+          this.$emit(
+            'pick',
+            (this.minDate && this.maxDate) ? [this.minDate, this.maxDate] : null,
+            false
+          );
+        }
       }
     },
 
