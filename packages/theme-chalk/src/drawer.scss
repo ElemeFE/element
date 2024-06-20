@@ -211,9 +211,9 @@ $directions: rtl, ltr, ttb, btt;
 }
 
 .el-drawer-fade-enter-active {
-  animation: el-drawer-fade-in .3s;
+  animation: el-drawer-fade-in .3s both;
 }
 
 .el-drawer-fade-leave-active {
-  animation: el-drawer-fade-in .3s reverse;
+  animation: el-drawer-fade-in .3s reverse both;
 }
