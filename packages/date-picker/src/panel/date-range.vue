@@ -441,8 +441,9 @@
 
     methods: {
       handleClear() {
-        this.minDate = null;
-        this.maxDate = null;
+        // popper hide call resetView
+        // this.minDate = null;
+        // this.maxDate = null;
         this.leftDate = calcDefaultValue(this.defaultValue)[0];
         this.rightDate = nextMonth(this.leftDate);
         this.$emit('pick', null);
