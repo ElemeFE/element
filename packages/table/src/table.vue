@@ -625,7 +625,9 @@
           this.store.setCurrentRowKey(value);
         }
       },
-
+      columns(){
+        this.layout.updateColumnsWidth();
+      },
       data: {
         immediate: true,
         handler(value) {
