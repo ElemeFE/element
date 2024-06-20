@@ -280,7 +280,10 @@
       loading: Boolean,
       popperClass: String,
       remote: Boolean,
-      loadingText: String,
+      loadingText: {
+        type: String,
+        default: 'Loading'
+      },
       noMatchText: String,
       noDataText: String,
       remoteMethod: Function,
