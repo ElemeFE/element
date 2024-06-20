@@ -316,7 +316,7 @@ export default {
           const leafKey = this.config.leaf;
 
           if (Array.isArray(dataList) && dataList.filter(item => item[valueKey] === nodeValue).length > 0) {
-            const checkedNode = this.store.getNodeByValue(nodeValue);
+            const checkedNode = this.store.getNodeByValue(nodeValue, node.level + 1);
 
             if (!checkedNode.data[leafKey]) {
               this.lazyLoad(checkedNode, () => {
