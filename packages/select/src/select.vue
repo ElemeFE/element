@@ -109,6 +109,7 @@
       <el-select-menu
         ref="popper"
         :append-to-body="popperAppendToBody"
+        :fix-dropdown-width="fixDropdownWidth"
         v-show="visible && emptyText !== false">
         <el-scrollbar
           tag="ul"
@@ -304,6 +305,10 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      fixDropdownWidth: {
+        type: Boolean,
+        default: false
       }
     },
 
