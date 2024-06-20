@@ -428,7 +428,7 @@ export default {
         let rect = target.getBoundingClientRect();
 
         const bodyStyle = document.body.style;
-        if (rect.width > 12 && rect.right - event.pageX < 8) {
+        if (rect.width > 12 && rect.right - event.clientX < 8) {
           bodyStyle.cursor = 'col-resize';
           if (hasClass(target, 'is-sortable')) {
             target.style.cursor = 'col-resize';
