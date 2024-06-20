@@ -50,7 +50,7 @@ npm install babel-plugin-component -D
 
 ```json
 {
-  "presets": [["es2015", { "modules": false }]],
+  "presets": [["@babel/preset-env", { "modules": false }]],
   "plugins": [
     [
       "component",
@@ -287,4 +287,3 @@ Vue.use(Button);
 <div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
   <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
 </div>
-
