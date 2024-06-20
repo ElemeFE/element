@@ -459,7 +459,7 @@
         }
       },
       handleQueryChange(val) {
-        if (this.previousQuery === val || this.isOnComposition) return;
+        if (this.isOnComposition) return;
         if (
           this.previousQuery === null &&
           (typeof this.filterMethod === 'function' || typeof this.remoteMethod === 'function')
