@@ -15,7 +15,7 @@
     padding: 0 30px;
   }
 
-  @include e(button) {
+  .el-transfer__button {
     display: block;
     margin: 0 auto;
     padding: 10px;
