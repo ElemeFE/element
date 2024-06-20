@@ -16,10 +16,10 @@ export default {
       startTime: 'זמן התחלה',
       endDate: 'תאריך סיום',
       endTime: 'זמן סיום',
-      prevYear: 'Previous Year', // to be translated
-      nextYear: 'Next Year', // to be translated
-      prevMonth: 'Previous Month', // to be translated
-      nextMonth: 'Next Month', // to be translated
+      prevYear: 'שנה קודמת',
+      nextYear: 'שנה הבאה',
+      prevMonth: 'חודש קודם',
+      nextMonth: 'חודש הבא',
       year: '',
       month1: 'ינואר',
       month2: 'פברואר',
@@ -33,7 +33,7 @@ export default {
       month10: 'אוקטובר',
       month11: 'נובמבר',
       month12: 'דצמבר',
-      // week: 'week',
+      week: 'שבוע',
       weeks: {
         sun: 'א׳',
         mon: 'ב׳',
@@ -83,7 +83,7 @@ export default {
       error: 'קלט לא תקין'
     },
     upload: {
-      deleteTip: 'press delete to remove', // to be translated
+      deleteTip: 'כדי למחוק תלחצו על מחק',
       delete: 'מחק',
       preview: 'תצוגה מקדימה',
       continue: 'המשך'
@@ -107,14 +107,14 @@ export default {
       hasCheckedFormat: ' אישור {checked}/{total}'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'נכשל'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'חזרה'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'כן',
+      cancelButtonText: 'לא'
     },
     empty: {
       description: 'אין נתונים'
