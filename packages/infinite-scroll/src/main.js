@@ -71,7 +71,7 @@ const getScrollOptions = (el, vm) => {
     switch (type) {
       case Number:
         value = Number(value);
-        value = Number.isNaN(value) ? defaultValue : value;
+        value = isNaN(value) ? defaultValue : value;
         break;
       case Boolean:
         value = isDefined(value) ? value === 'false' ? false : Boolean(value) : defaultValue;
@@ -104,7 +104,7 @@ const handleScroll = function(cb) {
   } else {
     const heightBelowTop = getOffsetHeight(el) + getElementTop(el) - getElementTop(container);
     const offsetHeight = getOffsetHeight(container);
-    const borderBottom = Number.parseFloat(getStyleComputedProperty(container, 'borderBottomWidth'));
+    const borderBottom = parseFloat(getStyleComputedProperty(container, 'borderBottomWidth'));
     shouldTrigger = heightBelowTop - offsetHeight + borderBottom <= distance;
   }
 
