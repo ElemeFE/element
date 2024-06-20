@@ -195,6 +195,8 @@
         this.validateDisabled = false;
         const rules = this.getFilteredRule(trigger);
         if ((!rules || rules.length === 0) && this.required === undefined) {
+          this.validateState = '';
+          this.validateMessage = '';
           callback();
           return true;
         }
