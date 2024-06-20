@@ -184,7 +184,7 @@ const TYPE_VALUE_RESOLVER_MAP = {
       let week = getWeekNumber(value);
       let month = value.getMonth();
       const trueDate = new Date(value);
-      if (week === 1 && month === 11) {
+      if ((week === 1 && month === 11) || (week >= 52 && month === 0)) {
         trueDate.setHours(0, 0, 0, 0);
         trueDate.setDate(trueDate.getDate() + 3 - (trueDate.getDay() + 6) % 7);
       }
