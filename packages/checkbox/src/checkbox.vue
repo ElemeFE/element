@@ -137,6 +137,7 @@
 
       /* used to make the isDisabled judgment under max/min props */
       isLimitDisabled() {
+        if (!this._checkboxGroup) return true;
         const { max, min } = this._checkboxGroup;
         return !!(max || min) &&
           (this.model.length >= max && !this.isChecked) ||
