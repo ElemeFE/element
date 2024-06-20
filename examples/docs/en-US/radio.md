@@ -178,6 +178,7 @@ Radio with button styles.
 value / v-model | binding value | string / number / boolean | — | —
 label | the value of Radio | string / number / boolean | — | —
 disabled | whether Radio is disabled | boolean | — | false
+controllable | whether keydown is disabled | boolean | — | false
 border  | whether to add a border around Radio  | boolean   | — | false
 size  | size of the Radio, only works when `border` is true  | string  | medium / small / mini | —
 name | native 'name' attribute | string    |      —         |     —
