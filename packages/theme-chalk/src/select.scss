@@ -12,11 +12,16 @@
   display: inline-block;
   position: relative;
 
-  .el-select__tags
-    >span {
+  .el-select__tags {
+    &>span {
       display: contents;
     }
-
+    .is-disabled{
+      color: #C0C4CC;
+      cursor: not-allowed;
+    }
+  }
+  
   &:hover {
     .el-input__inner {
       border-color: $--select-border-color-hover;
