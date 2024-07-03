@@ -33,7 +33,7 @@ Element UI 的成长离不开大家的支持，如果你愿意为 Element UI 贡
 - 合并代码需要两名维护人员参与：一人进行 review 后 approve，另一人再次 review，通过后即可合并。
 
 ## 开发环境搭建
-首先你需要 Node.js 4+，yarn 和 npm 3+。注意：我们使用 yarn 进行依赖版本的锁定，所以请不要使用 `npm install` 安装依赖。
+首先你需要 Node.js 14+，yarn 和 npm 3+。注意：我们使用 yarn 进行依赖版本的锁定，所以请不要使用 `npm install` 安装依赖。
 ```shell
 git clone git@github.com:ElemeFE/element.git
 npm run dev

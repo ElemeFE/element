@@ -35,7 +35,7 @@ Nous sommes ravis que vous souhaitiez contribuer à Element. Avant de soumettre 
 - La fusion d'un PR nécessite deux responsables: l'un approuve les modifications après révision, puis l'autre les révise et les fusionne.
 
 ## Pré-requis
-`Node.js 4+`, `yarn` et `npm 3+` sont requis. Note: nous utilisons yarn pour verrouiller les versions des dépendances, donc vous devriez installer les dépendances en utilisant `yarn` au lieu de `npm install`.
+`Node.js 14+`, `yarn` et `npm 3+` sont requis. Note: nous utilisons yarn pour verrouiller les versions des dépendances, donc vous devriez installer les dépendances en utilisant `yarn` au lieu de `npm install`.
 ```shell
 git clone git@github.com:ElemeFE/element.git
 npm run dev
