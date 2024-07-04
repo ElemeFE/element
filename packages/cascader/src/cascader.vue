@@ -56,6 +56,7 @@
       </el-tag>
       <input
         v-if="filterable && !isDisabled"
+        ref="inputSearch"
         v-model.trim="inputValue"
         type="text"
         class="el-cascader__search-input"
@@ -313,6 +314,14 @@ export default {
     checkedValue(val) {
       const { value, dropDownVisible } = this;
       const { checkStrictly, multiple } = this.config;
+
+      if (this.filterable) {
+        this.inputValue = '';
+        this.getSuggestions();
+        if (this.multiple) {
+          this.$refs.inputSearch.focus();
+        }
+      }
 
       if (!isEqual(val, value) || isUndefined(value)) {
         this.computePresentContent();
