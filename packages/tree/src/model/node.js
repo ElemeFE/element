@@ -5,21 +5,17 @@ import { arrayFindIndex } from 'element-ui/src/utils/util';
 export const getChildState = node => {
   let all = true;
   let none = true;
-  let allWithoutDisable = true;
   for (let i = 0, j = node.length; i < j; i++) {
     const n = node[i];
     if (n.checked !== true || n.indeterminate) {
       all = false;
-      if (!n.disabled) {
-        allWithoutDisable = false;
-      }
     }
     if (n.checked !== false || n.indeterminate) {
       none = false;
     }
   }
 
-  return { all, none, allWithoutDisable, half: !all && !none };
+  return { all, none, half: !all && !none };
 };
 
 const reInitChecked = function(node) {
@@ -353,16 +349,16 @@ export default class Node {
     this.isLeaf = false;
   }
 
-  setChecked(value, deep, recursion, passValue) {
+  setChecked(value, deep, recursion) {
     this.indeterminate = value === 'half';
     this.checked = value === true;
 
     if (this.store.checkStrictly) return;
 
     if (!(this.shouldLoadData() && !this.store.checkDescendants)) {
-      let { all, allWithoutDisable } = getChildState(this.childNodes);
+      let { all } = getChildState(this.childNodes);
 
-      if (!this.isLeaf && (!all && allWithoutDisable)) {
+      if (!this.isLeaf && !all) {
         this.checked = false;
         value = false;
       }
@@ -372,9 +368,8 @@ export default class Node {
           const childNodes = this.childNodes;
           for (let i = 0, j = childNodes.length; i < j; i++) {
             const child = childNodes[i];
-            passValue = passValue || value !== false;
-            const isCheck = child.disabled ? child.checked : passValue;
-            child.setChecked(isCheck, deep, true, passValue);
+            const isCheck = child.checked === true;
+            child.setChecked(isCheck, deep, true);
           }
           const { half, all } = getChildState(childNodes);
           if (!all) {
