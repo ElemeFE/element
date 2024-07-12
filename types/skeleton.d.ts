@@ -25,7 +25,7 @@ export declare class ElSkeleton extends ElementUIComponent {
   /** numbers of the row, only useful when no template slot were given; default: 4 */
   rows: boolean
 
-  /** Rendering delay in millseconds; default: 0 */
+  /** Rendering delay in milliseconds; default: 0 */
   throttle: number
 
   $slots: ElSkeletonSlots

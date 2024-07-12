@@ -71,8 +71,6 @@ export declare class ElAutocomplete extends ElementUIComponent {
   /** Whether to append the dropdown to body */
   popperAppendToBody: boolean
 
-  /**
-   * Focus the Input component
-   */
+  /** Focus the Input component */
   focus (): void
 }

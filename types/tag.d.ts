@@ -1,6 +1,6 @@
 import { ElementUIComponent, ElementUIComponentSize } from './component'
 
-export type TagType = 'primary' | 'gray' | 'success' | 'warning' | 'danger'
+export type TagType = 'success' | 'info' | 'warning' | 'danger'
 export type TagTheme = 'dark' | 'light' | 'plain'
 
 /** Tag Component */

@@ -12,7 +12,7 @@ export interface ResponsiveColumnProperties {
 /** Responsive column property */
 export type ResponsiveColumn = number | ResponsiveColumnProperties
 
-/** Colunm Layout Component */
+/** Column Layout Component */
 export declare class ElCol extends ElementUIComponent {
   /** Number of column the grid spans */
   span: number

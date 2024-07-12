@@ -90,18 +90,12 @@ export declare class ElInput extends ElementUIComponent {
   /** Whether to show wordCount when setting maxLength */
   showWordLimit: boolean
 
-  /**
-   * Focus the Input component
-   */
+  /** Focus the Input component */
   focus (): void
 
-  /**
-   * Blur the Input component
-   */
+  /** Blur the Input component */
   blur (): void
 
-  /**
-   * Select the text in input element
-   */
+  /** Select the text in input element */
   select (): void
 }

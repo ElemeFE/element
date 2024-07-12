@@ -40,8 +40,6 @@ export declare class ElInputNumber extends ElementUIComponent {
   /** whether input value can only be multiple of step */
   stepStrictly: boolean
 
-  /**
-   * Focus the Input component
-   */
+  /** Focus the Input component */
   focus (): void
 }

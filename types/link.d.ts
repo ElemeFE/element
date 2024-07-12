@@ -1,7 +1,7 @@
 import { ElementUIComponent } from './component'
 
 /** Button type */
-export type LinkType = 'primary' | 'success' | 'warning' | 'danger' | 'info' 
+export type LinkType = 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default'
 
 /** Link Component */
 export declare class ElLink extends ElementUIComponent {

@@ -117,8 +117,6 @@ export declare class ElDatePicker extends ElementUIComponent {
   /** name for the inner native input */
   name: string
 
-  /**
-   * Focus the Input component
-   */
+  /** Focus the Input component */
   focus (): void
 }

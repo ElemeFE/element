@@ -56,8 +56,6 @@ export declare class ElTimePicker extends ElementUIComponent {
   /** Range separator */
   rangeSeparator: string
 
-  /**
-   * Focus the Input component
-   */
+  /** Focus the Input component  */
   focus (): void
 }

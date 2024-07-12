@@ -96,7 +96,7 @@
             {
               "name": "focus",
               "description": "Focus the Input component",
-              "type": "function(): void"
+              "type": "() => void"
             },
             {
               "name": "selectWhenUnmatched",
@@ -1045,7 +1045,7 @@
             {
               "name": "value",
               "description": "The value of the date picker",
-              "type": "Date|string|Date[]|string[]"
+              "type": "Date|string|Date[]|string[]|number|number[]"
             },
             {
               "name": "rangeSeparator",
@@ -1290,14 +1290,14 @@
           "doc-url": "https://element.eleme.io/#/en-US/component/divider",
           "props": [
             {
-              "name": "vertical",
-              "description": "enable vertical divider",
-              "type": "boolean"
+              "name": "direction",
+              "description": "Set divider's direction",
+              "type": "'horizontal' | 'vertical'"
             },
             {
-              "name": "posiiton",
-              "description": "customize the content on the divider line",
-              "type": "ContentPosition"
+              "name": "content-position",
+              "description": "Customize the content on the divider line",
+              "type": "'left' | 'right' | 'center'"
             }
           ]
         },
@@ -1386,7 +1386,8 @@
             {
               "name": "type",
               "description": "Menu button type. only works when split-button is true",
-              "type": "ButtonType"
+              "type": "ButtonType",
+              "default": "'default'"
             },
             {
               "name": "tabindex",
@@ -2135,12 +2136,12 @@
             {
               "name": "title",
               "description": "title",
-              "type": "String"
+              "type": "string"
             },
             {
               "name": "content",
               "description": "content",
-              "type": "String"
+              "type": "string"
             }
           ],
           "slots": [
@@ -2299,7 +2300,7 @@
             },
             {
               "name": "cancelButtonType",
-              "description": "Popconfirm cancal type",
+              "description": "Popconfirm cancel type",
               "type": "string"
             },
             {
@@ -2720,7 +2721,7 @@
             {
               "name": "align",
               "description": "Vertical alignment of flex layout",
-              "type": "VertialAlignment"
+              "type": "VerticalAlignment"
             },
             {
               "name": "justify",
@@ -3308,7 +3309,7 @@
             {
               "name": "defaultExpandAll",
               "description": "Whether expand all rows by default. Only works when the table has a column `type=\"expand\"`",
-              "type": "Boolean"
+              "type": "boolean"
             },
             {
               "name": "height",
@@ -3358,7 +3359,7 @@
             {
               "name": "emptyText",
               "description": "Displayed text when data is empty. You can customize this area with `slot=\"empty\"`",
-              "type": "String"
+              "type": "string"
             },
             {
               "name": "maxHeight",
@@ -3480,7 +3481,7 @@
             {
               "name": "filterMultiple",
               "description": "Whether data filtering supports multiple options",
-              "type": "Boolean"
+              "type": "boolean"
             },
             {
               "name": "resizable",
@@ -3554,7 +3555,7 @@
             {
               "name": "stretch",
               "description": "Whether width of tab automatically fits its container",
-              "type": "Boolean"
+              "type": "boolean"
             },
             {
               "name": "value",
@@ -3847,7 +3848,7 @@
             {
               "name": "content",
               "description": "Display content, can be overridden by slot#content",
-              "type": "String"
+              "type": "string"
             },
             {
               "name": "enterable",
@@ -4171,6 +4172,10 @@
             },
             {
               "name": "fullscreen",
+              "type": "boolean"
+            },
+            {
+              "name": "lock",
               "type": "boolean"
             }
           ]

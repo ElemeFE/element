@@ -174,7 +174,7 @@ export class CheckboxButton extends ElCheckboxButton {}
 /** Checkbox Group Component */
 export class CheckboxGroup extends ElCheckboxGroup {}
 
-/** Colunm Layout Component */
+/** Column Layout Component */
 export class Col extends ElCol {}
 
 /** Collapse Component */

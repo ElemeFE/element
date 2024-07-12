@@ -158,7 +158,7 @@ export declare class ElTree<K, D extends TreeData> extends ElementUIComponent {
   /**
    * Set certain nodes to be checked. Only works when `node-key` is assigned
    *
-   * @param nodes An array of nodes to be checked
+   * @param data An array of nodes to be checked
    * @param leafOnly If the parameter is true, it only returns the currently selected array of sub-nodes
    */
   setCheckedNodes(data: D[], leafOnly?: boolean): void;
@@ -218,7 +218,7 @@ export declare class ElTree<K, D extends TreeData> extends ElementUIComponent {
   /**
    * Set highlighted node, only works when node-key is assigned
    *
-   * @param node The node to be highlighted
+   * @param data The node to be highlighted
    */
   setCurrentNode(data: D): void;
 
