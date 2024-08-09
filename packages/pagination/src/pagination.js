@@ -172,19 +172,19 @@ export default {
         return (
           <span class="el-pagination__sizes">
             <el-select
-              value={ this.$parent.internalPageSize }
-              popperClass={ this.$parent.popperClass || '' }
+              value={this.$parent.internalPageSize}
+              popperClass={this.$parent.popperClass || ""}
               size="mini"
-              on-input={ this.handleChange }
-              disabled={ this.$parent.disabled }>
-              {
-                this.pageSizes.map(item =>
-                  <el-option
-                    value={ item }
-                    label={ item + this.t('el.pagination.pagesize') }>
-                  </el-option>
-                )
-              }
+              on-input={this.handleChange}
+              disabled={this.$parent.disabled}
+              popperAppendToBody={this.$parent.popperAppendToBody}
+            >
+              {this.pageSizes.map((item) => (
+                <el-option
+                  value={item}
+                  label={item + this.t("el.pagination.pagesize")}
+                ></el-option>
+              ))}
             </el-select>
           </span>
         );
