@@ -447,7 +447,9 @@
       this.$on('tree-node-drag-end', (event) => {
         const { draggingNode, dropType, dropNode } = dragState;
         event.preventDefault();
-        event.dataTransfer.dropEffect = 'move';
+        if (event.dataTransfer) {
+          event.dataTransfer.dropEffect = 'move';
+        }
 
         if (draggingNode && dropNode) {
           const draggingNodeCopy = { data: draggingNode.node.data };
