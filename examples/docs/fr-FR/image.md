@@ -149,6 +149,7 @@ En plus des propriétés natives de img, ce composant supporte le lazy loading, 
 | preview-src-list | allow big image preview | Array | — | - |
 | z-index | set image preview z-index | Number | — | 2000 |
 | initial-index | set image preview array index | Number | — | - |
+| infinite | Voir si l'aperçu du spectateur est illimité. | boolean | — | true |
 
 ### Évènements
 | Nom | Description | Paramètres |

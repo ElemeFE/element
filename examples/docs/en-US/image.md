@@ -148,6 +148,7 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 | preview-src-list | allow big image preview | Array | — | - |
 | z-index | set image preview z-index | Number | — | 2000 |
 | initial-index | set image preview array index | Number | — | - |
+| infinite | whether the viewer preview is infinite. | boolean | — | true |
 
 ### Events
 | Event Name | Description | Parameters |

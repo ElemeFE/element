@@ -148,6 +148,7 @@
 | preview-src-list | 开启图片预览功能 | Array | — | - |
 | z-index | 设置图片预览的 z-index | Number | — | 2000 |
 | initial-index | 图片预览初始图片index | Number | — | - |
+| infinite | 是否可以无限循环预览 | boolean | — | true |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

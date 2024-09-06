@@ -150,6 +150,7 @@ Además de las características nativas de img, soporte de carga perezosa, marca
 | preview-src-list | permitir una vista previa grande de la imagen | Array | — | - |
 | z-index | establecer el z-index de la vista previa de la imagen | Number | — | 2000 |
 | initial-index | set image preview array index | Number | — | - |
+| infinite | Si la vista previa del espectador es ilimitada. | boolean | — | true |
 
 ### Eventos
 | Nombre del evento | Descripción | Parámetros |

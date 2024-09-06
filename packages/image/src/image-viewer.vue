@@ -35,23 +35,25 @@
       </div>
       <!-- CANVAS -->
       <div class="el-image-viewer__canvas">
-        <img
-          v-for="(url, i) in urlList"
-          v-if="i === index"
-          ref="img"
-          class="el-image-viewer__img"
-          :key="url"
-          :src="currentImg"
-          :style="imgStyle"
-          @load="handleImgLoad"
-          @error="handleImgError"
-          @mousedown="handleMouseDown">
+        <template v-for="(url, i) in urlList">
+          <img
+            v-if="i === index"
+            ref="img"
+            class="el-image-viewer__img"
+            :key="url"
+            :src="currentImg"
+            :style="imgStyle"
+            @load="handleImgLoad"
+            @error="handleImgError"
+            @mousedown="handleMouseDown" />
+        </template>
       </div>
     </div>
   </transition>
 </template>
 
 <script>
+import Locale from 'element-ui/src/mixins/locale';
 import { on, off } from 'element-ui/src/utils/dom';
 import { rafThrottle, isFirefox } from 'element-ui/src/utils/util';
 import { PopupManager } from 'element-ui/src/utils/popup';
@@ -71,7 +73,7 @@ const mousewheelEventName = isFirefox() ? 'DOMMouseScroll' : 'mousewheel';
 
 export default {
   name: 'elImageViewer',
-
+  mixins: [Locale],
   props: {
     urlList: {
       type: Array,
@@ -100,6 +102,10 @@ export default {
     maskClosable: {
       type: Boolean,
       default: true
+    },
+    infinite: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -107,7 +113,6 @@ export default {
     return {
       index: this.initialIndex,
       isShow: false,
-      infinite: true,
       loading: false,
       mode: Mode.CONTAIN,
       transform: {
@@ -230,7 +235,7 @@ export default {
     },
     handleImgError(e) {
       this.loading = false;
-      e.target.alt = '加载失败';
+      e.target.alt = this.t('el.image.error');
     },
     handleMouseDown(e) {
       if (this.loading || e.button !== 0) return;

@@ -122,6 +122,10 @@
     background-color: #606266;
     border-color: #fff;
     left: 40px;
+    @include when(disabled) {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   }
 
   @include e(next){
@@ -135,6 +139,10 @@
     border-color: #fff;
     right: 40px;
     text-indent: 2px;
+    @include when(disabled) {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   }
 
   @include e(mask) {

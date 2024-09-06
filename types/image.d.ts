@@ -24,6 +24,9 @@ export declare class ElImage extends ElementUIComponent {
   /** Whether to use lazy load */
   lazy: boolean
 
+  /** Whether to use infinite */
+  infinite: boolean
+
   /** Scroll container that to add scroll listener when using lazy load */
   scrollContainer: string | HTMLElement
 
