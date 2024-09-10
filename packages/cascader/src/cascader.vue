@@ -62,7 +62,7 @@
         :placeholder="presentTags.length ? '' : placeholder"
         @input="e => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
-        @keydown.delete="handleDelete">
+        @keydown.delete="e => handleDelete(e)">
     </div>
 
     <transition name="el-zoom-in-top" @after-leave="handleDropdownLeave">
@@ -588,7 +588,8 @@ export default {
           break;
       }
     },
-    handleDelete() {
+    handleDelete(event) {
+      if (event.isComposing) return;
       const { inputValue, pressDeleteCount, presentTags } = this;
       const lastIndex = presentTags.length - 1;
       const lastTag = presentTags[lastIndex];
