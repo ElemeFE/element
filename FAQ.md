@@ -1,8 +1,7 @@
 ## 常见问题
 
 <details>
-  <summary>给组件绑定的事件为什么无法触发？</summary>
-  
+  <summary>测试3333：给组件绑定的事件为什么无法触发？</summary>
   在 Vue 2.0 中，为**自定义**组件绑定**原生**事件必须使用 `.native` 修饰符：
   ```html
   <my-component @click.native="handleClick">Click Me</my-component>
