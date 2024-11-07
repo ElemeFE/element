@@ -228,6 +228,9 @@
         this.validateDisabled = false;
       },
       resetField() {
+        if (!this.prop) {
+          return;
+        }
         this.validateState = '';
         this.validateMessage = '';
 
