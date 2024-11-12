@@ -858,10 +858,13 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
+      this.picker.clearable = this.clearable;
       this.$watch('format', (format) => {
         this.picker.format = format;
       });
-
+      this.$watch('clearable', (clearable) => {
+        this.picker.clearable = clearable;
+      });
       const updateOptions = () => {
         const options = this.pickerOptions;
 
