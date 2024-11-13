@@ -1,0 +1,106 @@
+@import "../common/var";
+@import "mixins";
+
+@mixin chat-message-variant($color, $background-color) {
+  @include e(list) {
+    @include e(box) {
+      @include e(body) {
+        color: $color;
+        background-color: $background-color;
+
+        @include e(footer) {
+          color: mix($--color-white, $background-color, 70);
+
+          @include e(check-icon){
+            color: mix($--color-white, $background-color, 70);
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin chat-message-size(
+  $avatar-size,
+  $margin-gutter,
+  $font-size,
+  $font-size-footer,
+  $padding-vertical,
+  $padding-horizontal,
+  $border-radius
+) {
+  @include e(list) {
+    @include e(box) {
+      margin-bottom: $margin-gutter;
+      @include e(avatar) {
+        width: $avatar-size;
+        margin-right: $margin-gutter;
+
+        .el-avatar {
+          width: $avatar-size;
+          height: $avatar-size;
+        }
+      }
+
+      @include e(body) {
+        padding: $padding-vertical $padding-horizontal;
+        border-radius: $border-radius;
+        font-size: $font-size;
+
+        @include e(name) {
+          margin-bottom: 2px;
+          font-size: $font-size;
+          font-weight: bold;
+        }
+
+        @include e(footer) {
+          font-size: $font-size-footer;
+          margin-left: 10px;
+          line-height: $font-size + 2;
+
+          @include pseudo(last-child) {
+            @include e(check-icon) {
+              .el-icon-check.second {
+                position: absolute;
+                left: 4px;
+                top: $font-size - $font-size-footer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include when(left) {
+    @include e(list) {
+      @include e(box) {
+        @include e(avatar) {
+          margin-left: $margin-gutter;
+        }
+
+        @include pseudo(first-child) {
+          @include e(body) {
+            border-radius: $border-radius $border-radius $border-radius 5px;
+          }
+        }
+      }
+    }
+  }
+
+  @include when(right) {
+    @include e(list) {
+      @include e(box) {
+        @include e(avatar) {
+          margin-left: $margin-gutter;
+        }
+
+        @include pseudo(first-child) {
+          @include e(body) {
+            border-radius: $border-radius $border-radius 5px $border-radius;
+          }
+        }
+      }
+    }
+  }
+}
