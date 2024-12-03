@@ -270,25 +270,27 @@ export default {
       }
     },
     handleExpand(node, silent) {
-      const { activePath } = this;
-      const { level } = node;
-      const path = activePath.slice(0, level - 1);
-      const menus = this.menus.slice(0, level);
+      if (node) {
+        const { activePath } = this;
+        const { level } = node;
+        const path = activePath.slice(0, level - 1);
+        const menus = this.menus.slice(0, level);
 
-      if (!node.isLeaf) {
-        path.push(node);
-        menus.push(node.children);
-      }
+        if (!node.isLeaf) {
+          path.push(node);
+          menus.push(node.children);
+        }
 
-      this.activePath = path;
-      this.menus = menus;
+        this.activePath = path;
+        this.menus = menus;
 
-      if (!silent) {
-        const pathValues = path.map(node => node.getValue());
-        const activePathValues = activePath.map(node => node.getValue());
-        if (!valueEquals(pathValues, activePathValues)) {
-          this.$emit('active-item-change', pathValues); // Deprecated
-          this.$emit('expand-change', pathValues);
+        if (!silent) {
+          const pathValues = path.map(node => node.getValue());
+          const activePathValues = activePath.map(node => node.getValue());
+          if (!valueEquals(pathValues, activePathValues)) {
+            this.$emit('active-item-change', pathValues); // Deprecated
+            this.$emit('expand-change', pathValues);
+          }
         }
       }
     },
