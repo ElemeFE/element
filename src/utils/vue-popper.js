@@ -105,6 +105,9 @@ export default {
       options.offset = this.offset;
       options.arrowOffset = this.arrowOffset;
       this.popperJS = new PopperJS(reference, popper, options);
+      if (this.appendToBody) {
+        this.popperJS.state.position = 'fixed';
+      }
       this.popperJS.onCreate(_ => {
         this.$emit('created', this);
         this.resetTransformOrigin();
