@@ -29,6 +29,7 @@
         break;
       default:
         use(enLocale);
+        break;
     }
   };
   localize(lang);
