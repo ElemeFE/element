@@ -140,6 +140,10 @@
         this.resetColor();
       },
       resetColor() {
+        this.color = new Color({
+          enableAlpha: this.showAlpha,
+          format: this.colorFormat
+        });
         this.$nextTick(_ => {
           if (this.value) {
             this.color.fromString(this.value);
