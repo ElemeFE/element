@@ -107,14 +107,14 @@ export default {
       hasCheckedFormat: '{checked}/{total} seçildi'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'Hata'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'Geri'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'Onayla',
+      cancelButtonText: 'İptal'
     },
     empty: {
       description: 'Veri yok'
