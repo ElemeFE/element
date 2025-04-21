@@ -56,5 +56,5 @@ You can customise Popconfirm like:
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| confirm | triggers when click confirm button | — |
-| cancel | triggers when click cancel button | — |
+| onConfirm | triggers when click confirm button | — |
+| onCancel | triggers when click cancel button | — |
