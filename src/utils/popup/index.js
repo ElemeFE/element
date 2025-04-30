@@ -125,6 +125,8 @@ export default {
         PopupManager.zIndex = zIndex;
       }
 
+      PopupManager.openPopup(this._popupId);
+
       if (modal) {
         if (this._closing) {
           PopupManager.closeModal(this._popupId);
@@ -199,6 +201,7 @@ export default {
     },
 
     doAfterClose() {
+      PopupManager.closePopup();
       PopupManager.closeModal(this._popupId);
       this._closing = false;
     },
