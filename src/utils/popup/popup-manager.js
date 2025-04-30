@@ -55,13 +55,13 @@ const PopupManager = {
   },
 
   modalStack: [],
+  popupStack: [],
 
-  doOnModalClick: function() {
-    const topItem = PopupManager.modalStack[PopupManager.modalStack.length - 1];
-    if (!topItem) return;
+  doOnModalClick: function () {
+    const instance = getTopPopup();
+    if (!instance) return;
 
-    const instance = PopupManager.getInstance(topItem.id);
-    if (instance && instance.closeOnClickModal) {
+    if (instance && instance.modal && instance.closeOnClickModal) {
       instance.close();
     }
   },
@@ -107,6 +107,21 @@ const PopupManager = {
     modalDom.style.display = '';
 
     this.modalStack.push({ id: id, zIndex: zIndex, modalClass: modalClass });
+  },
+
+  openPopup: function (id) {
+    if (Vue.prototype.$isServer) return;
+    if (!id) return;
+    const popupStack = this.popupStack;
+    if (popupStack.includes(id)) return;
+    popupStack.push(id);
+  },
+
+  closePopup: function () {
+    const popupStack = this.popupStack;
+    if (popupStack.length > 0) {
+      popupStack.pop();
+    }
   },
 
   closeModal: function(id) {
@@ -165,12 +180,13 @@ Object.defineProperty(PopupManager, 'zIndex', {
   }
 });
 
-const getTopPopup = function() {
+const getTopPopup = function () {
   if (Vue.prototype.$isServer) return;
-  if (PopupManager.modalStack.length > 0) {
-    const topPopup = PopupManager.modalStack[PopupManager.modalStack.length - 1];
-    if (!topPopup) return;
-    const instance = PopupManager.getInstance(topPopup.id);
+  if (PopupManager.popupStack.length > 0) {
+    const topPopupId =
+      PopupManager.popupStack[PopupManager.popupStack.length - 1];
+    if (!topPopupId) return;
+    const instance = PopupManager.getInstance(topPopupId);
 
     return instance;
   }
