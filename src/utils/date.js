@@ -41,9 +41,10 @@
   var literal = /\[([^]*?)\]/gm;
   var noop = function () {
   };
+  var num = 1;
 
   function regexEscape(str) {
-    return str.replace( /[|\\{()[^$+*?.-]/g, '\\$&');
+    return str.replace(/[|\\{()[^$+*?.-]/g, '\\$&');
   }
 
   function shorten(arr, sLen) {
@@ -88,85 +89,85 @@
   };
 
   var formatFlags = {
-    D: function(dateObj) {
+    D: function (dateObj) {
       return dateObj.getDay();
     },
-    DD: function(dateObj) {
+    DD: function (dateObj) {
       return pad(dateObj.getDay());
     },
-    Do: function(dateObj, i18n) {
+    Do: function (dateObj, i18n) {
       return i18n.DoFn(dateObj.getDate());
     },
-    d: function(dateObj) {
+    d: function (dateObj) {
       return dateObj.getDate();
     },
-    dd: function(dateObj) {
+    dd: function (dateObj) {
       return pad(dateObj.getDate());
     },
-    ddd: function(dateObj, i18n) {
+    ddd: function (dateObj, i18n) {
       return i18n.dayNamesShort[dateObj.getDay()];
     },
-    dddd: function(dateObj, i18n) {
+    dddd: function (dateObj, i18n) {
       return i18n.dayNames[dateObj.getDay()];
     },
-    M: function(dateObj) {
+    M: function (dateObj) {
       return dateObj.getMonth() + 1;
     },
-    MM: function(dateObj) {
+    MM: function (dateObj) {
       return pad(dateObj.getMonth() + 1);
     },
-    MMM: function(dateObj, i18n) {
+    MMM: function (dateObj, i18n) {
       return i18n.monthNamesShort[dateObj.getMonth()];
     },
-    MMMM: function(dateObj, i18n) {
+    MMMM: function (dateObj, i18n) {
       return i18n.monthNames[dateObj.getMonth()];
     },
-    yy: function(dateObj) {
+    yy: function (dateObj) {
       return pad(String(dateObj.getFullYear()), 4).substr(2);
     },
-    yyyy: function(dateObj) {
+    yyyy: function (dateObj) {
       return pad(dateObj.getFullYear(), 4);
     },
-    h: function(dateObj) {
+    h: function (dateObj) {
       return dateObj.getHours() % 12 || 12;
     },
-    hh: function(dateObj) {
+    hh: function (dateObj) {
       return pad(dateObj.getHours() % 12 || 12);
     },
-    H: function(dateObj) {
+    H: function (dateObj) {
       return dateObj.getHours();
     },
-    HH: function(dateObj) {
+    HH: function (dateObj) {
       return pad(dateObj.getHours());
     },
-    m: function(dateObj) {
+    m: function (dateObj) {
       return dateObj.getMinutes();
     },
-    mm: function(dateObj) {
+    mm: function (dateObj) {
       return pad(dateObj.getMinutes());
     },
-    s: function(dateObj) {
+    s: function (dateObj) {
       return dateObj.getSeconds();
     },
-    ss: function(dateObj) {
+    ss: function (dateObj) {
       return pad(dateObj.getSeconds());
     },
-    S: function(dateObj) {
+    S: function (dateObj) {
       return Math.round(dateObj.getMilliseconds() / 100);
     },
-    SS: function(dateObj) {
+    SS: function (dateObj) {
       return pad(Math.round(dateObj.getMilliseconds() / 10), 2);
     },
-    SSS: function(dateObj) {
+    SSS: function (dateObj) {
       return pad(dateObj.getMilliseconds(), 3);
     },
-    a: function(dateObj, i18n) {
+    a: function (dateObj, i18n) {
       return dateObj.getHours() < 12 ? i18n.amPm[0] : i18n.amPm[1];
     },
-    A: function(dateObj, i18n) {
+    A: function (dateObj, i18n) {
       return dateObj.getHours() < 12 ? i18n.amPm[0].toUpperCase() : i18n.amPm[1].toUpperCase();
     },
-    ZZ: function(dateObj) {
+    ZZ: function (dateObj) {
       var o = dateObj.getTimezoneOffset();
       return (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4);
     }
@@ -270,9 +271,23 @@
     mask = fecha.masks[mask] || mask || fecha.masks['default'];
 
     var literals = [];
+    //------------此处为后加的，如果传过来自定义字符串含有周，则截取第一段周和第二段周以后的内容分别返回回去。 其他传过来的默认是(yyyy-MM-dd)不会有影响。
+    var index = mask.indexOf("周");
+    if (index > -1) {
+      if (num == 1) {
+        mask = mask.substring(0, index + 1);
+        mask = mask.replace('年第', '-').replace('周', '')
+        num++;
+      } else {
+        mask = mask.substring(index + 1, mask.length);
+        mask = mask.replace('年第', '-').replace('周', '')
+        num = 1;
+      }
+    }
+
 
     // Make literals inactive by replacing them with ??
-    mask = mask.replace(literal, function($0, $1) {
+    mask = mask.replace(literal, function ($0, $1) {
       literals.push($1);
       return '@@@';
     });
@@ -281,7 +296,7 @@
       return $0 in formatFlags ? formatFlags[$0](dateObj, i18n) : $0.slice(1, $0.length - 1);
     });
     // Inline literal values back into the formatted value
-    return mask.replace(/@@@/g, function() {
+    return mask.replace(/@@@/g, function () {
       return literals.shift();
     });
   };
@@ -311,7 +326,7 @@
     var dateInfo = {};
     var parseInfo = [];
     var literals = [];
-    format = format.replace(literal, function($0, $1) {
+    format = format.replace(literal, function ($0, $1) {
       literals.push($1);
       return '@@@';
     });
@@ -324,7 +339,7 @@
 
       return $0;
     });
-    newFormat = newFormat.replace(/@@@/g, function() {
+    newFormat = newFormat.replace(/@@@/g, function () {
       return literals.shift();
     });
     var matches = dateStr.match(new RegExp(newFormat, 'i'));

@@ -37,7 +37,6 @@
       return NaN;
     }
   };
-
   // remove the first element that satisfies `pred` from arr
   // return a new array if modification occurs
   // return the original array otherwise

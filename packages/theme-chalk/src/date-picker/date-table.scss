@@ -8,13 +8,18 @@
   @include when(week-mode) {
     .el-date-table__row {
       &:hover {
-        div {
+        td:not(.week) div {
           background-color: $--datepicker-inrange-background-color;
         }
         td.available:hover {
           color: $--datepicker-font-color;
         }
-        td:first-child div {
+        td.week + td div {
+          margin-left: 5px;
+          border-top-left-radius: 15px;
+          border-bottom-left-radius: 15px;
+        }
+        td:first-child:not(.week) div {
           margin-left: 5px;
           border-top-left-radius: 15px;
           border-bottom-left-radius: 15px;
@@ -26,7 +31,7 @@
         }
       }
 
-      &.current div {
+      &.current td:not(.week) div {
         background-color: $--datepicker-inrange-background-color;
       }
     }
@@ -139,6 +144,7 @@
     &.week {
       font-size: 80%;
       color: $--datepicker-header-font-color;
+      cursor: default;
     }
   }
 

@@ -66,7 +66,7 @@ const PopupManager = {
     }
   },
 
-  openModal: function(id, zIndex, dom, modalClass, modalFade) {
+  openModal: function(id, zIndex, dom, modalClass, modalFade, props) {
     if (Vue.prototype.$isServer) return;
     if (!id || zIndex === undefined) return;
     this.modalFade = modalFade;
@@ -93,13 +93,15 @@ const PopupManager = {
     setTimeout(() => {
       removeClass(modalDom, 'v-modal-enter');
     }, 200);
-
-    if (dom && dom.parentNode && dom.parentNode.nodeType !== 11) {
-      dom.parentNode.appendChild(modalDom);
+    if (typeof props.appendToIframeParent === 'boolean' && props.appendToIframeParent) {
+      window.top.document.body.appendChild(modalDom);
     } else {
-      document.body.appendChild(modalDom);
+      if (dom && dom.parentNode && dom.parentNode.nodeType !== 11) {
+        dom.parentNode.appendChild(modalDom);
+      } else {
+        document.body.appendChild(modalDom);
+      }
     }
-
     if (zIndex) {
       modalDom.style.zIndex = zIndex;
     }

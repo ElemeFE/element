@@ -120,6 +120,7 @@
               :disabled-date="disabledDate"
               :cell-class-name="cellClassName"
               @changerange="handleChangeRange"
+              :show-week-number="showWeekNumber"
               :first-day-of-week="firstDayOfWeek"
               @pick="handleRangePick">
             </date-table>
@@ -160,6 +161,7 @@
               :disabled-date="disabledDate"
               :cell-class-name="cellClassName"
               @changerange="handleChangeRange"
+              :show-week-number="showWeekNumber"
               :first-day-of-week="firstDayOfWeek"
               @pick="handleRangePick">
             </date-table>
@@ -335,6 +337,7 @@
         disabledDate: '',
         cellClassName: '',
         firstDayOfWeek: 7,
+        showWeekNumber: true,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
         format: '',

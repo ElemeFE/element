@@ -47,7 +47,7 @@
           </div>
           <div
             class="el-date-picker__header"
-            :class="{ 'el-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
+            :class="{ 'el-date-picker__header--bordered': currentView === 'year' || currentView === 'month' || currentView === 'quarter' }"
             v-show="currentView !== 'time'">
             <button
               type="button"
@@ -97,6 +97,7 @@
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
               :cell-class-name="cellClassName"
+              :show-week-number="showWeekNumber"
               :disabled-date="disabledDate">
             </date-table>
             <year-table
@@ -117,6 +118,14 @@
               :date="date"
               :disabled-date="disabledDate">
             </month-table>
+            <quarter-table
+              v-show="currentView === 'quarter'"
+              @pick="handleQuarterPick"
+              :value="new Date(value)"
+              :default-value="defaultValue ? new Date(defaultValue) : null"
+              :date="date"
+              :disabled-date="disabledDate">
+            </quarter-table>
           </div>
         </div>
       </div>
@@ -172,6 +181,7 @@
   import YearTable from '../basic/year-table';
   import MonthTable from '../basic/month-table';
   import DateTable from '../basic/date-table';
+  import QuarterTable from '../basic/quarter-table';
 
   export default {
     mixins: [Locale],
@@ -346,6 +356,20 @@
         }
       },
 
+      handleQuarterPick(quarter) {
+        const month = quarter * 3 - 3;
+        if (this.selectionMode === 'quarter') {
+          this.date = modifyDate(this.date, this.year, month, 1);
+          this.emit(this.date);
+        }
+      },
+
+      handleDateSelect(value) {
+        if (this.selectionMode === 'dates') {
+          this.selectedDate = value;
+        }
+      },
+
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
           let newDate = this.value
@@ -370,6 +394,10 @@
           this.emit(this.date);
         } else if (this.selectionMode === 'years') {
           this.emit(year, true);
+        } else if (this.selectionMode === 'quarter') {
+          this.date = changeYearMonthAndClampDate(this.date, year, this.month);
+          // this.emit(this.date, true);
+          this.currentView = 'quarter';
         } else {
           this.date = changeYearMonthAndClampDate(this.date, year, this.month);
           // TODO: should emit intermediate value ??
@@ -406,6 +434,8 @@
           this.currentView = 'month';
         } else if (this.selectionMode === 'year' || this.selectionMode === 'years') {
           this.currentView = 'year';
+        } else if (this.selectionMode === 'quarter') {
+          this.currentView = 'quarter';
         } else {
           this.currentView = 'date';
         }
@@ -512,7 +542,7 @@
     },
 
     components: {
-      TimePicker, YearTable, MonthTable, DateTable, ElInput, ElButton
+      TimePicker, YearTable, MonthTable, DateTable, ElInput, ElButton, QuarterTable
     },
 
     data() {

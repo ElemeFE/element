@@ -13,6 +13,13 @@ let seed = 0;
   nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
 });
 
+// 点击顶层document
+!Vue.prototype.$isServer && on(top.document, 'mousedown', e => (startClick = e));
+
+!Vue.prototype.$isServer && on(top.document, 'mouseup', e => {
+  nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
+});
+
 function createDocumentHandler(el, binding, vnode) {
   return function(mouseup = {}, mousedown = {}) {
     if (!vnode ||

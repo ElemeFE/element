@@ -280,3 +280,15 @@ export const extractTimeFormat = function(format) {
 export const validateRangeInOneMonth = function(start, end) {
   return (start.getMonth() === end.getMonth()) && (start.getFullYear() === end.getFullYear());
 };
+
+// eg: (2018-01-01) => 1; (2018-06-01) => 2
+export const getQuarterNumber = function(date) {
+  var m = date.getMonth();
+  return Math.floor((m + 3) / 3);
+};
+
+// eg: (1) => [0, 1, 2]; (4) => [9, 10, 11]
+export const getMonthNumberInQuarter = function(quarter) {
+  var start = quarter * 3 - 3;
+  return [start, start + 1, start + 2];
+};

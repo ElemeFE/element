@@ -6,6 +6,16 @@ import {
 const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
 const stop = e => e.stopPropagation();
 
+function searchParentNode(parentNode) {
+  while (parentNode) {
+    if (parentNode.$el.className.indexOf('el-dialog') !== -1) {
+      return true;
+    }
+    parentNode = parentNode.$parent;
+  }
+  return false;
+}
+
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
  * @param {HTMLElement} [popper=$refs.popper] - The HTML element used as popper, or a configuration used to generate the popper.
@@ -96,7 +106,12 @@ export default {
 
       if (!popper || !reference) return;
       if (this.visibleArrow) this.appendArrow(popper);
-      if (this.appendToBody) document.body.appendChild(this.popperElm);
+      let docBody = document.body;
+      // 在iframe里并且祖先元素是弹窗
+      if (searchParentNode(this.$parent) && window !== window.top) {
+        docBody = top.document.body;
+      }
+      if (this.appendToBody) docBody.appendChild(this.popperElm);
       if (this.popperJS && this.popperJS.destroy) {
         this.popperJS.destroy();
       }
@@ -185,9 +200,14 @@ export default {
 
   beforeDestroy() {
     this.doDestroy(true);
-    if (this.popperElm && this.popperElm.parentNode === document.body) {
+    let docBody = document.body;
+    // 在iframe里并且祖先元素是弹窗
+    if (searchParentNode(this.$parent) && window !== window.top) {
+      docBody = top.document.body;
+    }
+    if (this.popperElm && this.popperElm.parentNode === docBody) {
       this.popperElm.removeEventListener('click', stop);
-      document.body.removeChild(this.popperElm);
+      docBody.removeChild(this.popperElm);
     }
   },
 

@@ -130,20 +130,22 @@ export default {
           PopupManager.closeModal(this._popupId);
           this._closing = false;
         }
-        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
+        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade, props);
         if (props.lockScroll) {
-          this.withoutHiddenClass = !hasClass(document.body, 'el-popup-parent--hidden');
+          const body = typeof props.appendToIframeParent === 'boolean' && props.appendToIframeParent ? window.top.document.body : document.body;
+          this.withoutHiddenClass = !hasClass(body, 'el-popup-parent--hidden');
           if (this.withoutHiddenClass) {
-            this.bodyPaddingRight = document.body.style.paddingRight;
-            this.computedBodyPaddingRight = parseInt(getStyle(document.body, 'paddingRight'), 10);
+            this.bodyPaddingRight = body.style.paddingRight;
+            this.computedBodyPaddingRight = parseInt(getStyle(body, 'paddingRight'), 10);
           }
           scrollBarWidth = getScrollBarWidth();
-          let bodyHasOverflow = document.documentElement.clientHeight < document.body.scrollHeight;
-          let bodyOverflowY = getStyle(document.body, 'overflowY');
+          const docu = typeof props.appendToIframeParent === 'boolean' && props.appendToIframeParent ? window.top.document : document;
+          let bodyHasOverflow = docu.documentElement.clientHeight < body.scrollHeight;
+          let bodyOverflowY = getStyle(body, 'overflowY');
           if (scrollBarWidth > 0 && (bodyHasOverflow || bodyOverflowY === 'scroll') && this.withoutHiddenClass) {
-            document.body.style.paddingRight = this.computedBodyPaddingRight + scrollBarWidth + 'px';
+            body.style.paddingRight = this.computedBodyPaddingRight + scrollBarWidth + 'px';
           }
-          addClass(document.body, 'el-popup-parent--hidden');
+          addClass(body, 'el-popup-parent--hidden');
         }
       }
 
@@ -204,9 +206,13 @@ export default {
     },
 
     restoreBodyStyle() {
+      let body = document.body;
+      if (this.$props.appendToIframeParent) {
+        body = window.top.document.body;
+      }
       if (this.modal && this.withoutHiddenClass) {
-        document.body.style.paddingRight = this.bodyPaddingRight;
-        removeClass(document.body, 'el-popup-parent--hidden');
+        body.style.paddingRight = this.bodyPaddingRight;
+        removeClass(body, 'el-popup-parent--hidden');
       }
       this.withoutHiddenClass = true;
     }
