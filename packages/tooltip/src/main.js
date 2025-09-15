@@ -69,6 +69,22 @@ export default {
       data: { node: '' },
       render(h) {
         return this.node;
+      },
+      updated() {
+        if (this.showPopper && this.popperJS) {
+          this.$nextTick(() => {
+            this.updatePopper();
+          });
+        }
+      },
+      watch: {
+        node() {
+          if (this.showPopper && this.popperJS) {
+            this.$nextTick(() => {
+              this.updatePopper();
+            });
+          }
+        }
       }
     }).$mount();
 
