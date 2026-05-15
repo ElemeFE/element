@@ -3483,6 +3483,21 @@
               "type": "Boolean"
             },
             {
+              "name": "filterSearch",
+              "description": "Whether the filter panel can search filtering options",
+              "type": "boolean"
+            },
+            {
+              "name": "filterSearchMethod",
+              "description": "Search method for filtering options",
+              "type": "(query: string, filter: TableColumnFilter) => boolean"
+            },
+            {
+              "name": "filterSearchPlaceholder",
+              "description": "Placeholder for the filter search input",
+              "type": "string"
+            },
+            {
               "name": "resizable",
               "description": "Whether column width can be resized. Works when border of `el-table` is `true`",
               "type": "boolean"

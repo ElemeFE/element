@@ -5,11 +5,19 @@
       v-if="multiple"
       v-clickoutside="handleOutsideClick"
       v-show="showPopper">
+      <div class="el-table-filter__search" v-if="filterSearch">
+        <el-input
+          size="mini"
+          v-model="filterText"
+          :placeholder="filterSearchPlaceholder || t('el.table.filterPlaceholder')"
+          clearable>
+        </el-input>
+      </div>
       <div class="el-table-filter__content">
         <el-scrollbar wrap-class="el-table-filter__wrap">
           <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
             <el-checkbox
-              v-for="filter in filters"
+              v-for="filter in filteredFilters"
               :key="filter.value"
               :label="filter.value">{{ filter.text }}</el-checkbox>
           </el-checkbox-group>
@@ -27,12 +35,20 @@
       v-else
       v-clickoutside="handleOutsideClick"
       v-show="showPopper">
+      <div class="el-table-filter__search" v-if="filterSearch">
+        <el-input
+          size="mini"
+          v-model="filterText"
+          :placeholder="filterSearchPlaceholder || t('el.table.filterPlaceholder')"
+          clearable>
+        </el-input>
+      </div>
       <ul class="el-table-filter__list">
         <li class="el-table-filter__list-item"
             :class="{ 'is-active': filterValue === undefined || filterValue === null }"
             @click="handleSelect(null)">{{ t('el.table.clearFilter') }}</li>
         <li class="el-table-filter__list-item"
-            v-for="filter in filters"
+            v-for="filter in filteredFilters"
             :label="filter.value"
             :key="filter.value"
             :class="{ 'is-active': isActive(filter) }"
@@ -50,6 +66,7 @@
   import Dropdown from './dropdown';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
+  import ElInput from 'element-ui/packages/input';
   import ElScrollbar from 'element-ui/packages/scrollbar';
 
   export default {
@@ -64,6 +81,7 @@
     components: {
       ElCheckbox,
       ElCheckboxGroup,
+      ElInput,
       ElScrollbar
     },
 
@@ -121,13 +139,39 @@
       return {
         table: null,
         cell: null,
-        column: null
+        column: null,
+        filterText: ''
       };
     },
 
     computed: {
       filters() {
-        return this.column && this.column.filters;
+        return this.column && this.column.filters || [];
+      },
+
+      filterSearch() {
+        return this.column && this.column.filterSearch;
+      },
+
+      filterSearchMethod() {
+        return this.column && this.column.filterSearchMethod;
+      },
+
+      filterSearchPlaceholder() {
+        return this.column && this.column.filterSearchPlaceholder;
+      },
+
+      filteredFilters() {
+        if (!this.filterSearch || !this.filterText) {
+          return this.filters;
+        }
+
+        if (typeof this.filterSearchMethod === 'function') {
+          return this.filters.filter(filter => this.filterSearchMethod(this.filterText, filter));
+        }
+
+        const filterText = this.filterText.toLowerCase();
+        return this.filters.filter(filter => String(filter.text).toLowerCase().indexOf(filterText) > -1);
       },
 
       filterValue: {
@@ -188,6 +232,13 @@
         if (val === true && parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
           this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
         }
+        if (val === false) {
+          this.filterText = '';
+        }
+      },
+
+      filterText() {
+        this.$nextTick(() => this.updatePopper());
       }
     }
   };
