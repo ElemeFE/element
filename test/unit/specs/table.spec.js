@@ -298,6 +298,8 @@ describe('Table', () => {
                 { text: 'Peter Docter', value: 'Peter Docter' },
                 { text: 'Andrew Stanton', value: 'Andrew Stanton' }
               ]"
+              :filter-search="filterSearch"
+              :filter-search-method="filterSearchMethod"
               :filter-method="filterMethod"
               label="导演" />
             <el-table-column prop="runtime" label="时长（分）" />
@@ -306,6 +308,13 @@ describe('Table', () => {
 
         created() {
           this.testData = getTestData();
+        },
+
+        data() {
+          return {
+            filterSearch: false,
+            filterSearchMethod: null
+          };
         },
 
         methods: {
@@ -358,6 +367,31 @@ describe('Table', () => {
           }, DELAY);
         }, 100);
       }, 100);
+    });
+
+    it('filter search', done => {
+      vm.filterSearch = true;
+
+      vm.$nextTick(_ => {
+        const btn = vm.$el.querySelector('.el-table__column-filter-trigger');
+
+        triggerEvent(btn, 'click', true, false);
+        setTimeout(_ => {
+          const filter = document.body.querySelector('.el-table-filter');
+          const input = filter.querySelector('.el-table-filter__search input');
+
+          expect(input).to.exist;
+          input.value = 'Peter';
+          triggerEvent(input, 'input');
+
+          setTimeout(_ => {
+            const labels = toArray(filter.querySelectorAll('.el-checkbox__label')).map(label => label.textContent.trim());
+            expect(labels).to.eql(['Peter Docter']);
+            document.body.removeChild(filter);
+            done();
+          }, DELAY);
+        }, 100);
+      });
     });
 
     it('click reset', done => {
