@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
+  <img src="https://raw.githubusercontent.com/ElemeFE/element/dev/element_logo.svg">
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.org/ElemeFE/element">
-    <img src="https://travis-ci.org/ElemeFE/element.svg?branch=master">
+  <a href="https://app.travis-ci.com/github/ElemeFE/element">
+    <img src="https://app.travis-ci.com/github/ElemeFE/element.svg?branch=master">
   </a>
   <a href="https://coveralls.io/github/ElemeFE/element?branch=master">
     <img src="https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master">
@@ -25,12 +25,8 @@
   <a href="http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS">
     <img src="http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS">
   </a>
-  <a href="#backers">
-    <img src="https://opencollective.com/element/backers/badge.svg">
-  </a>
-  <a href="#sponsors">
-    <img src="https://opencollective.com/element/sponsors/badge.svg">
-  </a>
+  <img src="https://opencollective.com/element/backers/badge.svg">
+  <img src="https://opencollective.com/element/sponsors/badge.svg">
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
   </a>
