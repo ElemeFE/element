@@ -3,9 +3,6 @@
 </p>
 
 <p align="center">
-  <a href="https://app.travis-ci.com/github/ElemeFE/element">
-    <img src="https://app.travis-ci.com/github/ElemeFE/element.svg?branch=master">
-  </a>
   <a href="https://coveralls.io/github/ElemeFE/element?branch=master">
     <img src="https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master">
   </a>
@@ -42,14 +39,14 @@ For MiniProgram development, we recommend using [MorJS](https://github.com/eleme
 
 ## Links
 - Homepage and documentation
-  - [International users](http://element.eleme.io/#/en-US)
-  - [Chinese users](http://element.eleme.io/#/zh-CN)
-  - [Spanish users](http://element.eleme.io/#/es)
-  - [French users](http://element.eleme.io/#/fr-FR)
+  - [International users](https://element.eleme.cn/#/en-US)
+  - [Chinese users](https://element.eleme.cn/#/zh-CN)
+  - [Spanish users](https://element.eleme.cn/#/es)
+  - [French users](https://element.eleme.cn/#/fr-FR)
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
 - [Vue.js 3.0 migration](https://github.com/element-plus/element-plus)
-- [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
+- [Customize theme](https://element.eleme.cn/#/en-US/component/custom-theme)
 - [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)
 - [Element for React](https://github.com/elemefe/element-react)
 - [Element for Angular](https://github.com/ElemeFE/element-angular)
@@ -85,7 +82,7 @@ import {
 Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)
 ```
-For more information, please refer to [Quick Start](http://element.eleme.io/#/en-US/component/quickstart) in our documentation.
+For more information, please refer to [Quick Start](https://element.eleme.cn/#/en-US/component/quickstart) in our documentation.
 
 ## Browser Support
 Modern browsers and Internet Explorer 10+.

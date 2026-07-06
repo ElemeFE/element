@@ -4,14 +4,20 @@
     "chrome": true
   },
   "plugins": ["html", "json"],
-  "extends": "elemefe",
+  "extends": "eslint:recommended",
   "rules": {
-    "no-restricted-globals": ["error", "event", "fdescribe"]
+    "no-restricted-globals": ["error", "event", "fdescribe"],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
   },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2020,
     "ecmaFeatures": {
       "jsx": true
     }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
   }
 }

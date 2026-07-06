@@ -14,10 +14,12 @@ demoConfig.output = {
   filename: '[name].js'
 };
 demoConfig.plugins = [
-  new CopyWebpackPlugin([
-    { from: 'examples/extension/src/manifest.json' },
-    { from: 'examples/extension/src/icon.png' }
-  ]),
+  new CopyWebpackPlugin({
+    patterns: [
+      { from: 'examples/extension/src/manifest.json' },
+      { from: 'examples/extension/src/icon.png' }
+    ]
+  }),
   new VueLoaderPlugin(),
   new ProgressBarPlugin(),
   new webpack.LoaderOptionsPlugin({
