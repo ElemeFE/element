@@ -1,9 +1,14 @@
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 export default function(target) {
+  if (target == null) {
+    target = {};
+  }
   for (let i = 1, j = arguments.length; i < j; i++) {
-    let source = arguments[i] || {};
+    const source = arguments[i] || {};
     for (let prop in source) {
-      if (source.hasOwnProperty(prop)) {
-        let value = source[prop];
+      if (hasOwnProperty.call(source, prop)) {
+        const value = source[prop];
         if (value !== undefined) {
           target[prop] = value;
         }
