@@ -55,4 +55,4 @@ npm run dist
 - 组件内如果依赖了其他组件，需要在当前组件内引入，参考 `Select`
 
 ## 代码规范
-遵循饿了么前端的 [ESLint](https://github.com/ElemeFE/eslint-config-elemefe) 即可
+遵循 [ESLint](https://github.com/ElemeFE/eslint-config-elemefe) 即可

@@ -1,6 +1,7 @@
 function broadcast(componentName, eventName, params) {
+  if (!this.$children || !this.$children.length) return;
   this.$children.forEach(child => {
-    var name = child.$options.componentName;
+    const name = child.$options.componentName;
 
     if (name === componentName) {
       child.$emit.apply(child, [eventName].concat(params));
@@ -12,13 +13,13 @@ function broadcast(componentName, eventName, params) {
 export default {
   methods: {
     dispatch(componentName, eventName, params) {
-      var parent = this.$parent || this.$root;
-      var name = parent.$options.componentName;
+      let parent = this.$parent || this.$root;
+      let name = parent && parent.$options ? parent.$options.componentName : undefined;
 
       while (parent && (!name || name !== componentName)) {
         parent = parent.$parent;
 
-        if (parent) {
+        if (parent && parent.$options) {
           name = parent.$options.componentName;
         }
       }
