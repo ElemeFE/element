@@ -71,6 +71,10 @@ For MiniProgram development, we recommend using [MorJS](https://github.com/eleme
 ```shell
 npm install element-ui -S
 ```
+## Quick Start
+
+> **Note for Local Setup:**
+> Ensure Node.js (version 14 or higher) and npm are properly configured in your system environment before running dependency installation.
 
 ## Quick Start
 ``` javascript
