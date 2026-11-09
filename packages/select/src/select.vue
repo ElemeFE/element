@@ -683,6 +683,8 @@
       },
 
       handleOptionSelect(option, byClick) {
+        if (this.selectDisabled) return;
+
         if (this.multiple) {
           const value = (this.value || []).slice();
           const optionIndex = this.getValueIndex(value, option.value);
