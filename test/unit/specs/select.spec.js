@@ -225,6 +225,39 @@ describe('Select', () => {
     expect(vm.$el.querySelector('.el-input').classList.contains('is-disabled')).to.true;
   });
 
+  it('does not select an option after becoming disabled while open', async() => {
+    vm = createVue({
+      template: `
+        <el-select ref="select" v-model="value" :disabled="disabled" @change="changes++">
+          <el-option label="Apple" value="Apple" />
+          <el-option label="Orange" value="Orange" />
+        </el-select>
+      `,
+      data() {
+        return { value: 'Apple', disabled: false, changes: 0 };
+      }
+    }, true);
+
+    const select = vm.$refs.select;
+    select.toggleMenu();
+    await vm.$nextTick();
+    expect(select.visible).to.true;
+    vm.disabled = true;
+    await vm.$nextTick();
+    const orange = select.$refs.popper.$el.querySelectorAll('.el-select-dropdown__item')[1];
+    orange.click();
+    await vm.$nextTick();
+    expect(vm.value).to.equal('Apple');
+    expect(vm.changes).to.equal(0);
+
+    vm.disabled = false;
+    await vm.$nextTick();
+    orange.click();
+    await vm.$nextTick();
+    expect(vm.value).to.equal('Orange');
+    expect(vm.changes).to.equal(1);
+  });
+
   it('visible event', done => {
     vm = createVue({
       template: `
