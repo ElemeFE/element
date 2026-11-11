@@ -47,7 +47,15 @@ export default {
         <tbody>
           {
             data.reduce((acc, row) => {
-              return acc.concat(this.wrappedRowRender(row, acc.length));
+              const rendered = this.wrappedRowRender(row, acc.length);
+              if (Array.isArray(rendered)) {
+                for (let i = 0; i < rendered.length; i++) {
+                  acc.push(rendered[i]);
+                }
+              } else {
+                acc.push(rendered);
+              }
+              return acc;
             }, [])
           }
           <el-tooltip effect={this.table.tooltipEffect} placement="top" ref="tooltip" content={this.tooltipContent}></el-tooltip>
