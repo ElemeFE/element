@@ -429,6 +429,12 @@ export default {
   },
 
   watch: {
+    pickerDisabled(disabled) {
+      if (disabled && this.pickerVisible) {
+        this.userInput = null;
+        this.hidePicker();
+      }
+    },
     pickerVisible(val) {
       if (this.readonly || this.pickerDisabled) return;
       if (val) {
@@ -894,6 +900,7 @@ export default {
 
       this.picker.$on('dodestroy', this.doDestroy);
       this.picker.$on('pick', (date = '', visible = false) => {
+        if (this.pickerDisabled) return;
         this.userInput = null;
         this.pickerVisible = this.picker.visible = visible;
         this.emitInput(date);
