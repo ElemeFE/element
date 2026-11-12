@@ -68,12 +68,13 @@
     <transition name="el-zoom-in-top" @after-leave="handleDropdownLeave">
       <div
         v-show="dropDownVisible"
+        :inert="isDisabled || undefined"
         ref="popper"
         :class="['el-popper', 'el-cascader__dropdown', popperClass]">
         <el-cascader-panel
           ref="panel"
           v-show="!filtering"
-          v-model="checkedValue"
+          v-model="panelValue"
           :options="options"
           :props="config"
           :border="false"
@@ -258,6 +259,14 @@ export default {
     isDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
     },
+    panelValue: {
+      get() {
+        return this.checkedValue;
+      },
+      set(value) {
+        if (!this.isDisabled) this.checkedValue = value;
+      }
+    },
     config() {
       const config = this.props || {};
       const { $attrs } = this;
@@ -301,7 +310,8 @@ export default {
   },
 
   watch: {
-    disabled() {
+    isDisabled(disabled) {
+      if (disabled) this.toggleDropDownVisible(false);
       this.computePresentContent();
     },
     value(val) {
@@ -394,11 +404,10 @@ export default {
       };
     },
     toggleDropDownVisible(visible) {
-      if (this.isDisabled) return;
-
       const { dropDownVisible } = this;
       const { input } = this.$refs;
       visible = isDef(visible) ? visible : !dropDownVisible;
+      if (visible && this.isDisabled) return;
       if (visible !== dropDownVisible) {
         this.dropDownVisible = visible;
         if (visible) {
@@ -605,6 +614,7 @@ export default {
       }
     },
     handleSuggestionClick(index) {
+      if (this.isDisabled) return;
       const { multiple } = this;
       const targetNode = this.suggestions[index];
 
