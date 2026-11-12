@@ -85,6 +85,9 @@
     },
 
     watch: {
+      colorDisabled(disabled) {
+        if (disabled && this.showPicker) this.hide();
+      },
       value(val) {
         if (!val) {
           this.showPanelColor = false;
@@ -119,6 +122,7 @@
         this.showPicker = !this.showPicker;
       },
       confirmValue() {
+        if (this.colorDisabled) return;
         const value = this.color.value;
         this.$emit('input', value);
         this.$emit('change', value);
@@ -126,6 +130,7 @@
         this.showPicker = false;
       },
       clearValue() {
+        if (this.colorDisabled) return;
         this.$emit('input', null);
         this.$emit('change', null);
         if (this.value !== null) {
