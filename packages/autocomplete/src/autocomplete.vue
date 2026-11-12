@@ -71,6 +71,9 @@
     name: 'ElAutocomplete',
 
     mixins: [Emitter, Focus('input'), Migrating],
+    inject: {
+      elForm: { default: '' }
+    },
 
     inheritAttrs: false,
 
@@ -143,16 +146,22 @@
       };
     },
     computed: {
+      autocompleteDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
+      },
       suggestionVisible() {
         const suggestions = this.suggestions;
         let isValidData = Array.isArray(suggestions) && suggestions.length > 0;
-        return (isValidData || this.loading) && this.activated;
+        return !this.autocompleteDisabled && (isValidData || this.loading) && this.activated;
       },
       id() {
         return `el-autocomplete-${generateId()}`;
       }
     },
     watch: {
+      autocompleteDisabled(disabled) {
+        if (disabled) this.activated = false;
+      },
       suggestionVisible(val) {
         let $input = this.getInput();
         if ($input) {
@@ -218,6 +227,7 @@
         this.activated = false;
       },
       handleKeyEnter(e) {
+        if (this.autocompleteDisabled) return;
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
           e.preventDefault();
           this.select(this.suggestions[this.highlightedIndex]);
@@ -230,6 +240,7 @@
         }
       },
       select(item) {
+        if (this.autocompleteDisabled) return;
         this.$emit('input', item[this.valueKey]);
         this.$emit('select', item);
         this.$nextTick(_ => {
